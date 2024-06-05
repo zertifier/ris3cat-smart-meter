@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Pull changes
         run: |
-          cd /apps/dockers/blockbat/zertipower-smart-meter/dist/smart-meter-frontend
+          cd /apps/dockers/blockbat/zertipower-smart-meter
           echo "Pulling and rebasing changes from github"
           git pull --rebase
 
@@ -21,7 +21,7 @@ jobs:
       - name: Detect changes in smartmeter-blockbat
         id: check_smartmeter-blockbat
         run: |
-          cd /apps/dockers/blockbat/zertipower-smart-meter/dist/smart-meter-frontend
+          cd /apps/dockers/blockbat/zertipower-smart-meter
           cd ./
           echo "Getting smartmeter-blockbat diff"
           CHANGED_FILES=$(git diff --name-only HEAD HEAD~1 || true) 
@@ -44,7 +44,7 @@ jobs:
         - name: Deploy smartmeter-blockbat if changed
           if: needs.detect-changes.outputs.smartmeter-blockbat_changed == 'true'
           run: |
-            cd /apps/dockers/blockbat/zertipower-smart-meter/dist/smart-meter-frontend
+            cd /apps/dockers/blockbat/zertipower-smart-meter
             echo "Deploying smartmeter-blockbat"
             cd ./
             npm i
