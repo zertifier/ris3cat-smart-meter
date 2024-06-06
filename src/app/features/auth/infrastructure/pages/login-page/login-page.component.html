@@ -2,9 +2,9 @@
   <div [ngClass]="{'w-100': hideImage, 'w-50': !hideImage}" class="w-50">
     <div class="d-flex py-4 align-items-center flex-column w-100 h-100 justify-content-around">
       <div>
-        <h1 class="text-center mb-3">EL MEU COMPTADOR</h1>
+        <!-- <h1 class="text-center mb-3">EL MEU COMPTADOR</h1> -->
         <div class="d-flex justify-content-center w-100">
-          <img src="assets/img/meter.png" alt="meter" class="text-center" style="width: 35%">
+          <img src="assets/img/smart_meter_logo.png" alt="meter" class="text-center" style="width: 55%">
         </div>
       </div>
 
@@ -28,23 +28,31 @@
 
           <p>No guardem cap dada relacionada amb les teves credencials</p>
         </div>
-        <h2 class="text-center">Web wallet</h2>
+        <h2 class="text-center mt-4">Web wallet</h2>
         <button (click)="webWalletLogin()" [ngClass]="{'w-75': !hideImage, 'w-100': hideImage}" class="btn btn-dark rounded-pill my-3">Iniciar sessió amb web wallet
         </button>
       </div>
-      <div>
-        <a routerLink="/help">Necessites ajuda?</a>
-      </div>
+      
       <div class="w-75">
         <hr class="border-dark opacity-100">
       </div>
       <div class="d-flex w-100 align-items-center justify-content-center gap-5">
-        <img style="height: 2rem" src="assets/img/login/zertifier_logo_horizontal.png" alt="zertifier">
+        <img style="height: 2rem" src="assets/img/europe_black.png" alt="zertifier">
+        <img style="height: 2rem" src="assets/img/logo_generalitat_cat_black.png" alt="zertifier">
+        <img style="height: 2rem" src="assets/img/zertifier_logo_horizontal_negro.png" alt="zertifier">
       </div>
+
+
+      <div>
+        <a routerLink="/help">Centre d'ajuda</a>
+      </div>
+
     </div>
+
   </div>
 
   @if (!hideImage) {
     <img class="w-50 h-100" [src]="imageUrl" alt="random image">
   }
+  
 </div>
