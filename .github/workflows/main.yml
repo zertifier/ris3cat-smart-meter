@@ -1,3 +1,4 @@
+
 name: Deploy
 on:
   push:
@@ -8,39 +9,46 @@ jobs:
   detect-changes:
     runs-on: self-hosted
     outputs:
-      smart-meter-dev-ris3cat_changed: ${{ steps.check_smart-meter-dev-ris3cat.outputs.changed }}
+      smartmeter-blockbat_changed: ${{ steps.check_smartmeter-blockbat.outputs.changed }}
     steps:
       - name: Pull changes
         run: |
-          cd /home/megatro/apps/dockers/Ris3Cat/ris3cat-smart-meter
+          cd /home/megatro/apps/dockers/blockbat/zertipower-smart-meter
           echo "Pulling and rebasing changes from github"
           git pull --rebase
 
-      - name: Detect changes in smart-meter-dev-ris3cat
-        id: check_smart-meter-dev-ris3cat
+
+      - name: Detect changes in smartmeter-blockbat
+        id: check_smartmeter-blockbat
         run: |
-          cd /home/megatro/apps/dockers/Ris3Cat/ris3cat-smart-meter
-          echo "Getting smart-meter-dev-ris3cat diff"
+          cd /home/megatro/apps/dockers/blockbat/zertipower-smart-meter
+          cd ./
+          echo "Getting smartmeter-blockbat diff"
           CHANGED_FILES=$(git diff --name-only HEAD HEAD~1 | grep '[[:print:]]' || true)
-          echo "Checking smart-meter-dev-ris3cat diff"
+          echo "Checking smartmeter-blockbat diff"
           if [ -n "$CHANGED_FILES" ]; then
-            echo "Changes detected in smart-meter-dev-ris3cat"
+            echo "Changes detected in smartmeter-blockbat"
             echo "changed=true" >> $GITHUB_OUTPUT
           else
-            echo "No changes in smart-meter-dev-ris3cat"
+            echo "No changes in smartmeter-blockbat"
             echo "changed=false" >> $GITHUB_OUTPUT
           fi
 
-  deploy-frontend:
-    needs: detect-changes
-    runs-on: self-hosted
-    steps:
-      - name: Deploy smart-meter-dev-ris3cat if changed
-        if: needs.detect-changes.outputs.smart-meter-dev-ris3cat_changed == 'true'
-        run: |
-          echo "Deploying smart-meter-dev-ris3cat"
-          cd /home/megatro/apps/dockers/Ris3Cat/ris3cat-smart-meter
-          npm i
-          npm run build
-          docker compose up -d smart-meter-dev-ris3cat
-          echo "smart-meter-dev-ris3cat deployed"
+      
+
+
+  deploy-smartmeter-blockbat:
+      needs: detect-changes
+      runs-on: self-hosted
+      steps:
+        - name: Deploy smartmeter-blockbat if changed
+          if: needs.detect-changes.outputs.smartmeter-blockbat_changed == 'true'
+          run: |
+            cd /home/megatro/apps/dockers/blockbat/zertipower-smart-meter
+            echo "Deploying smartmeter-blockbat"
+            cd ./
+            npm i
+            npm run build
+            docker compose up -d smartmeter-blockbat --build --force-recreate
+            echo "smartmeter-blockbat deployed"
+  
