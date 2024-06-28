@@ -7,6 +7,7 @@ import dayjs from "dayjs";
 import 'dayjs/locale/ca';
 import {UserStoreService} from "@features/user/infrastructure/services/user-store.service";
 import {AuthStoreService} from "@features/auth/infrastructure/services/auth-store.service";
+import {TranslocoService} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-energy-prediction',
@@ -18,6 +19,8 @@ import {AuthStoreService} from "@features/auth/infrastructure/services/auth-stor
   styleUrl: './energy-prediction.component.scss'
 })
 export class EnergyPredictionComponent implements OnInit {
+  constructor(private translocoService: TranslocoService) {
+  }
   @Input() community: boolean = true;
   datasets: ChartDataset[] = [
     {
@@ -35,7 +38,7 @@ export class EnergyPredictionComponent implements OnInit {
   userStoreService = inject(UserStoreService);
 
   async ngOnInit() {
-    dayjs.locale('ca');
+    dayjs.locale(this.translocoService.getActiveLang() || 'ca');
     let productionPrediction;
     if (this.community) {
       const communityId = this.userStoreService.snapshotOnly(this.userStoreService.$.communityId);

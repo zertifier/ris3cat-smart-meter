@@ -20,9 +20,9 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     {provide: EventBus, useClass: InMemoryEventBusService}, provideHttpClient(), provideTransloco({
         config: {
-          availableLangs: ['en', 'es', 'cat'],
-          defaultLang: 'cat',
-          fallbackLang: ['en', 'es', 'cat'],
+          availableLangs: ['en', 'es', 'ca'],
+          defaultLang: 'ca',
+          fallbackLang: ['en', 'es', 'ca'],
           missingHandler: {
             // It will use the first language set in the `fallbackLang` property
             useFallbackTranslation: true

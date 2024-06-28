@@ -12,7 +12,7 @@ export class LanguageComponent {
   constructor(private translocoService: TranslocoService) {
   }
 
-  setLang(lang: 'cat' | 'es' | 'en'){
+  setLang(lang: 'ca' | 'es' | 'en'){
     this.translocoService.setActiveLang(lang);
   }
 }
