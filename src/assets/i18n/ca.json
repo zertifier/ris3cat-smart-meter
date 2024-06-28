@@ -1,5 +1,6 @@
 {
   "MY-CUPS": {
+    "navbar": "El meu comptador",
     "title": "Consum i producció",
     "texts": {
       "liveWaste": "La teva despesa en viu",
@@ -70,6 +71,37 @@
       "title": "Predicció d'energia"
     }
   },
+  "PROFILE": {
+    "navbar": "Perfil",
+    "title": "El meu perfil",
+    "texts": {
+      "nameLabel": "Nom (requerit)",
+      "lastnameLabel":"Cognom (requerit)"
+    }
+  },
+
+  "WALLET": {
+    "navbar": "La meva cartera",
+    "title": "La meva cartera",
+    "texts": {
+      "identityLabel": "Identitat",
+      "transferInfo": "Per a relatizar una transferència, tria que vols traspassar",
+      "energyAmount": "Saldo energètic",
+      "tokenAmount": "Saldo",
+      "communityShare": "Betes de la comunitat",
+      "transferEnergy": "Transferir saldo",
+      "transferToken": "Transferir XDAI",
+      "transferShare": "Transferir participacions"
+    },
+    "tooltips": {
+      "identity": "La identitat permet identificar el teu usuari a dintre de la Cadena de Blocks.",
+      "energy": "Aquest saldo es farà servir per a la compra d'energia a la comunitat.",
+      "token": "Saldo per les transaccions.",
+      "shares": "Són les Participacions que té la comunitat."
+    }
+  },
+
+
   "GENERIC": {
     "texts": {
       "months": {
@@ -99,7 +131,10 @@
         "Octubre",
         "Novembre",
         "Decembre"
-      ]
+      ],
+      "save": "Guardar",
+      "cancel": "Cancel·lar",
+      "close": "Tancar"
     }
   }
 }

@@ -11,15 +11,17 @@ import {ZertipowerService} from "../../../../../shared/infrastructure/services/z
 import Swal from "sweetalert2";
 import {EventBus} from "../../../../../shared/domain/EventBus";
 import {UserProfileChangedEvent} from "../../../../auth/domain/UserProfileChangedEvent";
+import {TranslocoDirective} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-user-profile-page',
   standalone: true,
-  imports: [
-    NgClass,
-    AsyncPipe,
-    ReactiveFormsModule
-  ],
+    imports: [
+        NgClass,
+        AsyncPipe,
+        ReactiveFormsModule,
+        TranslocoDirective
+    ],
   templateUrl: './user-profile-page.component.html',
   styleUrl: './user-profile-page.component.scss'
 })
