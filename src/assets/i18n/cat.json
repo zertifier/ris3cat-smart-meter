@@ -1,7 +1,107 @@
 {
   "MY-CUPS": {
-    "titles": {
-      "consumption": "Consum i producció"
+    "consumption": {
+      "title": "Consum i producció",
+      "texts": {
+        "liveWaste": "La teva despesa en viu",
+        "updatedAt": "Actualitzat a les ",
+        "noDataRegistered": "No s'ha registrat cap dada",
+        "assignedProd": "Producció assignada",
+        "consumption": "Consum",
+        "selfConsumption": "Autoconsum",
+        "generatedEnergy": "Energia generada",
+        "surplus": "Excedent"
+      },
+      "tooltips": {
+        "assignedProd": "El percentatge de l'energia produïda que se li assigna a aquest CUPS"
+      }
+    }
+  },
+
+  "HISTORIC-CHART": {
+    "title": "Històric consum/excedent",
+    "texts": {
+      "dataType": {
+        "title": "Tipus de dades",
+        "types": {
+          "energy": "Energia KWH"
+        }
+      },
+      "communityModel": {
+        "title": "Model comunitary",
+        "types": {
+          "acc": "ACC",
+          "cce": "CCE"
+        }
+      },
+      "dataSource": {
+        "title": "Font de dades",
+        "types": {
+          "datadis": "Datadis"
+        }
+      },
+      "dates": {
+        "daily": "Diari",
+        "monthly": "Mensual",
+        "yearly": "Anual"
+      },
+      "noDisplay": "Res a mostrar",
+      "chartBottomText": "· Coneix la despesa d'energia al detall fent clic en cada tipus de consum. La gràfica mostrarà la informació de consum individualitzada.",
+      "chartBottomCommunityText": "· Aquesta estadística indica les dades dels {activeMembers} membres actius d'un total de {totalMembers} membres de la comunitat.",
+      "chartLabels": {
+        "production": "Producció",
+        "networkConsumption": "Consum de la xarxa",
+        "surplus": "Excedent"
+      },
+      "displayLegend": "Mostrar la llegenda",
+      "maximize": "Ampliar",
+      "loadingData": "Carregant dades"
+    },
+    "tooltips": {
+      "communityModel": {
+        "acc": "(Auto Consum Compartit)",
+        "cce": "(Comunitat Ciutadana Energética)"
+      },
+      "dataSource": "Selecciona la plataforma des d'on prefereixis extreure i analitzar\n les dades relatives al consum, producció i excedent energètic."
+    }
+  },
+  "PREDICTIONS": {
+    "meterologic": {
+
+    },
+    "energy": {
+
+    }
+  },
+  "GENERIC": {
+    "texts": {
+      "months": {
+        "1": "Gener",
+        "2": "Febrer",
+        "3": "Març",
+        "4": "Abril",
+        "5": "Maig",
+        "6": "Juny",
+        "7": "Juliol",
+        "8": "Agost",
+        "9": "Setembre",
+        "10": "Octubre",
+        "11": "Novembre",
+        "12": "Decembre"
+      },
+      "monthsArray": ["Gener",
+        "Febrer",
+        "Març",
+        "Abril",
+        "Maig",
+        "Juny",
+        "Juliol",
+        "Agost",
+        "Setembre",
+        "Octubre",
+        "Novembre",
+        "Decembre"
+      ]
     }
   }
 }

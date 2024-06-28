@@ -1,16 +1,18 @@
+<app-language></app-language>
 <ng-container *transloco="let t; prefix: 'MY-CUPS'">
   <div class="container-page">
     <div class="d-flex justify-content-between flex-wrap-reverse gap-5">
-      <h4 style="font-weight: 600;">{{t('titles.consumption') }}</h4>
+      <h4 style="font-weight: 600;">{{ t('consumption.title') }}</h4>
 
       <div class="d-flex flex-column">
-        <p class="fst-italic">La teva despesa en viu <span><i class="fa-solid fa-rss fa-fade text-danger"></i></span></p>
+        <p class="fst-italic">{{ t('consumption.texts.liveWaste') }} <span><i
+          class="fa-solid fa-rss fa-fade text-danger"></i></span></p>
         <div class="d-flex justify-content-between">
           @if (lastUpdate$ | async) {
-            <p>Actualitzat a les {{ lastUpdate$ | async }} <span class="text-success" style="font-size: 0.8rem;"><i
+            <p>{{ t('consumption.texts.updatedAt') }} {{ lastUpdate$ | async }} <span class="text-success" style="font-size: 0.8rem;"><i
               class="fa-solid fa-circle"></i></span></p>
           } @else {
-            <p>No s'ha registrat cap dada</p>
+            <p>{{ t('consumption.texts.noDataRegistered') }}</p>
           }
         </div>
       </div>
@@ -23,13 +25,16 @@
           <select class="form-select bg-white border-2 border-primary" (change)="selectCups($event)">
             @for (cup of (cups$ | async); track $index) {
               <!--            <option [selected]="$index === (selectedCupsIndex$ | async)" [value]="$index">{{ cup.cupsCode }}</option>-->
-              <option [selected]="$index === (selectedCupsIndex$ | async)" [value]="$index">{{ cup.reference || cup.cupsCode }}</option>
+              <option [selected]="$index === (selectedCupsIndex$ | async)"
+                      [value]="$index">{{ cup.reference || cup.cupsCode }}
+              </option>
             }
           </select>
         </div>
 
         <div class="my-3 my-md-0">
-          <button class="btn btn-primary bg-primary me-3 ms-0 ms-md-3" (click)="openEditModal()" style="min-width: 65px; min-height: 40px">
+          <button class="btn btn-primary bg-primary me-3 ms-0 ms-md-3" (click)="openEditModal()"
+                  style="min-width: 65px; min-height: 40px">
             <i class="fa-solid fa-pencil"></i>
           </button>
 
@@ -39,10 +44,10 @@
         </div>
 
       </div>
-      <span>CUPS: {{getSelectedCupsCode() | async}}</span>
-      <span>Produccio assignada: {{ surplusDistribution$ | async }}%
+      <span>CUPS: {{ getSelectedCupsCode() | async }}</span>
+      <span>{{ t('consumption.texts.assignedProd') }}: {{ surplusDistribution$ | async }}%
       <app-question-badge>
-        El percentatge de l'energia produida que se li assigna a aquest CUPS
+        {{ t('consumption.tooltips.assignedProd') }}
       </app-question-badge>
     </span>
       <span><i class="fa-solid fa-battery-full"></i> 0%</span>
@@ -54,7 +59,7 @@
           [disabled]="true"
           width="20%"
           [color]="StatsColors.CONSUMPTION"
-          label="Consum"
+          label="{{ t('consumption.texts.consumption') }}"
           [text]="powerFlow().buy.toFixed(2) + ' KWH'"/>
       </div>
 
@@ -63,7 +68,7 @@
           [disabled]="powerFlow().inHouse === 0"
           width="20%"
           [color]="StatsColors.IN_HOUSE_CONSUMPTION"
-          label="Autoconsum"
+          label="{{ t('consumption.texts.selfConsumption') }}"
           [text]="powerFlow().inHouse.toFixed(2) + ' KWH'"/>
       </div>
 
@@ -72,7 +77,7 @@
           [disabled]="powerFlow().production === 0"
           width="20%"
           [color]="StatsColors.COMMUNITY_PRODUCTION"
-          label="Energia generada"
+          label="{{ t('consumption.texts.generatedEnergy') }}"
           [text]="powerFlow().production.toFixed(2) + ' KWH'"/>
       </div>
 
@@ -81,7 +86,7 @@
           [disabled]="powerFlow().sell === 0"
           width="20%"
           [color]="StatsColors.SURPLUS"
-          label="Excedent"
+          label="{{ t('consumption.texts.surplus') }}"
           [text]="powerFlow().sell.toFixed(2) + ' KWH'"/>
       </div>
     </div>
@@ -102,7 +107,6 @@
 
     <hr>
 
-    <h5 style="margin: 10rem 0 5rem 0;" class="fw-bold">Històric consum/excedent</h5>
     <app-historic-chart/>
 
     <div class="row">

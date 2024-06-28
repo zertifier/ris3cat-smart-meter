@@ -35,6 +35,7 @@ import {
   MetereologicPredictionComponent
 } from "../../../components/metereologic-prediction/metereologic-prediction.component";
 import {TranslocoDirective, TranslocoPipe} from "@jsverse/transloco";
+import {LanguageComponent} from "@core/layouts/language/language.component";
 
 
 @Component({
@@ -61,7 +62,8 @@ import {TranslocoDirective, TranslocoPipe} from "@jsverse/transloco";
     EnergyPredictionComponent,
     MetereologicPredictionComponent,
     TranslocoPipe,
-    TranslocoDirective
+    TranslocoDirective,
+    LanguageComponent
   ],
   templateUrl: './my-cup-page.component.html',
   styleUrl: './my-cup-page.component.scss'

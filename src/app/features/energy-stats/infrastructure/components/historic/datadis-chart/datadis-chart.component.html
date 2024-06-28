@@ -1,65 +1,65 @@
-<ng-template #maximizedChart let-modal>
-  <div class="modal-header">
-    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-  </div>
-  <div class="modal-body">
-    <app-data-chart #secondChart [dataset]="datasets" [labels]="labels"/>
-  </div>
-<!--  <div class="modal-footer">-->
-<!--    <button class="btn btn-light" type="button" (click)="secondChart.resetChartZoom()">Restableix zoom</button>-->
-<!--  </div>-->
-</ng-template>
+<ng-container *transloco="let t; prefix: 'HISTORIC-CHART'">
+  <ng-template #maximizedChart let-modal>
+    <div class="modal-header">
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <app-data-chart #secondChart [dataset]="datasets" [labels]="labels"/>
+    </div>
+    <!--  <div class="modal-footer">-->
+    <!--    <button class="btn btn-light" type="button" (click)="secondChart.resetChartZoom()">Restableix zoom</button>-->
+    <!--  </div>-->
+  </ng-template>
 
-<ng-template #legendModal let-modal>
-  <div class="modal-header">
-    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-  </div>
-  <div class="modal-body">
-    <app-chart-legend [labels]="mobileLabels" containerClassList="d-flex flex-column alig-items-start w-100 gap-4"/>
+  <ng-template #legendModal let-modal>
+    <div class="modal-header">
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <app-chart-legend [labels]="mobileLabels" containerClassList="d-flex flex-column alig-items-start w-100 gap-4"/>
 
-    <hr>
+      <hr>
 
-    <p class="mt-4" *ngIf="showCommunity$ | async">
-      · Aquesta estadística indica les dades dels {{ activeMembers$ | async }} membres actius d'un total
-      de {{ totalMembers$ | async }}
-      membres de la comunitat.
-    </p>
-    <p>
-      · Coneix la despesa d'energia al detall fent clic en cada tipus de consum. La gràfica mostrarà la informació de
-      consum individualitzada.
-    </p>
-  </div>
-</ng-template>
+      <p class="mt-4" *ngIf="showCommunity$ | async">
+      <!--  · Aquesta estadística indica les dades dels {{ activeMembers$ | async }} membres actius d'un total
+        de {{ totalMembers$ | async }}
+        membres de la comunitat.-->
+        {{ t('texts.chartBottomCommunityText', {activeMembers: activeMembers$ | async, totalmembers: totalMembers$ | async}) }}
+      </p>
+      <p>
+        {{ t('texts.chartBottomText') }}
+      </p>
+    </div>
+  </ng-template>
 
-@if ((fetchingData$ | async) === false) {
-  @if ((currentBreakpoint$ | async)! < BreakPoints.MD) {
-    <div class="d-flex justify-content-around">
-      <button class="btn btn-light btn-sm" (click)="showLegendModal()">Mostra llegenda</button>
-      <button type="button" class="btn btn-light btn-sm" (click)="maximizeChart()">Amplia <i
-        class="fa-solid fa-maximize"></i></button>
+  @if ((fetchingData$ | async) === false) {
+    @if ((currentBreakpoint$ | async)! < BreakPoints.MD) {
+      <div class="d-flex justify-content-around">
+        <button class="btn btn-light btn-sm" (click)="showLegendModal()">{{ t('texts.displayLegend') }}</button>
+        <button type="button" class="btn btn-light btn-sm" (click)="maximizeChart()">{{ t('texts.maximize') }} <i
+          class="fa-solid fa-maximize"></i></button>
+      </div>
+    }
+
+    <app-data-chart [dataset]="datasets" [labels]="labels"/>
+    <!--  <button class="btn btn-light" type="button" (click)="dataChart.resetChartZoom()">Restableix zoom</button>-->
+
+    @if ((currentBreakpoint$ | async)! >= BreakPoints.MD) {
+      <p class="mt-4" *ngIf="showCommunity$ | async">
+        {{ t('texts.chartBottomCommunityText', {activeMembers: activeMembers$ | async, totalmembers: totalMembers$ | async}) }}
+      </p>
+      <p>
+        {{ t('texts.chartBottomText') }}
+      </p>
+      <app-chart-legend [labels]="legendLabels"/>  }
+
+  } @else {
+    <div class="w-100 d-flex justify-content-center flex-column gap-2 align-items-center">
+      <h4>{{ t('texts.loadingData') }}</h4>
+      <div>
+        <i class="fa-solid fa-spinner fa-spin"></i>
+      </div>
     </div>
   }
 
-  <app-data-chart [dataset]="datasets" [labels]="labels"/>
-<!--  <button class="btn btn-light" type="button" (click)="dataChart.resetChartZoom()">Restableix zoom</button>-->
-
-  @if ((currentBreakpoint$ | async)! >= BreakPoints.MD) {
-    <p class="mt-4" *ngIf="showCommunity$ | async">
-      · Aquesta estadística indica les dades dels {{ activeMembers$ | async }} membres actius d'un total
-      de {{ totalMembers$ | async }}
-      membres de la comunitat.
-    </p>
-    <p>
-      · Coneix la despesa d'energia al detall fent clic en cada tipus de consum. La gràfica mostrarà la informació de
-      consum individualitzada.
-    </p>
-    <app-chart-legend [labels]="legendLabels"/>  }
-
-} @else {
-  <div class="w-100 d-flex justify-content-center flex-column gap-2 align-items-center">
-    <h4>Carregant dades</h4>
-    <div>
-      <i class="fa-solid fa-spinner fa-spin"></i>
-    </div>
-  </div>
-}
+</ng-container>

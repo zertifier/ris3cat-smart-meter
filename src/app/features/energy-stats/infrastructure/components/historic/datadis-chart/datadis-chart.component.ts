@@ -19,6 +19,7 @@ import {
 } from "@shared/infrastructure/services/screen-break-points.service";
 import {ChartDataset} from "@shared/infrastructure/interfaces/ChartDataset";
 import dayjs from '@shared/utils/dayjs';
+import {TranslocoDirective, TranslocoService} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-datadis-chart',
@@ -28,7 +29,8 @@ import dayjs from '@shared/utils/dayjs';
     ChartLegendComponent,
     DataChartComponent,
     NgIf,
-    JsonPipe
+    JsonPipe,
+    TranslocoDirective
   ],
   templateUrl: './datadis-chart.component.html',
   styleUrl: './datadis-chart.component.scss'
@@ -59,6 +61,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
     private readonly zertipower: ZertipowerService,
     private readonly ngbModal: NgbModal,
     private readonly breakpointsService: ScreenBreakPointsService,
+    private translocoService: TranslocoService
   ) {
   }
 
@@ -88,16 +91,21 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
             this.chartStoreService.patchState({lastFetchedStats: data});
 
             // Create labels
-            let labels: string[] = ["Gener", "Febrer", "Març", "Abril", "Maig", "Juny", "Juliol", "Agost", "Setembre", "Octubre", "Novembre", "Desembre"];
-            if (dateRange === DateRange.MONTH) {
-              labels = data.map(d => {
-                return dayjs.utc(d.infoDt).format('DD');
-              });
-            } else if (dateRange === DateRange.DAY) {
-              labels = data.map(d => {
-                return dayjs.utc(d.infoDt).format('HH');
-              })
-            }
+            // let labels: string[] = ["Gener", "Febrer", "Març", "Abril", "Maig", "Juny", "Juliol", "Agost", "Setembre", "Octubre", "Novembre", "Desembre"];
+            let labels: string[] = [];
+            this.translocoService.selectTranslate('GENERIC.texts.monthsArray').subscribe((monthsArray)=>{
+              labels = monthsArray
+              if (dateRange === DateRange.MONTH) {
+                labels = data.map(d => {
+                  return dayjs.utc(d.infoDt).format('DD');
+                });
+              } else if (dateRange === DateRange.DAY) {
+                labels = data.map(d => {
+                  return dayjs.utc(d.infoDt).format('HH');
+                })
+              }
+            })
+
 
             const cce = chartType === ChartType.CCE;
             const community = selectedChartEntity === ChartEntity.COMMUNITIES;

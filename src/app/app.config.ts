@@ -22,7 +22,7 @@ export const appConfig: ApplicationConfig = {
         config: {
           availableLangs: ['en', 'es', 'cat'],
           defaultLang: 'cat',
-          fallbackLang: 'en',
+          fallbackLang: ['en', 'es', 'cat'],
           missingHandler: {
             // It will use the first language set in the `fallbackLang` property
             useFallbackTranslation: true

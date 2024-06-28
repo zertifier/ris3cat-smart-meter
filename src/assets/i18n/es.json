@@ -2,6 +2,9 @@
   "MY-CUPS": {
     "titles": {
       "consumption": "Consumo y producción"
+    },
+    "texts": {
+      "liveWaste": "Tu gasto en vivo"
     }
   }
 }

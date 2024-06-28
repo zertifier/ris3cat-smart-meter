@@ -19,6 +19,7 @@ import {
   ScreenBreakPointsService
 } from "../../../../../../shared/infrastructure/services/screen-break-points.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {TranslocoDirective} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-historic-chart',
@@ -32,7 +33,8 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
     AsyncPipe,
     FormsModule,
     DatadisChartComponent,
-    QuestionBadgeComponent
+    QuestionBadgeComponent,
+    TranslocoDirective
   ],
   templateUrl: './historic-chart.component.html',
   styleUrl: './historic-chart.component.scss'
