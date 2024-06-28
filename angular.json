@@ -111,7 +111,7 @@
               "buildTarget": "smart-meter-frontend:build:production"
             },
             "preproduction": {
-              "buildTarget": "smart-meter-frontend:build:preproduction",
+              "buildTarget": "smart-meter-frontend:build:preproduction"
             },
             "development": {
               "buildTarget": "smart-meter-frontend:build:development"
