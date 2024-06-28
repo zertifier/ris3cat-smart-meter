@@ -1,23 +1,20 @@
 {
   "MY-CUPS": {
-    "consumption": {
-      "title": "Consum i producció",
-      "texts": {
-        "liveWaste": "La teva despesa en viu",
-        "updatedAt": "Actualitzat a les ",
-        "noDataRegistered": "No s'ha registrat cap dada",
-        "assignedProd": "Producció assignada",
-        "consumption": "Consum",
-        "selfConsumption": "Autoconsum",
-        "generatedEnergy": "Energia generada",
-        "surplus": "Excedent"
-      },
-      "tooltips": {
-        "assignedProd": "El percentatge de l'energia produïda que se li assigna a aquest CUPS"
-      }
+    "title": "Consum i producció",
+    "texts": {
+      "liveWaste": "La teva despesa en viu",
+      "updatedAt": "Actualitzat a les ",
+      "noDataRegistered": "No s'ha registrat cap dada",
+      "assignedProd": "Producció assignada",
+      "consumption": "Consum",
+      "selfConsumption": "Autoconsum",
+      "generatedEnergy": "Energia generada",
+      "surplus": "Excedent"
+    },
+    "tooltips": {
+      "assignedProd": "El percentatge de l'energia produïda que se li assigna a aquest CUPS"
     }
   },
-
   "HISTORIC-CHART": {
     "title": "Històric consum/excedent",
     "texts": {
@@ -67,10 +64,10 @@
   },
   "PREDICTIONS": {
     "meteorologic": {
-
+      "title": "Predicció metereologica"
     },
     "energy": {
-
+      "title": "Predicció d'energia"
     }
   },
   "GENERIC": {
@@ -89,7 +86,8 @@
         "11": "Novembre",
         "12": "Decembre"
       },
-      "monthsArray": ["Gener",
+      "monthsArray": [
+        "Gener",
         "Febrer",
         "Març",
         "Abril",

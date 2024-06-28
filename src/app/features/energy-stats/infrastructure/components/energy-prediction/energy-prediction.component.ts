@@ -7,13 +7,14 @@ import dayjs from "dayjs";
 import 'dayjs/locale/ca';
 import {UserStoreService} from "@features/user/infrastructure/services/user-store.service";
 import {AuthStoreService} from "@features/auth/infrastructure/services/auth-store.service";
-import {TranslocoService} from "@jsverse/transloco";
+import {TranslocoDirective, TranslocoService} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-energy-prediction',
   standalone: true,
   imports: [
-    EnergyPredictionChartComponent
+    EnergyPredictionChartComponent,
+    TranslocoDirective
   ],
   templateUrl: './energy-prediction.component.html',
   styleUrl: './energy-prediction.component.scss'

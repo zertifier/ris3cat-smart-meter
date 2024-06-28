@@ -1,4 +1,6 @@
-<h5 style="margin: 7rem 0 5rem 0;" class="fw-bold text-center">Predicció d'energia</h5>
-<div class="mx-auto" style="max-width: 250px">
-  <app-energy-prediction-chart [dataset]="datasets" [labels]="labels"/>
-</div>
+<ng-container *transloco="let t; prefix: 'PREDICTIONS'">
+  <h5 style="margin: 7rem 0 5rem 0;" class="fw-bold text-center">{{ t('energy.title') }}</h5>
+  <div class="mx-auto" style="max-width: 250px">
+    <app-energy-prediction-chart [dataset]="datasets" [labels]="labels"/>
+  </div>
+</ng-container>

@@ -3,13 +3,15 @@ import {EnergyPredictionChartComponent} from "./metereologic-chart/energy-predic
 import {WeatherPredictionService} from "../../services/weather-prediction.service";
 import {DatePipe, registerLocaleData} from "@angular/common";
 import localeCa from '@angular/common/locales/ca';
+import {TranslocoDirective} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-metereologic-prediction',
   standalone: true,
   imports: [
     EnergyPredictionChartComponent,
-    DatePipe
+    DatePipe,
+    TranslocoDirective
   ],
   providers: [{provide: LOCALE_ID, useValue: 'ca-ES'}],
   templateUrl: './metereologic-prediction.component.html',
