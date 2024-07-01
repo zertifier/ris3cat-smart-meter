@@ -111,6 +111,30 @@
     }
   },
 
+  "GOVERNOR": {
+    "navbar": "Governança",
+    "title": "Governança"
+  },
+
+  "PROPOSALS": {
+    "navbar": "Propostes",
+    "title": "Propostes",
+    "texts": {
+      "searchPlaceholder": "Buscar proposta",
+      "newProposal": "Nova proposta",
+      "createdBy": "Feta per:",
+      "expiration": "Expiració:"
+    },
+    "status": {
+      "all": "Totes",
+      "actives": "Actives",
+      "pending": "Pendents",
+      "expired": "Finalitzades",
+      "executed": "Executades",
+      "denied": "Denegades"
+    }
+  },
+
   "GENERIC": {
     "texts": {
       "months": {
