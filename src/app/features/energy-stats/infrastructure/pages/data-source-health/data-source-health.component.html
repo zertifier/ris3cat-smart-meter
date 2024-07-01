@@ -1,26 +1,29 @@
-<div class="container my-3">
-  <h2>Status</h2>
-  <p>· Aquí podras veure el estat de les fonts de dades</p>
+<ng-container *transloco="let t; prefix: 'STATUS'">
+  <div class="container my-3">
+    <h2>{{ t('title') }}</h2>
+    <p>{{ t('texts.statusInfo') }}</p>
 
 
-  <div class="card">
-    <div class="card-body">
-      <div class="d-flex justify-content-between">
-        <div class="d-flex align-items-center gap-2">
-          <h3 class="m-0">Datadis</h3>
-          @if (lastUpdate$ | async) {
-            <i class="fa-solid fa-circle fa-fade" [ngClass]="{'text-success': this.active, 'text-danger': !this.active}"></i>
-          }
-        </div>
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div class="d-flex align-items-center gap-2">
+            <h3 class="m-0">Datadis</h3>
+            @if (lastUpdate$ | async) {
+              <i class="fa-solid fa-circle fa-fade" [ngClass]="{'text-success': this.active, 'text-danger': !this.active}"></i>
+            }
+          </div>
 
-        <span class="d-flex align-items-center">
+          <span class="d-flex align-items-center">
         @if (lastUpdate$ | async) {
-          Ultima actualització {{ lastUpdate | async }}
+          {{ t('texts.lastUpdate') }} {{ lastUpdate | async }}
         } @else {
-          No hi ha actualitzacions
+          {{ t('texts.noLastUpdate') }}
         }
         </span>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</ng-container>
+

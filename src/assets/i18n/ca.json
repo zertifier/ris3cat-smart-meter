@@ -106,7 +106,8 @@
     "title": "Estatus",
     "texts": {
       "statusInfo": "· Aquí podras veure el estat de les fonts de dades",
-      "lastUpdate": "Ultima actualització"
+      "lastUpdate": "Ultima actualització",
+      "noLastUpdate": "No hi ha actualitzacions"
     }
   },
 
