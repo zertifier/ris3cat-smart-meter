@@ -80,7 +80,7 @@
     }
   },
 
-  "WALLET": {
+  "MY-WALLET": {
     "navbar": "La meva cartera",
     "title": "La meva cartera",
     "texts": {
@@ -101,6 +101,14 @@
     }
   },
 
+  "STATUS": {
+    "navbar": "Estatus",
+    "title": "Estatus",
+    "texts": {
+      "statusInfo": "· Aquí podras veure el estat de les fonts de dades",
+      "lastUpdate": "Ultima actualització"
+    }
+  },
 
   "GENERIC": {
     "texts": {

@@ -12,18 +12,20 @@ import {DaoService} from "@features/governance/infrastructure/services/dao.servi
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {TransferModalComponent} from "./transfer-modal/transfer-modal.component";
 import {NoRoundDecimalPipe} from "@shared/infrastructure/pipes/no-round-decimal.pipe";
+import {TranslocoDirective} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-user-wallet-page',
   standalone: true,
-  imports: [
-    AsyncPipe,
-    FormsModule,
-    QuestionBadgeComponent,
-    DecimalPipe,
-    NoRoundDecimalPipe,
-    NgIf
-  ],
+    imports: [
+        AsyncPipe,
+        FormsModule,
+        QuestionBadgeComponent,
+        DecimalPipe,
+        NoRoundDecimalPipe,
+        NgIf,
+        TranslocoDirective
+    ],
   templateUrl: './user-wallet-page.component.html',
   styleUrl: './user-wallet-page.component.scss'
 })
