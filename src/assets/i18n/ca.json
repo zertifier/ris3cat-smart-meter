@@ -153,6 +153,18 @@
       "energy": "Aquest saldo es farà servir per a la compra d'energia a la comunitat.",
       "token": "Saldo per les transaccions.",
       "shares": "Són les Participacions que té la comunitat."
+    },
+    "modals": {
+      "transfer": {
+        "title": "Transferència",
+        "texts": {
+          "balanceLabel": "Saldo",
+          "toLabel": "Destinatari",
+          "toPlaceholder": "exemple@correu.com / 0xA...",
+          "toBottomText": "Escriu el correu o número d'identitat del destinatari",
+          "amountLabel": "Quantitat"
+        }
+      }
     }
   },
 
@@ -220,7 +232,7 @@
     "tooltips": {
       "quorum": "Elegeix el percentatge de vots necessaris per a l'aprovació de la votació. Per exemple: 50%.",
       "type": "Sistemes de votacions.<br><strong>Ponderada:</strong> Cada vot es basa en un factor predefinit, com la quantitat d'aportacions realitzades o l'antiguitat en la comunitat. És a dir, es pondera per la quantitat d'accions.<br><strong>Igualitaria:</strong> Cada vot té el mateix pes, independentment de qualsevol altre factor.",
-      "transparency": "Elegeix <strong>SI</strong>, per a veure la votació a temps real, o <strong>NO</strong>,per a veure el resultat finalitzada la data d'expiració."
+      "transparency": "Elegeix <strong>SÍ</strong>, per a veure la votació a temps real, o <strong>NO</strong>,per a veure el resultat finalitzada la data d'expiració."
     }
   },
 
@@ -289,6 +301,8 @@
       "save": "Guardar",
       "cancel": "Cancel·lar",
       "close": "Tancar",
+      "send": "Enviar",
+      "sending": "Enviant...",
       "yes": "Sí",
       "no": "No"
     }

@@ -1,7 +1,11 @@
-
-
-<div>
-  <button class="btn btn-primary" (click)="setLang('en')">English</button>
-  <button class="btn btn-secondary" (click)="setLang('es')">Español</button>
-  <button class="btn btn-warning" (click)="setLang('ca')">Catala</button>
-</div>
+<select class="form-select bg-white shadow-none border-secondary" [(ngModel)]="selectedLang" (change)="setLang(selectedLang)">
+  <option [value]="'ca'">
+    CAT
+  </option>
+  <option [value]="'es'">
+    ESP
+  </option>
+  <option [value]="'en'">
+    ENG
+  </option>
+</select>

@@ -11,6 +11,7 @@ import Swal from "sweetalert2";
 import {DaoService} from "../../../../../governance/infrastructure/services/dao.service";
 import {Subscription} from "rxjs";
 import {ApiService} from "../../../../../../shared/infrastructure/services/api.service";
+import {TranslocoDirective, TranslocoPipe} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-transfer-modal',
@@ -20,7 +21,9 @@ import {ApiService} from "../../../../../../shared/infrastructure/services/api.s
     FormsModule,
     QuestionBadgeComponent,
     NoRoundDecimalPipe,
-    NgIf
+    NgIf,
+    TranslocoDirective,
+    TranslocoPipe
   ],
   providers: [NoRoundDecimalPipe],
   templateUrl: './transfer-modal.component.html',
