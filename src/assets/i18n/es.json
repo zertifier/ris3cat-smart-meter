@@ -6,5 +6,44 @@
     "texts": {
       "liveWaste": "Tu gasto en vivo"
     }
+  },
+
+  "GENERIC": {
+    "texts": {
+      "months": {
+        "1": "Gener",
+        "2": "Febrer",
+        "3": "Març",
+        "4": "Abril",
+        "5": "Maig",
+        "6": "Juny",
+        "7": "Juliol",
+        "8": "Agost",
+        "9": "Setembre",
+        "10": "Octubre",
+        "11": "Novembre",
+        "12": "Decembre"
+      },
+      "monthsArray": [
+        "Gener",
+        "Febrer",
+        "Març",
+        "Abril",
+        "Maig",
+        "Juny",
+        "Juliol",
+        "Agost",
+        "Setembre",
+        "Octubre",
+        "Novembre",
+        "Decembre"
+      ],
+      "daysArray": ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado"],
+      "save": "Guardar",
+      "cancel": "Cancel·lar",
+      "close": "Tancar",
+      "yes": "Sí",
+      "no": "No"
+    }
   }
 }

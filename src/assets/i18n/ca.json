@@ -285,6 +285,7 @@
         "Novembre",
         "Decembre"
       ],
+      "daysArray": ["Diumenge", "Dilluns", "Dimarts", "Dimecres", "Dijous", "Divendres", "Dissabte"],
       "save": "Guardar",
       "cancel": "Cancel·lar",
       "close": "Tancar",

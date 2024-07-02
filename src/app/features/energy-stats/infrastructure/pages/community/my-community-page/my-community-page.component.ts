@@ -22,7 +22,7 @@ import {UserStoreService} from "../../../../../user/infrastructure/services/user
 import {NavbarComponent} from "@shared/infrastructure/components/navbar/navbar.component";
 import {FooterComponent} from "@shared/infrastructure/components/footer/footer.component";
 import {MonitoringStoreService} from "../../../services/monitoring-store.service";
-import {getMonth} from "@shared/utils/DatesUtils";
+import {getMonth, getMonthTranslated} from "@shared/utils/DatesUtils";
 import {KnobModule} from "primeng/knob";
 import {PowerflowGausComponent} from "../../../components/powerflow-gaus/powerflow-gaus.component";
 import {
@@ -35,7 +35,7 @@ import {
 import {isDevMode} from '@angular/core';
 import {environment} from "@environments/environment";
 import {EnergyPredictionComponent} from "../../../components/energy-prediction/energy-prediction.component";
-import {TranslocoDirective} from "@jsverse/transloco";
+import {TranslocoDirective, TranslocoService} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-my-community-page',
@@ -121,7 +121,7 @@ export class MyCommunityPageComponent implements OnInit, OnDestroy {
       if (!value) {
         return '';
       }
-      const month = getMonth(value.getMonth());
+      const month = getMonthTranslated(this.translocoService,value.getMonth());
       return dayjs(value).format(`HH:mm:ss - DD [${month}] YYYY`);
     }));
   protected readonly StatsColors = StatsColors;
@@ -130,7 +130,8 @@ export class MyCommunityPageComponent implements OnInit, OnDestroy {
     private readonly monitoringService: MonitoringService,
     private readonly authStore: AuthStoreService,
     private readonly userStore: UserStoreService,
-    private readonly monitoringStore: MonitoringStoreService
+    private readonly monitoringStore: MonitoringStoreService,
+    private readonly translocoService: TranslocoService
   ) {
   }
 

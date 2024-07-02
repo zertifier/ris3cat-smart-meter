@@ -21,7 +21,7 @@ import {
   QuestionBadgeComponent
 } from "@shared/infrastructure/components/question-badge/question-badge.component";
 import {MonitoringStoreService} from "../../../services/monitoring-store.service";
-import {getMonth} from "@shared/utils/DatesUtils";
+import {getMonth, getMonthTranslated} from "@shared/utils/DatesUtils";
 import dayjs from "@shared/utils/dayjs";
 import {KnobModule} from "primeng/knob";
 import {PowerflowGausComponent} from "../../../components/powerflow-gaus/powerflow-gaus.component";
@@ -34,7 +34,7 @@ import {EnergyPredictionComponent} from "../../../components/energy-prediction/e
 import {
   MetereologicPredictionComponent
 } from "../../../components/metereologic-prediction/metereologic-prediction.component";
-import {TranslocoDirective, TranslocoPipe} from "@jsverse/transloco";
+import {TranslocoDirective, TranslocoPipe, TranslocoService} from "@jsverse/transloco";
 import {LanguageComponent} from "@core/layouts/language/language.component";
 
 
@@ -74,7 +74,7 @@ export class MyCupPageComponent implements OnInit {
       if (!value) {
         return '';
       }
-      const month = getMonth(value.getMonth());
+      const month = getMonthTranslated(this.translocoService, value.getMonth());
       return dayjs(value).format(`HH:mm:ss - DD [${month}] YYYY`);
     }));
   consumptionItems: ConsumptionItem[] = [
@@ -131,7 +131,8 @@ export class MyCupPageComponent implements OnInit {
     private readonly monitoringStore: MonitoringStoreService,
     private readonly ngbModal: NgbModal,
     private updateCups: UpdateUserCupsAction,
-    private readonly selectCupsAction: SelectCupsService
+    private readonly selectCupsAction: SelectCupsService,
+    private readonly translocoService: TranslocoService
   ) {
   }
 
