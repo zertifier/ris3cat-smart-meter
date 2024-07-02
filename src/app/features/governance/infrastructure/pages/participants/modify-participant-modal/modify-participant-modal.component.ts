@@ -4,12 +4,15 @@ import {FormsModule} from "@angular/forms";
 import {Participant, ParticipantsService} from "../../../services/participants.service";
 import {Subscription} from "rxjs";
 import Swal from "sweetalert2";
+import {TranslocoDirective, TranslocoPipe} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-modify-participant-modal',
   standalone: true,
   imports: [
-    FormsModule
+    FormsModule,
+    TranslocoDirective,
+    TranslocoPipe
   ],
   templateUrl: './modify-participant-modal.component.html',
   styleUrl: './modify-participant-modal.component.scss'

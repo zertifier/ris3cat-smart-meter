@@ -16,6 +16,7 @@ import {
 import {EditorComponent, TINYMCE_SCRIPT_SRC} from "@tinymce/tinymce-angular";
 import {Editor} from "tinymce";
 import {Subscription} from "rxjs";
+import {TranslocoDirective, TranslocoPipe} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-new-proposal-page',
@@ -31,6 +32,8 @@ import {Subscription} from "rxjs";
     RouterLinkActive,
     QuestionBadgeComponent,
     EditorComponent,
+    TranslocoDirective,
+    TranslocoPipe,
 
   ],
   providers: [

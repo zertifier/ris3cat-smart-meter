@@ -1,90 +1,89 @@
-<div class="container-page">
-  <div class="d-flex flex-wrap justify-content-between flex-wrap-reverse gap-5">
-    <h4 style="font-weight: 600;">Consum i producció</h4>
+<ng-container *transloco="let t; prefix: 'MY-COMMUNITY'">
+  <div class="container-page">
+    <div class="d-flex flex-wrap justify-content-between flex-wrap-reverse gap-5">
+      <h4 style="font-weight: 600;">{{ t('title') }}</h4>
 
-    <div class="d-flex flex-column">
-      <p class="fst-italic">La teva despesa en viu <span><i class="fa-solid fa-rss fa-fade text-danger"></i></span></p>
-      @if (lastUpdate$ | async) {
-        <p>Actualitzat a les {{ lastUpdate$ | async }} <span class="ms-3 text-success" style="font-size: 0.8rem;"><i
-          class="fa-solid fa-circle"></i></span></p>
-      } @else {
-        <p>No s'ha registrat cap dada</p>
-      }
-    </div>
-  </div>
-
-  <div class="w-100 d-flex flex-column">
-    <span>Membres d'aquesta
-      comunitat: {{ totalMembers$ | async }}
-    </span>
-    <!--    TODO update active members-->
-    <span>Membres actius: {{ (activeMembers$ | async) }}</span>
-    <span><i class="fa-solid fa-battery-full"></i> 0%</span>
-  </div>
-  <div class="row justify-content-evenly w-100 mt-5" style="margin-bottom: 8rem;">
-
-    <div class="col-6 col-lg my-3">
-      <app-stat-display
-        [disabled]="powerFlow().buy === 0"
-        width="20%"
-        [color]="StatsColors.CONSUMPTION"
-        label="Consum"
-        [text]="powerFlow().buy.toFixed(2) + ' KWH'"/>
+      <div class="d-flex flex-column">
+        <p class="fst-italic">{{ t('texts.liveWaste') }} <span><i class="fa-solid fa-rss fa-fade text-danger"></i></span></p>
+        @if (lastUpdate$ | async) {
+          <p>{{ t('texts.updatedAt') }} {{ lastUpdate$ | async }} <span class="ms-3 text-success" style="font-size: 0.8rem;"><i
+            class="fa-solid fa-circle"></i></span></p>
+        } @else {
+          <p>{{ t('texts.noDataRegistered') }}</p>
+        }
+      </div>
     </div>
 
-    <div class="col-6 col-lg my-3">
-      <app-stat-display
-        [disabled]="powerFlow().inHouse === 0"
-        width="20%"
-        [color]="StatsColors.IN_HOUSE_CONSUMPTION"
-        label="Autoconsum"
-        [text]="powerFlow().inHouse.toFixed(2) + ' KWH'"/>
+    <div class="w-100 d-flex flex-column">
+    <span>{{ t('texts.communityMembers') }} {{ totalMembers$ | async }}</span>
+      <!--    TODO update active members-->
+      <span>{{ t('texts.activeMembers') }} {{ (activeMembers$ | async) }}</span>
+      <span><i class="fa-solid fa-battery-full"></i> 0%</span>
+    </div>
+    <div class="row justify-content-evenly w-100 mt-5" style="margin-bottom: 8rem;">
+
+      <div class="col-6 col-lg my-3">
+        <app-stat-display
+          [disabled]="powerFlow().buy === 0"
+          width="20%"
+          [color]="StatsColors.CONSUMPTION"
+          label="{{ t('texts.consumption') }}"
+          [text]="powerFlow().buy.toFixed(2) + ' KWH'"/>
+      </div>
+
+      <div class="col-6 col-lg my-3">
+        <app-stat-display
+          [disabled]="powerFlow().inHouse === 0"
+          width="20%"
+          [color]="StatsColors.IN_HOUSE_CONSUMPTION"
+          label="{{ t('texts.selfConsumption') }}"
+          [text]="powerFlow().inHouse.toFixed(2) + ' KWH'"/>
+      </div>
+
+
+      <div class="col-6 col-lg my-3">
+        <app-stat-display
+          [disabled]="powerFlow().production === 0"
+          width="20%"
+          [color]="StatsColors.COMMUNITY_PRODUCTION"
+          label="{{ t('texts.generatedEnergy') }}"
+          [text]="powerFlow().production.toFixed(2) + ' KWH'"/>
+      </div>
+
+      <div class="col-6 col-lg my-3">
+        <app-stat-display
+          [disabled]="powerFlow().sell === 0"
+          width="20%"
+          [color]="StatsColors.SURPLUS"
+          label="{{ t('texts.surplus') }}"
+          [text]="powerFlow().sell.toFixed(2) + ' KWH'"/>
+      </div>
     </div>
 
+    <!--  <div style="margin-bottom: 5rem;">-->
+    <!--    <p class="fw-bold">Despesa genèrica:</p>-->
+    <!--    <p>Aquesta és una estimació mitjana a Kwh de despesa que tenen els electrodomèstics a casa.</p>-->
+    <!--  </div>-->
 
-    <div class="col-6 col-lg my-3">
-      <app-stat-display
-        [disabled]="powerFlow().production === 0"
-        width="20%"
-        [color]="StatsColors.COMMUNITY_PRODUCTION"
-        label="Energia generada"
-        [text]="powerFlow().production.toFixed(2) + ' KWH'"/>
-    </div>
-
-    <div class="col-6 col-lg my-3">
-      <app-stat-display
-        [disabled]="powerFlow().sell === 0"
-        width="20%"
-        [color]="StatsColors.SURPLUS"
-        label="Excedent"
-        [text]="powerFlow().sell.toFixed(2) + ' KWH'"/>
-    </div>
-  </div>
-
-<!--  <div style="margin-bottom: 5rem;">-->
-<!--    <p class="fw-bold">Despesa genèrica:</p>-->
-<!--    <p>Aquesta és una estimació mitjana a Kwh de despesa que tenen els electrodomèstics a casa.</p>-->
-<!--  </div>-->
-
-<!--  <div class="w-100" style="margin-bottom: 7rem;">-->
-<!--    <app-consumption-items [items]="consumptionItems"/>-->
-<!--  </div>-->
+    <!--  <div class="w-100" style="margin-bottom: 7rem;">-->
+    <!--    <app-consumption-items [items]="consumptionItems"/>-->
+    <!--  </div>-->
 
 
-<!--  <p class="mt-5">-->
-<!--    Aquest gràfic mostra la teva despesa actual segons els electrodomèstics endollats. Per a optimitzar el consum, el-->
-<!--    percentatge indica si pots afegir més electrodomèstics o treure.-->
-<!--    <span style="color: #5F7187;">-->
-<!--    Per exemple, si es mes alt vol dir que pots afegir més aparells perquè has acumulat energia per a consumir.-->
-<!--  </span>-->
-<!--  </p>-->
+    <!--  <p class="mt-5">-->
+    <!--    Aquest gràfic mostra la teva despesa actual segons els electrodomèstics endollats. Per a optimitzar el consum, el-->
+    <!--    percentatge indica si pots afegir més electrodomèstics o treure.-->
+    <!--    <span style="color: #5F7187;">-->
+    <!--    Per exemple, si es mes alt vol dir que pots afegir més aparells perquè has acumulat energia per a consumir.-->
+    <!--  </span>-->
+    <!--  </p>-->
 
 
-<!--  <app-powerflow-gaus [production]="powerFlow().production" [sell]="powerFlow().sell"/>-->
+    <!--  <app-powerflow-gaus [production]="powerFlow().production" [sell]="powerFlow().sell"/>-->
 
-  <hr>
+    <hr>
 
-  <app-historic-chart/>
+    <app-historic-chart/>
 
     <div class="row">
       <div class="col-md-6">
@@ -96,4 +95,7 @@
 
       </div>
     </div>
-</div>
+  </div>
+
+</ng-container>
+

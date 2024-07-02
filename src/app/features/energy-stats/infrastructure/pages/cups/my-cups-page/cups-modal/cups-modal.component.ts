@@ -5,13 +5,16 @@ import {UserCups} from "../../../../../../user/infrastructure/services/user-stor
 import {FormsModule} from "@angular/forms";
 import {ZertipowerService} from "../../../../../../../shared/infrastructure/services/zertipower/zertipower.service";
 import Swal from "sweetalert2";
+import {TranslocoDirective, TranslocoPipe} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-cups-modal',
   standalone: true,
   imports: [
     NgIf,
-    FormsModule
+    FormsModule,
+    TranslocoDirective,
+    TranslocoPipe
   ],
   templateUrl: './cups-modal.component.html',
   styleUrl: './cups-modal.component.scss'

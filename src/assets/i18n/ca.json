@@ -14,6 +14,36 @@
     },
     "tooltips": {
       "assignedProd": "El percentatge de l'energia produïda que se li assigna a aquest CUPS"
+    },
+    "modals": {
+      "modifyCups": {
+        "title": "Canviar el nom del CUPS",
+        "texts": {
+          "nameLabel": "Nom del CUPS",
+          "namePlaceholder": "Per exemple: Garatge"
+        }
+      },
+      "addCups": {
+        "title": "Afageix un nou CUPS"
+      }
+    }
+  },
+  "MY-COMMUNITY": {
+    "navbar": "La meva comunitat",
+    "title": "Consum i producció",
+    "texts": {
+      "liveWaste": "La teva despesa en viu",
+      "updatedAt": "Actualitzat a les ",
+      "noDataRegistered": "No s'ha registrat cap dada",
+      "communityMembers": "Membres d'aquesta comunitat:",
+      "activeMembers": "Membres actius:",
+      "consumption": "Consum",
+      "selfConsumption": "Autoconsum",
+      "generatedEnergy": "Energia generada",
+      "surplus": "Excedent"
+    },
+    "tooltips": {
+      "assignedProd": "El percentatge de l'energia produïda que se li assigna a aquest CUPS"
     }
   },
   "HISTORIC-CHART": {
@@ -135,6 +165,71 @@
     }
   },
 
+  "NEW-PROPOSAL": {
+    "title": "Nova proposta",
+    "texts": {
+      "goBack": "Tornar a propostes",
+      "titleLabel": "Afegeix un títol descriptiu",
+      "titlePlaceholder": "Títol de la proposta",
+      "descriptionLabel": "Desriu els aspectes principals de la teva proposta",
+      "descriptionWarning": "Recorda fer servir un llenguatge respectuós, un text breu, clar i descriptiu de la teva proposta",
+      "endDateLabel": "Data de finalització",
+      "minQuorumLabel": "Cens de vots minim",
+      "statusLabel": "Estat",
+      "typeLabel": "Tipus",
+      "transparencyLabel": "Transparència",
+      "optionsLabel": "Opcions",
+      "addOption": "Afegir opció",
+      "optionPlaceholder": "Opció",
+      "proposalValidation": "La proposta és vàlida a partir de 2 opcions.",
+      "abstainPlaceholder": "Abstenir-se"
+    },
+    "status": {
+      "active": "Activa",
+      "pending": "Pendent"
+    },
+    "types": {
+      "weighted": "Ponderada",
+      "equal": "Igualitaria"
+    },
+    "tooltips": {
+      "quorum": "Elegeix el percentatge de vots necessaris per a l'aprovació de la votació. Per exemple: 50%.",
+      "type": "Sistemes de votacions.<br><strong>Ponderada:</strong> Cada vot es basa en un factor predefinit, com la quantitat d'aportacions realitzades o l'antiguitat en la comunitat. És a dir, es pondera per la quantitat d'accions.<br><strong>Igualitaria:</strong> Cada vot té el mateix pes, independentment de qualsevol altre factor.",
+      "transparency": "Elegeix <strong>SI</strong>, per a veure la votació a temps real, o <strong>NO</strong>,per a veure el resultat finalitzada la data d'expiració."
+    }
+  },
+
+  "PARTICIPANTS": {
+    "navbar": "Participants",
+    "title": "Participants",
+    "texts": {
+      "searchPlaceholder": "Buscar participant",
+      "name": "Nom",
+      "mobileName": "Nom complet i correu",
+      "email": "Correu",
+      "shares": "Beta",
+      "actions": "Accions",
+      "noParticipants": "No hi ha cap particiapnt"
+    },
+    "status": {
+      "actives": "Actius",
+      "pending": "Pendents"
+    },
+    "modals": {
+      "modify": {
+        "nameLabel": "Nom complet",
+        "namePlaceholder": "nom",
+        "emailLabel": "Correu electrònic",
+        "emailPlaceholder": "correu@gmail.com",
+        "sharesLabel": "Beta",
+        "sharePlaceholder": "p.e.:5000"
+      },
+      "remove": {
+
+      }
+    }
+  },
+
   "GENERIC": {
     "texts": {
       "months": {
@@ -167,7 +262,9 @@
       ],
       "save": "Guardar",
       "cancel": "Cancel·lar",
-      "close": "Tancar"
+      "close": "Tancar",
+      "yes": "Sí",
+      "no": "No"
     }
   }
 }

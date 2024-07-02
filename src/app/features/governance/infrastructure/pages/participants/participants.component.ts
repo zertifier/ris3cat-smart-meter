@@ -8,16 +8,18 @@ import Swal from "sweetalert2";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ModifyParticipantModalComponent} from "./modify-participant-modal/modify-participant-modal.component";
 import {Router} from "@angular/router";
+import {TranslocoDirective} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-participants',
   standalone: true,
-  imports: [
-    PaginatorModule,
-    NgClass,
-    NgForOf,
-    NgIf
-  ],
+    imports: [
+        PaginatorModule,
+        NgClass,
+        NgForOf,
+        NgIf,
+        TranslocoDirective
+    ],
   templateUrl: './participants.component.html',
   styleUrl: './participants.component.scss'
 })

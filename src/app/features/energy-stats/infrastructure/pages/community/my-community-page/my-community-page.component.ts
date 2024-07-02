@@ -35,6 +35,7 @@ import {
 import {isDevMode} from '@angular/core';
 import {environment} from "@environments/environment";
 import {EnergyPredictionComponent} from "../../../components/energy-prediction/energy-prediction.component";
+import {TranslocoDirective} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-my-community-page',
@@ -64,7 +65,8 @@ import {EnergyPredictionComponent} from "../../../components/energy-prediction/e
     PowerflowGausComponent,
     EnergyPredictionChartComponent,
     MetereologicPredictionComponent,
-    EnergyPredictionComponent
+    EnergyPredictionComponent,
+    TranslocoDirective
   ],
   templateUrl: './my-community-page.component.html',
   styleUrl: './my-community-page.component.scss'
