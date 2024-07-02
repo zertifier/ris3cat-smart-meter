@@ -21,10 +21,10 @@
       <hr>
 
       <p class="mt-4" *ngIf="showCommunity$ | async">
-      <!--  · Aquesta estadística indica les dades dels {{ activeMembers$ | async }} membres actius d'un total
-        de {{ totalMembers$ | async }}
-        membres de la comunitat.-->
         {{ t('texts.chartBottomCommunityText', {activeMembers: activeMembers$ | async, totalmembers: totalMembers$ | async}) }}
+      </p>
+      <p>
+        {{ t('texts.chartUpdateWarning') }}
       </p>
       <p>
         {{ t('texts.chartBottomText') }}
@@ -46,7 +46,10 @@
 
     @if ((currentBreakpoint$ | async)! >= BreakPoints.MD) {
       <p class="mt-4" *ngIf="showCommunity$ | async">
-        {{ t('texts.chartBottomCommunityText', {activeMembers: activeMembers$ | async, totalmembers: totalMembers$ | async}) }}
+        {{ t('texts.chartBottomCommunityText', {activeMembers: activeMembers$ | async, totalMembers: totalMembers$ | async}) }}
+      </p>
+      <p>
+        {{ t('texts.chartUpdateWarning') }}
       </p>
       <p>
         {{ t('texts.chartBottomText') }}
