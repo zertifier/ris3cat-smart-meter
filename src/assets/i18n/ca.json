@@ -79,14 +79,38 @@
       "chartUpdateWarning": "· La informació del datadis actualitzada és de fa 3 dies.",
       "chartLabels": {
         "production": "Producció",
+        "productionActive": "Producció actius",
         "networkConsumption": "Consum de la xarxa",
-        "surplus": "Excedent"
+        "networkActiveConsumption": "Consum de la xarxa actius",
+        "surplus": "Excedent",
+        "surplusActive": "Excedent actius",
+        "surplusActiveShared": "Excedent actius comprartit"
+
+
       },
       "displayLegend": "Mostrar la llegenda",
       "maximize": "Ampliar",
       "loadingData": "Carregant dades"
     },
     "tooltips": {
+      "chartLabels": {
+        "community": {
+          "production": "Producció total de la comunitat.",
+          "activeProduction": "Producció dels participants actius",
+          "networkConsumption": "Consum que facturarà la companyia elèctrica.",
+          "networkActiveConsumption": "Consum dels participants actius",
+          "surplusActive": "Quantitat d’energia que es produeix i no es consumeix dels participans actius.",
+          "sharedSurplusActive": "Quantitat d’energia per compartir que es produeix i no es consumeix dels participans actius."
+        },
+        "cups": {
+          "networkConsumption": "Consum que facturarà la companyia elèctrica.",
+          "production": "Producció proporcional comunitaria",
+          "networkActiveConsumption": "Quantitat d'energia que gastem",
+          "surplusActive": "Quantitat d'energia que es produeix i no es consumeix.",
+          "sharedSurplusActive": "Quantitat d’energia per compartir que es produeix i no es consumeix dels participans actius."
+        }
+
+      },
       "communityModel": {
         "acc": "(Auto Consum Compartit)",
         "cce": "(Comunitat Ciutadana Energética)"

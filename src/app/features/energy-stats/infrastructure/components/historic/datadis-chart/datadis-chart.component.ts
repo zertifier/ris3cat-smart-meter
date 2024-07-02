@@ -70,147 +70,161 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit(): Promise<void> {
-    const chartParametrs$ = this.chartStoreService
-      .selectOnly(this.chartStoreService.$.params);
-    const selectedCups$ = this.userStore.selectOnly(state => ({selectedCupsIndex: state.selectedCupsIndex}))
     this.subscriptions.push(
-      combineLatest([chartParametrs$, selectedCups$])
-        .subscribe(
-          async ([{
-            date,
-            dateRange,
-            selectedChartResource,
-            selectedChartEntity,
-            chartType,
-          }]) => {
-            // Every time that params change, fetch data and update chart
-            // Fetching data
-            const cupId = this.userStore.snapshotOnly(this.userStore.$.cupsId);
-            const communityId = this.userStore.snapshotOnly(this.userStore.$.communityId);
-            const data = await this.fetchEnergyStats(date, dateRange, cupId, communityId);
-            this.chartStoreService.patchState({lastFetchedStats: data});
+      this.translocoService.langChanges$.subscribe(() => {
+        const chartParametrs$ = this.chartStoreService
+          .selectOnly(this.chartStoreService.$.params);
+        const selectedCups$ = this.userStore.selectOnly(state => ({selectedCupsIndex: state.selectedCupsIndex}))
+        this.subscriptions.push(
+          combineLatest([chartParametrs$, selectedCups$])
+            .subscribe(
+              async ([{
+                date,
+                dateRange,
+                selectedChartResource,
+                selectedChartEntity,
+                chartType,
+              }]) => {
+                // Every time that params change, fetch data and update chart
+                // Fetching data
+                const cupId = this.userStore.snapshotOnly(this.userStore.$.cupsId);
+                const communityId = this.userStore.snapshotOnly(this.userStore.$.communityId);
+                const data = await this.fetchEnergyStats(date, dateRange, cupId, communityId);
+                this.chartStoreService.patchState({lastFetchedStats: data});
 
-            // Create labels
-            // let labels: string[] = ["Gener", "Febrer", "Març", "Abril", "Maig", "Juny", "Juliol", "Agost", "Setembre", "Octubre", "Novembre", "Desembre"];
-            let labels: string[] = [];
-            this.translocoService.selectTranslate('GENERIC.texts.monthsArray').subscribe((monthsArray)=>{
-              labels = monthsArray
-              if (dateRange === DateRange.MONTH) {
-                labels = data.map(d => {
-                  return dayjs.utc(d.infoDt).format('DD');
-                });
-              } else if (dateRange === DateRange.DAY) {
-                labels = data.map(d => {
-                  return dayjs.utc(d.infoDt).format('HH');
+                // Create labels
+                // let labels: string[] = ["Gener", "Febrer", "Març", "Abril", "Maig", "Juny", "Juliol", "Agost", "Setembre", "Octubre", "Novembre", "Desembre"];
+                let labels: string[] = [];
+                this.translocoService.selectTranslate('GENERIC.texts.monthsArray').subscribe((monthsArray)=>{
+                  labels = monthsArray
+                  if (dateRange === DateRange.MONTH) {
+                    labels = data.map(d => {
+                      return dayjs.utc(d.infoDt).format('DD');
+                    });
+                  } else if (dateRange === DateRange.DAY) {
+                    labels = data.map(d => {
+                      return dayjs.utc(d.infoDt).format('HH');
+                    })
+                  }
                 })
-              }
-            })
 
 
-            const cce = chartType === ChartType.CCE;
-            const community = selectedChartEntity === ChartEntity.COMMUNITIES;
+                const cce = chartType === ChartType.CCE;
+                const community = selectedChartEntity === ChartEntity.COMMUNITIES;
 
-            // Map data to a more easy to use objects
-            const mappedData = this.mapData(data, chartType, selectedChartResource);
+                // Map data to a more easy to use objects
+                const mappedData = this.mapData(data, chartType, selectedChartResource);
 
-            // Create data sets
-            const datasets: ChartDataset[] = [];
+                // Create data sets
+                const datasets: ChartDataset[] = [];
 
-            if (cce) {
-              datasets.push({
-                order: 2,
-                label: 'Excedent actius compartit',
-                tooltipText: community ? 'Quantitat d’energia per compartir que es produeix i no es consumeix dels participans actius.' : 'Quantitat d’energia per compartir que es produeix i no es consumeix dels participans actius.',
-                color: StatsColors.VIRTUAL_SURPLUS,
-                data: mappedData.map(d => d.virtualSurplus),
-              })
-            } else {
-              datasets.push({
-                order: 2,
-                label: community ? 'Excedent actius' : 'Excedent',
-                tooltipText: community ? 'Quantitat d’energia que es produeix i no es consumeix dels participans actius.' : 'Quantitat d\'energia que es produeix i no es consumeix.',
-                color: StatsColors.SURPLUS,
-                data: mappedData.map(d => d.surplus),
-                stack: 'Stack 2',
-              })
-            }
-
-            if (community) {
-              datasets.unshift(
-                {
-                  order: 0,
-                  label: 'Producció actius',
-                  tooltipText: 'Producció dels participants actius',
-                  color: StatsColors.ACTIVE_COMMUNITY_PRODUCTION,
-                  data: mappedData.map(d => d.productionActives),
-                  stack: 'Excedent',
-                },
-                {
-                  order: 3,
-                  color: StatsColors.COMMUNITY_PRODUCTION,
-                  label: 'Producció',
-                  tooltipText: 'Producció total de la comunitat',
-                  data: mappedData.map(d => {
-                    if (!d.production) {
-                      return 0;
-                    }
-                    return d.production - d.productionActives;
-                  }),
-                  stack: 'Excedent',
-                },
-                {
-                  label: 'Consum del a xarxa actius',
-                  data: mappedData.map(d => {
-                    return d.consumption;
-                  }),
-                  tooltipText: community ? 'Consum dels participants actius' : 'Quantitat d\'energia que gastem',
-                  stack: 'Consumption',
-                  order: 0,
-                  color: StatsColors.SELF_CONSUMPTION
-                },
-              )
-            } else {
-              datasets.unshift({
-                label: 'Consum de la xarxa',
-                color: StatsColors.SELF_CONSUMPTION,
-                data: mappedData.map(d => {
-                  return d.gridConsumption
-                }),
-                tooltipText: 'Consum que facturarà la companyia elèctrica',
-                stack: 'Consumption',
-              })
-              datasets.unshift({
-                label: 'Producció',
-                tooltipText: 'Producció proporcional comunitaria',
-                color: StatsColors.COMMUNITY_PRODUCTION,
-                data: mappedData.map(d => d.production),
-                stack: 'Production',
-              })
-            }
-
-            this.labels = labels;
-            this.datasets = datasets;
-            this.legendLabels = datasets.map((entry, index) => {
-              return {
-                tooltipText: entry.tooltipText,
-                label: entry.label,
-                radius: '2.5rem',
-                color: entry.color,
-                hidden: false,
-                toggle: (label) => {
-                  this.dataChart.toggleDataset(index);
-                  label.hidden = !label.hidden;
-                  return label;
+                if (cce) {
+                  datasets.push({
+                    order: 2,
+                    label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.surplusActiveShared'),
+                    // tooltipText: community ? 'Quantitat d’energia per compartir que es produeix i no es consumeix dels participans actius.' : 'Quantitat d’energia per compartir que es produeix i no es consumeix dels participans actius.',
+                    tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.community.sharedSurplusActive'),
+                    color: StatsColors.VIRTUAL_SURPLUS,
+                    data: mappedData.map(d => d.virtualSurplus),
+                  })
+                } else {
+                  datasets.push({
+                    order: 2,
+                    label: community ? this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.surplusActive') : this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.surplus'),
+                    // tooltipText: community ? 'Quantitat d’energia que es produeix i no es consumeix dels participans actius.' : 'Quantitat d\'energia que es produeix i no es consumeix.',
+                    tooltipText: community ? this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.community.surplusActive') : this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.cups.surplusActive') ,
+                    color: StatsColors.SURPLUS,
+                    data: mappedData.map(d => d.surplus),
+                    stack: 'Stack 2',
+                  })
                 }
-              }
-            });
 
-            this.mobileLabels = this.legendLabels.map(d => {
-              return {...d, radius: '2.5rem'}
-            })
-          }),
+                if (community) {
+                  datasets.unshift(
+                    {
+                      order: 0,
+                      // label: 'Producció actius',
+                      label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.productionActive'),
+                      tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.community.activeProduction') ,
+                      color: StatsColors.ACTIVE_COMMUNITY_PRODUCTION,
+                      data: mappedData.map(d => d.productionActives),
+                      stack: 'Excedent',
+                    },
+                    {
+                      order: 3,
+                      color: StatsColors.COMMUNITY_PRODUCTION,
+                      // label: 'Producció',
+                      label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.production'),
+                      // tooltipText: 'Producció total de la comunitat',
+                      tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.community.production') ,
+                      data: mappedData.map(d => {
+                        if (!d.production) {
+                          return 0;
+                        }
+                        return d.production - d.productionActives;
+                      }),
+                      stack: 'Excedent',
+                    },
+                    {
+                      // label: 'Consum del a xarxa actius',
+                      label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.networkActiveConsumption'),
+                      data: mappedData.map(d => {
+                        return d.consumption;
+                      }),
+                      tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.community.networkActiveConsumption') ,
+                      stack: 'Consumption',
+                      order: 0,
+                      color: StatsColors.SELF_CONSUMPTION
+                    },
+                  )
+                } else {
+                  datasets.unshift({
+                    // label: 'Consum de la xarxa',
+                    label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.networkConsumption'),
+                    color: StatsColors.SELF_CONSUMPTION,
+                    data: mappedData.map(d => {
+                      return d.gridConsumption
+                    }),
+                    // tooltipText: 'Consum que facturarà la companyia elèctrica',
+                    tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.cups.networkConsumption'),
+                    stack: 'Consumption',
+                  })
+                  datasets.unshift({
+                    // label: 'Producció',
+                    label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.production'),
+                    // tooltipText: 'Producció proporcional comunitaria',
+                    tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.cups.networkConsumption'),
+                    color: StatsColors.COMMUNITY_PRODUCTION,
+                    data: mappedData.map(d => d.production),
+                    stack: 'Production',
+                  })
+                }
+
+                this.labels = labels;
+                this.datasets = datasets;
+                this.legendLabels = datasets.map((entry, index) => {
+                  return {
+                    tooltipText: entry.tooltipText,
+                    label: entry.label,
+                    radius: '2.5rem',
+                    color: entry.color,
+                    hidden: false,
+                    toggle: (label) => {
+                      this.dataChart.toggleDataset(index);
+                      label.hidden = !label.hidden;
+                      return label;
+                    }
+                  }
+                });
+
+                this.mobileLabels = this.legendLabels.map(d => {
+                  return {...d, radius: '2.5rem'}
+                })
+              }),
+        );
+      })
     )
-    ;
+
   }
 
   public showLegendModal() {
