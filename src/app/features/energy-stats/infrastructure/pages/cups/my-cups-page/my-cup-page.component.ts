@@ -1,4 +1,4 @@
-import {Component, computed, OnInit, signal} from '@angular/core';
+import {Component, computed, OnDestroy, OnInit, signal} from '@angular/core';
 import {ChartModule} from "primeng/chart";
 import {AsyncPipe, JsonPipe, NgStyle} from "@angular/common";
 import {MonitoringService, PowerStats} from "../../../services/monitoring.service";
@@ -36,6 +36,9 @@ import {
 } from "../../../components/metereologic-prediction/metereologic-prediction.component";
 import {TranslocoDirective, TranslocoPipe, TranslocoService} from "@jsverse/transloco";
 import {LanguageComponent} from "@core/layouts/language/language.component";
+import {state} from "@angular/animations";
+import _default from "chart.js/dist/core/core.interaction";
+import index = _default.modes.index;
 
 
 @Component({
@@ -68,7 +71,7 @@ import {LanguageComponent} from "@core/layouts/language/language.component";
   templateUrl: './my-cup-page.component.html',
   styleUrl: './my-cup-page.component.scss'
 })
-export class MyCupPageComponent implements OnInit {
+export class MyCupPageComponent implements OnInit, OnDestroy {
   lastUpdate$ = this.monitoringStore.selectOnly(state => state.lastPowerFlowUpdate)
     .pipe(map(value => {
       if (!value) {
@@ -189,4 +192,8 @@ export class MyCupPageComponent implements OnInit {
   }
 
     protected readonly environment = environment;
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(s => s.unsubscribe())
+  }
 }

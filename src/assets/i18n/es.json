@@ -166,6 +166,9 @@
       }
     }
   },
+  "SHARE-ENERGY": {
+    "navbar": "Compartir energía"
+  },
   "STATUS": {
     "navbar": "Estado",
     "title": "Estado",
@@ -259,6 +262,17 @@
       "remove": {
 
       }
+    }
+  },
+  "LOGIN": {
+    "title": "Iniciar sesión",
+    "texts": {
+      "loginGoogle": "Iniciar sesión con Google",
+      "loginWebwallet": "Iniciar sesión con web wallet",
+      "noDataSaved": "No guardamos ningún dato relacionado con tus credenciales",
+      "help": "¿Necesitas ayuda?",
+      "logingIn": "Iniciando sesión.",
+      "wait": "Por favor, espera."
     }
   },
   "GENERIC": {

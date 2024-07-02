@@ -12,24 +12,26 @@ import {
 } from "../../../../../features/user/infrastructure/components/user-profile/user-profile-button/user-profile-button.component";
 import {NgbDropdown, NgbDropdownItem, NgbDropdownMenu, NgbDropdownToggle} from "@ng-bootstrap/ng-bootstrap";
 import {UserStoreService} from "../../../../../features/user/infrastructure/services/user-store.service";
+import {TranslocoPipe} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-large-navbar',
   standalone: true,
-  imports: [
-    AppLogoComponent,
-    RouterLink,
-    RouterLinkActive,
-    UserProfileSelectorComponent,
-    NgStyle,
-    AsyncPipe,
-    UserProfileButtonComponent,
-    NgbDropdown,
-    NgbDropdownMenu,
-    NgbDropdownItem,
-    NgbDropdownToggle,
-    NgClass
-  ],
+    imports: [
+        AppLogoComponent,
+        RouterLink,
+        RouterLinkActive,
+        UserProfileSelectorComponent,
+        NgStyle,
+        AsyncPipe,
+        UserProfileButtonComponent,
+        NgbDropdown,
+        NgbDropdownMenu,
+        NgbDropdownItem,
+        NgbDropdownToggle,
+        NgClass,
+        TranslocoPipe
+    ],
   templateUrl: './large-navbar.component.html',
   styleUrl: './large-navbar.component.scss'
 })

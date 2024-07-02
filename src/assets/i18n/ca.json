@@ -167,7 +167,9 @@
       }
     }
   },
-
+  "SHARE-ENERGY": {
+    "navbar": "Compartir energia"
+  },
   "STATUS": {
     "navbar": "Estatus",
     "title": "Estatus",
@@ -264,6 +266,17 @@
       "remove": {
 
       }
+    }
+  },
+  "LOGIN": {
+    "title": "Iniciar Sessió",
+    "texts": {
+      "loginGoogle": "Inciar sessió amb google",
+      "loginWebwallet": "Iniciar sessió amb web wallet",
+      "noDataSaved": "No guardem cap dada relacionada amb les teves credencials",
+      "help": "Necessites ajuda?",
+      "logingIn": "Iniciant sessió.",
+      "wait": "Si us plau, esperi."
     }
   },
 
