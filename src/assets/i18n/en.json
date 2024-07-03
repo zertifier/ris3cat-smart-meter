@@ -196,6 +196,9 @@
         "consumption": "Consumption",
         "surplus": "Surplus"
       }
+    },
+    "tooltips": {
+      "ekw": "EKW: Fictional currency for buying and selling energy on this platform."
     }
   },
   "STATUS": {
@@ -221,9 +224,6 @@
       "wallet": "Wallet",
       "amount": "Amount",
       "anonymous": "Anonymous"
-    },
-    "tooltips": {
-      "ekw": "EKW: Fictional currency for buying and selling energy on this platform."
     }
   },
   "GOVERNOR": {

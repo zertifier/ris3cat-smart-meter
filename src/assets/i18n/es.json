@@ -196,6 +196,9 @@
         "consumption": "Consumo",
         "surplus": "Excedente"
       }
+    },
+    "tooltips": {
+      "ekw": "EKW: Moneda ficticia para la compra y venta de energía en esta plataforma."
     }
   },
   "STATUS": {
@@ -222,9 +225,7 @@
       "amount": "Cantidad",
       "anonymous": "Anónimo"
     },
-    "tooltips": {
-      "ekw": "EKW: Moneda ficticia para la compra y venta de energía en esta plataforma."
-    }
+
   },
   "GOVERNOR": {
     "navbar": "Gobernanza",
