@@ -174,7 +174,29 @@
     }
   },
   "SHARE-ENERGY": {
-    "navbar": "Share energy"
+    "navbar": "Share energy",
+    "title": "Share energy",
+    "texts": {
+      "chooseData": "Choose which data range you want to consult",
+      "from": "From",
+      "to": "To",
+      "date": "Date",
+      "action": "Action",
+      "amount": "Amount",
+      "total": "Total",
+      "result": "Result",
+      "bottomTable": "Please note that data update is not daily.",
+      "actions": {
+        "buy": "Buy",
+        "sell": "Sell"
+      },
+      "results": {
+        "before": "Before",
+        "now": "Now",
+        "consumption": "Consumption",
+        "surplus": "Surplus"
+      }
+    }
   },
   "STATUS": {
     "navbar": "Status",

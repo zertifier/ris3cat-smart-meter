@@ -174,7 +174,29 @@
     }
   },
   "SHARE-ENERGY": {
-    "navbar": "Compartir energía"
+    "navbar": "Compartir energía",
+    "title": "Compartir energía",
+    "texts": {
+      "chooseData": "Elige el intervalo de fechas que deseas consultar",
+      "from": "Desde",
+      "to": "Hasta",
+      "date": "Fecha",
+      "action": "Acción",
+      "amount": "Cantidad",
+      "total": "Total",
+      "result": "Resultado",
+      "bottomTable": "Ten en cuenta que la actualización de datos no es diaria.",
+      "actions": {
+        "buy": "Compra",
+        "sell": "Venta"
+      },
+      "results": {
+        "before": "Antes",
+        "now": "Ahora",
+        "consumption": "Consumo",
+        "surplus": "Excedente"
+      }
+    }
   },
   "STATUS": {
     "navbar": "Estado",

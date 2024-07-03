@@ -175,7 +175,29 @@
     }
   },
   "SHARE-ENERGY": {
-    "navbar": "Compartir energia"
+    "navbar": "Compartir energia",
+    "title": "Compartir energia",
+    "texts": {
+      "chooseData": "Tria quin tram de data vols consultar",
+      "from": "Des de",
+      "to": "Fins a",
+      "date": "Data",
+      "action": "Acció",
+      "amount": "Quantitat",
+      "total": "Total",
+      "result": "Resultat",
+      "bottomTable": "Tingues en compte que l'actualització de dades no és diària.",
+      "actions": {
+        "buy": "Compra",
+        "sell": "Venta"
+      },
+      "results": {
+        "before": "Abans",
+        "now": "Ara",
+        "consumption": "Consum",
+        "surplus": "Exedent"
+      }
+    }
   },
   "STATUS": {
     "navbar": "Estatus",
