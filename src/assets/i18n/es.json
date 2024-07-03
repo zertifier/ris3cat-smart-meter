@@ -221,6 +221,9 @@
       "wallet": "Cartera",
       "amount": "Cantidad",
       "anonymous": "Anónimo"
+    },
+    "tooltips": {
+      "ekw": "EKW: Moneda ficticia para la compra y venta de energía en esta plataforma."
     }
   },
   "GOVERNOR": {

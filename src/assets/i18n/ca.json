@@ -222,6 +222,9 @@
       "wallet": "Cartera",
       "amount": "Quantitat",
       "anonymous": "Anònim"
+    },
+    "tooltips": {
+      "ekw": "EKW: Moneda fictícia per a la venda/compra d'energia en aquesta plataforma."
     }
   },
 

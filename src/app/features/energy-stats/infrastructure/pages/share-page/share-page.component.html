@@ -36,7 +36,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let data of sharedData">
+        <tr *ngFor="let data of sharedData" style="height: 50px">
           <td>{{ data.date }}</td>
           <td>
             <span *ngIf="data.type == 'buy'"
@@ -45,9 +45,17 @@
                   class="badge text-bg-success d-flex align-items-center justify-content-center fw-normal"> {{ t('texts.actions.sell') }} </span>
           </td>
           <td>
-            {{ data.type === 'buy' ? '-' : (data.type === 'sell' ? '+' : '') }} {{ data.qty }} kWh
+           {{ data.qty }} kWh
           </td>
-          <td>{{ data.total }} EKW</td>
+          <td>
+            {{ data.type === 'buy' ? '-' : (data.type === 'sell' ? '+' : '') }}
+            {{ data.total }} EKW
+            <app-question-badge>
+              <div class="my-3">
+                {{ t('tooltips.ekw') }}
+              </div>
+            </app-question-badge>
+          </td>
           <td><span class="text-decoration-line-through d-block" style="font-size: 14px">{{ data.before }} kWh</span>
             <span class="fw-semibold">{{ data.now }} kWh</span></td>
         </tr>

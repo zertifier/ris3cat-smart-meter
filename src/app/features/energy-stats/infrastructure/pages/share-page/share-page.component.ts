@@ -9,6 +9,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CalendarModule} from "primeng/calendar";
 import dayjs from "dayjs";
 import {NgForOf, NgIf} from "@angular/common";
+import {QuestionBadgeComponent} from "@shared/infrastructure/components/question-badge/question-badge.component";
 
 
 @Component({
@@ -23,6 +24,7 @@ import {NgForOf, NgIf} from "@angular/common";
     FormsModule,
     NgIf,
     NgForOf,
+    QuestionBadgeComponent,
   ],
   providers: [
     MonitoringService,
