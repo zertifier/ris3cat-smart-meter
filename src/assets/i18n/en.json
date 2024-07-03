@@ -1,10 +1,355 @@
 {
   "MY-CUPS": {
-    "titles": {
-      "consumption": "Consumption and production"
-    },
+    "navbar": "My counter",
+    "title": "Consumption and production",
     "texts": {
-      "liveWaste": "Your live waste"
+      "liveWaste": "Your live spending",
+      "updatedAt": "Updated at ",
+      "noDataRegistered": "No data has been registered",
+      "assignedProd": "Assigned production",
+      "consumption": "Consumption",
+      "selfConsumption": "Self-consumption",
+      "generatedEnergy": "Energy generated",
+      "surplus": "Surplus"
+    },
+    "tooltips": {
+      "assignedProd": "The percentage of energy produced that is assigned to this CUPS"
+    },
+    "modals": {
+      "modifyCups": {
+        "title": "Change the CUPS name",
+        "texts": {
+          "nameLabel": "CUPS name",
+          "namePlaceholder": "For example: Garage"
+        }
+      },
+      "addCups": {
+        "title": "Add a new CUPS"
+      }
+    }
+  },
+  "MY-COMMUNITY": {
+    "navbar": "My community",
+    "title": "Consumption and production",
+    "texts": {
+      "liveWaste": "Your live spending",
+      "updatedAt": "Updated at ",
+      "noDataRegistered": "No data has been registered",
+      "communityMembers": "Members of this community:",
+      "activeMembers": "Active members:",
+      "consumption": "Consumption",
+      "selfConsumption": "Self-consumption",
+      "generatedEnergy": "Energy generated",
+      "surplus": "Surplus"
+    },
+    "tooltips": {
+      "assignedProd": "The percentage of energy produced that is assigned to this CUPS"
+    }
+  },
+  "HISTORIC-CHART": {
+    "title": "Historical consumption/surplus",
+    "texts": {
+      "dataType": {
+        "title": "Data type",
+        "types": {
+          "energy": "Energy KWH"
+        }
+      },
+      "communityModel": {
+        "title": "Community model",
+        "types": {
+          "acc": "SSC",
+          "cce": "CEC"
+        }
+      },
+      "dataSource": {
+        "title": "Data source",
+        "types": {
+          "datadis": "Datadis"
+        }
+      },
+      "dates": {
+        "daily": "Daily",
+        "monthly": "Monthly",
+        "yearly": "Yearly"
+      },
+      "noDisplay": "Nothing to show",
+      "chartBottomText": "· Learn about energy spending in detail by clicking on each type of consumption. The chart will show individualized consumption information.",
+      "chartBottomCommunityText": "· This statistic indicates the data of the {{activeMembers}} active members out of a total of {{totalMembers}} community members.",
+      "chartUpdateWarning": "· The updated datadis information is from 3 days ago.",
+      "chartLabels": {
+        "production": "Production",
+        "productionActive": "Active production",
+        "networkConsumption": "Network consumption",
+        "networkActiveConsumption": "Active network consumption",
+        "surplus": "Surplus",
+        "surplusActive": "Active surplus",
+        "surplusActiveShared": "Active shared surplus"
+
+
+      },
+      "displayLegend": "Show legend",
+      "maximize": "Maximize",
+      "loadingData": "Loading data"
+    },
+    "tooltips": {
+      "chartLabels": {
+        "community": {
+          "production": "Total community production.",
+          "activeProduction": "Production of active participants",
+          "networkConsumption": "Consumption that the electricity company will bill.",
+          "networkActiveConsumption": "Consumption of active participants",
+          "surplusActive": "Amount of energy produced and not consumed by active participants.",
+          "sharedSurplusActive": "Amount of energy to share that is produced and not consumed by active participants."
+        },
+        "cups": {
+          "networkConsumption": "Consumption that the electricity company will bill.",
+          "production": "Proportional community production",
+          "networkActiveConsumption": "Amount of energy we consume",
+          "surplusActive": "Amount of energy produced and not consumed.",
+          "sharedSurplusActive": "Amount of energy to share that is produced and not consumed by active participants."
+        }
+
+      },
+      "communityModel": {
+        "acc": "(Shared Self-Consumption)",
+        "cce": "(Citizen Energy Community)"
+      },
+      "dataSource": "Select the platform from which you prefer to extract and analyze\nthe data related to energy consumption, production and surplus."
+    }
+  },
+  "PREDICTIONS": {
+    "meteorologic": {
+      "title": "Weather forecast"
+    },
+    "energy": {
+      "title": "Energy prediction"
+    }
+  },
+  "PROFILE": {
+    "navbar": "Profile",
+    "title": "My profile",
+    "texts": {
+      "nameLabel": "Name (required)",
+      "lastnameLabel":"Last name (required)"
+    }
+  },
+  "MY-WALLET": {
+    "navbar": "My wallet",
+    "title": "My wallet",
+    "texts": {
+      "identityLabel": "Identity",
+      "transferInfo": "To relate a transfer, choose what you want to transfer",
+      "energyAmount": "Energy balance",
+      "tokenAmount": "Balance",
+      "communityShare": "Community shares",
+      "transferEnergy": "Transfer balance",
+      "transferToken": "Transfer XDAI",
+      "transferShare": "Transfer shares"
+    },
+    "tooltips": {
+      "identity": "Identity allows to identify your user within the Blockchain.",
+      "energy": "This balance will be used to purchase energy from the community.",
+      "token": "Balance for transactions.",
+      "shares": "These are the Shares that the community has."
+    },
+    "modals": {
+      "transfer": {
+        "title": "Transfer",
+        "texts": {
+          "balanceLabel": "Balance",
+          "toLabel": "Recipient",
+          "toPlaceholder": "example@email.com / 0xA...",
+          "toBottomText": "Write the email or identity number of the recipient",
+          "amountLabel": "Amount"
+        },
+        "swal": {
+          "blockchainError": "Problems with the blockchain.",
+          "tryAgainError": "Try again in a few minutes.",
+          "checkTryAgainError": "Check it and try again.",
+          "wrongDestinyError": "Incorrect recipient.",
+          "success": "Transfer sent successfully."
+        }
+      }
+    }
+  },
+  "SHARE-ENERGY": {
+    "navbar": "Share energy"
+  },
+  "STATUS": {
+    "navbar": "Status",
+    "title": "Status",
+    "texts": {
+      "statusInfo": "· Here you can see the status of the data sources",
+      "lastUpdate": "Last update",
+      "noLastUpdate": "No updates"
+    }
+  },
+  "GOVERNOR": {
+    "navbar": "Governance",
+    "title": "Governance"
+  },
+  "PROPOSALS": {
+    "navbar": "Proposals",
+    "title": "Proposals",
+    "texts": {
+      "searchPlaceholder": "Search proposal",
+      "newProposal": "New proposal",
+      "createdBy": "Created by:",
+      "expiration": "Expiration:"
+    },
+    "status": {
+      "all": "All",
+      "actives": "Active",
+      "pending": "Pending",
+      "expired": "Expired",
+      "executed": "Executed",
+      "denied": "Denied"
+    }
+  },
+  "NEW-PROPOSAL": {
+    "title": "New proposal",
+    "texts": {
+      "goBack": "Back to proposals",
+      "titleLabel": "Add a descriptive title",
+      "titlePlaceholder": "Proposal title",
+      "descriptionLabel": "Describe the main aspects of your proposal",
+      "descriptionWarning": "Remember to use respectful language, a brief, clear and descriptive text of your proposal",
+      "endDateLabel": "End date",
+      "minQuorumLabel": "Minimum voting quorum",
+      "statusLabel": "Status",
+      "typeLabel": "Type",
+      "transparencyLabel": "Transparency",
+      "optionsLabel": "Options",
+      "addOption": "Add option",
+      "optionPlaceholder": "Option",
+      "proposalValidation": "The proposal is valid from 2 options.",
+      "abstainPlaceholder": "Abstain"
+    },
+    "status": {
+      "active": "Active",
+      "pending": "Pending"
+    },
+    "types": {
+      "weighted": "Weighted",
+      "equal": "Equal"
+    },
+    "tooltips": {
+      "quorum": "Choose the percentage of votes needed for the approval of the vote. For example: 50%.",
+      "type": "Voting systems.<br><strong>Weighted:</strong> Each vote is based on a predefined factor, such as the amount of contributions made or the seniority in the community. That is, it is weighted by the amount of actions.<br><strong>Equal:</strong> Each vote has the same weight, regardless of any other factor.",
+      "transparency": "Choose <strong>YES</strong>, to see the vote in real time, or <strong>NO</strong>, to see the result after the expiration date."
+    },
+    "modals": {
+      "errorCreate": "There was an error creating the proposal, make sure all fields are complete",
+      "successCreate": "Proposal saved successfully"
+    }
+  },
+
+  "PARTICIPANTS": {
+    "navbar": "Participants",
+    "title": "Participants",
+    "texts": {
+      "searchPlaceholder": "Search participant",
+      "name": "Name",
+      "mobileName": "Full name and email",
+      "email": "Email",
+      "shares": "Participation",
+      "actions": "Actions",
+      "noParticipants": "There are no participants"
+    },
+    "status": {
+      "actives": "Active",
+      "pending": "Pending"
+    },
+    "modals": {
+      "modify": {
+        "nameLabel": "Full name",
+        "namePlaceholder": "name",
+        "emailLabel": "Email address",
+        "emailPlaceholder": "email@gmail.com",
+        "sharesLabel": "Participation",
+        "sharePlaceholder": "e.g.:5000"
+      },
+      "remove": {
+
+      },
+      "swal": {
+        "activate": {
+          "title": "Accept this participant?",
+          "inputLabel": "Beta",
+          "inputPlaceholder": "e.g.: 5000",
+          "success": {
+            "title": "The participant has been activated successfully"
+          }
+        },
+        "remove": {
+          "title": "The participant will be deleted permanently",
+          "success": {
+            "title": "The participant has been deleted successfully"
+          }
+        },
+        "errorMessage": "There was an error with the proposal. Wait a few minutes and try again."
+      }
+    }
+  },
+  "LOGIN": {
+    "title": "Log in",
+    "texts": {
+      "loginGoogle": "Log in with Google",
+      "loginWebwallet": "Log in with web wallet",
+      "noDataSaved": "We do not save any data related to your credentials",
+      "help": "Need help?",
+      "logingIn": "Logging in.",
+      "wait": "Please wait."
+    }
+  },
+
+  "LOGOUT": {
+    "navbar": "Log out",
+    "modal": {
+      "message": "Are you sure you want to log out",
+      "confirm": "Log out"
+    }
+  },
+  "GENERIC": {
+    "texts": {
+      "months": {
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+      },
+      "monthsArray": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ],
+      "daysArray": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "save": "Save",
+      "cancel": "Cancel",
+      "close": "Close",
+      "send": "Send",
+      "sending": "Sending...",
+      "yes": "Yes",
+      "no": "No",
+      "okay": "Okay"
     }
   }
 }
