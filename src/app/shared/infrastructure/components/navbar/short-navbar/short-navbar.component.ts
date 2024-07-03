@@ -86,8 +86,8 @@ export class ShortNavbarComponent implements OnDestroy{
       {route: '/energy-stats/community', label: this.translocoService.translate('MY-COMMUNITY.navbar')},
       {route: '/energy-stats/my-cup', label: this.translocoService.translate('MY-CUPS.navbar')},
       {route: '/energy-stats/share', label: this.translocoService.translate('SHARE-ENERGY.navbar')},
-      // {route: '/energy-stats/governance', label: 'Governança'},
-      {route: '/energy-stats/data-source-health', label: this.translocoService.translate('STATUS.navbar')}
+      {route: '/energy-stats/stats', label: this.translocoService.translate('STATS.navbar')},
+      {route: '/energy-stats/data-source-health', label: this.translocoService.translate('STATUS.navbar')},
     ]
   }
 

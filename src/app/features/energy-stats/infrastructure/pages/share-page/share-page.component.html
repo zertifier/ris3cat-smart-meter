@@ -1,60 +1,63 @@
 <ng-container *transloco="let t; prefix: 'SHARE-ENERGY'">
-<div class="container-page">
-  <div class="my-4">
-    <h4 class="fw-semibold"> {{ t('title') }} </h4>
+  <div class="container-page">
+    <div class="my-4">
+      <h4 class="fw-semibold"> {{ t('title') }} </h4>
 
-    <p class="mt-4 fs-5"> {{ t('texts.chooseData')}} </p>
+      <p class="mt-4 fs-5"> {{ t('texts.chooseData') }} </p>
 
 
-    <div class="row">
-      <div class="col-12 col-md-6">
-        <label class="form-label">
-          {{ t('texts.from')}}
-        </label>
-        <p-calendar [(ngModel)]="fromDate"  iconDisplay="input" [showIcon]="true" view="date" (onClose)="getData()"
-                    [maxDate]="maxDate" [dateFormat]="'dd/mm/yy'" styleClass="w-100"/>
-      </div>
-      <div class="col-12 col-md-6">
-        <label class="form-label">
-          {{ t('texts.to')}}
-        </label>
-        <p-calendar [(ngModel)]="toDate"  iconDisplay="input" [showIcon]="true" view="date" (onClose)="getData()"
-                    [maxDate]="maxDate" [dateFormat]="'dd/mm/yy'" styleClass="w-100"/>
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <label class="form-label">
+            {{ t('texts.from') }}
+          </label>
+          <p-calendar [(ngModel)]="fromDate" iconDisplay="input" [showIcon]="true" view="date" (onClose)="getData()"
+                      [maxDate]="maxDate" [dateFormat]="'dd/mm/yy'" styleClass="w-100"/>
+        </div>
+        <div class="col-12 col-md-6">
+          <label class="form-label">
+            {{ t('texts.to') }}
+          </label>
+          <p-calendar [(ngModel)]="toDate" iconDisplay="input" [showIcon]="true" view="date" (onClose)="getData()"
+                      [maxDate]="maxDate" [dateFormat]="'dd/mm/yy'" styleClass="w-100"/>
+        </div>
       </div>
     </div>
+
+    <div *ngIf="!loading && sharedData.length != 0" class="overflow-y-scroll" style="max-height: 440px">
+      <table class="table table-striped align-middle">
+        <thead>
+        <tr class="border-2 border-end-0 border-start-0 border-tertiary" style="height: 50px !important;">
+          <th style="max-width: 18%; width: 100%" scope="col">{{ t('texts.date') }}</th>
+          <th style="max-width: 28%; width: 100%" scope="col">{{ t('texts.action') }}</th>
+          <th style="max-width: 20%; width: 100%" scope="col">{{ t('texts.amount') }}</th>
+          <th style="max-width: 20%; width: 100%" scope="col">{{ t('texts.total') }}</th>
+          <th scope="col">{{ t('texts.result') }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let data of sharedData">
+          <td>{{ data.date }}</td>
+          <td>
+            <span *ngIf="data.type == 'buy'"
+                  class="badge buy-badge d-flex align-items-center justify-content-center fw-normal"> {{ t('texts.actions.buy') }} </span>
+            <span *ngIf="data.type == 'sell'"
+                  class="badge text-bg-success d-flex align-items-center justify-content-center fw-normal"> {{ t('texts.actions.sell') }} </span>
+          </td>
+          <td>
+            {{ data.type === 'buy' ? '-' : (data.type === 'sell' ? '+' : '') }} {{ data.qty }} kWh
+          </td>
+          <td>{{ data.total }} EKW</td>
+          <td><span class="text-decoration-line-through d-block" style="font-size: 14px">{{ data.before }} kWh</span>
+            <span class="fw-semibold">{{ data.now }} kWh</span></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      {{ t('texts.bottomTable') }}
+    </p>
+
   </div>
-
-  <div *ngIf="!loading && sharedData.length != 0" class="overflow-y-scroll" style="max-height: 440px">
-    <table class="table table-striped align-middle">
-      <thead>
-      <tr class="border-2 border-end-0 border-start-0 border-tertiary">
-        <th style="max-width: 18%; width: 100%" scope="col">{{ t('texts.date') }}</th>
-        <th style="max-width: 28%; width: 100%" scope="col">{{ t('texts.action') }}</th>
-        <th style="max-width: 20%; width: 100%" scope="col">{{ t('texts.amount') }}</th>
-        <th style="max-width: 20%; width: 100%" scope="col">{{ t('texts.total') }}</th>
-        <th scope="col">{{ t('texts.result') }}</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let data of sharedData">
-        <td>{{ data.date }}</td>
-        <td>
-          <span *ngIf="data.type == 'buy'" class="badge buy-badge d-flex align-items-center justify-content-center fw-normal"> {{ t('texts.actions.buy') }} </span>
-          <span *ngIf="data.type == 'sell'" class="badge text-bg-success d-flex align-items-center justify-content-center fw-normal"> {{ t('texts.actions.sell') }} </span>
-        </td>
-        <td>
-          {{ data.type === 'buy' ? '-' : (data.type === 'sell' ? '+' : '') }} {{ data.qty }} kWh
-        </td>
-        <td>{{ data.total }} EKW</td>
-        <td><span class="text-decoration-line-through d-block" style="font-size: 14px">{{ data.before }} kWh</span> <span class="fw-semibold">{{ data.now }} kWh</span></td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <p>
-    {{ t('texts.bottomTable')}}
-  </p>
-
-</div>
 </ng-container>

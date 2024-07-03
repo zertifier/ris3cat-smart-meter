@@ -207,6 +207,22 @@
       "noLastUpdate": "No updates"
     }
   },
+  "STATS": {
+    "navbar": "Stats",
+    "title": "Stats",
+    "subTitle": "Ranking",
+    "texts": {
+      "monthLabel": "Select the month you want to see",
+      "typeLabel": "What data do you want to see?",
+      "types": {
+        "lessConsumption": "Users with less consumption",
+        "moreSurplus": "Users with more surplus"
+      },
+      "wallet": "Wallet",
+      "amount": "Amount",
+      "anonymous": "Anonymous"
+    }
+  },
   "GOVERNOR": {
     "navbar": "Governance",
     "title": "Governance"

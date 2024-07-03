@@ -207,6 +207,22 @@
       "noLastUpdate": "No hay actualizaciones"
     }
   },
+  "STATS": {
+    "navbar": "Estadísticas",
+    "title": "Estadísticas",
+    "subTitle": "Ranking",
+    "texts": {
+      "monthLabel": "Elige el mes que quieres ver",
+      "typeLabel": "¿Qué datos quieres ver?",
+      "types": {
+        "lessConsumption": "Usuarios que tienen menos consumo",
+        "moreSurplus": "Usuarios que tienen más excedente"
+      },
+      "wallet": "Cartera",
+      "amount": "Cantidad",
+      "anonymous": "Anónimo"
+    }
+  },
   "GOVERNOR": {
     "navbar": "Gobernanza",
     "title": "Gobernanza"

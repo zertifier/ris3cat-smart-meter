@@ -208,6 +208,22 @@
       "noLastUpdate": "No hi ha actualitzacions"
     }
   },
+  "STATS": {
+    "navbar": "Estadístiques",
+    "title": "Estadístiques",
+    "subTitle": "Rànquing",
+    "texts": {
+      "monthLabel": "Trïa el mes que vols veure",
+      "typeLabel": "Quines dades vols veure?",
+      "types": {
+        "lessConsumption": "Usuaris que tenen menys consum",
+        "moreSurplus": "Usuaris que tenen més excedent"
+      },
+      "wallet": "Cartera",
+      "amount": "Quantitat",
+      "anonymous": "Anònim"
+    }
+  },
 
   "GOVERNOR": {
     "navbar": "Governança",
