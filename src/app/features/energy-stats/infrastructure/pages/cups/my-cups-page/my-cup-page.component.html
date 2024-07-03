@@ -5,7 +5,7 @@
 
       <div class="d-flex flex-column">
         <p class="fst-italic">{{ t('texts.liveWaste') }} <span><i
-          class="fa-solid fa-rss fa-fade text-danger"></i></span></p>
+          class="fa-solid fa-rss fa-fade text-success"></i></span></p>
         <div class="d-flex justify-content-between">
           @if (lastUpdate$ | async) {
             <p>{{ t('texts.updatedAt') }} {{ lastUpdate$ | async }} <span class="text-success" style="font-size: 0.8rem;"><i

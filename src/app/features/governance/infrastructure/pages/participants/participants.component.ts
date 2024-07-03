@@ -3,7 +3,7 @@ import {PaginatorModule} from "primeng/paginator";
 import {Subscription} from "rxjs";
 import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {Participant, ParticipantsService, ParticipantStatus} from "../../services/participants.service";
-import {UserStoreService} from "../../../../user/infrastructure/services/user-store.service";
+import {UserProfile, UserStoreService} from "../../../../user/infrastructure/services/user-store.service";
 import Swal from "sweetalert2";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ModifyParticipantModalComponent} from "./modify-participant-modal/modify-participant-modal.component";
@@ -35,6 +35,7 @@ export class ParticipantsComponent implements OnDestroy{
 
   subscriptions: Subscription[] = [];
 
+  // user: UserProfile | undefined
 
   constructor(
     private participantsService: ParticipantsService,
@@ -44,24 +45,27 @@ export class ParticipantsComponent implements OnDestroy{
     private translocoService: TranslocoService
   ) {
 
-    const user = this.userStore.snapshotOnly(state => state.user);
+    /*const user = this.userStore.snapshotOnly(state => state.user);
     if (!user) {
       return
-    }
+    }*/
 
-    if (user.role.toLowerCase() == 'user') {
-      this.router.navigate(['']);
-      return
-    }else{
-      this.subscriptions.push(
-        this.userStore.selectOnly(this.userStore.$.communityId).subscribe((community) => {
-          this.communityId = community
-          this.getParticipantsByStatus(this.participantStatus)
-          this.getPendingQty(this.communityId!)
+    this.subscriptions.push(
+      this.userStore
+        .selectOnly(state => state).subscribe((data) => {
+        if (data.user) {
+          // this.user = data.user
+          this.subscriptions.push(
+            this.userStore.selectOnly(this.userStore.$.communityId).subscribe((community) => {
+              this.communityId = community
+              this.getParticipantsByStatus(this.participantStatus)
+              this.getPendingQty(this.communityId!)
 
-        })
-      )
-    }
+            })
+          )
+        }
+      })
+    )
   }
 
 
