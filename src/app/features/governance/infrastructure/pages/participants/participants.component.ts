@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ModifyParticipantModalComponent} from "./modify-participant-modal/modify-participant-modal.component";
 import {Router} from "@angular/router";
-import {TranslocoDirective} from "@jsverse/transloco";
+import {TranslocoDirective, TranslocoService} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-participants',
@@ -40,7 +40,8 @@ export class ParticipantsComponent implements OnDestroy{
     private participantsService: ParticipantsService,
     private userStore: UserStoreService,
     private modalService: NgbModal,
-    private router: Router
+    private router: Router,
+    private translocoService: TranslocoService
   ) {
 
     const user = this.userStore.snapshotOnly(state => state.user);
@@ -103,7 +104,7 @@ export class ParticipantsComponent implements OnDestroy{
         this.pendingQty = response.data.qty
       },
       error: err => {
-        this.swalErrorDisplay('Hi ha hagut un error amb la proposta. Espera uns minuts i torna-ho a intentar.').then(() => {
+        this.swalErrorDisplay(this.translocoService.translate('PARTICIPANTS.modals.swal.errorMessage')).then(() => {
           console.log("ERRROR", err)
         })
       }
@@ -112,22 +113,22 @@ export class ParticipantsComponent implements OnDestroy{
 
   activateParticipant(id: number) {
     Swal.fire({
-      title: "Acceptar aquest participant?",
+      title: this.translocoService.translate('PARTICIPANTS.modals.swal.activate.title'),
       icon: "question",
       input: "number",
-      inputLabel: "Beta",
-      inputPlaceholder: "p.e.: 5000",
+      inputLabel: this.translocoService.translate('PARTICIPANTS.modals.swal.activate.inputLabel'),
+      inputPlaceholder: this.translocoService.translate('PARTICIPANTS.modals.swal.activate.inputPlaceholder'),
       showCancelButton: true,
-      confirmButtonText: "Acceptar",
-      cancelButtonText: 'Tancar',
+      confirmButtonText: this.translocoService.translate('GENERIC.texts.okay'),
+      cancelButtonText: this.translocoService.translate('GENERIC.texts.close'),
       preConfirm : (shares: any) => {
         this.subscriptions.push(
           this.participantsService.activateParticipant(id, shares || 0).subscribe({
             next: result => {
               Swal.fire({
                 icon: "success",
-                title: "El participant s'ha activat correctament",
-                confirmButtonText: 'Entès',
+                title: this.translocoService.translate('PARTICIPANTS.modals.swal.activate.success.title'),
+                confirmButtonText: this.translocoService.translate('GENERIC.texts.okay'),
                 customClass: {
                   confirmButton: 'btn btn-secondary-force'
                 }
@@ -138,7 +139,7 @@ export class ParticipantsComponent implements OnDestroy{
               })
             },
             error: err => {
-              this.swalErrorDisplay('Hi ha hagut un error amb la proposta. Espera uns minuts i torna-ho a intentar.').then(() => {
+              this.swalErrorDisplay(this.translocoService.translate('PARTICIPANTS.modals.swal.errorMessage')).then(() => {
                 console.log("ERRROR", err)
               })
             }
@@ -152,9 +153,9 @@ export class ParticipantsComponent implements OnDestroy{
   removeParticipant(id: number) {
     Swal.fire({
       icon: "warning",
-      title: "El participant s'eliminarà permanentment",
-      confirmButtonText: 'Entès',
-      cancelButtonText: 'Tancar',
+      title: this.translocoService.translate('PARTICIPANTS.modals.swal.remove.title'),
+      confirmButtonText: this.translocoService.translate('GENERIC.texts.okay'),
+      cancelButtonText: this.translocoService.translate('GENERIC.texts.close'),
       showCancelButton: true,
       customClass: {
         confirmButton: 'btn btn-secondary-force'
@@ -167,8 +168,8 @@ export class ParticipantsComponent implements OnDestroy{
 
               Swal.fire({
                 icon: "success",
-                title: "El participant s'ha eliminat correctament",
-                confirmButtonText: 'Entès',
+                title: this.translocoService.translate('PARTICIPANTS.modals.swal.remove.success.title'),
+                confirmButtonText: this.translocoService.translate('GENERIC.texts.okay'),
                 customClass: {
                   confirmButton: 'btn btn-secondary-force'
                 }
@@ -179,7 +180,7 @@ export class ParticipantsComponent implements OnDestroy{
               })
             },
             error: err => {
-              this.swalErrorDisplay('Hi ha hagut un error amb la proposta. Espera uns minuts i torna-ho a intentar.').then(() => {
+              this.swalErrorDisplay(this.translocoService.translate('PARTICIPANTS.modals.swal.errorMessage')).then(() => {
                 console.log("ERRROR", err)
               })
             }

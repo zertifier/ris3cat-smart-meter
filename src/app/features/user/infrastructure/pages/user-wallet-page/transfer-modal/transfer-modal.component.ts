@@ -11,7 +11,7 @@ import Swal from "sweetalert2";
 import {DaoService} from "../../../../../governance/infrastructure/services/dao.service";
 import {Subscription} from "rxjs";
 import {ApiService} from "../../../../../../shared/infrastructure/services/api.service";
-import {TranslocoDirective, TranslocoPipe} from "@jsverse/transloco";
+import {TranslocoDirective, TranslocoPipe, TranslocoService} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-transfer-modal',
@@ -46,7 +46,8 @@ export class TransferModalComponent implements OnDestroy{
     private ethersService: EthersService,
     private noRoundDecimal: NoRoundDecimalPipe,
     private daoService: DaoService,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private readonly translocoService: TranslocoService
   ) {
   }
 
@@ -145,23 +146,23 @@ export class TransferModalComponent implements OnDestroy{
   displaySuccessTransfer() {
     return Swal.fire({
       icon: 'success',
-      title: 'Transferència enviada correctament.',
+      title: this.translocoService.translate('MY-WALLET.modals.swal.success'),
     })
   }
 
   displayTransferError() {
     return Swal.fire({
       icon: 'error',
-      title: 'Problemes amb la blockchain.',
-      text: 'Torna-ho a intentar en uns minuts.'
+      title: this.translocoService.translate('MY-WALLET.modals.swal.blockchainError'),
+      text: this.translocoService.translate('MY-WALLET.modals.swal.tryAgainError')
     })
   }
 
   displayWrongDestinationError() {
     return Swal.fire({
       icon: 'error',
-      title: 'Destinatari incorrecte.',
-      text: 'Revisa-ho i torna-ho a intentar.'
+      title: this.translocoService.translate('MY-WALLET.modals.swal.wrongDestinyError'),
+      text: this.translocoService.translate('MY-WALLET.modals.swal.checkTryAgainError')
     })
   }
 

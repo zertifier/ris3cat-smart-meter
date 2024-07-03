@@ -162,6 +162,13 @@
           "toPlaceholder": "ejemplo@correo.com / 0xA...",
           "toBottomText": "Escribe el correo o número de identidad del destinatario",
           "amountLabel": "Cantidad"
+        },
+        "swal": {
+          "blockchainError": "Problemas con la cadena de bloques.",
+          "tryAgainError": "Inténtalo de nuevo en unos minutos.",
+          "checkTryAgainError": "Revísalo e inténtalo de nuevo.",
+          "wrongDestinyError": "Destinatario incorrecto.",
+          "success": "Transferencia enviada correctamente."
         }
       }
     }
@@ -231,6 +238,10 @@
       "quorum": "Elige el porcentaje de votos necesarios para la aprobación de la votación. Por ejemplo: 50%.",
       "type": "Sistemas de votación.<br><strong>Ponderada:</strong> Cada voto se basa en un factor predefinido, como la cantidad de aportaciones realizadas o la antigüedad en la comunidad. Es decir, se pondera por la cantidad de acciones.<br><strong>Igualitaria:</strong> Cada voto tiene el mismo peso, independientemente de cualquier otro factor.",
       "transparency": "Elige <strong>SÍ</strong>, para ver la votación en tiempo real, o <strong>NO</strong>, para ver el resultado finalizada la fecha de expiración."
+    },
+    "modals": {
+      "errorCreate": "Ha habido un error creando la propuesta, revisa que todos los campos estén completos",
+      "successCreate": "Propuesta guardada correctamente"
     }
   },
 
@@ -257,10 +268,27 @@
         "emailLabel": "Correo electrónico",
         "emailPlaceholder": "correo@gmail.com",
         "sharesLabel": "Participación",
-        "sharePlaceholder": "p.e.:5000"
+        "sharePlaceholder": "ej:5000"
       },
       "remove": {
 
+      },
+      "swal": {
+        "activate": {
+          "title": "¿Aceptar este participante?",
+          "inputLabel": "Beta",
+          "inputPlaceholder": "ej.: 5000",
+          "success": {
+            "title": "El participante se ha activado correctamente"
+          }
+        },
+        "remove": {
+          "title": "El participante se eliminará permanentemente",
+          "success": {
+            "title": "El participante se ha eliminado correctamente"
+          }
+        },
+        "errorMessage": "Ha habido un error con la propuesta. Espera unos minutos e inténtalo de nuevo."
       }
     }
   },
@@ -273,6 +301,14 @@
       "help": "¿Necesitas ayuda?",
       "logingIn": "Iniciando sesión.",
       "wait": "Por favor, espera."
+    }
+  },
+
+  "LOGOUT": {
+    "navbar": "Cerrar sesión",
+    "modal": {
+      "message": "Seguro que quieres cerrar sesión",
+      "confirm": "Cerrar sesión"
     }
   },
   "GENERIC": {
@@ -312,7 +348,8 @@
       "send": "Enviar",
       "sending": "Enviando...",
       "yes": "Sí",
-      "no": "No"
+      "no": "No",
+      "okay": "Entendido"
     }
   }
 }
