@@ -17,6 +17,8 @@ import {
   BreakPoints,
   ScreenBreakPointsService
 } from "../../../../../../shared/infrastructure/services/screen-break-points.service";
+import {TranslocoPipe, TranslocoService} from "@jsverse/transloco";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-user-profile-selector',
@@ -29,7 +31,8 @@ import {
     NgbDropdownButtonItem,
     AsyncPipe,
     TextShorterPipe,
-    RouterLink
+    RouterLink,
+    TranslocoPipe
   ],
   templateUrl: './user-profile-selector.component.html',
   styleUrl: './user-profile-selector.component.scss'
@@ -67,12 +70,30 @@ export class UserProfileSelectorComponent {
     private readonly logoutAction: LogoutActionService,
     private readonly userStore: UserStoreService,
     private readonly screenBreakpointService: ScreenBreakPointsService,
+    private readonly translocoService: TranslocoService
   ) {
   }
 
-  @Confirmable("Segur que vols tancar sessió?", {confirmButton: 'Tancar sessió', cancelButton: 'Cancel·lar'})
+  // @Confirmable(() => (this as any).translocoService.translate('LOGOUT.modal.message'), () => {
+  //   return {confirmButton: 'Tancar sessió', cancelButton: 'Cancel·lar'}
+  // })
   async logout() {
-    await this.logoutAction.run();
+
+    Swal.fire({
+      text: this.translocoService.translate('LOGOUT.modal.message'),
+      icon: 'question',
+      confirmButtonText: this.translocoService.translate('LOGOUT.modal.confirm'),
+      cancelButtonText: this.translocoService.translate('GENERIC.texts.cancel'),
+      showCancelButton: true
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        // originalFunction.apply(this, args)
+        await this.logoutAction.run();
+
+      }
+    });
+
+    // await this.logoutAction.run();
   }
 
 }

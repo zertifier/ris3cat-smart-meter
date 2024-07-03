@@ -1,79 +1,83 @@
-<div class="row justify-content-evenly mb-3">
-  <div class="col-12 col-lg-4">
-    <h5>Tipus de dades</h5>
-    <select class="form-select w-100" readonly (change)="setChartResource($event)">
-      <option [value]="ChartResource.ENERGY" [selected]="(chartResource$ | async) === ChartResource.ENERGY">Energia
-        kwh
-      </option>
-<!--      <option [value]="ChartResource.PRICE" [selected]="(chartResource$ | async) === ChartResource.PRICE">Preu-->
-<!--        energètic-->
-<!--      </option>-->
-    </select>
+<ng-container *transloco="let t; prefix: 'HISTORIC-CHART'">
+  <h5 style="margin: 10rem 0 5rem 0;" class="fw-bold">{{ t('title') }}</h5>
+
+  <div class="row justify-content-evenly mb-3">
+    <div class="col-12 col-lg-4">
+      <h5>{{ t('texts.dataType.title') }}</h5>
+      <select class="form-select w-100" readonly (change)="setChartResource($event)">
+        <option [value]="ChartResource.ENERGY" [selected]="(chartResource$ | async) === ChartResource.ENERGY">
+          {{ t('texts.dataType.types.energy') }}
+        </option>
+        <!--      <option [value]="ChartResource.PRICE" [selected]="(chartResource$ | async) === ChartResource.PRICE">Preu-->
+        <!--        energètic-->
+        <!--      </option>-->
+      </select>
+    </div>
+
+    <div class="col-12 col-lg-4">
+      <h5>{{ t('texts.communityModel.title') }}
+        <app-question-badge>
+          <strong>{{ t('texts.communityModel.types.acc') }}</strong> {{ t('tooltips.communityModel.acc') }}
+          <br>
+          <strong>{{ t('texts.communityModel.types.cce') }}</strong> {{ t('tooltips.communityModel.cce') }}
+        </app-question-badge>
+      </h5>
+      <select class="form-select w-100" (change)="setChartType($event)">
+        <option [selected]="(chartType$ | async) === ChartType.ACC">{{ t('texts.communityModel.types.acc') }}</option>
+        <option [selected]="(chartType$ | async) === ChartType.CCE">{{ t('texts.communityModel.types.cce') }}</option>
+      </select>
+    </div>
+
+    <div class="col-12 col-lg-4">
+      <h5>{{ t('texts.dataSource.title') }}
+        <app-question-badge>
+          {{ t('tooltips.dataSource') }}
+        </app-question-badge>
+      </h5>
+      <select class="form-select w-100">
+        <option selected>{{ t('texts.dataSource.types.datadis') }}</option>
+      </select>
+    </div>
   </div>
 
-  <div class="col-12 col-lg-4">
-    <h5>Model comunitari
-      <app-question-badge>
-        <strong>ACC</strong> (Auto Consum Compartit)
-        <br>
-        <strong>CCE</strong> (Comunitat Ciutadana Energética)
-      </app-question-badge>
-    </h5>
-    <select class="form-select w-100" (change)="setChartType($event)">
-      <option [selected]="(chartType$ | async) === ChartType.ACC">ACC</option>
-      <option [selected]="(chartType$ | async) === ChartType.CCE">CCE</option>
-    </select>
+  <div class="row justify-content-evenly my-4">
+    <div class="col-12 col-lg-4 mt-2 m-lg-0">
+      <button (click)="setDateRange(DateRange.DAY)" class="btn rounded-4 py-3 w-100 text-center"
+              [ngClass]="(dateRange$ | async) === DateRange.DAY ? 'btn-active' : 'btn-inactive'">
+        <span class="d-block">{{ t('texts.dates.daily') }}</span>
+      </button>
+    </div>
+    <div class="col-12 col-lg-4 mt-2 m-lg-0">
+      <button (click)="setDateRange(DateRange.MONTH)" class="btn rounded-4 py-3 w-100 text-center"
+              [ngClass]="(dateRange$ | async) === DateRange.MONTH ? 'btn-active' : 'btn-inactive'">
+        <span class="d-block">{{ t('texts.dates.monthly') }}</span>
+      </button>
+    </div>
+    <div class="col-12 col-lg-4 mt-2 m-lg-0">
+      <button (click)="setDateRange(DateRange.YEAR)" class="btn rounded-4 py-3 w-100 text-center"
+              [ngClass]="(dateRange$ | async) === DateRange.YEAR ? 'btn-active' : 'btn-inactive'">
+        <span class="d-block">{{ t('texts.dates.yearly') }}</span>
+      </button>
+    </div>
   </div>
 
-  <div class="col-12 col-lg-4">
-    <h5>Font de les dades
-      <app-question-badge>
-        Selecciona la plataforma des d'on prefereixis extreure i analitzar
-        les dades relatives al consum, producció i excedent energètic.
-      </app-question-badge>
-    </h5>
-    <select class="form-select w-100">
-      <option selected>Datadis</option>
-    </select>
-  </div>
-</div>
+  <div class="row justify-content-center">
+    <div class="col-md-3 mb-4">
+      <p-calendar [maxDate]="maxDate" (onSelect)="setDate($event)" (ngModelChange)="setInputDate($event)"
+                  [ngModel]="date$ | async" iconDisplay="input"
+                  [dateFormat]="(dateFormat$ | async) || 'yy'" [showIcon]="true" styleClass="w-100"
+                  [view]="(calendarView$ | async) || 'month'"/>
 
-<div class="row justify-content-evenly my-4">
-  <div class="col-12 col-lg-4 mt-2 m-lg-0">
-    <button (click)="setDateRange(DateRange.DAY)" class="btn rounded-4 py-3 w-100 text-center"
-            [ngClass]="(dateRange$ | async) === DateRange.DAY ? 'btn-active' : 'btn-inactive'">
-      <span class="d-block">Diari</span>
-    </button>
+    </div>
   </div>
-  <div class="col-12 col-lg-4 mt-2 m-lg-0">
-    <button (click)="setDateRange(DateRange.MONTH)" class="btn rounded-4 py-3 w-100 text-center"
-            [ngClass]="(dateRange$ | async) === DateRange.MONTH ? 'btn-active' : 'btn-inactive'">
-      <span class="d-block">Mensual</span>
-    </button>
-  </div>
-  <div class="col-12 col-lg-4 mt-2 m-lg-0">
-    <button (click)="setDateRange(DateRange.YEAR)" class="btn rounded-4 py-3 w-100 text-center"
-            [ngClass]="(dateRange$ | async) === DateRange.YEAR ? 'btn-active' : 'btn-inactive'">
-      <span class="d-block">Anual</span>
-    </button>
-  </div>
-</div>
 
-<div class="row justify-content-center">
-  <div class="col-md-3 mb-4">
-    <p-calendar [maxDate]="maxDate" (onSelect)="setDate($event)" (ngModelChange)="setInputDate($event)"
-                [ngModel]="date$ | async" iconDisplay="input"
-                [dateFormat]="(dateFormat$ | async) || 'yy'" [showIcon]="true" styleClass="w-100"
-                [view]="(calendarView$ | async) || 'month'"/>
-
-  </div>
-</div>
-
-@switch (origin$ | async) {
-  @case (ChartOrigins.DATADIS) {
-    <app-datadis-chart/>
+  @switch (origin$ | async) {
+    @case (ChartOrigins.DATADIS) {
+      <app-datadis-chart/>
+    }
+    @default {
+      <h3>{{ t('texts.noDisplay') }}</h3>
+    }
   }
-  @default {
-    <h3>Nothing to display</h3>
-  }
-}
+</ng-container>
+

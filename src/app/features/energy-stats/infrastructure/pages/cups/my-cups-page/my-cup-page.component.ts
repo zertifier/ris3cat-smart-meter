@@ -1,4 +1,4 @@
-import {Component, computed, OnInit, signal} from '@angular/core';
+import {Component, computed, OnDestroy, OnInit, signal} from '@angular/core';
 import {ChartModule} from "primeng/chart";
 import {AsyncPipe, JsonPipe, NgStyle} from "@angular/common";
 import {MonitoringService, PowerStats} from "../../../services/monitoring.service";
@@ -19,7 +19,7 @@ import {NavbarComponent} from "@shared/infrastructure/components/navbar/navbar.c
 import {FooterComponent} from "@shared/infrastructure/components/footer/footer.component";
 import {QuestionBadgeComponent} from "@shared/infrastructure/components/question-badge/question-badge.component";
 import {MonitoringStoreService} from "../../../services/monitoring-store.service";
-import {getMonth} from "@shared/utils/DatesUtils";
+import {getMonth, getMonthTranslated} from "@shared/utils/DatesUtils";
 import dayjs from "@shared/utils/dayjs";
 import {KnobModule} from "primeng/knob";
 import {PowerflowGausComponent} from "../../../components/powerflow-gaus/powerflow-gaus.component";
@@ -32,6 +32,11 @@ import {EnergyPredictionComponent} from "../../../components/energy-prediction/e
 import {
   MetereologicPredictionComponent
 } from "../../../components/metereologic-prediction/metereologic-prediction.component";
+import {TranslocoDirective, TranslocoPipe, TranslocoService} from "@jsverse/transloco";
+import {LanguageComponent} from "@core/layouts/language/language.component";
+import {state} from "@angular/animations";
+import _default from "chart.js/dist/core/core.interaction";
+import index = _default.modes.index;
 
 
 @Component({
@@ -56,18 +61,21 @@ import {
     FormsModule,
     PowerflowGausComponent,
     EnergyPredictionComponent,
-    MetereologicPredictionComponent
+    MetereologicPredictionComponent,
+    TranslocoPipe,
+    TranslocoDirective,
+    LanguageComponent
   ],
   templateUrl: './my-cup-page.component.html',
   styleUrl: './my-cup-page.component.scss'
 })
-export class MyCupPageComponent implements OnInit {
+export class MyCupPageComponent implements OnInit, OnDestroy {
   lastUpdate$ = this.monitoringStore.selectOnly(state => state.lastPowerFlowUpdate)
     .pipe(map(value => {
       if (!value) {
         return '';
       }
-      const month = getMonth(value.getMonth());
+      const month = getMonthTranslated(this.translocoService, value.getMonth());
       return dayjs(value).format(`HH:mm:ss - DD [${month}] YYYY`);
     }));
   consumptionItems: ConsumptionItem[] = [
@@ -124,7 +132,8 @@ export class MyCupPageComponent implements OnInit {
     private readonly monitoringStore: MonitoringStoreService,
     private readonly ngbModal: NgbModal,
     private updateCups: UpdateUserCupsAction,
-    private readonly selectCupsAction: SelectCupsService
+    private readonly selectCupsAction: SelectCupsService,
+    private readonly translocoService: TranslocoService
   ) {
   }
 
@@ -181,4 +190,8 @@ export class MyCupPageComponent implements OnInit {
   }
 
     protected readonly environment = environment;
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(s => s.unsubscribe())
+  }
 }

@@ -5,14 +5,16 @@ import {UserStoreService} from "../../../../user/infrastructure/services/user-st
 import {AsyncPipe, NgClass} from "@angular/common";
 import {BehaviorSubject, map} from "rxjs";
 import dayjs from "@shared/utils/dayjs";
+import {TranslocoDirective} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-data-source-health',
   standalone: true,
-  imports: [
-    NgClass,
-    AsyncPipe
-  ],
+    imports: [
+        NgClass,
+        AsyncPipe,
+        TranslocoDirective
+    ],
   templateUrl: './data-source-health.component.html',
   styleUrl: './data-source-health.component.scss'
 })

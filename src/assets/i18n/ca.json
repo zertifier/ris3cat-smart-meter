@@ -1,0 +1,360 @@
+{
+  "MY-CUPS": {
+    "navbar": "El meu comptador",
+    "title": "Consum i producció",
+    "texts": {
+      "liveWaste": "La teva despesa en viu",
+      "updatedAt": "Actualitzat a les ",
+      "noDataRegistered": "No s'ha registrat cap dada",
+      "assignedProd": "Producció assignada",
+      "consumption": "Consum",
+      "selfConsumption": "Autoconsum",
+      "generatedEnergy": "Energia generada",
+      "surplus": "Excedent"
+    },
+    "tooltips": {
+      "assignedProd": "El percentatge de l'energia produïda que se li assigna a aquest CUPS"
+    },
+    "modals": {
+      "modifyCups": {
+        "title": "Canviar el nom del CUPS",
+        "texts": {
+          "nameLabel": "Nom del CUPS",
+          "namePlaceholder": "Per exemple: Garatge"
+        }
+      },
+      "addCups": {
+        "title": "Afageix un nou CUPS"
+      }
+    }
+  },
+  "MY-COMMUNITY": {
+    "navbar": "La meva comunitat",
+    "title": "Consum i producció",
+    "texts": {
+      "liveWaste": "La teva despesa en viu",
+      "updatedAt": "Actualitzat a les ",
+      "noDataRegistered": "No s'ha registrat cap dada",
+      "communityMembers": "Membres d'aquesta comunitat:",
+      "activeMembers": "Membres actius:",
+      "consumption": "Consum",
+      "selfConsumption": "Autoconsum",
+      "generatedEnergy": "Energia generada",
+      "surplus": "Excedent"
+    },
+    "tooltips": {
+      "assignedProd": "El percentatge de l'energia produïda que se li assigna a aquest CUPS"
+    }
+  },
+  "HISTORIC-CHART": {
+    "title": "Històric consum/excedent",
+    "texts": {
+      "dataType": {
+        "title": "Tipus de dades",
+        "types": {
+          "energy": "Energia KWH"
+        }
+      },
+      "communityModel": {
+        "title": "Model comunitary",
+        "types": {
+          "acc": "ACC",
+          "cce": "CCE"
+        }
+      },
+      "dataSource": {
+        "title": "Font de dades",
+        "types": {
+          "datadis": "Datadis"
+        }
+      },
+      "dates": {
+        "daily": "Diari",
+        "monthly": "Mensual",
+        "yearly": "Anual"
+      },
+      "noDisplay": "Res a mostrar",
+      "chartBottomText": "· Coneix la despesa d'energia al detall fent clic en cada tipus de consum. La gràfica mostrarà la informació de consum individualitzada.",
+      "chartBottomCommunityText": "· Aquesta estadística indica les dades dels {{activeMembers}} membres actius d'un total de {{totalMembers}} membres de la comunitat.",
+      "chartUpdateWarning": "· La informació del datadis actualitzada és de fa 3 dies.",
+      "chartLabels": {
+        "production": "Producció",
+        "productionActive": "Producció actius",
+        "networkConsumption": "Consum de la xarxa",
+        "networkActiveConsumption": "Consum de la xarxa actius",
+        "surplus": "Excedent",
+        "surplusActive": "Excedent actius",
+        "surplusActiveShared": "Excedent actius comprartit"
+
+
+      },
+      "displayLegend": "Mostrar la llegenda",
+      "maximize": "Ampliar",
+      "loadingData": "Carregant dades"
+    },
+    "tooltips": {
+      "chartLabels": {
+        "community": {
+          "production": "Producció total de la comunitat.",
+          "activeProduction": "Producció dels participants actius",
+          "networkConsumption": "Consum que facturarà la companyia elèctrica.",
+          "networkActiveConsumption": "Consum dels participants actius",
+          "surplusActive": "Quantitat d’energia que es produeix i no es consumeix dels participans actius.",
+          "sharedSurplusActive": "Quantitat d’energia per compartir que es produeix i no es consumeix dels participans actius."
+        },
+        "cups": {
+          "networkConsumption": "Consum que facturarà la companyia elèctrica.",
+          "production": "Producció proporcional comunitaria",
+          "networkActiveConsumption": "Quantitat d'energia que gastem",
+          "surplusActive": "Quantitat d'energia que es produeix i no es consumeix.",
+          "sharedSurplusActive": "Quantitat d’energia per compartir que es produeix i no es consumeix dels participans actius."
+        }
+
+      },
+      "communityModel": {
+        "acc": "(Auto Consum Compartit)",
+        "cce": "(Comunitat Ciutadana Energética)"
+      },
+      "dataSource": "Selecciona la plataforma des d'on prefereixis extreure i analitzar\n les dades relatives al consum, producció i excedent energètic."
+    }
+  },
+  "PREDICTIONS": {
+    "meteorologic": {
+      "title": "Predicció metereologica"
+    },
+    "energy": {
+      "title": "Predicció d'energia"
+    }
+  },
+  "PROFILE": {
+    "navbar": "Perfil",
+    "title": "El meu perfil",
+    "texts": {
+      "nameLabel": "Nom (requerit)",
+      "lastnameLabel":"Cognom (requerit)"
+    }
+  },
+
+  "MY-WALLET": {
+    "navbar": "La meva cartera",
+    "title": "La meva cartera",
+    "texts": {
+      "identityLabel": "Identitat",
+      "transferInfo": "Per a relatizar una transferència, tria que vols traspassar",
+      "energyAmount": "Saldo energètic",
+      "tokenAmount": "Saldo",
+      "communityShare": "Betes de la comunitat",
+      "transferEnergy": "Transferir saldo",
+      "transferToken": "Transferir XDAI",
+      "transferShare": "Transferir participacions"
+    },
+    "tooltips": {
+      "identity": "La identitat permet identificar el teu usuari a dintre de la Cadena de Blocks.",
+      "energy": "Aquest saldo es farà servir per a la compra d'energia a la comunitat.",
+      "token": "Saldo per les transaccions.",
+      "shares": "Són les Participacions que té la comunitat."
+    },
+    "modals": {
+      "transfer": {
+        "title": "Transferència",
+        "texts": {
+          "balanceLabel": "Saldo",
+          "toLabel": "Destinatari",
+          "toPlaceholder": "exemple@correu.com / 0xA...",
+          "toBottomText": "Escriu el correu o número d'identitat del destinatari",
+          "amountLabel": "Quantitat"
+        },
+        "swal": {
+          "blockchainError": "Problemes amb la cadena de blocs.",
+          "tryAgainError": "Torna-ho a intentar en uns minuts.",
+          "checkTryAgainError": "Revisa-ho i torna-ho a intentar.",
+          "wrongDestinyError": "Destinatari incorrecte.",
+          "success": "Transferència enviada correctament."
+        }
+      }
+    }
+  },
+  "SHARE-ENERGY": {
+    "navbar": "Compartir energia"
+  },
+  "STATUS": {
+    "navbar": "Estatus",
+    "title": "Estatus",
+    "texts": {
+      "statusInfo": "· Aquí podras veure el estat de les fonts de dades",
+      "lastUpdate": "Ultima actualització",
+      "noLastUpdate": "No hi ha actualitzacions"
+    }
+  },
+
+  "GOVERNOR": {
+    "navbar": "Governança",
+    "title": "Governança"
+  },
+
+  "PROPOSALS": {
+    "navbar": "Propostes",
+    "title": "Propostes",
+    "texts": {
+      "searchPlaceholder": "Buscar proposta",
+      "newProposal": "Nova proposta",
+      "createdBy": "Feta per:",
+      "expiration": "Expiració:"
+    },
+    "status": {
+      "all": "Totes",
+      "actives": "Actives",
+      "pending": "Pendents",
+      "expired": "Finalitzades",
+      "executed": "Executades",
+      "denied": "Denegades"
+    }
+  },
+
+  "NEW-PROPOSAL": {
+    "title": "Nova proposta",
+    "texts": {
+      "goBack": "Tornar a propostes",
+      "titleLabel": "Afegeix un títol descriptiu",
+      "titlePlaceholder": "Títol de la proposta",
+      "descriptionLabel": "Desriu els aspectes principals de la teva proposta",
+      "descriptionWarning": "Recorda fer servir un llenguatge respectuós, un text breu, clar i descriptiu de la teva proposta",
+      "endDateLabel": "Data de finalització",
+      "minQuorumLabel": "Cens de vots minim",
+      "statusLabel": "Estat",
+      "typeLabel": "Tipus",
+      "transparencyLabel": "Transparència",
+      "optionsLabel": "Opcions",
+      "addOption": "Afegir opció",
+      "optionPlaceholder": "Opció",
+      "proposalValidation": "La proposta és vàlida a partir de 2 opcions.",
+      "abstainPlaceholder": "Abstenir-se"
+    },
+    "status": {
+      "active": "Activa",
+      "pending": "Pendent"
+    },
+    "types": {
+      "weighted": "Ponderada",
+      "equal": "Igualitaria"
+    },
+    "tooltips": {
+      "quorum": "Elegeix el percentatge de vots necessaris per a l'aprovació de la votació. Per exemple: 50%.",
+      "type": "Sistemes de votacions.<br><strong>Ponderada:</strong> Cada vot es basa en un factor predefinit, com la quantitat d'aportacions realitzades o l'antiguitat en la comunitat. És a dir, es pondera per la quantitat d'accions.<br><strong>Igualitaria:</strong> Cada vot té el mateix pes, independentment de qualsevol altre factor.",
+      "transparency": "Elegeix <strong>SÍ</strong>, per a veure la votació a temps real, o <strong>NO</strong>,per a veure el resultat finalitzada la data d'expiració."
+    },
+    "modals": {
+      "errorCreate": "Hi ha hagut un error creant la proposta, revisa que tots els camps estiguin complets",
+      "successCreate": "Proposta guardada correctament"
+    }
+  },
+
+  "PARTICIPANTS": {
+    "navbar": "Participants",
+    "title": "Participants",
+    "texts": {
+      "searchPlaceholder": "Buscar participant",
+      "name": "Nom",
+      "mobileName": "Nom complet i correu",
+      "email": "Correu",
+      "shares": "Beta",
+      "actions": "Accions",
+      "noParticipants": "No hi ha cap particiapnt"
+    },
+    "status": {
+      "actives": "Actius",
+      "pending": "Pendents"
+    },
+    "modals": {
+      "modify": {
+        "nameLabel": "Nom complet",
+        "namePlaceholder": "nom",
+        "emailLabel": "Correu electrònic",
+        "emailPlaceholder": "correu@gmail.com",
+        "sharesLabel": "Beta",
+        "sharePlaceholder": "p.e.:5000"
+      },
+      "remove": {
+
+      },
+      "swal": {
+        "activate": {
+          "title": "Acceptar aquest participant?",
+          "inputLabel": "Beta",
+          "inputPlaceholder": "p.e.: 5000",
+          "success": {
+            "title": "El participant s'ha activat correctament"
+          }
+        },
+        "remove": {
+          "title": "El participant s'eliminarà permanentment",
+          "success": {
+            "title": "El participant s'ha eliminat correctament"
+          }
+        },
+        "errorMessage": "Hi ha hagut un error amb la proposta. Espera uns minuts i torna-ho a intentar."
+      }
+    }
+  },
+  "LOGIN": {
+    "title": "Iniciar Sessió",
+    "texts": {
+      "loginGoogle": "Inciar sessió amb google",
+      "loginWebwallet": "Iniciar sessió amb web wallet",
+      "noDataSaved": "No guardem cap dada relacionada amb les teves credencials",
+      "help": "Necessites ajuda?",
+      "logingIn": "Iniciant sessió.",
+      "wait": "Si us plau, esperi."
+    }
+  },
+
+  "LOGOUT": {
+    "navbar": "Tancar sessió",
+    "modal": {
+      "message": "Segur que vols tancar sessió",
+      "confirm": "Tancar sessió"
+    }
+  },
+
+  "GENERIC": {
+    "texts": {
+      "months": {
+        "1": "Gener",
+        "2": "Febrer",
+        "3": "Març",
+        "4": "Abril",
+        "5": "Maig",
+        "6": "Juny",
+        "7": "Juliol",
+        "8": "Agost",
+        "9": "Setembre",
+        "10": "Octubre",
+        "11": "Novembre",
+        "12": "Decembre"
+      },
+      "monthsArray": [
+        "Gener",
+        "Febrer",
+        "Març",
+        "Abril",
+        "Maig",
+        "Juny",
+        "Juliol",
+        "Agost",
+        "Setembre",
+        "Octubre",
+        "Novembre",
+        "Decembre"
+      ],
+      "daysArray": ["Diumenge", "Dilluns", "Dimarts", "Dimecres", "Dijous", "Divendres", "Dissabte"],
+      "save": "Guardar",
+      "cancel": "Cancel·lar",
+      "close": "Tancar",
+      "send": "Enviar",
+      "sending": "Enviant...",
+      "yes": "Sí",
+      "no": "No",
+      "okay": "D'acord"
+    }
+  }
+}

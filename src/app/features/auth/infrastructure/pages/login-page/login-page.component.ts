@@ -10,22 +10,24 @@ import {
   BreakPoints,
   ScreenBreakPointsService
 } from "../../../../../shared/infrastructure/services/screen-break-points.service";
+import {TranslocoDirective} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-login-page',
   standalone: true,
-  imports: [
-    OauthLoginComponent,
-    NgbNav,
-    NgbNavItem,
-    NgbNavLinkButton,
-    WebWalletLoginComponent,
-    NgbNavContent,
-    NgbNavOutlet,
-    NgOptimizedImage,
-    NgClass,
-    RouterLink
-  ],
+    imports: [
+        OauthLoginComponent,
+        NgbNav,
+        NgbNavItem,
+        NgbNavLinkButton,
+        WebWalletLoginComponent,
+        NgbNavContent,
+        NgbNavOutlet,
+        NgOptimizedImage,
+        NgClass,
+        RouterLink,
+        TranslocoDirective
+    ],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss'
 })

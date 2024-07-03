@@ -10,11 +10,11 @@
     <i class="px-2 fa-solid fa-sort-down text-white" style="border-left: 0; font-size: 1.5rem;"></i>
   </button>
   <div class="dropdown-menu w-100 custom-dropdown" ngbDropdownMenu>
-    <a ngbDropdownItem routerLink="/user/profile">Perfil</a>
-    <a ngbDropdownItem routerLink="/user/wallet">La meva cartera</a>
+    <a ngbDropdownItem routerLink="/user/profile"> {{ 'PROFILE.navbar' | transloco }} </a>
+    <a ngbDropdownItem routerLink="/user/wallet"> {{ 'MY-WALLET.navbar' | transloco }} </a>
     <hr class="border-white mx-3" style="border-top-width: 1px; opacity: 1;">
     <a ngbDropdownItem class="cursor-pointer d-none">Configuració <i class="fa-solid fa-gear"></i></a>
-    <a ngbDropdownItem (click)="logout()" class="cursor-pointer">Tancar sessió <i
+    <a ngbDropdownItem (click)="logout()" class="cursor-pointer"> {{ 'LOGOUT.navbar' | transloco }} <i
       class="fa-solid fa-arrow-right-from-bracket"></i></a>
   </div>
 </div>

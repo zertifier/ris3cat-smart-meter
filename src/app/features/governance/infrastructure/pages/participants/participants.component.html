@@ -1,110 +1,113 @@
-<div class="container-page">
-  <div class="my-4">
-    <h3 class="fw-bold"> Participants </h3>
+<ng-container *transloco="let t; prefix: 'PARTICIPANTS'">
+  <div class="container-page">
+    <div class="my-4">
+      <h3 class="fw-bold"> {{ t('title') }} </h3>
 
-    <div class="input-group mb-3" style="max-width: 675px">
-      <input [(ngModel)]="filterText" (keyup)="getParticipantsByStatus(participantStatus)" type="text"
-             class="form-control bg-white border-secondary border-1 border-end-0 shadow-none"
-             placeholder="Buscar participant">
-      <span class="input-group-text bg-white border-secondary border-1 border-start-0"><i
-        class="fa-solid fa-magnifying-glass"></i></span>
-    </div>
-
-  </div>
-
-  <div class="d-flex mb-3 py-2 py-md-0">
-    <div class="me-3">
-      <button class="btn" [ngClass]="participantStatus == 'active' ? 'btn-complementary' : 'btn-outline-tertiary'"
-              (click)="getParticipantsByStatus('active')"> Actius
-      </button>
-    </div>
-    <div class="me-3">
-      <button class="btn position-relative" [ngClass]="participantStatus == 'pending' ? 'btn-complementary' : 'btn-outline-tertiary'"
-              (click)="getParticipantsByStatus('pending')">
-        Pendents
-        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-          {{pendingQty}}
-          <span class="visually-hidden">unread messages</span>
-        </span>
-      </button>
-    </div>
-  </div>
-
-  <div *ngIf="!loading && participants.length != 0" class="overflow-y-scroll" style="max-height: 440px">
-    <div class="d-none d-lg-block">
-      <table class="table table-striped align-middle">
-        <thead>
-        <tr class="border-2 border-end-0 border-start-0 border-tertiary">
-          <th style="max-width: 18%; width: 100%" scope="col">Nom</th>
-          <th style="max-width: 28%; width: 100%" scope="col">Correu</th>
-          <th style="max-width: 20%; width: 100%" scope="col">Beta</th>
-          <th class="d-flex justify-content-end pe-5" scope="col">Accions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let participant of participants">
-          <td>{{ participant.name }}</td>
-          <td>{{ participant.email }}</td>
-          <td>{{ participant.shares }}</td>
-          <td class="d-flex justify-content-end pe-2">
-            <button *ngIf="participantStatus == 'active'" class="btn bg-transparent text-tertiary rounded-5 ps-0 border-0"
-                    (click)="openModifyModal(participant)">
-              <i class="fa-solid fa-pencil icon-rounded"></i>
-            </button>
-            <button *ngIf="participantStatus == 'pending'" class="btn bg-transparent text-secondary rounded-5 fs-2 ps-0 border-0"
-                    (click)="activateParticipant(participant.id!)">
-              <!--              <i class="fa-solid fa-check"></i>-->
-              <i class="fa-solid fa-circle-check"></i>
-            </button>
-            <button class="btn bg-transparent text-tertiary rounded-5 fs-2 border-0"
-                    (click)="removeParticipant(participant.id!)">
-              <i class="fa-solid fa-circle-xmark"></i>
-            </button>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="d-block d-lg-none" style="max-height: 46.2vh">
-      <div class="d-flex">
-        <h4>Nom complet i correu</h4>
-        <h4 class="ms-auto">Accions</h4>
+      <div class="input-group mb-3" style="max-width: 675px">
+        <input [(ngModel)]="filterText" (keyup)="getParticipantsByStatus(participantStatus)" type="text"
+               class="form-control bg-white border-secondary border-1 border-end-0 shadow-none"
+               placeholder="{{ t('texts.searchPlaceholder') }}">
+        <span class="input-group-text bg-white border-secondary border-1 border-start-0"><i
+          class="fa-solid fa-magnifying-glass"></i></span>
       </div>
-      <div *ngFor="let participant of participants"
-           class="card mb-3 bg-white border-secondary border-1">
-        <div class="card-body d-flex py-4 border-0 w-100">
-          <div class="d-block"  style="max-width: 60%">
-            <p class="card-text text-primary text-truncate">{{ participant.name }}</p>
-            <p class="card-text text-primary ">{{ participant.email }}</p>
-            <small>Beta: {{participant.shares}}</small>
-          </div>
 
-          <div class="ms-auto d-flex align-items-center">
-            <button *ngIf="participantStatus == 'active'" class="btn bg-transparent text-tertiary rounded-5 border-0"
-                    (click)="openModifyModal(participant)">
-              <i class="fa-solid fa-pencil icon-rounded"></i>
-            </button>
-            <button *ngIf="participantStatus == 'pending'" class="btn bg-transparent text-secondary rounded-5 fs-2 border-0"
-                    (click)="activateParticipant(participant.id!)">
-              <i class="fa-solid fa-circle-check"></i>
-            </button>
-            <button class="btn bg-transparent text-tertiary rounded-5 fs-2 pe-0 border-0"
-                    (click)="removeParticipant(participant.id!)">
-              <i class="fa-solid fa-circle-xmark"></i>
-            </button>
+    </div>
+
+    <div class="d-flex mb-3 py-2 py-md-0">
+      <div class="me-3">
+        <button class="btn" [ngClass]="participantStatus == 'active' ? 'btn-complementary' : 'btn-outline-tertiary'"
+                (click)="getParticipantsByStatus('active')"> {{ t('status.actives') }}
+        </button>
+      </div>
+      <div class="me-3">
+        <button class="btn position-relative" [ngClass]="participantStatus == 'pending' ? 'btn-complementary' : 'btn-outline-tertiary'"
+                (click)="getParticipantsByStatus('pending')">
+          {{ t('status.pending') }}
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+          {{pendingQty}}
+<!--            <span class="visually-hidden">unread messages</span>-->
+        </span>
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="!loading && participants.length != 0" class="overflow-y-scroll" style="max-height: 440px">
+      <div class="d-none d-lg-block">
+        <table class="table table-striped align-middle">
+          <thead>
+          <tr class="border-2 border-end-0 border-start-0 border-tertiary">
+            <th style="max-width: 18%; width: 100%" scope="col">{{ t('texts.name') }}</th>
+            <th style="max-width: 28%; width: 100%" scope="col">{{ t('texts.email') }}</th>
+            <th style="max-width: 20%; width: 100%" scope="col">{{ t('texts.shares') }}</th>
+            <th class="d-flex justify-content-end pe-5" scope="col">{{ t('texts.actions') }}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let participant of participants">
+            <td>{{ participant.name }}</td>
+            <td>{{ participant.email }}</td>
+            <td>{{ participant.shares }}</td>
+            <td class="d-flex justify-content-end pe-2">
+              <button *ngIf="participantStatus == 'active'" class="btn bg-transparent text-tertiary rounded-5 ps-0 border-0"
+                      (click)="openModifyModal(participant)">
+                <i class="fa-solid fa-pencil icon-rounded"></i>
+              </button>
+              <button *ngIf="participantStatus == 'pending'" class="btn bg-transparent text-secondary rounded-5 fs-2 ps-0 border-0"
+                      (click)="activateParticipant(participant.id!)">
+                <!--              <i class="fa-solid fa-check"></i>-->
+                <i class="fa-solid fa-circle-check"></i>
+              </button>
+              <button class="btn bg-transparent text-tertiary rounded-5 fs-2 border-0"
+                      (click)="removeParticipant(participant.id!)">
+                <i class="fa-solid fa-circle-xmark"></i>
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="d-block d-lg-none" style="max-height: 46.2vh">
+        <div class="d-flex">
+          <h4>{{ t('texts.mobileName') }}</h4>
+          <h4 class="ms-auto">{{ t('texts.actions') }}</h4>
+        </div>
+        <div *ngFor="let participant of participants"
+             class="card mb-3 bg-white border-secondary border-1">
+          <div class="card-body d-flex py-4 border-0 w-100">
+            <div class="d-block"  style="max-width: 60%">
+              <p class="card-text text-primary text-truncate">{{ participant.name }}</p>
+              <p class="card-text text-primary ">{{ participant.email }}</p>
+              <small>Beta: {{participant.shares}}</small>
+            </div>
+
+            <div class="ms-auto d-flex align-items-center">
+              <button *ngIf="participantStatus == 'active'" class="btn bg-transparent text-tertiary rounded-5 border-0"
+                      (click)="openModifyModal(participant)">
+                <i class="fa-solid fa-pencil icon-rounded"></i>
+              </button>
+              <button *ngIf="participantStatus == 'pending'" class="btn bg-transparent text-secondary rounded-5 fs-2 border-0"
+                      (click)="activateParticipant(participant.id!)">
+                <i class="fa-solid fa-circle-check"></i>
+              </button>
+              <button class="btn bg-transparent text-tertiary rounded-5 fs-2 pe-0 border-0"
+                      (click)="removeParticipant(participant.id!)">
+                <i class="fa-solid fa-circle-xmark"></i>
+              </button>
+            </div>
+
           </div>
 
         </div>
-
       </div>
     </div>
-  </div>
 
 
-  <div *ngIf="!loading && participants.length == 0">
-    <h2 class="text-center">
-      No hi ha cap participant
-    </h2>
+    <div *ngIf="!loading && participants.length == 0">
+      <h2 class="text-center">
+        {{ t('texts.noParticipants') }}
+      </h2>
+    </div>
   </div>
-</div>
+</ng-container>
+

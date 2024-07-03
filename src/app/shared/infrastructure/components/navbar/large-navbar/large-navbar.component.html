@@ -7,17 +7,21 @@
   }
   <div class="d-flex flex-wrap gap-4 p-4 align-items-center">
     <li class="nav-item">
-      <a class="nav-link" [routerLink]="'/energy-stats/community'" [routerLinkActive]="'active'">La
-        meva comunitat</a>
+      <a class="nav-link" [routerLink]="'/energy-stats/community'" [routerLinkActive]="'active'">
+        {{'MY-COMMUNITY.navbar' | transloco}}
+      </a>
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" [routerLink]="'/energy-stats/my-cup'" [routerLinkActive]="'active'">El meu comptador</a>
+      <a class="nav-link" [routerLink]="'/energy-stats/my-cup'" [routerLinkActive]="'active'">
+        {{'MY-CUPS.navbar' | transloco}}
+      </a>
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" [routerLink]="'/energy-stats/share'" [routerLinkActive]="'active'">Compartir
-        energia</a>
+      <a class="nav-link" [routerLink]="'/energy-stats/share'" [routerLinkActive]="'active'">
+        {{'SHARE-ENERGY.navbar' | transloco}}
+      </a>
     </li>
 
     <li class="nav-item">
@@ -28,20 +32,20 @@
 
       <div ngbDropdown class="d-inline-block">
         <button type="button" class="nav-link" id="governDropdown" ngbDropdownToggle>
-          Governança
+          {{'GOVERNOR.navbar' | transloco}}
         </button>
         <div class="bg-primary dropdown-menu px-0 custom-dropdown" ngbDropdownMenu aria-labelledby="governDropdown">
           <a ngbDropdownItem class="nav-link px-2" [routerLink]="'/governance/proposals'"
-             [routerLinkActive]="'active'">Propostes</a>
+             [routerLinkActive]="'active'">{{'PROPOSALS.navbar' | transloco}}</a>
           <a [ngClass]="{'d-none': userRole?.toLowerCase() == 'user'}" ngbDropdownItem class="nav-link px-2" [routerLink]="'/governance/participants'"
-             [routerLinkActive]="'active'">Participants</a>
+             [routerLinkActive]="'active'">{{'PARTICIPANTS.navbar' | transloco}}</a>
         </div>
 
 
       </div>
     </li>
     <li>
-      <a class="nav-link text-white" [routerLink]="'/energy-stats/data-source-health'" [routerLinkActive]="'active'">Status</a>
+      <a class="nav-link text-white" [routerLink]="'/energy-stats/data-source-health'" [routerLinkActive]="'active'">{{'STATUS.navbar' | transloco}}</a>
     </li>
   </div>
 

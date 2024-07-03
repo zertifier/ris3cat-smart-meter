@@ -1,23 +1,27 @@
-import {Component, inject, Input, OnInit} from '@angular/core';
-import {
-  EnergyPredictionChartComponent
-} from "../metereologic-prediction/metereologic-chart/energy-prediction-chart.component";
+import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
+import {EnergyPredictionChartComponent} from "../metereologic-prediction/metereologic-chart/energy-prediction-chart.component";
 import {ChartDataset} from "@shared/infrastructure/interfaces/ChartDataset";
 import {StatsColors} from "../../../domain/StatsColors";
 import {EnergyPredictionService} from "../../services/energy-prediction.service";
-import dayjs from "@shared/utils/dayjs";
+import dayjs from "dayjs";
 import {UserStoreService} from "@features/user/infrastructure/services/user-store.service";
+import {TranslocoDirective, TranslocoService} from "@jsverse/transloco";
+import {getDayTranslated} from "@shared/utils/DatesUtils";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-energy-prediction',
   standalone: true,
   imports: [
-    EnergyPredictionChartComponent
+    EnergyPredictionChartComponent,
+    TranslocoDirective
   ],
   templateUrl: './energy-prediction.component.html',
   styleUrl: './energy-prediction.component.scss'
 })
-export class EnergyPredictionComponent implements OnInit {
+export class EnergyPredictionComponent implements OnInit, OnDestroy {
+  constructor(private translocoService: TranslocoService) {
+  }
   @Input() community: boolean = true;
   datasets: ChartDataset[] = [
     {
@@ -33,24 +37,34 @@ export class EnergyPredictionComponent implements OnInit {
   labels: string [] = [];
   energyPredictionService = inject(EnergyPredictionService);
   userStoreService = inject(UserStoreService);
+  productionPrediction: any;
 
+  subscriptions: Subscription[] = [];
   async ngOnInit() {
-    let productionPrediction;
-    // Based on community property the way that production prediction is obtained differs
-    // the api has a parameter that specifies what prediction is needed: community or cups.
+    this.subscriptions.push(
+      this.translocoService.langChanges$.subscribe(async () => {
+        this.elements = []
+        await this.getPrediction()
+      })
+    )
+  }
+
+
+  async getPrediction(){
     if (this.community) {
       const communityId = this.userStoreService.snapshotOnly(this.userStoreService.$.communityId);
-      productionPrediction = await this.energyPredictionService.getCommunityPrediction(communityId);
+      this.productionPrediction = await this.energyPredictionService.getCommunityPrediction(communityId);
     } else {
       const cupsId = this.userStoreService.snapshotOnly(this.userStoreService.$.cupsId);
-      productionPrediction = await this.energyPredictionService.getCupsPrediction(cupsId);
+      this.productionPrediction = await this.energyPredictionService.getCupsPrediction(cupsId);
     }
 
-    // Here the prediction data is grouped by days
     const dailyPrediction: Map<string, number> = new Map();
-    for (const predictionEntry of productionPrediction) {
+    for (const predictionEntry of this.productionPrediction) {
       // const parsedDate = dayjs(predictionEntry.time).format("YYYY-MM-DD");
-      const parsedDate = dayjs.utc(predictionEntry.time).format("dddd DD");
+      // const parsedDate = dayjs(predictionEntry.time).format("dddd DD");
+      const parsedDate = `${getDayTranslated(this.translocoService, dayjs(predictionEntry.time).day())} ${dayjs(predictionEntry.time).format("DD")}`;
+
       const value = dailyPrediction.get(parsedDate) || 0;
       dailyPrediction.set(parsedDate, value + predictionEntry.value);
     }
@@ -64,5 +78,7 @@ export class EnergyPredictionComponent implements OnInit {
     ];
     this.labels = Array.from(dailyPrediction.keys());
   }
-
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(s => s.unsubscribe());
+  }
 }

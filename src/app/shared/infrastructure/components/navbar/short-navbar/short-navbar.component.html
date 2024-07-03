@@ -25,16 +25,16 @@
       <div ngbAccordion class="d-inline-block">
         <div ngbAccordionItem style="min-width: 130px">
           <h2 ngbAccordionHeader>
-            <button ngbAccordionButton class="me-2">Governança</button>
+            <button ngbAccordionButton class="me-2">{{'GOVERNOR.navbar' | transloco}}</button>
           </h2>
 
           <div ngbAccordionCollapse>
             <div ngbAccordionBody>
               <a class="nav-link bg-transparent py-3" [routerLink]="'/governance/proposals'"
-                 [routerLinkActive]="'active'" (click)="modal.close('')">Propostes</a>
+                 [routerLinkActive]="'active'" (click)="modal.close('')">{{'PROPOSALS.navbar' | transloco}}</a>
 
               <a [ngClass]="{'d-none': userRole?.toLowerCase() == 'user'}" class="nav-link bg-transparent py-3"  [routerLink]="'/governance/participants'"
-                 [routerLinkActive]="'active'" (click)="modal.close('')">Participants</a>
+                 [routerLinkActive]="'active'" (click)="modal.close('')">{{'PARTICIPANTS.navbar' | transloco}}</a>
             </div>
           </div>
         </div>

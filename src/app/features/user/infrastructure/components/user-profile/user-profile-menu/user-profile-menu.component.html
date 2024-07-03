@@ -18,17 +18,17 @@
       <hr class="border-white opacity-100 mx-5" style="width: 90%">
       <button type="button" class="btn btn-toolbar text-white" style="font-size: 1.5rem;"
               (click)="modal.dismiss()"
-              [routerLink]="'/user/profile'">Perfil
+              [routerLink]="'/user/profile'">{{ 'PROFILE.navbar' | transloco }}
       </button>
       <button type="button" class="btn btn-toolbar text-white" style="font-size: 1.5rem;"
               (click)="modal.dismiss()"
               [routerLink]="'/user/wallet'">
-        Cartera
+        {{ 'MY-WALLET.navbar' | transloco }}
       </button>
       <button type="button" class="btn btn-toolbar text-white" style="font-size: 1.5rem;"
               (click)="logout(); modal.dismiss()">
         <span>
-        Tancar sessió <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        {{ 'LOGOUT.navbar' | transloco }} <i class="fa-solid fa-arrow-right-from-bracket"></i>
         </span>
       </button>
     </div>

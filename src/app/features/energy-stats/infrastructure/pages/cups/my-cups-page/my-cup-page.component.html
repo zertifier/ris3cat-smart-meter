@@ -1,108 +1,112 @@
-<div class="container-page">
-  <div class="d-flex justify-content-between flex-wrap-reverse gap-5">
-    <h4 style="font-weight: 600;">Consum i producció</h4>
+<ng-container *transloco="let t; prefix: 'MY-CUPS'">
+  <div class="container-page">
+    <div class="d-flex justify-content-between flex-wrap-reverse gap-5">
+      <h4 style="font-weight: 600;">{{ t('title') }}</h4>
 
-    <div class="d-flex flex-column">
-      <p class="fst-italic">La teva despesa en viu <span><i class="fa-solid fa-rss fa-fade text-success"></i></span></p>
-      <div class="d-flex justify-content-between">
-        @if (lastUpdate$ | async) {
-          <p>Actualitzat a les {{ lastUpdate$ | async }} <span class="text-success" style="font-size: 0.8rem;"><i
-            class="fa-solid fa-circle"></i></span></p>
-        } @else {
-          <p>No s'ha registrat cap dada</p>
-        }
-      </div>
-    </div>
-  </div>
-
-
-  <div class="w-100 mb-3 d-flex flex-column">
-    <div class="d-block d-md-flex mb-2">
-      <div class="w-100 d-flex" style="max-width: 20rem">
-        <select class="form-select bg-white border-2 border-primary" (change)="selectCups($event)">
-          @for (cup of (cups$ | async); track $index) {
-<!--            <option [selected]="$index === (selectedCupsIndex$ | async)" [value]="$index">{{ cup.cupsCode }}</option>-->
-            <option [selected]="$index === (selectedCupsIndex$ | async)" [value]="$index">{{ cup.reference || cup.cupsCode }}</option>
+      <div class="d-flex flex-column">
+        <p class="fst-italic">{{ t('texts.liveWaste') }} <span><i
+          class="fa-solid fa-rss fa-fade text-danger"></i></span></p>
+        <div class="d-flex justify-content-between">
+          @if (lastUpdate$ | async) {
+            <p>{{ t('texts.updatedAt') }} {{ lastUpdate$ | async }} <span class="text-success" style="font-size: 0.8rem;"><i
+              class="fa-solid fa-circle"></i></span></p>
+          } @else {
+            <p>{{ t('texts.noDataRegistered') }}</p>
           }
-        </select>
+        </div>
       </div>
-
-      <div class="my-3 my-md-0">
-        <button class="btn btn-primary bg-primary me-3 ms-0 ms-md-3" (click)="openEditModal()" style="min-width: 65px; min-height: 40px">
-          <i class="fa-solid fa-pencil"></i>
-        </button>
-
-        <button class="btn btn-secondary bg-secondary d-none" style="min-width: 65px; min-height: 40px">
-          <i class="fa-solid fa-plus"></i>
-        </button>
-      </div>
-
     </div>
-    <span>CUPS: {{getSelectedCupsCode() | async}}</span>
-    <span>Produccio assignada: {{ surplusDistribution$ | async }}%
+
+
+    <div class="w-100 mb-3 d-flex flex-column">
+      <div class="d-block d-md-flex mb-2">
+        <div class="w-100 d-flex" style="max-width: 20rem">
+          <select class="form-select bg-white border-2 border-primary" (change)="selectCups($event)">
+            @for (cup of (cups$ | async); track $index) {
+              <!--            <option [selected]="$index === (selectedCupsIndex$ | async)" [value]="$index">{{ cup.cupsCode }}</option>-->
+              <option [selected]="$index === (selectedCupsIndex$ | async)"
+                      [value]="$index">{{ cup.reference || cup.cupsCode }}
+              </option>
+            }
+          </select>
+        </div>
+
+        <div class="my-3 my-md-0">
+          <button class="btn btn-primary bg-primary me-3 ms-0 ms-md-3" (click)="openEditModal()"
+                  style="min-width: 65px; min-height: 40px">
+            <i class="fa-solid fa-pencil"></i>
+          </button>
+
+          <button class="btn btn-secondary bg-secondary d-none" style="min-width: 65px; min-height: 40px">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+
+      </div>
+      <span>CUPS: {{ getSelectedCupsCode() | async }}</span>
+      <span>{{ t('texts.assignedProd') }}: {{ surplusDistribution$ | async }}%
       <app-question-badge>
-        El percentatge de l'energia produida que se li assigna a aquest CUPS
+        {{ t('tooltips.assignedProd') }}
       </app-question-badge>
     </span>
-    <span><i class="fa-solid fa-battery-full"></i> 0%</span>
-  </div>
-
-  <div class="row justify-content-around w-100" style="margin: 7rem 0">
-    <div class="col-6 col-lg my-3">
-      <app-stat-display
-        [disabled]="true"
-        width="20%"
-        [color]="StatsColors.CONSUMPTION"
-        label="Consum"
-        [text]="powerFlow().buy.toFixed(2) + ' KWH'"/>
+      <span><i class="fa-solid fa-battery-full"></i> 0%</span>
     </div>
 
-    <div class="col-6 col-lg my-3">
-      <app-stat-display
-        [disabled]="true"
-        width="20%"
-        [color]="StatsColors.IN_HOUSE_CONSUMPTION"
-        label="Autoconsum"
-        [text]="powerFlow().inHouse.toFixed(2) + ' KWH'"/>
+    <div class="row justify-content-around w-100" style="margin: 7rem 0">
+      <div class="col-6 col-lg my-3">
+        <app-stat-display
+          [disabled]="true"
+          width="20%"
+          [color]="StatsColors.CONSUMPTION"
+          label="{{ t('texts.consumption') }}"
+          [text]="powerFlow().buy.toFixed(2) + ' KWH'"/>
+      </div>
+
+      <div class="col-6 col-lg my-3">
+        <app-stat-display
+          [disabled]="true"
+          width="20%"
+          [color]="StatsColors.IN_HOUSE_CONSUMPTION"
+          label="{{ t('texts.selfConsumption') }}"
+          [text]="powerFlow().inHouse.toFixed(2) + ' KWH'"/>
+      </div>
+
+      <div class="col-6 col-lg my-3">
+        <app-stat-display
+          [disabled]="powerFlow().production === 0"
+          width="20%"
+          [color]="StatsColors.COMMUNITY_PRODUCTION"
+          label="{{ t('texts.generatedEnergy') }}"
+          [text]="powerFlow().production.toFixed(2) + ' KWH'"/>
+      </div>
+
+      <div class="col-6 col-lg my-3">
+        <app-stat-display
+          [disabled]="powerFlow().sell === 0"
+          width="20%"
+          [color]="StatsColors.SURPLUS"
+          label="{{ t('texts.surplus') }}"
+          [text]="powerFlow().sell.toFixed(2) + ' KWH'"/>
+      </div>
     </div>
 
-    <div class="col-6 col-lg my-3">
-      <app-stat-display
-        [disabled]="powerFlow().production === 0"
-        width="20%"
-        [color]="StatsColors.COMMUNITY_PRODUCTION"
-        label="Energia generada"
-        [text]="powerFlow().production.toFixed(2) + ' KWH'"/>
+    <div class="w-100" style="margin-bottom: 10rem;">
+      <app-consumption-items [items]="consumptionItems"/>
     </div>
-
-    <div class="col-6 col-lg my-3">
-      <app-stat-display
-        [disabled]="powerFlow().sell === 0"
-        width="20%"
-        [color]="StatsColors.SURPLUS"
-        label="Excedent"
-        [text]="powerFlow().sell.toFixed(2) + ' KWH'"/>
-    </div>
-  </div>
-
-  <div class="w-100" style="margin-bottom: 10rem;">
-    <app-consumption-items [items]="consumptionItems"/>
-  </div>
 
   <hr>
 
-  <h5 style="margin: 10rem 0 5rem 0;" class="fw-bold">Històric consum/excedent</h5>
-  <app-historic-chart/>
+    <app-historic-chart/>
 
     <div class="row">
       <div class="col-md-6">
-        <h5 style="margin: 7rem 0 5rem 0;" class="fw-bold text-center">Predicció metereologica</h5>
         <app-metereologic-prediction/>
       </div>
 
       <div class="col-md-6">
-        <h5 style="margin: 7rem 0 5rem 0;" class="fw-bold text-center">Predicció d'energia comunitària</h5>
         <app-energy-prediction [community]="false"/>
       </div>
     </div>
-</div>
+  </div>
+
+</ng-container>
