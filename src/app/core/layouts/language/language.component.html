@@ -3,7 +3,7 @@
           id="dropdownConfig" ngbDropdownToggle>
     {{ 'FOOTER.texts.language' | transloco }}
     <i *ngIf="location === 'footer'" class="fa-solid fa-chevron-up ps-1" style="font-size: 8px"></i>
-    <i *ngIf="location === 'login'" class="fa-solid fa-chevron-down ps-1" style="font-size: 8px"></i>
+    <i *ngIf="location === 'login'" class="fa-solid fa-chevron-down ps-1" style="font-size: 10px"></i>
   </button>
   <div class=" custom-dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownConfig" style="font-size: 12px;" [ngClass]="location === 'login' ? 'login-dropdown' : ''">
     <button class="ps-2" style="width: 50px;" [ngClass]="getCurrentLang() === 'ca' ? 'active' : ''"
