@@ -15,10 +15,14 @@
 
 
         <div
-          class="d-flex flex-column align-items-center">
-          <h2 class="text-center">{{t('title')}}</h2>
+          class="d-flex flex-column align-items-center px-5 px-md-0">
+          <h2 class="text-center">{{t('title')}}</h2><!--
           <button (click)="googleLogin()" [ngClass]="{'w-75': !hideImage, 'w-100': hideImage}"
                   class="w-75 d-flex justify-content-around btn btn-dark rounded-pill my-3"
+                  (mouseenter)="googleActive = true"
+                  (mouseleave)="googleActive = false">-->
+          <button (click)="googleLogin()" style="max-width: 370px; font-size: 18px"
+                  class="d-flex justify-content-around btn btn-dark rounded-pill my-3 w-100 fw-bold"
                   (mouseenter)="googleActive = true"
                   (mouseleave)="googleActive = false">
             @if (googleActive) {
@@ -51,13 +55,19 @@
             <a routerLink="/help">{{t('texts.help')}}</a>
             <app-language [location]="'login'"></app-language>
           </div>
-          <div class="mx-auto mb-5" style="width: 680px">
+          <div class="mx-auto mb-5 w-100 px-5 px-md-0" style="max-width: 680px">
             <hr class="border-dark opacity-100">
           </div>
-          <div class="d-flex w-100 align-items-center justify-content-between gap-5">
-            <img style="height: 2.5rem" src="assets/img/europe_black.png" alt="europe">
-            <img style="height: 2.5rem" src="assets/img/login/generalitat.png" alt="generalitat">
-            <img style="height: 2rem" src="assets/img/login/zertifier_logo_horizontal.png" alt="zertifier">
+          <div class="row gap-4 gap-md-0 justify-content-between align-items-center w-100 mx-auto">
+            <div class="col-12 col-md-4 text-center">
+              <img class="w-100 mx-auto ps-3 ps-md-0" style="max-width: 200px" src="assets/img/europe_black.png" alt="europe">
+            </div>
+            <div class="col-12 col-md-4 text-center">
+              <img class="w-100 mx-auto" style="max-width: 170px" src="assets/img/login/generalitat.png" alt="generalitat">
+            </div>
+            <div class="col-12 col-md-4 text-center">
+              <img class="w-100 mx-auto" style="max-width: 200px" src="assets/img/login/zertifier_logo_horizontal.png" alt="zertifier">
+            </div>
           </div>
 
         </div>

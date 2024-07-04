@@ -51,7 +51,7 @@ export class LoginPageComponent {
   @HostListener('window:resize')
   onResize() {
     const breakpoint = this.screenService.getCurrentBreakPoint()
-    this.hideImage = breakpoint <= BreakPoints.SM;
+    this.hideImage = breakpoint <= BreakPoints.LG;
   }
 
   public googleLogin() {
