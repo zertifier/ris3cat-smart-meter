@@ -5,7 +5,16 @@
   width: auto; /* Adapt width based on content */
 }
 
+.dropdown-item{
+  font-weight: 600;
+}
 .dropdown-item:hover, .dropdown-item.active{
   color: $secondary !important;
+  background-color: #dfdfdf;
+}
+
+.dropdown-item.active{
   background-color: transparent;
+  font-weight: bolder !important;
+  text-decoration: underline
 }
