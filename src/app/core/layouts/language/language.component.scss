@@ -18,3 +18,17 @@
   font-weight: bolder !important;
   text-decoration: underline
 }
+
+.login-dropdown{
+  border: 2px solid $secondary;
+}
+
+.login-button{
+  color: $primary;
+  font-size: 16px;
+}
+
+.footer-button{
+  color: white;
+  font-size: 12px;
+}

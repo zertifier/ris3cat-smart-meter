@@ -11,6 +11,7 @@ import {
   ScreenBreakPointsService
 } from "../../../../../shared/infrastructure/services/screen-break-points.service";
 import {TranslocoDirective} from "@jsverse/transloco";
+import {LanguageComponent} from "@core/layouts/language/language.component";
 
 @Component({
   selector: 'app-login-page',
@@ -26,7 +27,8 @@ import {TranslocoDirective} from "@jsverse/transloco";
         NgOptimizedImage,
         NgClass,
         RouterLink,
-        TranslocoDirective
+        TranslocoDirective,
+        LanguageComponent
     ],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss'

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {TranslocoDirective, TranslocoPipe, TranslocoService} from "@jsverse/transloco";
 import {FormsModule} from "@angular/forms";
 import {
@@ -8,7 +8,7 @@ import {
   NgbDropdownModule,
   NgbDropdownToggle
 } from "@ng-bootstrap/ng-bootstrap";
-import {NgClass} from "@angular/common";
+import {NgClass, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-language',
@@ -22,7 +22,8 @@ import {NgClass} from "@angular/common";
     NgbDropdownModule,
     TranslocoDirective,
     TranslocoPipe,
-    NgClass
+    NgClass,
+    NgIf
   ],
   templateUrl: './language.component.html',
   styleUrl: './language.component.scss'
@@ -31,7 +32,7 @@ export class LanguageComponent {
   constructor(private translocoService: TranslocoService) {
   }
 
-  // selectedLang:  'ca' | 'es' | 'en' | string = this.translocoService.getActiveLang()
+  @Input() location: 'footer' | 'login' = 'footer'
 
   setLang(lang: 'ca' | 'es' | 'en' | string){
     this.translocoService.setActiveLang(lang);

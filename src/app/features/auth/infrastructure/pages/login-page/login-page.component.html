@@ -34,9 +34,7 @@
 
             <p>{{t('texts.noDataSaved')}}</p>
 
-            <div class="text-center mt-5">
-              <a routerLink="/help">{{t('texts.help')}}</a>
-            </div>
+
           </div>
           <div class="d-none">
             <h2 class="text-center">Web wallet</h2>
@@ -49,6 +47,10 @@
 
 
         <div>
+          <div class="text-center mb-5">
+            <a routerLink="/help">{{t('texts.help')}}</a>
+            <app-language [location]="'login'"></app-language>
+          </div>
           <div class="mx-auto mb-5" style="width: 680px">
             <hr class="border-dark opacity-100">
           </div>
