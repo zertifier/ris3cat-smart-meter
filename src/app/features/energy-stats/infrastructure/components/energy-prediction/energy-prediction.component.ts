@@ -63,7 +63,7 @@ export class EnergyPredictionComponent implements OnInit, OnDestroy {
     for (const predictionEntry of this.productionPrediction) {
       // const parsedDate = dayjs(predictionEntry.time).format("YYYY-MM-DD");
       // const parsedDate = dayjs(predictionEntry.time).format("dddd DD");
-      const parsedDate = `${getDayTranslated(this.translocoService, dayjs(predictionEntry.time).day())} ${dayjs(predictionEntry.time).format("DD")}`;
+      const parsedDate = `${getDayTranslated(this.translocoService, dayjs.utc(predictionEntry.time).day())} ${dayjs.utc(predictionEntry.time).format("DD")}`;
 
       const value = dailyPrediction.get(parsedDate) || 0;
       dailyPrediction.set(parsedDate, value + predictionEntry.value);

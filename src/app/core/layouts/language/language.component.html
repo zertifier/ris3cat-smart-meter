@@ -1,11 +1,18 @@
-<select class="form-select form-select-sm bg-white shadow-none border-secondary" [(ngModel)]="selectedLang" (change)="setLang(selectedLang)">
-  <option [value]="'ca'">
-    CAT
-  </option>
-  <option [value]="'es'">
-    ESP
-  </option>
-  <option [value]="'en'">
-    ENG
-  </option>
-</select>
+<div ngbDropdown>
+  <button type="button" class="btn bg-transparent text-white text-decoration-underline px-0 border-0"
+          id="dropdownConfig" ngbDropdownToggle style="font-size: 12px">
+    {{ 'FOOTER.texts.language' | transloco }} <i class="fa-solid fa-chevron-up ps-1" style="font-size: 8px"></i>
+  </button>
+  <div class=" custom-dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownConfig" style="font-size: 12px;">
+    <button class="ps-2" style="width: 50px;" [ngClass]="getCurrentLang() === 'ca' ? 'active' : ''"
+            (click)="setLang('ca')" ngbDropdownItem>CAT
+    </button>
+    <button class="ps-2" style="width: 50px;" [ngClass]="getCurrentLang() === 'es' ? 'active' : ''"
+            (click)="setLang('es')" ngbDropdownItem>ESP
+    </button>
+    <button class="ps-2" style="width: 50px;" [ngClass]="getCurrentLang() === 'en' ? 'active' : ''"
+            (click)="setLang('en')" ngbDropdownItem>ENG
+    </button>
+  </div>
+</div>
+

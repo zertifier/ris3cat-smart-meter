@@ -123,7 +123,7 @@
       "title": "Weather forecast"
     },
     "energy": {
-      "title": "Energy prediction"
+      "title": "Community energy prediction"
     }
   },
   "PROFILE": {
@@ -350,6 +350,13 @@
     "modal": {
       "message": "Are you sure you want to log out",
       "confirm": "Log out"
+    }
+  },
+  "FOOTER": {
+    "texts": {
+      "privacy": "Privacy Policy",
+      "help": "Help",
+      "language": "Language"
     }
   },
   "GENERIC": {

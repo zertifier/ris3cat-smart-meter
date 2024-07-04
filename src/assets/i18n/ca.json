@@ -123,7 +123,7 @@
       "title": "Predicció metereologica"
     },
     "energy": {
-      "title": "Predicció d'energia"
+      "title": "Predicció d'energia comunitaria"
     }
   },
   "PROFILE": {
@@ -354,6 +354,14 @@
     "modal": {
       "message": "Segur que vols tancar sessió",
       "confirm": "Tancar sessió"
+    }
+  },
+
+  "FOOTER": {
+    "texts": {
+      "privacy": "Política de privacitat",
+      "help": "Ajuda",
+      "language": "Idioma"
     }
   },
 

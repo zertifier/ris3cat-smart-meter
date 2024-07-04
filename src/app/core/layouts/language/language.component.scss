@@ -1,0 +1,11 @@
+@import 'styles/colors';
+.custom-dropdown-menu{
+  min-width: 30px; /* Minimum width */
+  max-width: 55px; /* Maximum width to control overflow */
+  width: auto; /* Adapt width based on content */
+}
+
+.dropdown-item:hover, .dropdown-item.active{
+  color: $secondary !important;
+  background-color: transparent;
+}

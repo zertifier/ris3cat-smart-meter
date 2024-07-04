@@ -123,7 +123,7 @@
       "title": "Predicción meteorológica"
     },
     "energy": {
-      "title": "Predicción de energía"
+      "title": "Predicción de energía comunitaria"
     }
   },
   "PROFILE": {
@@ -224,8 +224,7 @@
       "wallet": "Cartera",
       "amount": "Cantidad",
       "anonymous": "Anónimo"
-    },
-
+    }
   },
   "GOVERNOR": {
     "navbar": "Gobernanza",
@@ -351,6 +350,13 @@
     "modal": {
       "message": "Seguro que quieres cerrar sesión",
       "confirm": "Cerrar sesión"
+    }
+  },
+  "FOOTER": {
+    "texts": {
+      "privacy": "Política de Privacidad",
+      "help": "Ayuda",
+      "language": "Idioma"
     }
   },
   "GENERIC": {
