@@ -8,8 +8,11 @@ import {TranslocoDirective} from "@jsverse/transloco";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CalendarModule} from "primeng/calendar";
 import dayjs from "dayjs";
-import {NgForOf, NgIf} from "@angular/common";
+import {DatePipe, DecimalPipe, NgForOf, NgIf} from "@angular/common";
 import {QuestionBadgeComponent} from "@shared/infrastructure/components/question-badge/question-badge.component";
+import {ZertipowerService} from "@shared/infrastructure/services/zertipower/zertipower.service";
+import {TradeInterface} from "@shared/infrastructure/services/zertipower/trades/ZertipowerTradesService";
+import {NoRoundDecimalPipe} from "@shared/infrastructure/pipes/no-round-decimal.pipe";
 
 
 @Component({
@@ -25,6 +28,9 @@ import {QuestionBadgeComponent} from "@shared/infrastructure/components/question
     NgIf,
     NgForOf,
     QuestionBadgeComponent,
+    DecimalPipe,
+    DatePipe,
+    NoRoundDecimalPipe,
   ],
   providers: [
     MonitoringService,
@@ -66,17 +72,23 @@ export class SharePageComponent {
       now: "40"
     }
   ]
+
+  tradesData!: TradeInterface[]
   constructor(
     private ngModal: NgbModal,
     protected sharingUsers: SharingUsersService,
-    private monitoringService: MonitoringService
+    private monitoringService: MonitoringService,
+    private readonly zertipower: ZertipowerService
   ) {
+    this.getData()
   }
 
 
-  getData(){
-    console.log('DATA')
+  async getData(){
+
+    this.tradesData = await this.zertipower.trades.getTrades(20, dayjs(this.fromDate).format('YYYY-MM-DD'), dayjs(this.toDate).format('YYYY-MM-DD'))
+
   }
 
-  protected readonly EnergyPrice = EnergyPrice;
+  protected readonly parseFloat = parseFloat;
 }

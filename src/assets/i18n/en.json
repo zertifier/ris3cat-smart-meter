@@ -186,6 +186,7 @@
       "total": "Total",
       "result": "Result",
       "bottomTable": "Please note that data update is not daily.",
+      "noData": "There is no data. Please try another range of dates",
       "actions": {
         "buy": "Buy",
         "sell": "Sell"

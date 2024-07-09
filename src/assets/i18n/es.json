@@ -186,6 +186,7 @@
       "total": "Total",
       "result": "Resultado",
       "bottomTable": "Ten en cuenta que la actualización de datos no es diaria.",
+      "noData": "No hay datos. Por favor, prueba otro rango de fechas.",
       "actions": {
         "buy": "Compra",
         "sell": "Venta"

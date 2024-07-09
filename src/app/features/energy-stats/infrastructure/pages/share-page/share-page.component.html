@@ -19,7 +19,7 @@
             {{ t('texts.to') }}
           </label>
           <p-calendar [(ngModel)]="toDate" iconDisplay="input" [showIcon]="true" view="date" (onClose)="getData()"
-                      [maxDate]="maxDate" [dateFormat]="'dd/mm/yy'" styleClass="w-100"/>
+                      [maxDate]="maxDate" [minDate]="fromDate" [dateFormat]="'dd/mm/yy'" styleClass="w-100"/>
         </div>
       </div>
     </div>
@@ -36,36 +36,42 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let data of sharedData" style="height: 50px">
-          <td>{{ data.date }}</td>
+        <tr *ngFor="let data of tradesData" style="height: 50px">
+          <td>{{ data.infoDt | date:'dd-MM-yyyy' }}</td>
           <td>
-            <span *ngIf="data.type == 'buy'"
+            <span *ngIf="data.action == 'BUY'"
                   class="badge buy-badge d-flex align-items-center justify-content-center fw-normal"> {{ t('texts.actions.buy') }} </span>
-            <span *ngIf="data.type == 'sell'"
+            <span *ngIf="data.action == 'SELL'"
                   class="badge text-bg-success d-flex align-items-center justify-content-center fw-normal"> {{ t('texts.actions.sell') }} </span>
           </td>
           <td>
-           {{ data.qty }} kWh
+           {{ data.tradedKwh | noRoundDecimal:3 }} kWh
           </td>
           <td>
-            {{ data.type === 'buy' ? '-' : (data.type === 'sell' ? '+' : '') }}
-            {{ data.total }} EKW
+            <span *ngIf="data.cost > 0">{{ data.action === 'BUY' ? '-' : (data.action === 'SELL' ? '+' : '') }}</span>
+            {{ data.cost | noRoundDecimal:3  }} EKW
             <app-question-badge>
               <div class="my-3">
                 {{ t('tooltips.ekw') }}
               </div>
             </app-question-badge>
           </td>
-          <td><span class="text-decoration-line-through d-block" style="font-size: 14px">{{ data.before }} kWh</span>
-            <span class="fw-semibold">{{ data.now }} kWh</span></td>
+          <td><span class="text-decoration-line-through d-block" style="font-size: 14px">{{ data.previousKwh | noRoundDecimal:3}} kWh</span>
+            <span class="fw-semibold">{{ data.currentKwh | noRoundDecimal:3 }} kWh</span></td>
         </tr>
         </tbody>
       </table>
     </div>
 
-    <p>
-      {{ t('texts.bottomTable') }}
-    </p>
+    <div class="mt-2">
+      <p *ngIf="tradesData && tradesData.length">
+        {{ t('texts.bottomTable') }}
+      </p>
+      <p class="text-center" *ngIf=" !tradesData || !tradesData.length">
+        {{ t('texts.noData') }}
+      </p>
+    </div>
+
 
   </div>
 </ng-container>

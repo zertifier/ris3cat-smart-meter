@@ -187,6 +187,7 @@
       "total": "Total",
       "result": "Resultat",
       "bottomTable": "Tingues en compte que l'actualització de dades no és diària.",
+      "noData": "No hi ha dades. Prova un altre rang de dies.",
       "actions": {
         "buy": "Compra",
         "sell": "Venta"
