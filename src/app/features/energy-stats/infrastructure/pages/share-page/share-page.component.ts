@@ -43,7 +43,7 @@ export class SharePageComponent {
   fromDate: Date = dayjs().subtract(1).toDate();
   toDate: Date = dayjs().toDate();
   maxDate: Date = dayjs().toDate();
-  minToDate: Date = dayjs().add(1).toDate();
+  minToDate: Date = dayjs().toDate();
 
   loading: boolean = false;
 
