@@ -1,8 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {NgbModal, NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import {EnergyPrice, SharingUsersService} from "../../services/sharing-users.service";
+import {SharingUsersService} from "../../services/sharing-users.service";
 import {MonitoringService} from "../../services/monitoring.service";
-import {AddUserFormModalComponent} from "../../components/add-user-form-modal/add-user-form-modal.component";
 import {NavbarComponent} from "../../../../../shared/infrastructure/components/navbar/navbar.component";
 import {TranslocoDirective} from "@jsverse/transloco";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -13,6 +12,8 @@ import {QuestionBadgeComponent} from "@shared/infrastructure/components/question
 import {ZertipowerService} from "@shared/infrastructure/services/zertipower/zertipower.service";
 import {TradeInterface} from "@shared/infrastructure/services/zertipower/trades/ZertipowerTradesService";
 import {NoRoundDecimalPipe} from "@shared/infrastructure/pipes/no-round-decimal.pipe";
+import {Subscription} from "rxjs";
+import {UserStoreService} from "@features/user/infrastructure/services/user-store.service";
 
 
 @Component({
@@ -38,7 +39,7 @@ import {NoRoundDecimalPipe} from "@shared/infrastructure/pipes/no-round-decimal.
   templateUrl: './share-page.component.html',
   styleUrl: './share-page.component.scss'
 })
-export class SharePageComponent {
+export class SharePageComponent implements OnDestroy{
 
   fromDate: Date = dayjs().subtract(1).toDate();
   toDate: Date = dayjs().toDate();
@@ -75,22 +76,41 @@ export class SharePageComponent {
   ]
 
   tradesData!: TradeInterface[]
+  customerId!: number;
+
+  subscriptions: Subscription[] = [];
   constructor(
     private ngModal: NgbModal,
     protected sharingUsers: SharingUsersService,
     private monitoringService: MonitoringService,
-    private readonly zertipower: ZertipowerService
+    private readonly zertipower: ZertipowerService,
+    private readonly userStore: UserStoreService,
   ) {
-    this.getData()
+    this.subscriptions.push(
+      this.userStore
+        .selectOnly(state => state).subscribe((data) => {
+        console.log(data)
+
+        if (data.user) {
+          this.customerId = data.user.customer_id!
+          this.getData()
+        }
+      })
+    )
+
   }
 
 
   async getData(){
     this.minToDate = dayjs(this.fromDate).toDate();
-    this.tradesData = await this.zertipower.trades.getTrades(20, dayjs(this.fromDate).format('YYYY-MM-DD'), dayjs(this.toDate).format('YYYY-MM-DD'))
+    this.tradesData = await this.zertipower.trades.getTrades(this.customerId, dayjs(this.fromDate).format('YYYY-MM-DD'), dayjs(this.toDate).format('YYYY-MM-DD'))
+    // this.tradesData = await this.zertipower.trades.getTrades(22, dayjs(this.fromDate).format('YYYY-MM-DD'), dayjs(this.toDate).format('YYYY-MM-DD'))
 
   }
 
-  protected readonly parseFloat = parseFloat;
-  protected readonly dayjs = dayjs;
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(s => s.unsubscribe())
+  }
+
+
 }
