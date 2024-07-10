@@ -43,6 +43,7 @@ export class SharePageComponent {
   fromDate: Date = dayjs().subtract(1).toDate();
   toDate: Date = dayjs().toDate();
   maxDate: Date = dayjs().toDate();
+  minToDate: Date = dayjs().add(1).toDate();
 
   loading: boolean = false;
 
@@ -85,10 +86,11 @@ export class SharePageComponent {
 
 
   async getData(){
-
+    this.minToDate = dayjs(this.fromDate).toDate();
     this.tradesData = await this.zertipower.trades.getTrades(20, dayjs(this.fromDate).format('YYYY-MM-DD'), dayjs(this.toDate).format('YYYY-MM-DD'))
 
   }
 
   protected readonly parseFloat = parseFloat;
+  protected readonly dayjs = dayjs;
 }

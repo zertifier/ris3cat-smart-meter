@@ -19,7 +19,7 @@
             {{ t('texts.to') }}
           </label>
           <p-calendar [(ngModel)]="toDate" iconDisplay="input" [showIcon]="true" view="date" (onClose)="getData()"
-                      [maxDate]="maxDate" [minDate]="fromDate" [dateFormat]="'dd/mm/yy'" styleClass="w-100"/>
+                      [maxDate]="maxDate" [minDate]="minToDate" [dateFormat]="'dd/mm/yy'" styleClass="w-100"/>
         </div>
       </div>
     </div>
@@ -37,7 +37,7 @@
         </thead>
         <tbody>
         <tr *ngFor="let data of tradesData" style="height: 50px">
-          <td>{{ data.infoDt | date:'dd-MM-yyyy' }}</td>
+          <td>{{ data.infoDt | date:'dd-MM-yyyy HH:mm' }}</td>
           <td>
             <span *ngIf="data.action == 'BUY'"
                   class="badge buy-badge d-flex align-items-center justify-content-center fw-normal"> {{ t('texts.actions.buy') }} </span>
