@@ -6,7 +6,6 @@ hr {
   opacity: 1;
 }
 
-
 .btn-active {
   color: white !important;
   background-color: $primary !important;
@@ -16,3 +15,21 @@ hr {
   color: white !important;
   background-color: $inactive !important;
 }
+
+.prediction-container{
+  max-width: 1200px;
+  margin:auto;
+}
+
+.container-page-cups {
+  padding: 0rem 1rem !important;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .container-page-cups {
+    padding: 0rem 6rem !important;
+    width: 100%;
+  }
+}
+

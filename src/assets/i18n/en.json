@@ -74,9 +74,10 @@
         "yearly": "Yearly"
       },
       "noDisplay": "Nothing to show",
+      "chartDataInputText":"Choose a month/year to see the consumption.",
       "chartBottomText": "· Learn about energy spending in detail by clicking on each type of consumption. The chart will show individualized consumption information.",
       "chartBottomCommunityText": "· This statistic indicates the data of the {{activeMembers}} active members out of a total of {{totalMembers}} community members.",
-      "chartUpdateWarning": "· The updated datadis information is from 3 days ago.",
+      "chartUpdateWarning": "· Please note that data updates are not daily.",
       "chartLabels": {
         "production": "Production",
         "productionActive": "Active production",
@@ -340,7 +341,7 @@
       "loginGoogle": "Log in with Google",
       "loginWebwallet": "Log in with web wallet",
       "noDataSaved": "We do not save any data related to your credentials",
-      "help": "Need help?",
+      "help": "Help Center",
       "logingIn": "Logging in.",
       "wait": "Please wait."
     }
@@ -356,7 +357,7 @@
   "FOOTER": {
     "texts": {
       "privacy": "Privacy Policy",
-      "help": "Help",
+      "help": "Help Center",
       "language": "Language"
     }
   },

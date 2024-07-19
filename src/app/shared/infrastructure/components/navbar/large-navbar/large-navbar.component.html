@@ -31,9 +31,18 @@
     <li class="nav-item">
 
       <div ngbDropdown class="d-inline-block">
-        <button type="button" class="nav-link" id="governDropdown" ngbDropdownToggle>
+        <a 
+        class="nav-link" 
+        id="governDropdown" 
+        ngbDropdownToggle 
+        [routerLink]="'/governance'"
+        [routerLinkActive]="'active'" 
+        [routerLinkActiveOptions]="{ exact: false }">
+        {{'GOVERNOR.navbar' | transloco}}
+      </a>
+        <!-- <button type="button" class="nav-link" id="governDropdown" ngbDropdownToggle  [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: false }" [routerLink]="'/governance'">
           {{'GOVERNOR.navbar' | transloco}}
-        </button>
+        </button> -->
         <div class="bg-primary dropdown-menu px-0 custom-dropdown" ngbDropdownMenu aria-labelledby="governDropdown">
           <a ngbDropdownItem class="nav-link px-2" [routerLink]="'/governance/proposals'"
              [routerLinkActive]="'active'">{{'PROPOSALS.navbar' | transloco}}</a>

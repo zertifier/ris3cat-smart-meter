@@ -56,7 +56,7 @@
         }
       },
       "communityModel": {
-        "title": "Model comunitary",
+        "title": "Model comunitari",
         "types": {
           "acc": "ACC",
           "cce": "CCE"
@@ -74,9 +74,10 @@
         "yearly": "Anual"
       },
       "noDisplay": "Res a mostrar",
+      "chartDataInputText":"Tria un mes/any per veure el consum",
       "chartBottomText": "· Coneix la despesa d'energia al detall fent clic en cada tipus de consum. La gràfica mostrarà la informació de consum individualitzada.",
       "chartBottomCommunityText": "· Aquesta estadística indica les dades dels {{activeMembers}} membres actius d'un total de {{totalMembers}} membres de la comunitat.",
-      "chartUpdateWarning": "· La informació del datadis actualitzada és de fa 3 dies.",
+      "chartUpdateWarning": "· Tingues en compte que l'actualització de dades no és diària.",
       "chartLabels": {
         "production": "Producció",
         "productionActive": "Producció actius",
@@ -344,7 +345,7 @@
       "loginGoogle": "Inciar sessió amb google",
       "loginWebwallet": "Iniciar sessió amb web wallet",
       "noDataSaved": "No guardem cap dada relacionada amb les teves credencials",
-      "help": "Necessites ajuda?",
+      "help": "Centre d'ajuda",
       "logingIn": "Iniciant sessió.",
       "wait": "Si us plau, esperi."
     }
@@ -361,7 +362,7 @@
   "FOOTER": {
     "texts": {
       "privacy": "Política de privacitat",
-      "help": "Ajuda",
+      "help": "Centre d'ajuda",
       "language": "Idioma"
     }
   },

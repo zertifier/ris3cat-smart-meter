@@ -1,9 +1,9 @@
 <ng-container *transloco="let t; prefix: 'HISTORIC-CHART'">
-  <h5 style="margin: 10rem 0 5rem 0;" class="fw-bold">{{ t('title') }}</h5>
+  <h5 style="margin: 2rem 0 2rem 0;" class="fw-bold">{{ t('title') }}</h5>
 
   <div class="row justify-content-evenly mb-3">
     <div class="col-12 col-lg-4">
-      <h5>{{ t('texts.dataType.title') }}</h5>
+      <h5 class="subtitle">{{ t('texts.dataType.title') }}</h5>
       <select class="form-select w-100" readonly (change)="setChartResource($event)">
         <option [value]="ChartResource.ENERGY" [selected]="(chartResource$ | async) === ChartResource.ENERGY">
           {{ t('texts.dataType.types.energy') }}
@@ -15,7 +15,7 @@
     </div>
 
     <div class="col-12 col-lg-4">
-      <h5>{{ t('texts.communityModel.title') }}
+      <h5 class="subtitle">{{ t('texts.communityModel.title') }}
         <app-question-badge>
           <strong>{{ t('texts.communityModel.types.acc') }}</strong> {{ t('tooltips.communityModel.acc') }}
           <br>
@@ -29,7 +29,7 @@
     </div>
 
     <div class="col-12 col-lg-4">
-      <h5>{{ t('texts.dataSource.title') }}
+      <h5 class="subtitle">{{ t('texts.dataSource.title') }}
         <app-question-badge>
           {{ t('tooltips.dataSource') }}
         </app-question-badge>
@@ -60,6 +60,11 @@
       </button>
     </div>
   </div>
+
+
+  <p class="text-center">
+    {{ t('texts.chartDataInputText') }}
+  </p>
 
   <div class="row justify-content-center">
     <div class="col-md-3 mb-4">

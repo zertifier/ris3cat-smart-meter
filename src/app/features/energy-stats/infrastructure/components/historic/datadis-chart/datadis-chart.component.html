@@ -45,7 +45,10 @@
     <!--  <button class="btn btn-light" type="button" (click)="dataChart.resetChartZoom()">Restableix zoom</button>-->
 
     @if ((currentBreakpoint$ | async)! >= BreakPoints.MD) {
-      <p class="mt-4" *ngIf="showCommunity$ | async">
+
+      <div class="mt-4">
+
+      <p class="" *ngIf="showCommunity$ | async">
         {{ t('texts.chartBottomCommunityText', {activeMembers: activeMembers$ | async, totalMembers: totalMembers$ | async}) }}
       </p>
       <p>
@@ -54,7 +57,13 @@
       <p>
         {{ t('texts.chartBottomText') }}
       </p>
-      <app-chart-legend [labels]="legendLabels"/>  }
+
+      </div>
+
+      <div class="mt-4">
+        <app-chart-legend [labels]="legendLabels"/>
+      </div>
+        }
 
   } @else {
     <div class="w-100 d-flex justify-content-center flex-column gap-2 align-items-center">

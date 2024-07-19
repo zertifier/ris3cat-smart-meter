@@ -1,17 +1,19 @@
 <ng-container *transloco="let t; prefix: 'MY-CUPS'">
+
   <div class="container-page">
+
     <div class="d-flex justify-content-between flex-wrap-reverse gap-5">
       <h4 style="font-weight: 600;">{{ t('title') }}</h4>
 
       <div class="d-flex flex-column">
         <p class="fst-italic">{{ t('texts.liveWaste') }} <span><i
-          class="fa-solid fa-rss fa-fade text-success"></i></span></p>
+              class="fa-solid fa-rss fa-fade text-success"></i></span></p>
         <div class="d-flex justify-content-between">
           @if (lastUpdate$ | async) {
-            <p>{{ t('texts.updatedAt') }} {{ lastUpdate$ | async }} <span class="text-success" style="font-size: 0.8rem;"><i
-              class="fa-solid fa-circle"></i></span></p>
+          <p>{{ t('texts.updatedAt') }} {{ lastUpdate$ | async }} <span class="text-success"
+              style="font-size: 0.8rem;"><i class="fa-solid fa-circle"></i></span></p>
           } @else {
-            <p>{{ t('texts.noDataRegistered') }}</p>
+          <p>{{ t('texts.noDataRegistered') }}</p>
           }
         </div>
       </div>
@@ -23,17 +25,17 @@
         <div class="w-100 d-flex" style="max-width: 20rem">
           <select class="form-select bg-white border-2 border-primary" (change)="selectCups($event)">
             @for (cup of (cups$ | async); track $index) {
-              <!--            <option [selected]="$index === (selectedCupsIndex$ | async)" [value]="$index">{{ cup.cupsCode }}</option>-->
-              <option [selected]="$index === (selectedCupsIndex$ | async)"
-                      [value]="$index">{{ cup.reference || cup.cupsCode }}
-              </option>
+            <!--            <option [selected]="$index === (selectedCupsIndex$ | async)" [value]="$index">{{ cup.cupsCode }}</option>-->
+            <option [selected]="$index === (selectedCupsIndex$ | async)" [value]="$index">{{ cup.reference ||
+              cup.cupsCode }}
+            </option>
             }
           </select>
         </div>
 
         <div class="my-3 my-md-0">
           <button class="btn btn-primary bg-primary me-3 ms-0 ms-md-3" (click)="openEditModal()"
-                  style="min-width: 65px; min-height: 40px">
+            style="min-width: 65px; min-height: 40px">
             <i class="fa-solid fa-pencil"></i>
           </button>
 
@@ -45,67 +47,60 @@
       </div>
       <span>CUPS: {{ getSelectedCupsCode() | async }}</span>
       <span>{{ t('texts.assignedProd') }}: {{ surplusDistribution$ | async }}%
-      <app-question-badge>
-        {{ t('tooltips.assignedProd') }}
-      </app-question-badge>
-    </span>
+        <app-question-badge>
+          {{ t('tooltips.assignedProd') }}
+        </app-question-badge>
+      </span>
       <span><i class="fa-solid fa-battery-full"></i> 0%</span>
     </div>
 
-    <div class="row justify-content-around w-100" style="margin: 7rem 0">
+    <div class="row justify-content-around w-100" style="margin: 2rem 0">
       <div class="col-6 col-lg my-3">
-        <app-stat-display
-          [disabled]="true"
-          width="20%"
-          [color]="StatsColors.CONSUMPTION"
-          label="{{ t('texts.consumption') }}"
-          [text]="powerFlow().buy.toFixed(2) + ' KWH'"/>
+        <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.CONSUMPTION"
+          label="{{ t('texts.consumption') }}" [text]="powerFlow().buy.toFixed(2) + ' KWH'" />
       </div>
 
       <div class="col-6 col-lg my-3">
-        <app-stat-display
-          [disabled]="true"
-          width="20%"
-          [color]="StatsColors.IN_HOUSE_CONSUMPTION"
-          label="{{ t('texts.selfConsumption') }}"
-          [text]="powerFlow().inHouse.toFixed(2) + ' KWH'"/>
+        <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
+          label="{{ t('texts.selfConsumption') }}" [text]="powerFlow().inHouse.toFixed(2) + ' KWH'" />
       </div>
 
       <div class="col-6 col-lg my-3">
-        <app-stat-display
-          [disabled]="powerFlow().production === 0"
-          width="20%"
-          [color]="StatsColors.COMMUNITY_PRODUCTION"
-          label="{{ t('texts.generatedEnergy') }}"
-          [text]="powerFlow().production.toFixed(2) + ' KWH'"/>
+        <app-stat-display [disabled]="powerFlow().production === 0" width="20%"
+          [color]="StatsColors.COMMUNITY_PRODUCTION" label="{{ t('texts.generatedEnergy') }}"
+          [text]="powerFlow().production.toFixed(2) + ' KWH'" />
       </div>
 
       <div class="col-6 col-lg my-3">
-        <app-stat-display
-          [disabled]="powerFlow().sell === 0"
-          width="20%"
-          [color]="StatsColors.SURPLUS"
-          label="{{ t('texts.surplus') }}"
-          [text]="powerFlow().sell.toFixed(2) + ' KWH'"/>
+        <app-stat-display [disabled]="powerFlow().sell === 0" width="20%" [color]="StatsColors.SURPLUS"
+          label="{{ t('texts.surplus') }}" [text]="powerFlow().sell.toFixed(2) + ' KWH'" />
       </div>
     </div>
 
-    <div class="w-100" style="margin-bottom: 10rem;">
-      <app-consumption-items [items]="consumptionItems"/>
+    <div class="w-100" style="margin-bottom: 2rem;">
+      <app-consumption-items [items]="consumptionItems" />
     </div>
 
-  <hr>
+    <hr>
 
-    <app-historic-chart/>
+    <div style="margin-bottom: 2rem;">
+      <app-historic-chart />
+    </div>
+    
 
-    <div class="row">
-      <div class="col-md-6">
-        <app-metereologic-prediction/>
-      </div>
+  </div>
 
-      <div class="col-md-6">
-        <app-energy-prediction [community]="false"/>
-      </div>
+  <div class="row" style="background-color: white;">
+    <div class="col-12 prediction-container">
+      <!-- <div class="d-flex justify-content-center prediction-container"> -->
+      <app-metereologic-prediction />
+      <!-- </div> -->
+    </div>
+  </div>
+
+  <div class="container-page-cups mb-5">
+    <div style="max-width: 400px;">
+      <app-energy-prediction [community]="false" />
     </div>
   </div>
 
