@@ -235,6 +235,14 @@
     "title": "Governança"
   },
 
+  "INTEGRATIONS": {
+    "navbar": "Integracions",
+    "title": "Integracions",
+    "texts":{
+      "refreshPermanentToken":"Actualitza el token"
+    }
+  },
+
   "PROPOSALS": {
     "navbar": "Propostes",
     "title": "Propostes",

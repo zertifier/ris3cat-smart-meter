@@ -232,6 +232,13 @@
     "navbar": "Governance",
     "title": "Governance"
   },
+  "INTEGRATIONS": {
+    "navbar": "Integrations",
+    "title": "Integrations",
+    "texts":{
+      "refreshPermanentToken":"Token refresh"
+    }
+  },
   "PROPOSALS": {
     "navbar": "Proposals",
     "title": "Proposals",

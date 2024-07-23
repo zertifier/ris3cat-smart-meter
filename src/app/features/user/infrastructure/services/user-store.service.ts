@@ -11,7 +11,8 @@ export interface UserProfile {
   lastname: string,
   wallet_address: string,
   customer_id?: number,
-  wallet?: Wallet
+  wallet?: Wallet,
+  permanent_token?:string
 }
 
 export interface UserStore {

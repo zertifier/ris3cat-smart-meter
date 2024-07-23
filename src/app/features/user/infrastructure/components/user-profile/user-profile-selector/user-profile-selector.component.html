@@ -12,6 +12,9 @@
   <div class="dropdown-menu w-100 custom-dropdown" ngbDropdownMenu>
     <a ngbDropdownItem routerLink="/user/profile"> {{ 'PROFILE.navbar' | transloco }} </a>
     <a ngbDropdownItem routerLink="/user/wallet"> {{ 'MY-WALLET.navbar' | transloco }} </a>
+    <a ngbDropdownItem routerLink="/user/integrations"> 
+      {{ 'INTEGRATIONS.navbar' | transloco }} 
+    </a>
     <hr class="border-white mx-3" style="border-top-width: 1px; opacity: 1;">
     <a ngbDropdownItem class="cursor-pointer d-none">Configuració <i class="fa-solid fa-gear"></i></a>
     <a ngbDropdownItem (click)="logout()" class="cursor-pointer"> {{ 'LOGOUT.navbar' | transloco }} <i
