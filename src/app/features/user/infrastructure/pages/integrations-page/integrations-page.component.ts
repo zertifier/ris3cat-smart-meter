@@ -28,11 +28,13 @@ import { IntegrationsService } from '../../services/integrations.service';
 export class IntegrationsPageComponent {
 
     permanentToken: string = '';
+    apiRealtimeDocsUrl:string = ''
 
     constructor(private userStore: UserStoreService,private integrationsService: IntegrationsService) {
         integrationsService.getPermaToken().subscribe((res:any)=>{
             this.permanentToken=res.token;
         })
+        this.apiRealtimeDocsUrl=integrationsService.getRealtimeApiDocsUrl();
     }
 
     refreshPermanentToken(){

@@ -15,6 +15,10 @@ export class IntegrationsService {
         console.log(this.accessToken)
     }
 
+    getRealtimeApiDocsUrl(){
+    return `${environment.real_time_energy_url}/api-docs`;
+  }
+
   getPermaToken() {
     const headers = new Headers({
         'Content-Type': 'application/json',
