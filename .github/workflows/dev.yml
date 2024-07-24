@@ -40,7 +40,7 @@ jobs:
         run: |
           echo "Deploying smart-meter-dev-ris3cat"
           cd /home/megatro/apps/dockers/Ris3Cat/dev-ris3cat-smart-meter
-          npm i
+          npm ci
           npm run build:preproduction --configuration=preproduction
           docker compose up -d smart-meter-dev-ris3cat
           echo "smart-meter-dev-ris3cat deployed"
