@@ -33,6 +33,13 @@ export const routes: Routes = [
         }
       },
       {
+        path: 'notifications',
+        loadComponent: () => import('./notifications-page/notifications-page.component').then(c => c.NotificationsPageComponent),
+        data: {
+          name: USER_ROUTE_NAMES.INTEGRATIONS
+        }
+      },
+      {
         path: '',
         redirectTo: 'profile',
         pathMatch: 'full'

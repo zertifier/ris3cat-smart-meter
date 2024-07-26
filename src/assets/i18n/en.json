@@ -239,6 +239,27 @@
       "refreshPermanentToken":"Token refresh"
     }
   },
+  "NOTIFICATIONS": {
+    "navbar": "Notifications",
+    "title": "Notifications",
+    "texts": {
+      "governance": "Community proposals",
+      "sharing": "Energy sharing",
+      "datadis": "Datadis alerts",
+      "created_proposal": "Proposal creation",
+      "delete_proposal": "Proposal deleted",
+      "proposal_accepted": "Proposal accepted",
+      "proposal_denied": "Proposal denied",
+      "proposal_executed": "Proposal executed",
+      "proposal_expired": "Proposal expired",
+      "sharing_received": "Energy received",
+      "sharing_sent": "Energy sent",
+      "updated_datadis": "Datadis updated",
+      "datadis_error": "Datadis errors",
+      "datadis_active": "Datadis active",
+      "datadis_inactive": "Datadis inactive"
+    }
+  },
   "PROPOSALS": {
     "navbar": "Proposals",
     "title": "Proposals",

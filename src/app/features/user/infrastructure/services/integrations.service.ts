@@ -12,7 +12,6 @@ export class IntegrationsService {
 
     constructor(private httpClient: HttpClient,private readonly authStore: AuthStoreService) {
         this.accessToken = this.authStore.snapshotOnly(state => state.accessToken);
-        console.log(this.accessToken)
     }
 
     getRealtimeApiDocsUrl(){

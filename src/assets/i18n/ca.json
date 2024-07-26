@@ -242,7 +242,27 @@
       "refreshPermanentToken":"Actualitza el token"
     }
   },
-
+  "NOTIFICATIONS": {
+    "navbar": "Notificacions",
+    "title": "Notificacions",
+    "texts": {
+      "governance": "Propostes de la comunitat",
+      "sharing": "Compartició d'energia",
+      "datadis": "Alertes del datadis",
+      "created_proposal": "Creació de proposta",
+      "delete_proposal": "Proposta esborrada",
+      "proposal_accepted": "Proposta acceptada",
+      "proposal_denied": "Proposta denegada",
+      "proposal_executed": "Proposta executada",
+      "proposal_expired": "Proposta caducada",
+      "sharing_received": "Energia rebuda",
+      "sharing_sent": "Energia enviada",
+      "updated_datadis": "Datadis actualitzat",
+      "datadis_error": "Errors en el datadis",
+      "datadis_active": "Datadis actiu",
+      "datadis_inactive": "Datadis inactiu"
+    }
+  },
   "PROPOSALS": {
     "navbar": "Propostes",
     "title": "Propostes",
