@@ -236,7 +236,9 @@
     "navbar": "Integrations",
     "title": "Integrations",
     "texts":{
-      "refreshPermanentToken":"Token refresh"
+      "token": "API token",
+      "refreshPermanentToken":"Refresh",
+      "documentation":"See docs"
     }
   },
   "NOTIFICATIONS": {
@@ -246,7 +248,7 @@
       "governance": "Community proposals",
       "sharing": "Energy sharing",
       "datadis": "Datadis alerts",
-      "created_proposal": "Proposal creation",
+      "create_proposal": "Proposal creation",
       "delete_proposal": "Proposal deleted",
       "proposal_accepted": "Proposal accepted",
       "proposal_denied": "Proposal denied",

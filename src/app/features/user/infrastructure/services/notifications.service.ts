@@ -24,7 +24,7 @@ export class NotificationsService {
     }
 
     setNotifications(notifications:{}){
-        return this.httpClient.post(`${environment.zertipower_url}/users-notifications/`,notifications, { headers: this.headers });
+        return this.httpClient.put(`${environment.zertipower_url}/user-notifications`,notifications, { headers: this.headers });
     }
 
 }

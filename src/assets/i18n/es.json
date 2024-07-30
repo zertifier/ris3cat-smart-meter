@@ -236,7 +236,9 @@
     "navbar": "Integraciones",
     "title": "Integraciones",
     "texts":{
-      "refreshPermanentToken":"Actualiza el token"
+      "token": "API token",
+      "refreshPermanentToken":"Actualizar",
+      "documentation":"Ver documentación"
     }
   },
   "NOTIFICATIONS": {
@@ -246,7 +248,7 @@
       "governance":"Propuestas de la comunidad",
       "sharing":"Compartición de energía",
       "datadis":"Alertas del datadis",
-      "created_proposal":"Creación de propuesta",
+      "create_proposal":"Creación de propuesta",
       "delete_proposal":"Propuesta borrada",
       "proposal_accepted":"Propuesta aceptada",
       "proposal_denied":"Propuesta denegada",

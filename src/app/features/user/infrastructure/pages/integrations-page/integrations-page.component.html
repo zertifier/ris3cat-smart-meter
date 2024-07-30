@@ -4,19 +4,22 @@
 
         <div class="my-3">
             <label class="form-label" for="permanent-token">
-                Token permanent
+                {{ t('INTEGRATIONS.texts.token') }}
             </label>
-            <div class="d-block d-lg-flex">
-                <div class="input-group form-div-width">
-                    <input readonly id="permanent-token" type="text"
-                        class="form-control form-control-lg bg-white border-secondary border-2 shadow-none"
-                        [value]="permanentToken">
-                </div>
-                <button class="btn btn-secondary bg-primary ms-0 ms-lg-3 mt-2 mt-lg-0 rounded-3" type="button"
-                    (click)="refreshPermanentToken()">
+            <div class="input-group mb-3">
+                <input readonly id="permanent-token" type="text"
+                    class="form-control form-control-lg bg-white border-secondary border-2 shadow-none"
+                    [value]="permanentToken">
+                <button class="btn btn-secondary" type="button" (click)="refreshPermanentToken()">
                     {{ t('INTEGRATIONS.texts.refreshPermanentToken') }}
                 </button>
             </div>
+        </div>
+
+        <div class="my-3">
+            <button class="btn btn-secondary bg-primary" type="button" (click)="refreshPermanentToken()">
+                {{ t('INTEGRATIONS.texts.documentation') }}
+            </button>
         </div>
 
     </div>

@@ -1,4 +1,23 @@
 :host {
     flex-grow: 1;
   }
-  
+
+.form-switch .form-check-input:checked {
+  background-position: right center;
+  --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+   background-color: #5F7187!important;
+   border-color: #5F7187!important;
+}
+
+.form-switch .form-check-input{
+   background-color: #BFBFBF;
+   color:white !important;
+}
+
+.form-switch .form-check-input{
+  width: 50px;
+  height: 25px;
+}
+
+// Placeholder color #BFBFBF
+// Secondary color #5F7187
