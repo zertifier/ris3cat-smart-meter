@@ -37,6 +37,8 @@ import {LanguageComponent} from "@core/layouts/language/language.component";
 import {state} from "@angular/animations";
 import _default from "chart.js/dist/core/core.interaction";
 import index = _default.modes.index;
+import { CommunityResponse, ZertipowerCommunitiesService } from '../../../../../../shared/infrastructure/services/zertipower/communities/ZertipowerCommunitiesService';
+import { ZertipowerService } from '../../../../../../shared/infrastructure/services/zertipower/zertipower.service';
 
 
 @Component({
@@ -66,10 +68,10 @@ import index = _default.modes.index;
     TranslocoDirective,
     LanguageComponent
   ],
-  templateUrl: './my-cup-page.component.html',
-  styleUrl: './my-cup-page.component.scss'
+  templateUrl: './my-cups-page.component.html',
+  styleUrl: './my-cups-page.component.scss'
 })
-export class MyCupPageComponent implements OnInit, OnDestroy {
+export class MyCupsPageComponent implements OnInit, OnDestroy {
   lastUpdate$ = this.monitoringStore.selectOnly(state => state.lastPowerFlowUpdate)
     .pipe(map(value => {
       if (!value) {
@@ -121,6 +123,10 @@ export class MyCupPageComponent implements OnInit, OnDestroy {
   });
   protected readonly StatsColors = StatsColors;
   cupsReference$ = this.userStore.selectOnly(this.userStore.$.cupsReference);
+  communityData!:CommunityResponse | any;
+  communityId$ = this.userStore.selectOnly(this.userStore.$.communityId).subscribe(async (communityId:any)=>{
+    this.communityData = await this.zertipowerService.communities.getCommunityById(communityId)
+  });
   cups$ = this.userStore.selectOnly(state => state.cups);
   selectedCupsIndex$ = this.userStore.selectOnly(state => state.selectedCupsIndex);
   surplusDistribution$ = this.userStore.selectOnly(state => state.surplusDistribution);
@@ -133,7 +139,8 @@ export class MyCupPageComponent implements OnInit, OnDestroy {
     private readonly ngbModal: NgbModal,
     private updateCups: UpdateUserCupsAction,
     private readonly selectCupsAction: SelectCupsService,
-    private readonly translocoService: TranslocoService
+    private readonly translocoService: TranslocoService,
+    private readonly zertipowerService: ZertipowerService
   ) {
   }
 
@@ -157,6 +164,9 @@ export class MyCupPageComponent implements OnInit, OnDestroy {
           })
         })
     )
+
+    //this.communitiesService.get
+
   }
 
   selectCups(event: any) {

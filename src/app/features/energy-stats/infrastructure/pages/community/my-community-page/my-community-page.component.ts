@@ -34,6 +34,8 @@ import {
 import {environment} from "@environments/environment";
 import {EnergyPredictionComponent} from "../../../components/energy-prediction/energy-prediction.component";
 import {TranslocoDirective, TranslocoService} from "@jsverse/transloco";
+import { CommunityResponse } from '../../../../../../shared/infrastructure/services/zertipower/communities/ZertipowerCommunitiesService';
+import { ZertipowerService } from '../../../../../../shared/infrastructure/services/zertipower/zertipower.service';
 
 @Component({
   selector: 'app-my-community-page',
@@ -124,12 +126,18 @@ export class MyCommunityPageComponent implements OnInit, OnDestroy {
     }));
   protected readonly StatsColors = StatsColors;
 
+  communityData!:CommunityResponse | any;
+  communityId$ = this.userStore.selectOnly(this.userStore.$.communityId).subscribe(async (communityId:any)=>{
+    this.communityData = await this.zertipowerService.communities.getCommunityById(communityId)
+  });
+
   constructor(
     private readonly monitoringService: MonitoringService,
     private readonly authStore: AuthStoreService,
     private readonly userStore: UserStoreService,
     private readonly monitoringStore: MonitoringStoreService,
-    private readonly translocoService: TranslocoService
+    private readonly translocoService: TranslocoService,
+    private readonly zertipowerService:ZertipowerService
   ) {
   }
 

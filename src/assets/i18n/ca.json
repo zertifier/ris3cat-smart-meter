@@ -10,7 +10,9 @@
       "consumption": "Consum",
       "selfConsumption": "Autoconsum",
       "generatedEnergy": "Energia generada",
-      "surplus": "Excedent"
+      "surplus": "Excedent",
+      "buyingPrice":"Preu de compra",
+      "sellingPrice":"Preu de venda"
     },
     "tooltips": {
       "assignedProd": "El percentatge de l'energia produïda que se li assigna a aquest CUPS"
@@ -40,7 +42,9 @@
       "consumption": "Consum",
       "selfConsumption": "Autoconsum",
       "generatedEnergy": "Energia generada",
-      "surplus": "Excedent"
+      "surplus": "Excedent",
+      "buyingPrice":"Preu de compra",
+      "sellingPrice":"Preu de venda"
     },
     "tooltips": {
       "assignedProd": "El percentatge de l'energia produïda que se li assigna a aquest CUPS"
@@ -79,6 +83,7 @@
       "chartBottomCommunityText": "· Aquesta estadística indica les dades dels {{activeMembers}} membres actius d'un total de {{totalMembers}} membres de la comunitat.",
       "chartUpdateWarning": "· Tingues en compte que l'actualització de dades no és diària.",
       "chartLabels": {
+        "CO2Savings": "Estalvi en CO2",
         "production": "Producció",
         "productionActive": "Producció actius",
         "networkConsumption": "Consum de la xarxa",

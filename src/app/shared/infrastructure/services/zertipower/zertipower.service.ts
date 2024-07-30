@@ -12,6 +12,7 @@ import {ZertipowerCupsService} from "./cups/ZertipowerCupsService";
 import {ZertipowerLocationService} from "./location/ZertipowerLocationService";
 import {ZertipowerEnergyHourlyService} from "@shared/infrastructure/services/zertipower/energy-hourly/ZertipowerEnergyHourlyService";
 import {ZertipowerTradesService} from "@shared/infrastructure/services/zertipower/trades/ZertipowerTradesService";
+import { UserStoreService } from '../../../../features/user/infrastructure/services/user-store.service';
 
 @Injectable({
   providedIn: 'root'
@@ -49,9 +50,11 @@ export class ZertipowerService {
 
       return config;
     });
+
     this.users = new ZertipowerUserService(this.axiosClient);
     this.energyStats = new ZertipowerEnergyStats(this.axiosClient);
     this.auth = new ZertipowerAuthService(this.axiosClient);
+    
     this.communities = new ZertipowerCommunitiesService(this.axiosClient);
     this.customers = new ZertipowerCustomersService(this.axiosClient);
     this.cups = new ZertipowerCupsService(this.axiosClient);

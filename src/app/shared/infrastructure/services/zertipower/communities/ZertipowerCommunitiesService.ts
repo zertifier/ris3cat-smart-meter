@@ -4,6 +4,8 @@ import dayjs from "@shared/utils/dayjs";
 import {HttpResponse} from "../../HttpResponse";
 import {EnergyStatDTO} from "../DTOs/EnergyStatDTO";
 import {ChartEntity} from "@features/energy-stats/domain/ChartEntity";
+import { UserStore, UserStoreService } from "../../../../../features/user/infrastructure/services/user-store.service";
+import { Injectable } from "@angular/core";
 
 export interface CommunityResponse{
   id: number,
@@ -15,7 +17,9 @@ export interface CommunityResponse{
 }
 
 export class ZertipowerCommunitiesService {
+  
   constructor(private readonly axios: Axios) {
+  
   }
 
   async getActiveMembers(id: number): Promise<number> {
@@ -25,6 +29,11 @@ export class ZertipowerCommunitiesService {
 
   async getByLocationId(id: number){
     const response = await this.axios.get<HttpResponse<CommunityResponse[]>>(`${ChartEntity.COMMUNITIES}/locations/${id}`);
+    return response.data.data
+  }
+
+  async getCommunityById(id: number){
+    const response = await this.axios.get<HttpResponse<CommunityResponse[]>>(`${ChartEntity.COMMUNITIES}/${id}`);
     return response.data.data
   }
 

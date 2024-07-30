@@ -17,9 +17,11 @@
         </div>
 
         <div class="my-3">
-            <button class="btn btn-secondary bg-primary" type="button" (click)="refreshPermanentToken()">
-                {{ t('INTEGRATIONS.texts.documentation') }}
-            </button>
+            <a href={{apiRealtimeDocsUrl}} target="_blank">
+                <button class="btn btn-secondary bg-primary" type="button" (click)="refreshPermanentToken()">
+                    {{ t('INTEGRATIONS.texts.documentation') }}
+                </button>
+            </a>
         </div>
 
     </div>

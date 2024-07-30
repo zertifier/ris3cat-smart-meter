@@ -45,12 +45,15 @@
         </div>
 
       </div>
+
       <span>CUPS: {{ getSelectedCupsCode() | async }}</span>
       <span>{{ t('texts.assignedProd') }}: {{ surplusDistribution$ | async }}%
         <app-question-badge>
           {{ t('tooltips.assignedProd') }}
         </app-question-badge>
       </span>
+      <span>{{ t('texts.buyingPrice') }} : {{communityData.energyPrice}}€/kWh</span>
+      <span>{{ t('texts.sellingPrice') }} : {{communityData.energyPrice}}€/kWh</span>
       <span><i class="fa-solid fa-battery-full"></i> 0%</span>
     </div>
 

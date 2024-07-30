@@ -29,8 +29,8 @@ export const routes: Routes = [
         }
       },
       {
-        path: 'my-cup',
-        loadComponent: () => import('./cups/my-cups-page/my-cup-page.component').then(c => c.MyCupPageComponent),
+        path: 'my-cups',
+        loadComponent: () => import('./cups/my-cups-page/my-cups-page.component').then(c => c.MyCupsPageComponent),
         canActivate: [switchChartEntityGuard(ChartEntity.CUPS), hasCupsGuard],
         data: {
           name: ENERGY_STATS_ROUTE_NAMES.STATS_CUPS

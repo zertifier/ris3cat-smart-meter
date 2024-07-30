@@ -10,7 +10,9 @@
       "consumption": "Consumption",
       "selfConsumption": "Self-consumption",
       "generatedEnergy": "Energy generated",
-      "surplus": "Surplus"
+      "surplus": "Surplus",
+      "buyingPrice":"Buying price",
+      "sellingPrice":"selling price"
     },
     "tooltips": {
       "assignedProd": "The percentage of energy produced that is assigned to this CUPS"
@@ -40,7 +42,9 @@
       "consumption": "Consumption",
       "selfConsumption": "Self-consumption",
       "generatedEnergy": "Energy generated",
-      "surplus": "Surplus"
+      "surplus": "Surplus",
+      "buyingPrice":"Buying price",
+      "sellingPrice":"selling price"
     },
     "tooltips": {
       "assignedProd": "The percentage of energy produced that is assigned to this CUPS"
@@ -79,6 +83,7 @@
       "chartBottomCommunityText": "· This statistic indicates the data of the {{activeMembers}} active members out of a total of {{totalMembers}} community members.",
       "chartUpdateWarning": "· Please note that data updates are not daily.",
       "chartLabels": {
+        "CO2Savings": "CO2 savings",
         "production": "Production",
         "productionActive": "Active production",
         "networkConsumption": "Network consumption",
@@ -86,8 +91,6 @@
         "surplus": "Surplus",
         "surplusActive": "Active surplus",
         "surplusActiveShared": "Active shared surplus"
-
-
       },
       "displayLegend": "Show legend",
       "maximize": "Maximize",

@@ -6,5 +6,6 @@ export enum StatsColors {
   IN_HOUSE_CONSUMPTION = '#F0A64E',
   SURPLUS = '#80BFE9',
   VIRTUAL_SURPLUS = '#B3D8F2',
+  CO2_SAVINGS = '#6ce076'
   // CUPS_PRODUCTION = '#175E35',
 }
