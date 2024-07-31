@@ -205,7 +205,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                     // label: 'co2',
                     label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.CO2Savings'),
                     // tooltipText: 'Producció proporcional comunitaria',
-                    tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.cups.networkConsumption'),
+                    tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.cups.CO2Savings'),
                     color: StatsColors.CO2_SAVINGS,
                     data: mappedData.map(d => d.production * this.co2Savings),
                     stack: 'CO2Savings',
@@ -226,7 +226,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                     // label: 'Producció',
                     label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.production'),
                     // tooltipText: 'Producció proporcional comunitaria',
-                    tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.cups.networkConsumption'),
+                    tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.cups.production'),
                     color: StatsColors.COMMUNITY_PRODUCTION,
                     data: mappedData.map(d => d.production),
                     stack: 'Production',
@@ -235,10 +235,11 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                     // label: 'co2',
                     label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.CO2Savings'),
                     // tooltipText: 'Producció proporcional comunitaria',
-                    tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.cups.networkConsumption'),
+                    tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.cups.CO2Savings'),
                     color: StatsColors.CO2_SAVINGS,
                     data: mappedData.map(d => d.production * this.co2Savings),
                     stack: 'CO2Savings',
+                    yAxisID: 'y-axis-2',
                   })
                 }
 

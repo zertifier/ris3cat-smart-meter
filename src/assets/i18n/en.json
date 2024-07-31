@@ -99,6 +99,7 @@
     "tooltips": {
       "chartLabels": {
         "community": {
+          "CO2Savings":"",
           "production": "Total community production.",
           "activeProduction": "Production of active participants",
           "networkConsumption": "Consumption that the electricity company will bill.",
@@ -107,9 +108,10 @@
           "sharedSurplusActive": "Amount of energy to share that is produced and not consumed by active participants."
         },
         "cups": {
+          "CO2Savings":"",
           "networkConsumption": "Consumption that the electricity company will bill.",
-          "production": "Proportional community production",
-          "networkActiveConsumption": "Amount of energy we consume",
+          "production": "Proportional community production.",
+          "networkActiveConsumption": "Amount of energy we consume.",
           "surplusActive": "Amount of energy produced and not consumed.",
           "sharedSurplusActive": "Amount of energy to share that is produced and not consumed by active participants."
         }

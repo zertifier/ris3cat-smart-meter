@@ -101,6 +101,7 @@
     "tooltips": {
       "chartLabels": {
         "community": {
+          "CO2Savings":"Tones de co2 estalviades",
           "production": "Producció total de la comunitat.",
           "activeProduction": "Producció dels participants actius",
           "networkConsumption": "Consum que facturarà la companyia elèctrica.",
@@ -109,9 +110,10 @@
           "sharedSurplusActive": "Quantitat d’energia per compartir que es produeix i no es consumeix dels participans actius."
         },
         "cups": {
+          "CO2Savings":"Tones de co2 estalviades.",
           "networkConsumption": "Consum que facturarà la companyia elèctrica.",
-          "production": "Producció proporcional comunitaria",
-          "networkActiveConsumption": "Quantitat d'energia que gastem",
+          "production": "Producció proporcional comunitària.",
+          "networkActiveConsumption": "Quantitat d'energia que gastem.",
           "surplusActive": "Quantitat d'energia que es produeix i no es consumeix.",
           "sharedSurplusActive": "Quantitat d’energia per compartir que es produeix i no es consumeix dels participans actius."
         }

@@ -52,8 +52,10 @@
           {{ t('tooltips.assignedProd') }}
         </app-question-badge>
       </span>
+      @if(communityData && communityData.energyPrice) {
       <span>{{ t('texts.buyingPrice') }} : {{communityData.energyPrice}}€/kWh</span>
       <span>{{ t('texts.sellingPrice') }} : {{communityData.energyPrice}}€/kWh</span>
+      }
       <span><i class="fa-solid fa-battery-full"></i> 0%</span>
     </div>
 

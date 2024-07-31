@@ -9,15 +9,15 @@ import {
   SimpleChanges,
   ViewChild
 } from '@angular/core';
-import {ChartModule} from "primeng/chart";
-import {Subscription} from "rxjs";
-import {ChartStoreService} from "../../../services/chart-store.service";
-import {ChartResource} from "../../../../domain/ChartResource";
-import {ChartLegendComponent} from "../chart-legend/chart-legend.component";
-import {Chart} from "chart.js";
-import {ChartEntity} from "../../../../domain/ChartEntity";
-import {AsyncPipe, NgIf} from "@angular/common";
-import {ChartDataset} from "@shared/infrastructure/interfaces/ChartDataset";
+import { ChartModule } from "primeng/chart";
+import { Subscription } from "rxjs";
+import { ChartStore, ChartStoreService } from "../../../services/chart-store.service";
+import { ChartResource } from "../../../../domain/ChartResource";
+import { ChartLegendComponent } from "../chart-legend/chart-legend.component";
+import { Chart } from "chart.js";
+import { ChartEntity } from "../../../../domain/ChartEntity";
+import { AsyncPipe, NgIf } from "@angular/common";
+import { ChartDataset } from "@shared/infrastructure/interfaces/ChartDataset";
 
 @Component({
   selector: 'app-data-chart',
@@ -36,8 +36,8 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
     datasets: any[],
     labels: string[]
   };
-  @Input({required: true}) dataset: ChartDataset[] = [];
-  @Input({required: true}) labels: string[] = [];
+  @Input({ required: true }) dataset: ChartDataset[] = [];
+  @Input({ required: true }) labels: string[] = [];
   @ViewChild('chart') chartElement!: ElementRef;
   private chart!: Chart;
   private subscriptions: Subscription[] = [];
@@ -69,8 +69,24 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
         ticks: {
           callback: (value: never) => {
             const state = this.chartStoreService.snapshot();
-            const label = state.selectedChartResource === ChartResource.ENERGY ? 'kWh' : '€'
+            const label = this.getLabelText(ChartResource) // state.selectedChartResource === ChartResource.ENERGY ? 'kWh' : '€'
             return `${value} ${label}`;
+          },
+          color: this.textColorSecondary
+        },
+        grid: {
+          color: this.surfaceBorder,
+        }
+      },
+      y1: {
+        stacked: true,
+        beginAtZero: true,
+        min: 0,
+        ticks: {
+          callback: (value: never) => {
+            const state = this.chartStoreService.snapshot();
+            //const label = this.getLabelText(ChartResource) // state.selectedChartResource === ChartResource.ENERGY ? 'kWh' : '€'
+            return `${value} Tn`;
           },
           color: this.textColorSecondary
         },
@@ -90,8 +106,8 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
       tooltip: {
         callbacks: {
           label: (context: any) => {
-            const {label} = context.dataset;
-            let {formattedValue} = context;
+            const { label } = context.dataset;
+            let { formattedValue } = context;
             const chartEntity = this.chartStoreService.snapshotOnly(state => state);
 
             // To show the bars on the same stack and overlying them (like a z-index) some adjustments need to be made
@@ -120,9 +136,16 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
               formattedValue = consumption.toLocaleString();
             }
 
-            const unit = chartEntity.selectedChartResource === ChartResource.ENERGY ? 'kWh' : '€'
-            const labels: string[] = [`${label}: ${formattedValue} ${unit}`];
+            const unit = this.getLabelText(chartEntity);
+            
+            let labels:string[];
 
+            if(label.includes('CO2')){
+              labels = [`${label}: ${formattedValue} Tn`];
+            }else{
+              labels = [`${label}: ${formattedValue} ${unit}`];
+            }
+          
             if (chartEntity.selectedChartEntity === ChartEntity.COMMUNITIES) {
               const stat = this.chartStoreService.snapshot().lastFetchedStats[context.dataIndex];
               if (context.dataset.label === "Excedent actius") {
@@ -243,6 +266,21 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
           grid: {
             color: this.surfaceBorder,
           }
+        },
+        y1: {
+          stacked: true,
+          beginAtZero: true,
+          min: 0,
+          ticks: {
+            callback: function (value: never) {
+              //const label = state.selectedChartResource === ChartResource.ENERGY ? 'kWh' : '€'
+              return `${value} Tn`;
+            },
+            color: this.textColorSecondary
+          },
+          grid: {
+            color: this.surfaceBorder,
+          }
         }
       }
     }
@@ -259,6 +297,21 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
       indexAxis: 'y',
       scales: {
         y: {
+          beginAtZero: true,
+          stacked: true,
+          min: 0,
+          ticks: {
+            color: this.textColorSecondary,
+            font: {
+              weight: 500
+            },
+          },
+          grid: {
+            color: this.surfaceBorder,
+            drawBorder: false
+          }
+        },
+        y1: {
           beginAtZero: true,
           stacked: true,
           min: 0,
@@ -323,4 +376,24 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
       })
     );
   }
+
+  getLabelText(chartEntity:any){
+    let unit: string;
+    switch (chartEntity.selectedChartResource) {
+      case ChartResource.ENERGY:
+        unit = 'kWh'
+        break;
+      case ChartResource.PRICE:
+        unit = '€'
+        break;
+      case ChartResource.WEIGHT:
+        unit = 'Tn'
+        break;
+      default:
+        unit = 'Tn'
+        break;
+    }
+    return unit;
+  }
+
 }

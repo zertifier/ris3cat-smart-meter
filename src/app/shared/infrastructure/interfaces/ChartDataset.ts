@@ -5,4 +5,5 @@ export interface ChartDataset {
   stack?: string,
   data: unknown[],
   tooltipText?: string,
+  yAxisID?:string
 }
