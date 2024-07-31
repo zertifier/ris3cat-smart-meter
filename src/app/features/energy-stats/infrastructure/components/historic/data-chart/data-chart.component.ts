@@ -81,16 +81,18 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
       y1: {
         stacked: true,
         beginAtZero: true,
+        position: 'right',
         min: 0,
         ticks: {
           callback: (value: never) => {
-            const state = this.chartStoreService.snapshot();
+            //const state = this.chartStoreService.snapshot();
             //const label = this.getLabelText(ChartResource) // state.selectedChartResource === ChartResource.ENERGY ? 'kWh' : '€'
             return `${value} Tn`;
           },
           color: this.textColorSecondary
         },
         grid: {
+          drawOnChartArea: false,
           color: this.surfaceBorder,
         }
       }
@@ -137,15 +139,15 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
             }
 
             const unit = this.getLabelText(chartEntity);
-            
-            let labels:string[];
 
-            if(label.includes('CO2')){
+            let labels: string[];
+
+            if (label.includes('CO2')) {
               labels = [`${label}: ${formattedValue} Tn`];
-            }else{
+            } else {
               labels = [`${label}: ${formattedValue} ${unit}`];
             }
-          
+
             if (chartEntity.selectedChartEntity === ChartEntity.COMMUNITIES) {
               const stat = this.chartStoreService.snapshot().lastFetchedStats[context.dataIndex];
               if (context.dataset.label === "Excedent actius") {
@@ -270,6 +272,7 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
         y1: {
           stacked: true,
           beginAtZero: true,
+          position: 'right',
           min: 0,
           ticks: {
             callback: function (value: never) {
@@ -279,6 +282,7 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
             color: this.textColorSecondary
           },
           grid: {
+            drawOnChartArea: false,
             color: this.surfaceBorder,
           }
         }
@@ -314,6 +318,7 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
         y1: {
           beginAtZero: true,
           stacked: true,
+          position: 'top',
           min: 0,
           ticks: {
             color: this.textColorSecondary,
@@ -322,6 +327,7 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
             },
           },
           grid: {
+           // drawOnChartArea: false,
             color: this.surfaceBorder,
             drawBorder: false
           }
@@ -358,6 +364,7 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
         stack: entry.stack,
         grouped: true,
         order: entry.order,
+        yAxisID:entry.yAxisID
       });
     }
 
@@ -377,7 +384,7 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
     );
   }
 
-  getLabelText(chartEntity:any){
+  getLabelText(chartEntity: any) {
     let unit: string;
     switch (chartEntity.selectedChartResource) {
       case ChartResource.ENERGY:

@@ -173,6 +173,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                       color: StatsColors.ACTIVE_COMMUNITY_PRODUCTION,
                       data: mappedData.map(d => d.productionActives),
                       stack: 'Excedent',
+                      yAxisID: 'y'
                     },
                     {
                       order: 3,
@@ -188,6 +189,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                         return d.production - d.productionActives;
                       }),
                       stack: 'Excedent',
+                      yAxisID: 'y'
                     },
                     {
                       // label: 'Consum del a xarxa actius',
@@ -198,7 +200,8 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                       tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.community.networkActiveConsumption') ,
                       stack: 'Consumption',
                       order: 0,
-                      color: StatsColors.SELF_CONSUMPTION
+                      color: StatsColors.SELF_CONSUMPTION,
+                      yAxisID: 'y'
                     },
                   )
                   datasets.unshift({
@@ -209,6 +212,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                     color: StatsColors.CO2_SAVINGS,
                     data: mappedData.map(d => d.production * this.co2Savings),
                     stack: 'CO2Savings',
+                    yAxisID: 'y1'
                   })
                 } else {
                   datasets.unshift({
@@ -221,6 +225,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                     // tooltipText: 'Consum que facturarà la companyia elèctrica',
                     tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.cups.networkConsumption'),
                     stack: 'Consumption',
+                    yAxisID: 'y'
                   })
                   datasets.unshift({
                     // label: 'Producció',
@@ -230,6 +235,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                     color: StatsColors.COMMUNITY_PRODUCTION,
                     data: mappedData.map(d => d.production),
                     stack: 'Production',
+                    yAxisID: 'y'
                   })
                   datasets.unshift({
                     // label: 'co2',
@@ -239,7 +245,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                     color: StatsColors.CO2_SAVINGS,
                     data: mappedData.map(d => d.production * this.co2Savings),
                     stack: 'CO2Savings',
-                    yAxisID: 'y-axis-2',
+                    yAxisID: 'y1',
                   })
                 }
 
