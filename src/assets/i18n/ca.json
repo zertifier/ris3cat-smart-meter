@@ -144,17 +144,22 @@
   },
 
   "MY-WALLET": {
-    "navbar": "La meva cartera",
-    "title": "La meva cartera",
+    "navbar": "La meva wallet",
+    "title": "La meva wallet",
     "texts": {
       "identityLabel": "Identitat",
       "transferInfo": "Per a relatizar una transferència, tria que vols traspassar",
-      "energyAmount": "Saldo energètic",
-      "tokenAmount": "Saldo",
-      "communityShare": "Betes de la comunitat",
+      "energyAmount": "Tokens energètics",
+      "tokenAmount": "Saldo blockchain",
+      "communityShare": "Betas de la comunitat",
       "transferEnergy": "Transferir saldo",
       "transferToken": "Transferir XDAI",
-      "transferShare": "Transferir participacions"
+      "transferShare": "Transferir participacions",
+      "platformSection":"Plataforma",
+      "blockchainSection":"Blockchain",
+      "communityBalance":"Saldo energètic dins de la CCE",
+      "addBalance":"Afegir tokens",
+      "pullOutBalance":"Retirar tokens"
     },
     "tooltips": {
       "identity": "La identitat permet identificar el teu usuari a dintre de la Cadena de Blocks.",
@@ -186,7 +191,7 @@
     "navbar": "Compartir energia",
     "title": "Compartir energia",
     "texts": {
-      "chooseData": "Tria quin tram de data vols consultar",
+      "chooseData": "Trieu quin tram de data voleu consultar",
       "from": "Des de",
       "to": "Fins a",
       "date": "Data",
@@ -194,12 +199,14 @@
       "amount": "Quantitat",
       "total": "Total",
       "result": "Resultat",
-      "bottomTable": "Tingues en compte que l'actualització de dades no és diària.",
+      "bottomTable": "Tingueu en compte que l'actualització de dades no és diària.",
       "noData": "No hi ha dades. Prova un altre rang de dies.",
       "actions": {
-        "buy": "Compra",
-        "sell": "Venta"
+        "buy": "Rebut",
+        "sell": "Enviat"
       },
+       "buyingPrice":"Preu de compra",
+      "sellingPrice":"Preu de venda",
       "results": {
         "before": "Abans",
         "now": "Ara",

@@ -1,5 +1,5 @@
 import {Component, OnDestroy} from '@angular/core';
-import {AsyncPipe, DecimalPipe, NgIf} from "@angular/common";
+import {AsyncPipe, CommonModule, DecimalPipe, NgIf} from "@angular/common";
 import {UserStoreService} from "../../services/user-store.service";
 import {EthersService} from "@shared/infrastructure/services/ethers.service";
 import {FormsModule} from "@angular/forms";
@@ -22,11 +22,13 @@ import {TranslocoDirective} from "@jsverse/transloco";
         DecimalPipe,
         NoRoundDecimalPipe,
         NgIf,
-        TranslocoDirective
+        TranslocoDirective,
+        CommonModule
     ],
   templateUrl: './user-wallet-page.component.html',
   styleUrl: './user-wallet-page.component.scss'
 })
+
 export class UserWalletPageComponent implements OnDestroy {
   wallet$ = this.userStore.selectOnly(state => state.user?.wallet_address)
     .pipe(wallet => wallet || 'No hi ha cap wallet assignada')
@@ -39,6 +41,7 @@ export class UserWalletPageComponent implements OnDestroy {
   communityId?: number
   customerId!: number
   walletAddress!: string;
+  activeSection: 'Platform' | 'Blockchain' = 'Platform';
 
   subscriptions: Subscription[] = [];
 
@@ -100,6 +103,10 @@ export class UserWalletPageComponent implements OnDestroy {
         confirmButton: 'btn btn-secondary-force'
       }
     })
+  }
+
+  changeSection(activeSection: 'Platform' | 'Blockchain'){
+    this.activeSection = activeSection;
   }
 
   ngOnDestroy() {

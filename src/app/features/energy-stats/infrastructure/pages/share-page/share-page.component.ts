@@ -14,6 +14,7 @@ import {TradeInterface} from "@shared/infrastructure/services/zertipower/trades/
 import {NoRoundDecimalPipe} from "@shared/infrastructure/pipes/no-round-decimal.pipe";
 import {Subscription} from "rxjs";
 import {UserStoreService} from "@features/user/infrastructure/services/user-store.service";
+import { CommunityResponse } from '../../../../../shared/infrastructure/services/zertipower/communities/ZertipowerCommunitiesService';
 
 
 @Component({
@@ -41,10 +42,10 @@ import {UserStoreService} from "@features/user/infrastructure/services/user-stor
 })
 export class SharePageComponent implements OnDestroy{
 
-  fromDate: Date = dayjs().subtract(1).toDate();
+  fromDate: Date = dayjs().subtract(30,'days').toDate();
   toDate: Date = dayjs().toDate();
   maxDate: Date = dayjs().toDate();
-  minToDate: Date = dayjs().toDate();
+  minToDate: Date = dayjs().subtract(30).toDate();
 
   loading: boolean = false;
 
@@ -78,19 +79,22 @@ export class SharePageComponent implements OnDestroy{
   tradesData!: TradeInterface[]
   customerId!: number;
 
+  communityData!:CommunityResponse | any;
+  communityId$ = this.userStore.selectOnly(this.userStore.$.communityId).subscribe(async (communityId:any)=>{
+    this.communityData = await this.zertipower.communities.getCommunityById(communityId)
+  });
+
   subscriptions: Subscription[] = [];
   constructor(
     private ngModal: NgbModal,
     protected sharingUsers: SharingUsersService,
     private monitoringService: MonitoringService,
     private readonly zertipower: ZertipowerService,
-    private readonly userStore: UserStoreService,
+    private readonly userStore: UserStoreService
   ) {
     this.subscriptions.push(
       this.userStore
         .selectOnly(state => state).subscribe((data) => {
-        console.log(data)
-
         if (data.user) {
           this.customerId = data.user.customer_id!
           this.getData()
@@ -102,10 +106,10 @@ export class SharePageComponent implements OnDestroy{
 
 
   async getData(){
+    console.log(this.fromDate,this.toDate)
     this.minToDate = dayjs(this.fromDate).toDate();
     this.tradesData = await this.zertipower.trades.getTrades(this.customerId, dayjs(this.fromDate).format('YYYY-MM-DD'), dayjs(this.toDate).format('YYYY-MM-DD'))
     // this.tradesData = await this.zertipower.trades.getTrades(22, dayjs(this.fromDate).format('YYYY-MM-DD'), dayjs(this.toDate).format('YYYY-MM-DD'))
-
   }
 
   ngOnDestroy(): void {

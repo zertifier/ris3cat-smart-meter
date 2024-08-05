@@ -70,7 +70,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
   labels: string[] = [];
   legendLabels: DataLabel[] = [];
   mobileLabels: DataLabel[] = [];
-  co2Savings:number = 0.2; //TODO: THIS IS AN EXAMPLE
+  //co2Savings:number = 0.2; //TODO: THIS IS AN EXAMPLE
 
   @ViewChild(DataChartComponent) dataChart!: DataChartComponent;
   @ViewChild('secondChart') secondChart!: DataChartComponent;
@@ -204,16 +204,16 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                       yAxisID: 'y'
                     },
                   )
-                  datasets.unshift({
-                    // label: 'co2',
-                    label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.CO2Savings'),
-                    // tooltipText: 'Producció proporcional comunitaria',
-                    tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.cups.CO2Savings'),
-                    color: StatsColors.CO2_SAVINGS,
-                    data: mappedData.map(d => d.production * this.co2Savings),
-                    stack: 'CO2Savings',
-                    yAxisID: 'y1'
-                  })
+                  // datasets.unshift({
+                  //   // label: 'co2',
+                  //   label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.CO2Savings'),
+                  //   // tooltipText: 'Producció proporcional comunitaria',
+                  //   tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.cups.CO2Savings'),
+                  //   color: StatsColors.CO2_SAVINGS,
+                  //   data: mappedData.map(d => d.production * this.co2Savings),
+                  //   stack: 'CO2Savings',
+                  //   yAxisID: 'y1'
+                  // })
                 } else {
                   datasets.unshift({
                     // label: 'Consum de la xarxa',
@@ -237,16 +237,16 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                     stack: 'Production',
                     yAxisID: 'y'
                   })
-                  datasets.unshift({
-                    // label: 'co2',
-                    label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.CO2Savings'),
-                    // tooltipText: 'Producció proporcional comunitaria',
-                    tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.cups.CO2Savings'),
-                    color: StatsColors.CO2_SAVINGS,
-                    data: mappedData.map(d => d.production * this.co2Savings),
-                    stack: 'CO2Savings',
-                    yAxisID: 'y1',
-                  })
+                  // datasets.unshift({
+                  //   // label: 'co2',
+                  //   label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.CO2Savings'),
+                  //   // tooltipText: 'Producció proporcional comunitaria',
+                  //   tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.cups.CO2Savings'),
+                  //   color: StatsColors.CO2_SAVINGS,
+                  //   data: mappedData.map(d => d.production * this.co2Savings),
+                  //   stack: 'CO2Savings',
+                  //   yAxisID: 'y1',
+                  // })
                 }
 
                 this.labels = labels;

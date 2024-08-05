@@ -20,8 +20,8 @@
       </span>
       <span>{{ t('texts.activeMembers') }} {{ (activeMembers$ | async) }}</span>
       @if(communityData && communityData.energyPrice) {
-        <span>{{ t('texts.buyingPrice') }} : {{communityData.energyPrice}}€/kWh</span>
-        <span>{{ t('texts.sellingPrice') }} : {{communityData.energyPrice}}€/kWh</span>
+        <span>{{ t('texts.buyingPrice') }} : <b class="color-tertiary"> {{communityData.energyPrice}}€/kWh</b></span>
+        <span>{{ t('texts.sellingPrice') }} : <b class="color-tertiary"> {{communityData.energyPrice}}€/kWh </b></span>
       }
       <span><i class="fa-solid fa-battery-full"></i> 0%</span>
     </div>

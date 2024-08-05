@@ -151,7 +151,12 @@
       "communityShare": "Community shares",
       "transferEnergy": "Transfer balance",
       "transferToken": "Transfer XDAI",
-      "transferShare": "Transfer shares"
+      "transferShare": "Transfer shares",
+      "platformSection":"Platform",
+      "blockchainSection":"Blockchain",
+      "communityBalance":"Energetic balance inside the CCE",
+      "addBalance":"Add tokens",
+      "pullOutBalance":"Pull out tokens"
     },
     "tooltips": {
       "identity": "Identity allows to identify your user within the Blockchain.",
@@ -194,15 +199,17 @@
       "bottomTable": "Please note that data update is not daily.",
       "noData": "There is no data. Please try another range of dates",
       "actions": {
-        "buy": "Buy",
-        "sell": "Sell"
+        "buy": "Received",
+        "sell": "Sent"
       },
       "results": {
         "before": "Before",
         "now": "Now",
         "consumption": "Consumption",
         "surplus": "Surplus"
-      }
+      },
+       "buyingPrice":"Buying price",
+      "sellingPrice":"selling price"
     },
     "tooltips": {
       "ekw": "EKW: Fictional currency for buying and selling energy on this platform."

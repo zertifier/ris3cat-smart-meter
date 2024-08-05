@@ -143,8 +143,8 @@
     }
   },
   "MY-WALLET": {
-    "navbar": "Mi cartera",
-    "title": "Mi cartera",
+    "navbar": "Mi wallet",
+    "title": "Mi wallet",
     "texts": {
       "identityLabel": "Identidad",
       "transferInfo": "Para relacionar una transferencia, elige qué quieres traspasar",
@@ -153,7 +153,12 @@
       "communityShare": "Participaciones de la comunidad",
       "transferEnergy": "Transferir saldo",
       "transferToken": "Transferir XDAI",
-      "transferShare": "Transferir participaciones"
+      "transferShare": "Transferir participaciones",
+      "platformSection":"Plataforma",
+      "blockchainSection":"Blockchain",
+      "communityBalance":"Saldo energético dentro de la CCE",
+      "addBalance":"Añadir tokens",
+      "pullOutBalance":"Retirar tokens"
     },
     "tooltips": {
       "identity": "La identidad permite identificar tu usuario dentro de la Cadena de Bloques.",
@@ -196,15 +201,17 @@
       "bottomTable": "Ten en cuenta que la actualización de datos no es diaria.",
       "noData": "No hay datos. Por favor, prueba otro rango de fechas.",
       "actions": {
-        "buy": "Compra",
-        "sell": "Venta"
+        "buy": "Recibido",
+        "sell": "Enviado"
       },
       "results": {
         "before": "Antes",
         "now": "Ahora",
         "consumption": "Consumo",
         "surplus": "Excedente"
-      }
+      },
+      "buyingPrice":"Precio de compra",
+      "sellingPrice":"Precio de venta"
     },
     "tooltips": {
       "ekw": "EKW: Moneda ficticia para la compra y venta de energía en esta plataforma."

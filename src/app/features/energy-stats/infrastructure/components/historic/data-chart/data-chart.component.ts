@@ -78,24 +78,24 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
           color: this.surfaceBorder,
         }
       },
-      y1: {
-        stacked: true,
-        beginAtZero: true,
-        position: 'right',
-        min: 0,
-        ticks: {
-          callback: (value: never) => {
-            //const state = this.chartStoreService.snapshot();
-            //const label = this.getLabelText(ChartResource) // state.selectedChartResource === ChartResource.ENERGY ? 'kWh' : '€'
-            return `${value} Tn`;
-          },
-          color: this.textColorSecondary
-        },
-        grid: {
-          drawOnChartArea: false,
-          color: this.surfaceBorder,
-        }
-      }
+      // y1: {
+      //   stacked: true,
+      //   beginAtZero: true,
+      //   position: 'right',
+      //   min: 0,
+      //   ticks: {
+      //     callback: (value: never) => {
+      //       //const state = this.chartStoreService.snapshot();
+      //       //const label = this.getLabelText(ChartResource) // state.selectedChartResource === ChartResource.ENERGY ? 'kWh' : '€'
+      //       return `${value} Tn`;
+      //     },
+      //     color: this.textColorSecondary
+      //   },
+      //   grid: {
+      //     drawOnChartArea: false,
+      //     color: this.surfaceBorder,
+      //   }
+      // }
     },
     interaction: {
       intersect: true,
@@ -269,23 +269,23 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
             color: this.surfaceBorder,
           }
         },
-        y1: {
-          stacked: true,
-          beginAtZero: true,
-          position: 'right',
-          min: 0,
-          ticks: {
-            callback: function (value: never) {
-              //const label = state.selectedChartResource === ChartResource.ENERGY ? 'kWh' : '€'
-              return `${value} Tn`;
-            },
-            color: this.textColorSecondary
-          },
-          grid: {
-            drawOnChartArea: false,
-            color: this.surfaceBorder,
-          }
-        }
+        // y1: {
+        //   stacked: true,
+        //   beginAtZero: true,
+        //   position: 'right',
+        //   min: 0,
+        //   ticks: {
+        //     callback: function (value: never) {
+        //       //const label = state.selectedChartResource === ChartResource.ENERGY ? 'kWh' : '€'
+        //       return `${value} Tn`;
+        //     },
+        //     color: this.textColorSecondary
+        //   },
+        //   grid: {
+        //     drawOnChartArea: false,
+        //     color: this.surfaceBorder,
+        //   }
+        // }
       }
     }
 
@@ -315,23 +315,23 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
             drawBorder: false
           }
         },
-        y1: {
-          beginAtZero: true,
-          stacked: true,
-          position: 'top',
-          min: 0,
-          ticks: {
-            color: this.textColorSecondary,
-            font: {
-              weight: 500
-            },
-          },
-          grid: {
-           // drawOnChartArea: false,
-            color: this.surfaceBorder,
-            drawBorder: false
-          }
-        },
+        // y1: {
+        //   beginAtZero: true,
+        //   stacked: true,
+        //   position: 'top',
+        //   min: 0,
+        //   ticks: {
+        //     color: this.textColorSecondary,
+        //     font: {
+        //       weight: 500
+        //     },
+        //   },
+        //   grid: {
+        //    // drawOnChartArea: false,
+        //     color: this.surfaceBorder,
+        //     drawBorder: false
+        //   }
+        // },
         x: {
           stacked: true,
           ticks: {

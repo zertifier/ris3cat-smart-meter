@@ -2,93 +2,199 @@
   <h4 class="mt-5 mx-5">{{ t('title') }}</h4>
   <div class="container mt-5 my-5">
     <div>
-      <div class="mb-3">
-        <label class="form-label" for="wallet">
-          {{ t('texts.identityLabel') }}
-          <app-question-badge>
-            <div class="my-3">
-              {{ t('tooltips.identity') }}
-            </div>
-          </app-question-badge>
-        </label>
-        <input readonly id="wallet" type="text" class="form-control form-control-lg bg-white border-secondary border-2 shadow-none" [value]="wallet$ | async">
-      </div>
 
-      <hr class="my-4 border-tertiary border-2" style="max-width: 1040px;">
-      <p class="mb-5">{{ t('texts.transferInfo') }}</p>
+      <div class="row mb-3">
 
-      <div class="my-3">
-        <label class="form-label">
-          {{ t('texts.energyAmount') }}
+        <div class="col-6 justify-content-end text-end pe-md-5">
+          <button class="btn rounded-3 py-3 px-5" style="width: 300px;" type="button"
+            (click)="changeSection('Platform')"
+            [ngClass]="activeSection=='Platform' ? 'btn-tertiary' : 'btn-outline-tertiary' ">
+            {{ t('texts.platformSection') }}
+          </button>
+        </div>
 
-          <app-question-badge>
-            <div class="my-3">
-              {{ t('tooltips.energy') }}
-            </div>
-          </app-question-badge>
-        </label>
-        <div class="d-block d-lg-flex">
-          <div class="input-group form-div-width">
-            <input readonly type="text" class="form-control form-control-lg bg-white border-secondary border-2 shadow-none" placeholder=""
-                   [ngModel]="ekwBalance | noRoundDecimal: 4">
-            <button class="btn btn-tertiary rounded-end-3 form-button" type="button">EKW</button>
-
-          </div>
-          <button class="btn btn-secondary bg-primary ms-0 ms-lg-3 mt-2 mt-lg-0 rounded-3" type="button" (click)="openTransferModal('EKW', ekwBalance)">
-            {{ t('texts.transferEnergy') }}
+        <div class="col-6 ps-md-5">
+          <button class="btn rounded-3 py-3 px-5" style="width: 300px;" type="button"
+            (click)="changeSection('Blockchain')"
+            [ngClass]="activeSection=='Blockchain' ? 'btn-tertiary' : 'btn-outline-tertiary' ">
+            {{ t('texts.blockchainSection') }}
           </button>
         </div>
 
       </div>
 
-      <div class="my-3">
-        <label class="form-label">
-          {{ t('texts.tokenAmount') }}
+      @if(activeSection=='Platform'){
+      <div>
 
-          <app-question-badge>
-            <div class="my-3">
-              {{ t('tooltips.token') }}
+        <!-- Saldo energètic -->
+
+        <div class="my-3">
+          <label class="form-label">
+            {{ t('texts.communityBalance') }}
+
+            <app-question-badge>
+              <div class="my-3">
+                {{ t('tooltips.energy') }}
+              </div>
+            </app-question-badge>
+          </label>
+          <div class="d-block d-lg-flex">
+            <div class="input-group form-div-width">
+              <input readonly type="text"
+                class="form-control form-control-lg bg-white border-secondary border-2 shadow-none" placeholder=""
+                [ngModel]="ekwBalance | noRoundDecimal: 4">
+              <button class="btn btn-tertiary rounded-end-3 form-button" type="button">EKW</button>
+
             </div>
-          </app-question-badge>
-        </label>
-        <div class="d-block d-lg-flex">
-          <div class="input-group form-div-width">
-            <input readonly type="text" class="form-control form-control-lg bg-white border-secondary border-2 shadow-none" placeholder=""
-                   [ngModel]="chainBalance | noRoundDecimal: 4">
-            <button class="btn btn-tertiary rounded-end-3 form-button" type="button">XDAI</button>
-
+            <button class="btn btn-secondary bg-secondary ms-0 ms-lg-3 mt-2 mt-lg-0 rounded-3 btn-default-length" type="button"
+              (click)="openTransferModal('EKW', ekwBalance)">
+              {{ t('texts.addBalance') }}
+            </button>
+            <button class="btn btn-quaternary ms-0 ms-lg-3 mt-2 mt-lg-0 rounded-3 btn-default-length" type="button" 
+              (click)="openTransferModal('EKW', ekwBalance)">
+              {{ t('texts.pullOutBalance') }}
+            </button>
           </div>
-          <button class="btn btn-secondary bg-primary ms-0 ms-lg-3 mt-2 mt-lg-0 rounded-3" type="button" (click)="openTransferModal('XDAI', chainBalance)">
-            {{ t('texts.transferToken') }}
-          </button>
+
+        </div>
+
+        <!-- Betas -->
+
+        <div *ngIf="communityId" class="my-3">
+          <label class="form-label">
+            {{ t('texts.communityShare') }}
+
+            <app-question-badge>
+              <div class="my-3">
+                {{ t('tooltips.shares') }}
+              </div>
+            </app-question-badge>
+          </label>
+          <div class="d-block d-lg-flex">
+            <div class="input-group form-div-width">
+              <input readonly type="text"
+                class="form-control form-control-lg bg-white border-secondary border-2 shadow-none" placeholder=""
+                [ngModel]="voteWeight">
+              <button class="btn btn-tertiary rounded-end-3 form-button" type="button">DAO</button>
+            </div>
+            <button class="btn btn-secondary bg-primary ms-0 ms-lg-3 mt-2 mt-lg-0 rounded-3 btn-default-length" type="button"
+              (click)="openTransferModal('DAO', voteWeight)">
+              {{ t('texts.transferShare') }}
+            </button>
+          </div>
 
         </div>
 
       </div>
-
-      <div *ngIf="communityId" class="my-3">
-        <label class="form-label">
-          {{ t('texts.communityShare') }}
-
-          <app-question-badge>
-            <div class="my-3">
-              {{ t('tooltips.shares') }}
-            </div>
-          </app-question-badge>
-        </label>
-        <div class="d-block d-lg-flex">
-          <div class="input-group form-div-width">
-            <input readonly type="text" class="form-control form-control-lg bg-white border-secondary border-2 shadow-none" placeholder="" [ngModel]="voteWeight">
-            <button class="btn btn-tertiary rounded-end-3 form-button" type="button">DAO</button>
-          </div>
-          <button class="btn btn-secondary bg-primary ms-0 ms-lg-3 mt-2 mt-lg-0 rounded-3" type="button" (click)="openTransferModal('DAO', voteWeight)">
-            {{ t('texts.transferShare') }}
-          </button>
+      }
+      @if(activeSection=='Blockchain'){
+      <div>
+        <!-- wallet -->
+        <div class="mb-3">
+          <label class="form-label" for="wallet">
+            {{ t('texts.identityLabel') }}
+            <app-question-badge>
+              <div class="my-3">
+                {{ t('tooltips.identity') }}
+              </div>
+            </app-question-badge>
+          </label>
+          <input readonly id="wallet" type="text"
+            class="form-control form-control-lg bg-white border-secondary border-2 shadow-none"
+            [value]="wallet$ | async">
         </div>
 
+        <hr class="my-4 border-tertiary border-2" style="max-width: 1040px;">
+        <p class="mb-5">{{ t('texts.transferInfo') }}</p>
+
+        <div class="my-3">
+          <label class="form-label">
+            {{ t('texts.energyAmount') }}
+
+            <app-question-badge>
+              <div class="my-3">
+                {{ t('tooltips.energy') }}
+              </div>
+            </app-question-badge>
+          </label>
+          <div class="d-block d-lg-flex">
+            <div class="input-group form-div-width">
+              <input readonly type="text"
+                class="form-control form-control-lg bg-white border-secondary border-2 shadow-none" placeholder=""
+                [ngModel]="ekwBalance | noRoundDecimal: 4">
+              <button class="btn btn-tertiary rounded-end-3 form-button" type="button">EKW</button>
+
+            </div>
+            <button class="btn btn-secondary bg-primary ms-0 ms-lg-3 mt-2 mt-lg-0 rounded-3 btn-default-length" type="button"
+              (click)="openTransferModal('EKW', ekwBalance)">
+              {{ t('texts.transferEnergy') }}
+            </button>
+          </div>
+
+        </div>
+
+        <div class="my-3">
+          <label class="form-label">
+            {{ t('texts.tokenAmount') }}
+
+            <app-question-badge>
+              <div class="my-3">
+                {{ t('tooltips.token') }}
+              </div>
+            </app-question-badge>
+          </label>
+          <div class="d-block d-lg-flex">
+            <div class="input-group form-div-width">
+              <input readonly type="text"
+                class="form-control form-control-lg bg-white border-secondary border-2 shadow-none" placeholder=""
+                [ngModel]="chainBalance | noRoundDecimal: 4">
+              <button class="btn btn-tertiary rounded-end-3 form-button" type="button">XDAI</button>
+
+            </div>
+            <button class="btn btn-secondary bg-primary ms-0 ms-lg-3 mt-2 mt-lg-0 rounded-3 btn-default-length" type="button"
+              (click)="openTransferModal('XDAI', chainBalance)">
+              {{ t('texts.transferToken') }}
+            </button>
+
+          </div>
+
+        </div>
+
+        <!-- Betas -->
+
+        <div *ngIf="communityId" class="my-3">
+          <label class="form-label">
+            {{ t('texts.communityShare') }}
+
+            <app-question-badge>
+              <div class="my-3">
+                {{ t('tooltips.shares') }}
+              </div>
+            </app-question-badge>
+          </label>
+          <div class="d-block d-lg-flex">
+            <div class="input-group form-div-width">
+              <input readonly type="text"
+                class="form-control form-control-lg bg-white border-secondary border-2 shadow-none" placeholder=""
+                [ngModel]="voteWeight">
+              <button class="btn btn-tertiary rounded-end-3 form-button" type="button">DAO</button>
+            </div>
+            <button class="btn btn-secondary bg-primary ms-0 ms-lg-3 mt-2 mt-lg-0 rounded-3 btn-default-length" type="button"
+              (click)="openTransferModal('DAO', voteWeight)">
+              {{ t('texts.transferShare') }}
+            </button>
+          </div>
+
+        </div>
+
+
       </div>
+      }
+
+
+
+
 
     </div>
   </div>
 </ng-container>
-
