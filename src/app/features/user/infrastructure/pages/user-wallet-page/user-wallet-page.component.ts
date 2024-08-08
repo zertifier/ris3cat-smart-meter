@@ -11,6 +11,8 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {TransferModalComponent} from "./transfer-modal/transfer-modal.component";
 import {NoRoundDecimalPipe} from "@shared/infrastructure/pipes/no-round-decimal.pipe";
 import {TranslocoDirective} from "@jsverse/transloco";
+import { ZertipowerService } from '../../../../../shared/infrastructure/services/zertipower/zertipower.service';
+import { CustomerDTO } from '../../../../../shared/infrastructure/services/zertipower/customers/ZertipowerCustomersService';
 
 @Component({
   selector: 'app-user-wallet-page',
@@ -40,16 +42,21 @@ export class UserWalletPageComponent implements OnDestroy {
   voteWeight: number = 0
   communityId?: number
   customerId!: number
+  customer:CustomerDTO | undefined;
   walletAddress!: string;
-  activeSection: 'Platform' | 'Blockchain' = 'Platform';
 
+  activeSection: 'Platform' | 'Blockchain' = 'Platform';
+  userAction: 'add' | 'pullOut' | 'transfer' = 'add';
+  userActionType: 'balance' | 'tokens' | 'betas' = 'balance';
+  
   subscriptions: Subscription[] = [];
 
   constructor(
     private userStore: UserStoreService,
     private ethersService: EthersService,
     private daoService: DaoService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private zertipowerService:ZertipowerService
   ) {
     this.subscriptions.push(
       this.userStore$.subscribe((store) => {
@@ -63,7 +70,7 @@ export class UserWalletPageComponent implements OnDestroy {
     )
   }
 
-  getAllBalances(wallet: string) {
+  async getAllBalances(wallet: string) {
     this.ethersService.getEKWBalance(wallet,).then((balance) => {
       this.ekwBalance = balance
     })
@@ -71,18 +78,32 @@ export class UserWalletPageComponent implements OnDestroy {
       this.chainBalance = balance
     })
 
-    if (this.communityId)
+    if (this.communityId){
       this.daoService.getDaoBalance(wallet, this.communityId).then((balance) => {
         this.voteWeight = balance
       })
+    }
+
+    this.customer = await this.zertipowerService.customers.getCustomerById(this.customerId)
+    console.log(this.customer)
 
   }
 
-  openTransferModal(type: 'DAO' | 'XDAI' | 'EKW', currentAmount: number) {
+  openTransferModal(type: 'DAO' | 'XDAI' | 'EKW', currentAmount: number, userAction:string, userActionType:string) {
     const modalRef = this.modalService.open(TransferModalComponent, {size: 'lg'})
     modalRef.componentInstance.type = type
-    modalRef.componentInstance.currentAmount = currentAmount
+    
+    if(currentAmount){
+      modalRef.componentInstance.currentAmount = currentAmount;
+    }
+    
     modalRef.componentInstance.communityId = this.communityId
+    modalRef.componentInstance.userAction = userAction
+    modalRef.componentInstance.userActionType = userActionType
+
+    if(this.customer){
+      modalRef.componentInstance.customer = this.customer
+    }
 
     this.subscriptions.push(
       modalRef.closed.subscribe({

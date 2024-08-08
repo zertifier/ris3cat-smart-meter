@@ -153,7 +153,7 @@
       "communityShare": "Participaciones de la comunidad",
       "transferEnergy": "Transferir saldo",
       "transferToken": "Transferir XDAI",
-      "transferShare": "Transferir participaciones",
+      "transferShare": "Transferir betas",
       "platformSection":"Plataforma",
       "blockchainSection":"Blockchain",
       "communityBalance":"Saldo energético dentro de la CCE",
@@ -168,7 +168,9 @@
     },
     "modals": {
       "transfer": {
-        "title": "Transferencia",
+        "transferTitle": "Transferencia",
+        "addTitle": "Añadir",
+        "pullOutTitle": "Retirar",
         "texts": {
           "balanceLabel": "Saldo",
           "toLabel": "Destinatario",
@@ -443,7 +445,8 @@
       "sending": "Enviando...",
       "yes": "Sí",
       "no": "No",
-      "okay": "Entendido"
+      "okay": "Entendido",
+      "confirm":"Confirmar"
     }
   }
 }

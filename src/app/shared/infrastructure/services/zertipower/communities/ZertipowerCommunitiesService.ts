@@ -37,6 +37,24 @@ export class ZertipowerCommunitiesService {
     return response.data.data
   }
 
+  async deposit(customerId:number,EKW:number){
+    const body = {
+      customerId,
+      EKW
+    }
+    const response = await this.axios.put<HttpResponse<CommunityResponse[]>>(`${ChartEntity.COMMUNITIES}/balance/deposit`);
+    return response.data.data
+  }
+
+  async witdraw(customerId:number,balance:number){
+    const body = {
+      customerId,
+      balance
+    }
+    const response = await this.axios.put<HttpResponse<CommunityResponse[]>>(`${ChartEntity.COMMUNITIES}/balance/witdraw`);
+    return response.data.data
+  }
+
   private async getEnergyStats(resource: ChartEntity, resourceId: number, source: string, date: Date, dateRange: DateRange) {
     let range: string;
     let desiredFormat: string

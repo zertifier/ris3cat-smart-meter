@@ -152,9 +152,9 @@
       "energyAmount": "Tokens energètics",
       "tokenAmount": "Saldo blockchain",
       "communityShare": "Betas de la comunitat",
-      "transferEnergy": "Transferir saldo",
-      "transferToken": "Transferir XDAI",
-      "transferShare": "Transferir participacions",
+      "transferEnergy": "Transferir tokens",
+      "transferToken": "Transferir saldo",
+      "transferShare": "Transferir betas",
       "platformSection":"Plataforma",
       "blockchainSection":"Blockchain",
       "communityBalance":"Saldo energètic dins de la CCE",
@@ -169,7 +169,9 @@
     },
     "modals": {
       "transfer": {
-        "title": "Transferència",
+        "transferTitle": "Transferència",
+        "addTitle": "Afegir",
+        "pullOutTitle": "Retirar",
         "texts": {
           "balanceLabel": "Saldo",
           "toLabel": "Destinatari",
@@ -449,7 +451,8 @@
       "sending": "Enviant...",
       "yes": "Sí",
       "no": "No",
-      "okay": "D'acord"
+      "okay": "D'acord",
+      "confirm":"Confirmar"
     }
   }
 }

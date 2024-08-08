@@ -38,22 +38,26 @@
               </div>
             </app-question-badge>
           </label>
-          <div class="d-block d-lg-flex">
+
+          <div class="d-block d-lg-flex" *ngIf="customer">
+
             <div class="input-group form-div-width">
               <input readonly type="text"
                 class="form-control form-control-lg bg-white border-secondary border-2 shadow-none" placeholder=""
-                [ngModel]="ekwBalance | noRoundDecimal: 4">
+                [ngModel]="customer.balance | noRoundDecimal: 4">
               <button class="btn btn-tertiary rounded-end-3 form-button" type="button">EKW</button>
-
             </div>
-            <button class="btn btn-secondary bg-secondary ms-0 ms-lg-3 mt-2 mt-lg-0 rounded-3 btn-default-length" type="button"
-              (click)="openTransferModal('EKW', ekwBalance)">
+
+            <button class="btn btn-secondary bg-primary ms-0 ms-lg-3 mt-2 mt-lg-0 rounded-3 btn-default-length"
+              type="button" (click)="openTransferModal('EKW', ekwBalance, 'add','balance')">
               {{ t('texts.addBalance') }}
             </button>
-            <button class="btn btn-quaternary ms-0 ms-lg-3 mt-2 mt-lg-0 rounded-3 btn-default-length" type="button" 
-              (click)="openTransferModal('EKW', ekwBalance)">
+
+            <button class="btn btn-quaternary ms-0 ms-lg-3 mt-2 mt-lg-0 rounded-3 btn-default-length" type="button"
+              (click)="openTransferModal('EKW', ekwBalance,'pullOut','balance')">
               {{ t('texts.pullOutBalance') }}
             </button>
+
           </div>
 
         </div>
@@ -77,8 +81,8 @@
                 [ngModel]="voteWeight">
               <button class="btn btn-tertiary rounded-end-3 form-button" type="button">DAO</button>
             </div>
-            <button class="btn btn-secondary bg-primary ms-0 ms-lg-3 mt-2 mt-lg-0 rounded-3 btn-default-length" type="button"
-              (click)="openTransferModal('DAO', voteWeight)">
+            <button class="btn btn-secondary bg-primary ms-0 ms-lg-3 mt-2 mt-lg-0 rounded-3 btn-default-length"
+              type="button" (click)="openTransferModal('DAO', voteWeight, 'transfer','betas')">
               {{ t('texts.transferShare') }}
             </button>
           </div>
@@ -99,9 +103,27 @@
               </div>
             </app-question-badge>
           </label>
-          <input readonly id="wallet" type="text"
-            class="form-control form-control-lg bg-white border-secondary border-2 shadow-none"
-            [value]="wallet$ | async">
+
+          <div class="d-block d-flex">
+
+            <div class="input-group form-div-width">
+
+              <input readonly id="wallet" type="text"
+                class="form-control form-control-lg bg-white border-secondary border-2 shadow-none"
+                [value]="wallet$ | async">
+                
+                  
+            </div>
+
+            <a [href]="'https://gnosisscan.io/address/' + (wallet$ | async)" target="_blank" type="button" class="btn btn-secondary bg-primary ms-0 ms-lg-3 mt-2 mt-lg-0 rounded-3 btn-default-length d-flex justify-content-center align-items-center" >
+
+              <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.8406 0.5C12.1492 0.5 11.5906 1.05859 11.5906 1.75C11.5906 2.44141 12.1492 3 12.8406 3H16.071L8.20776 10.8672C7.71948 11.3555 7.71948 12.1484 8.20776 12.6367C8.69604 13.125 9.48901 13.125 9.97729 12.6367L17.8406 4.76953V8C17.8406 8.69141 18.3992 9.25 19.0906 9.25C19.782 9.25 20.3406 8.69141 20.3406 8V1.75C20.3406 1.05859 19.782 0.5 19.0906 0.5H12.8406ZM3.46558 1.75C1.73901 1.75 0.340576 3.14844 0.340576 4.875V17.375C0.340576 19.1016 1.73901 20.5 3.46558 20.5H15.9656C17.6921 20.5 19.0906 19.1016 19.0906 17.375V13C19.0906 12.3086 18.532 11.75 17.8406 11.75C17.1492 11.75 16.5906 12.3086 16.5906 13V17.375C16.5906 17.7188 16.3093 18 15.9656 18H3.46558C3.12183 18 2.84058 17.7188 2.84058 17.375V4.875C2.84058 4.53125 3.12183 4.25 3.46558 4.25H7.84058C8.53198 4.25 9.09058 3.69141 9.09058 3C9.09058 2.30859 8.53198 1.75 7.84058 1.75H3.46558Z" fill="white"/>
+                </svg>
+
+          </a>
+          </div>
+
         </div>
 
         <hr class="my-4 border-tertiary border-2" style="max-width: 1040px;">
@@ -120,13 +142,13 @@
           <div class="d-block d-lg-flex">
             <div class="input-group form-div-width">
               <input readonly type="text"
-                class="form-control form-control-lg bg-white border-secondary border-2 shadow-none" placeholder=""
+                class="form-control form-control-lg bg-white border-secondary border-2 shadow-none"
                 [ngModel]="ekwBalance | noRoundDecimal: 4">
               <button class="btn btn-tertiary rounded-end-3 form-button" type="button">EKW</button>
 
             </div>
-            <button class="btn btn-secondary bg-primary ms-0 ms-lg-3 mt-2 mt-lg-0 rounded-3 btn-default-length" type="button"
-              (click)="openTransferModal('EKW', ekwBalance)">
+            <button class="btn btn-secondary bg-primary ms-0 ms-lg-3 mt-2 mt-lg-0 rounded-3 btn-default-length"
+              type="button" (click)="openTransferModal('EKW', ekwBalance, 'transfer','tokens')">
               {{ t('texts.transferEnergy') }}
             </button>
           </div>
@@ -151,8 +173,8 @@
               <button class="btn btn-tertiary rounded-end-3 form-button" type="button">XDAI</button>
 
             </div>
-            <button class="btn btn-secondary bg-primary ms-0 ms-lg-3 mt-2 mt-lg-0 rounded-3 btn-default-length" type="button"
-              (click)="openTransferModal('XDAI', chainBalance)">
+            <button class="btn btn-secondary bg-primary ms-0 ms-lg-3 mt-2 mt-lg-0 rounded-3 btn-default-length"
+              type="button" (click)="openTransferModal('XDAI', chainBalance,'transfer','tokens')">
               {{ t('texts.transferToken') }}
             </button>
 
@@ -179,8 +201,8 @@
                 [ngModel]="voteWeight">
               <button class="btn btn-tertiary rounded-end-3 form-button" type="button">DAO</button>
             </div>
-            <button class="btn btn-secondary bg-primary ms-0 ms-lg-3 mt-2 mt-lg-0 rounded-3 btn-default-length" type="button"
-              (click)="openTransferModal('DAO', voteWeight)">
+            <button class="btn btn-secondary bg-primary ms-0 ms-lg-3 mt-2 mt-lg-0 rounded-3 btn-default-length"
+              type="button" (click)="openTransferModal('DAO', voteWeight,'transfer','betas')">
               {{ t('texts.transferShare') }}
             </button>
           </div>

@@ -166,7 +166,9 @@
     },
     "modals": {
       "transfer": {
-        "title": "Transfer",
+        "transferTitle": "Transfer",
+        "addTitle": "Add",
+        "pullOutTitle": "Pull out",
         "texts": {
           "balanceLabel": "Balance",
           "toLabel": "Recipient",
@@ -441,7 +443,8 @@
       "sending": "Sending...",
       "yes": "Yes",
       "no": "No",
-      "okay": "Okay"
+      "okay": "Okay",
+      "confifrm":"Confirm"
     }
   }
 }
