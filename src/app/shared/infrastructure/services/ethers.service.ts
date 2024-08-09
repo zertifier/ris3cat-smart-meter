@@ -165,7 +165,7 @@ export class EthersService {
           to: to,
           value: ethers.parseUnits(amount.toString(), "ether"),
         };
-        tx = await user.wallet?.sendTransaction(tx)
+        tx = await user.wallet?.sendTransaction(tx);
       }else{
         const contract = new Contract(contractAddress, abi, user.wallet)
         tx = await contract['transfer'](to, parseUnits(amount.toString(), "ether"))

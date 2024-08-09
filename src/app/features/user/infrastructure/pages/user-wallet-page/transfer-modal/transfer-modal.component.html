@@ -21,9 +21,9 @@
             [ngModel]="currentAmount | noRoundDecimal: 4">
           }
 
-          @if(userActionType=='balance' && customerBalance){
+          @if(userActionType=='balance' && customer && customer.balance){
           <input type="number" class="form-control form-control-lg bg-white border-secondary border-2 shadow-none"
-            placeholder="000" [(ngModel)]="customerBalance">
+            placeholder="000" [(ngModel)]="customer.balance">
           }
 
           <button class="btn btn-tertiary rounded-end-3 form-button" type="button">{{ type }}</button>
