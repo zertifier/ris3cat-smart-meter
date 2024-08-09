@@ -53,7 +53,6 @@ export class EthersService {
 
     try {
       const privateKeyResponse = await this.zertiauthApiService.getPrivateKey(oAuthCode)
-      console.log(privateKeyResponse)
       const provider = new JsonRpcProvider(await this.getWorkingRpc())
 
       return new Wallet(privateKeyResponse.privateKey, provider)

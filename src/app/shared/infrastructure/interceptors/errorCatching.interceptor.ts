@@ -11,15 +11,15 @@ export const errorCatchingInterceptor: HttpInterceptorFn = (request, next) => {
     }),
     catchError((e: HttpErrorResponse) => {
       let errorMsg = '';
-      
+
       if (e.error.msg) {
-        swal.fire('Error', e.error.msg, 'error');
+        //swal.fire('Error', e.error.msg, 'error');
         errorMsg = e.error.msg;
       } else if (e.error.message && e.error.message.msg) {
-        swal.fire('Error', e.error.message.msg, 'error');
+        //swal.fire('Error', e.error.message.msg, 'error');
         errorMsg = e.error.message.msg;
       } else {
-        swal.fire('Error', e.statusText, 'error');
+        //swal.fire('Error', e.statusText, 'error');
         errorMsg = e.statusText;
       }
       return throwError(() => new Error(errorMsg));
