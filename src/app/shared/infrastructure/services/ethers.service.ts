@@ -179,8 +179,8 @@ export class EthersService {
     }
   }
 
-  getZertipowerWallet():string{
-    return environment.zertipower_address;
-  }
+  // getZertipowerWallet():string{
+  //   return environment.zertipower_address;
+  // }
 
 }
