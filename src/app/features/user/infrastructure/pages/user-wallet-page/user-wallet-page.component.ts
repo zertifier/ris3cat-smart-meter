@@ -85,7 +85,7 @@ export class UserWalletPageComponent implements OnDestroy {
     }
 
     this.customer = await this.zertipowerService.customers.getCustomerById(this.customerId)
-    console.log(this.customer)
+    //console.log(this.customer)
 
   }
 

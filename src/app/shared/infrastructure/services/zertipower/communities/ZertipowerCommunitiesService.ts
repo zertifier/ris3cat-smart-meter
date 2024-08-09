@@ -1,13 +1,15 @@
-import {Axios} from "axios";
-import {DateRange} from "@features/energy-stats/domain/DateRange";
+import { Axios } from "axios";
+import { DateRange } from "@features/energy-stats/domain/DateRange";
 import dayjs from "@shared/utils/dayjs";
-import {HttpResponse} from "../../HttpResponse";
-import {EnergyStatDTO} from "../DTOs/EnergyStatDTO";
-import {ChartEntity} from "@features/energy-stats/domain/ChartEntity";
+import { HttpResponse } from "../../HttpResponse";
+import { EnergyStatDTO } from "../DTOs/EnergyStatDTO";
+import { ChartEntity } from "@features/energy-stats/domain/ChartEntity";
 import { UserStore, UserStoreService } from "../../../../../features/user/infrastructure/services/user-store.service";
 import { Injectable } from "@angular/core";
+import { ZertiauthApiService } from "../../../../../features/auth/infrastructure/services/zertiauth-api.service";
+import { AuthStoreService } from "../../../../../features/auth/infrastructure/services/auth-store.service";
 
-export interface CommunityResponse{
+export interface CommunityResponse {
   id: number,
   name: string,
   test: boolean,
@@ -17,9 +19,12 @@ export interface CommunityResponse{
 }
 
 export class ZertipowerCommunitiesService {
-  
-  constructor(private readonly axios: Axios) {
-  
+
+  constructor(private readonly axios: Axios,
+    private readonly zertiauthApiService: ZertiauthApiService,
+    private readonly authStoreService: AuthStoreService,
+  ) {
+
   }
 
   async getActiveMembers(id: number): Promise<number> {
@@ -27,28 +32,35 @@ export class ZertipowerCommunitiesService {
     return response.totalActiveMembers;
   }
 
-  async getByLocationId(id: number){
+  async getByLocationId(id: number) {
     const response = await this.axios.get<HttpResponse<CommunityResponse[]>>(`${ChartEntity.COMMUNITIES}/locations/${id}`);
     return response.data.data
   }
 
-  async getCommunityById(id: number){
+  async getCommunityById(id: number) {
     const response = await this.axios.get<HttpResponse<CommunityResponse[]>>(`${ChartEntity.COMMUNITIES}/${id}`);
     return response.data.data
   }
 
-  async deposit(customerId:number,EKW:number){
-    const body = {
-      customerId,
-      EKW
+  async deposit(EKW: number) {
+    try {
+      const oAuthCode = this.authStoreService.getOauthCode()
+      const privateKeyResponse = await this.zertiauthApiService.getPrivateKey(oAuthCode)
+      const PK = privateKeyResponse.privateKey;
+      const body = {
+        PK,
+        EKW
+      }
+      const response = await this.axios.put<HttpResponse<CommunityResponse[]>>(`${ChartEntity.COMMUNITIES}/balance/deposit`);
+      return response.data.data
+    } catch (error) {
+      console.log("Error deposit balance", error)
+      throw new Error(`Error deposit balance ${error}`)
     }
-    const response = await this.axios.put<HttpResponse<CommunityResponse[]>>(`${ChartEntity.COMMUNITIES}/balance/deposit`);
-    return response.data.data
   }
 
-  async witdraw(customerId:number,balance:number){
+  async witdraw(balance: number) {
     const body = {
-      customerId,
       balance
     }
     const response = await this.axios.put<HttpResponse<CommunityResponse[]>>(`${ChartEntity.COMMUNITIES}/balance/witdraw`);
@@ -81,11 +93,11 @@ export class ZertipowerCommunitiesService {
     return {
       ...response.data.data,
       stats: response.data.data.stats.map(r => ({
-          ...r,
-          createdAt: new Date(r.createdAt),
-          updatedAt: new Date(r.updatedAt),
-          infoDt: new Date(r.infoDt),
-        })
+        ...r,
+        createdAt: new Date(r.createdAt),
+        updatedAt: new Date(r.updatedAt),
+        infoDt: new Date(r.infoDt),
+      })
       )
     };
   }

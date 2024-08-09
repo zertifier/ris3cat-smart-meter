@@ -96,17 +96,19 @@ export class TransferModalComponent implements OnDestroy {
         //if amount to transfer is greater than max amount
         if ((this.amountToTransfer || 0) > maxAmount) {
           //TODO: swal error: insuficient funds
+
+          Swal.fire('','saldo insuficient','warning')
+
           this.loading = false;
           this.activeModal.close();
           return;
         }
 
-        try {
-          this.zertipowerService.communities.deposit(this.customer!.id, this.amountToTransfer!);
-          //TODO: SWAL
-        } catch (error) {
-          //TODO: SWAL
-        }
+        await this.zertipowerService.communities.deposit(this.amountToTransfer!)
+        .then(res=>{console.log(res); Swal.fire('','saldo depositat','success')})
+        .catch(error=>{console.log(error); Swal.fire('Error',error.toString(),'error')});
+
+        return;
 
       }
 
@@ -121,7 +123,7 @@ export class TransferModalComponent implements OnDestroy {
         }
 
         try {
-          this.zertipowerService.communities.witdraw(this.customer!.id, this.amountToTransfer!);
+          this.zertipowerService.communities.witdraw(this.amountToTransfer!);
           //TODO: SWAL
         } catch (error) {
           //TODO: SWAL
