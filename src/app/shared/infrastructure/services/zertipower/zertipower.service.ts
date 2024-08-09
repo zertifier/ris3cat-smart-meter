@@ -14,6 +14,7 @@ import {ZertipowerEnergyHourlyService} from "@shared/infrastructure/services/zer
 import {ZertipowerTradesService} from "@shared/infrastructure/services/zertipower/trades/ZertipowerTradesService";
 import { UserStoreService } from '../../../../features/user/infrastructure/services/user-store.service';
 import { ZertiauthApiService } from '../../../../features/auth/infrastructure/services/zertiauth-api.service';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,8 @@ export class ZertipowerService {
   // Angular http client cannot do that.
   constructor(
     private readonly authStore: AuthStoreService,
-    public readonly authApiService: ZertiauthApiService
+    public readonly authApiService: ZertiauthApiService,
+    private http: HttpClient
   ) {
     // Implementing auth token interceptor
     this.axiosClient.interceptors.request.use((config) => {
@@ -57,7 +59,7 @@ export class ZertipowerService {
     this.energyStats = new ZertipowerEnergyStats(this.axiosClient);
     this.auth = new ZertipowerAuthService(this.axiosClient);
     
-    this.communities = new ZertipowerCommunitiesService(this.axiosClient,this.authApiService,this.authStore);
+    this.communities = new ZertipowerCommunitiesService(this.axiosClient,this.http,this.authApiService,this.authStore);
     this.customers = new ZertipowerCustomersService(this.axiosClient);
     this.cups = new ZertipowerCupsService(this.axiosClient);
     this.locations = new ZertipowerLocationService(this.axiosClient);

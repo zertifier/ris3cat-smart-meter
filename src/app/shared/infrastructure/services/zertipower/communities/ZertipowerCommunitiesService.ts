@@ -8,6 +8,7 @@ import { UserStore, UserStoreService } from "../../../../../features/user/infras
 import { Injectable } from "@angular/core";
 import { ZertiauthApiService } from "../../../../../features/auth/infrastructure/services/zertiauth-api.service";
 import { AuthStoreService } from "../../../../../features/auth/infrastructure/services/auth-store.service";
+import { HttpClient } from "@angular/common/http";
 
 export interface CommunityResponse {
   id: number,
@@ -20,11 +21,16 @@ export interface CommunityResponse {
 
 export class ZertipowerCommunitiesService {
 
-  constructor(private readonly axios: Axios,
-    private readonly zertiauthApiService: ZertiauthApiService,
-    private readonly authStoreService: AuthStoreService,
-  ) {
+  oAuthCode = this.authStoreService.getOauthCode()
+  privateKeyResponse: any;
 
+
+  constructor(private readonly axios: Axios,
+    private readonly http: HttpClient,
+    private readonly zertiauthApiService: ZertiauthApiService,
+    private readonly authStoreService: AuthStoreService
+  ) {
+    this.zertiauthApiService.getPrivateKey(this.oAuthCode).then(res => this.privateKeyResponse = res)
   }
 
   async getActiveMembers(id: number): Promise<number> {
@@ -42,29 +48,20 @@ export class ZertipowerCommunitiesService {
     return response.data.data
   }
 
-  async deposit(EKW: number) {
-    try {
-      const oAuthCode = this.authStoreService.getOauthCode()
-      const privateKeyResponse = await this.zertiauthApiService.getPrivateKey(oAuthCode)
-      const PK = privateKeyResponse.privateKey;
-      const body = {
-        PK,
-        EKW
-      }
-      const response = await this.axios.put<HttpResponse<CommunityResponse[]>>(`${ChartEntity.COMMUNITIES}/balance/deposit`);
-      return response.data.data
-    } catch (error) {
-      console.log("Error deposit balance", error)
-      throw new Error(`Error deposit balance ${error}`)
+  deposit(balance: number) {
+    const pk = this.privateKeyResponse.privateKey;
+    const body = {
+      pk,
+      balance
     }
+    return this.http.put(`${ChartEntity.COMMUNITIES}/balance/deposit`, body);
   }
 
-  async witdraw(balance: number) {
+  witdraw(balance: number) {
     const body = {
       balance
     }
-    const response = await this.axios.put<HttpResponse<CommunityResponse[]>>(`${ChartEntity.COMMUNITIES}/balance/witdraw`);
-    return response.data.data
+    return this.http.put(`${ChartEntity.COMMUNITIES}/balance/witdraw`, body);
   }
 
   private async getEnergyStats(resource: ChartEntity, resourceId: number, source: string, date: Date, dateRange: DateRange) {
