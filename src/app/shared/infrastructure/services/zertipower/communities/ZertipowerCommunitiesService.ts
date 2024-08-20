@@ -4,8 +4,6 @@ import dayjs from "@shared/utils/dayjs";
 import { HttpResponse } from "../../HttpResponse";
 import { EnergyStatDTO } from "../DTOs/EnergyStatDTO";
 import { ChartEntity } from "@features/energy-stats/domain/ChartEntity";
-import { UserStore, UserStoreService } from "../../../../../features/user/infrastructure/services/user-store.service";
-import { Injectable } from "@angular/core";
 import { ZertiauthApiService } from "../../../../../features/auth/infrastructure/services/zertiauth-api.service";
 import { AuthStoreService } from "../../../../../features/auth/infrastructure/services/auth-store.service";
 import { HttpClient } from "@angular/common/http";
@@ -23,7 +21,6 @@ export class ZertipowerCommunitiesService {
 
   oAuthCode = this.authStoreService.getOauthCode()
   privateKeyResponse: any;
-
 
   constructor(private readonly axios: Axios,
     private readonly http: HttpClient,
@@ -54,6 +51,8 @@ export class ZertipowerCommunitiesService {
       pk,
       balance
     }
+    //TODO: COMMENT or delete!!
+    //console.log("pk",pk)
     return this.http.put(`${ChartEntity.COMMUNITIES}/balance/deposit`, body);
   }
 

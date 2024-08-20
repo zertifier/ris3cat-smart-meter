@@ -3,11 +3,7 @@
 import axios from 'axios';
 import swal from 'sweetalert2';
 
-const axiosClient = axios.create({
-    baseURL: '', 
-});
-
-axiosClient.interceptors.response.use(
+axios.interceptors.response.use(
     response => {
         return response;
     },
@@ -29,5 +25,3 @@ axiosClient.interceptors.response.use(
         return Promise.reject(error);
     }
 );
-
-export default axiosClient;

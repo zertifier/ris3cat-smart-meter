@@ -106,7 +106,7 @@ export class TransferModalComponent implements OnDestroy {
 
         this.zertipowerService.communities.deposit(this.amountToTransfer!)
           .subscribe({
-            next: (res: any) => { console.log("tot be", res); Swal.fire('', 'saldo depositat', 'success') },
+            next: (res: any) => { Swal.fire('', 'saldo depositat', 'success') },
             error: (error: any) => { }
           })
 

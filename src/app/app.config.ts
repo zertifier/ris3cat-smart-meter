@@ -11,6 +11,9 @@ import { InMemoryEventBusService } from "./shared/infrastructure/services/in-mem
 import { TranslocoHttpLoader } from './transloco-loader';
 import { provideTransloco } from '@jsverse/transloco';
 
+//Import axios interceptors configuration (already implemented in zertipower service)
+//import './shared/infrastructure/interceptors/axiosErrorCatching.interceptor'; 
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),

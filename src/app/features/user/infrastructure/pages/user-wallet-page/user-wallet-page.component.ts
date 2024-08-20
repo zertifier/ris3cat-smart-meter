@@ -63,6 +63,7 @@ export class UserWalletPageComponent implements OnDestroy {
         if (store && store.user?.wallet_address) {
           this.communityId = store.cups.length ? store.cups[0].communityId : undefined
           this.customerId = store.user?.customer_id!
+          console.log(this.customerId)
           this.walletAddress = store.user?.wallet_address
           this.getAllBalances(this.walletAddress)
         }
@@ -77,7 +78,6 @@ export class UserWalletPageComponent implements OnDestroy {
     this.ethersService.getChainBalance(wallet).then((balance) => {
       this.chainBalance = balance
     })
-
     if (this.communityId){
       this.daoService.getDaoBalance(wallet, this.communityId).then((balance) => {
         this.voteWeight = balance
@@ -85,7 +85,6 @@ export class UserWalletPageComponent implements OnDestroy {
     }
 
     this.customer = await this.zertipowerService.customers.getCustomerById(this.customerId)
-    //console.log(this.customer)
 
   }
 

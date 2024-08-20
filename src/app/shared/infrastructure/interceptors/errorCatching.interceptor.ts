@@ -1,7 +1,7 @@
-import {HttpInterceptorFn} from '@angular/common/http';
-import {HttpErrorResponse} from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
-import {catchError, map} from 'rxjs/operators';
+import { HttpInterceptorFn } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import swal from "sweetalert2";
 
 export const errorCatchingInterceptor: HttpInterceptorFn = (request, next) => {
@@ -11,18 +11,30 @@ export const errorCatchingInterceptor: HttpInterceptorFn = (request, next) => {
     }),
     catchError((e: HttpErrorResponse) => {
       let errorMsg = '';
-      if (e.error.msg) {
+      
+      let ignore = [
+        'https://api-smart-meter-dev-ris3cat.zertifier.com/monitoring/powerflow/',
+        'https://zertirpc.zertifier.com/100/rpc'
+      ]
+
+      if (!ignore.includes(request.url)) {
+
+        if (e.error.msg) {
+          errorMsg = e.error.msg;
+        } else if (e.error.message && e.error.message.msg) {
+          errorMsg = e.error.message.msg;
+        } else {
+          errorMsg = e.statusText;
+        }
         swal.fire('Error', e.error.msg, 'error');
-        errorMsg = e.error.msg;
-      } else if (e.error.message && e.error.message.msg) {
-        swal.fire('Error', e.error.message.msg, 'error');
-        errorMsg = e.error.message.msg;
+        console.log("angular http interceptor error ", request.url, errorMsg)
+
       } else {
-        swal.fire('Error', e.statusText, 'error');
-        errorMsg = e.statusText;
+        console.log("Angular interceptor ignored error", request.url)
       }
-      console.log("interceptor error ", errorMsg)
+
       return throwError(() => new Error(errorMsg));
+
     })
   );
 };
