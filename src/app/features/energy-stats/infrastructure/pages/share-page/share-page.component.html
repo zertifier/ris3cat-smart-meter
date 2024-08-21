@@ -7,7 +7,7 @@
 
       <div class="w-100 mb-3 d-flex flex-column">
         @if(customer){
-        <span>{{ t('texts.availableBalance') }} : <b class="color-tertiary">{{customer.balance}} EKW</b></span>
+        <span class="mt-2 mb-2">{{ t('texts.availableBalance') }} : <b class="color-tertiary">{{customer.balance}} EKW</b></span>
         }
         @if(communityData && communityData.energyPrice) {
         <span>{{ t('texts.buyingPrice') }} : <b class="color-tertiary">{{communityData.energyPrice}} €/kWh</b></span>
