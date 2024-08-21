@@ -151,6 +151,7 @@
       "energyAmount": "Saldo energético",
       "tokenAmount": "Saldo",
       "communityShare": "Participaciones de la comunidad",
+      "addEnergy": "Afegir tokens",
       "transferEnergy": "Transferir saldo",
       "transferToken": "Transferir XDAI",
       "transferShare": "Transferir betas",
@@ -185,6 +186,9 @@
           "wrongDestinyError": "Destinatario incorrecto.",
           "success": "Transferencia enviada correctamente."
         }
+      },
+      "buy": {
+        "title": "Método de pago"
       }
     }
   },
@@ -275,7 +279,7 @@
       "updated_datadis":"Datadis actualitzat",
       "datadis_error":"Errores en el datadis",
       "datadis_active":"Datadis actiu",
-      "datadis_inactive":"Datadis inactiu" 
+      "datadis_inactive":"Datadis inactiu"
     }
   },
   "PROPOSALS": {

@@ -1,0 +1,27 @@
+<ng-container *transloco="let t; prefix: 'MY-WALLET'">
+  <div class="modal-header border-0 pe-4 pt-4">
+    <button type="button" class="btn-close shadow-none" aria-label="Close"
+            (click)="activeModal.dismiss('Cross click')"></button>
+  </div>
+  <h4 class="modal-title text-center">
+    {{ t('modals.buy.title') }}
+  </h4>
+  <div class="modal-body px-lg-5">
+    <button class="btn btn-primary my-3 w-100 rounded-3 form-button" (click)="openStripe()">
+      Visa
+    </button>
+
+
+    <button class="btn btn-secondary my-3 w-100 rounded-3 form-button">
+      Crypto
+    </button>
+  </div>
+  <div class="modal-footer border-0 mb-5">
+    <div class="mx-auto">
+      <button type="button" class="btn btn-outline-dark mx-3 footer-btn" (click)="activeModal.close('Close click')"
+              >
+        {{'GENERIC.texts.cancel' | transloco}}
+      </button>
+    </div>
+  </div>
+</ng-container>

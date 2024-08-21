@@ -152,6 +152,7 @@
       "energyAmount": "Tokens energètics",
       "tokenAmount": "Saldo blockchain",
       "communityShare": "Betas de la comunitat",
+      "addEnergy": "Afegir tokens",
       "transferEnergy": "Transferir tokens",
       "transferToken": "Transferir saldo",
       "transferShare": "Transferir betas",
@@ -186,7 +187,13 @@
           "wrongDestinyError": "Destinatari incorrecte.",
           "success": "Transferència enviada correctament."
         }
+      },
+      "buy": {
+        "title": "Mètode de pagament"
       }
+    },
+    "swal": {
+      "stripeCheckoutError": "Hi ha hagut un error processant la teva petició. Tonra-ho a intentar en uns mintus."
     }
   },
   "SHARE-ENERGY": {

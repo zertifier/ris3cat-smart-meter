@@ -149,6 +149,7 @@
       "energyAmount": "Energy balance",
       "tokenAmount": "Balance",
       "communityShare": "Community shares",
+      "addEnergy": "Afegir tokens",
       "transferEnergy": "Transfer balance",
       "transferToken": "Transfer XDAI",
       "transferShare": "Transfer shares",
@@ -183,6 +184,9 @@
           "wrongDestinyError": "Incorrect recipient.",
           "success": "Transfer sent successfully."
         }
+      },
+      "buy": {
+        "title": "Payment method"
       }
     }
   },
