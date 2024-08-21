@@ -81,7 +81,9 @@ export class SharePageComponent implements OnDestroy{
 
   communityData!:CommunityResponse | any;
   communityId$ = this.userStore.selectOnly(this.userStore.$.communityId).subscribe(async (communityId:any)=>{
-    this.communityData = await this.zertipower.communities.getCommunityById(communityId)
+    if(communityId){
+      this.communityData = await this.zertipower.communities.getCommunityById(communityId)
+    }
   });
 
   subscriptions: Subscription[] = [];

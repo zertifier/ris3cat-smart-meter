@@ -15,18 +15,20 @@
       <div class="d-block d-lg-flex">
         <div class="input-group form-div-width">
 
-          @if(userActionType=='tokens' || ( userActionType=='balance' && userAction == 'add' )  && currentAmount){
+          @if(userActionType=='tokens' || ( userActionType=='balance' && userAction == 'add' ) && currentAmount){
           <input readonly type="number"
             class="form-control form-control-lg bg-white border-secondary border-2 shadow-none"
             [ngModel]="currentAmount | noRoundDecimal: 4">
+          <button class="btn btn-tertiary rounded-end-3 form-button" type="button">XDAI</button>
+        
           }
 
           @if(userActionType=='balance' && customer && customer.balance >= 0 && this.userAction == 'pullOut'){
           <input type="number" class="form-control form-control-lg border-secondary border-2 shadow-none"
             placeholder="000" [(ngModel)]="customer.balance" readonly>
+          <button class="btn btn-tertiary rounded-end-3 form-button" type="button">{{ type }}</button>
           }
 
-          <button class="btn btn-tertiary rounded-end-3 form-button" type="button">{{ type }}</button>
         </div>
       </div>
     </div>

@@ -83,7 +83,6 @@ export class UserWalletPageComponent implements OnDestroy {
         this.voteWeight = balance
       })
     }
-
     this.customer = await this.zertipowerService.customers.getCustomerById(this.customerId)
 
   }

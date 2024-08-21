@@ -77,15 +77,16 @@ export class DaoService {
 
   getCommunityContract(communityId: number) {
     return new Promise<string>(resolve => {
-      this.apiService.getCommunityById(communityId).subscribe({
-        next: async (community) => {
-
-          resolve(community.data.daoAddress)
-        },
-        error: (error) => {
-          resolve('')
-        }
-      })
+      if(communityId){
+        this.apiService.getCommunityById(communityId).subscribe({
+          next: async (community) => {
+            resolve(community.data.daoAddress)
+          },
+          error: (error) => {
+            resolve('')
+          }
+        })
+      }
     })
   }
 

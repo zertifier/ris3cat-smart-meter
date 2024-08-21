@@ -42,7 +42,7 @@ export class ZertipowerCommunitiesService {
 
   async getCommunityById(id: number) {
     const response = await this.axios.get<HttpResponse<CommunityResponse[]>>(`${ChartEntity.COMMUNITIES}/${id}`);
-    return response.data.data
+    return response.data.data;
   }
 
   deposit(balance: number) {
