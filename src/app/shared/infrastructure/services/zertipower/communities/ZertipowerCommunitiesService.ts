@@ -6,7 +6,8 @@ import { EnergyStatDTO } from "../DTOs/EnergyStatDTO";
 import { ChartEntity } from "@features/energy-stats/domain/ChartEntity";
 import { ZertiauthApiService } from "../../../../../features/auth/infrastructure/services/zertiauth-api.service";
 import { AuthStoreService } from "../../../../../features/auth/infrastructure/services/auth-store.service";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { UserStoreService } from "../../../../../features/user/infrastructure/services/user-store.service";
 
 export interface CommunityResponse {
   id: number,
@@ -19,16 +20,10 @@ export interface CommunityResponse {
 
 export class ZertipowerCommunitiesService {
 
-  oAuthCode = this.authStoreService.getOauthCode()
-  privateKeyResponse: any;
-
   constructor(private readonly axios: Axios,
     private readonly http: HttpClient,
-    private readonly zertiauthApiService: ZertiauthApiService,
-    private readonly authStoreService: AuthStoreService
-  ) {
-    this.zertiauthApiService.getPrivateKey(this.oAuthCode).then(res => this.privateKeyResponse = res)
-  }
+    private userStore: UserStoreService,
+  ) {}
 
   async getActiveMembers(id: number): Promise<number> {
     const response = await this.getEnergyStats(ChartEntity.COMMUNITIES, id, 'datadis', new Date(), DateRange.DAY);
@@ -46,13 +41,11 @@ export class ZertipowerCommunitiesService {
   }
 
   deposit(balance: number) {
-    const pk = this.privateKeyResponse.privateKey;
+    const pk = this.userStore.snapshotOnly(state => state.user?.wallet?.privateKey)!;
     const body = {
       pk,
       balance
     }
-    //TODO: COMMENT or delete!!
-    //console.log("pk",pk)
     return this.http.put(`${ChartEntity.COMMUNITIES}/balance/deposit`, body);
   }
 
