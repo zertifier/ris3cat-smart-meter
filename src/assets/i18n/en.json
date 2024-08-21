@@ -274,7 +274,9 @@
       "updated_datadis": "Datadis updated",
       "datadis_error": "Datadis errors",
       "datadis_active": "Datadis active",
-      "datadis_inactive": "Datadis inactive"
+      "datadis_inactive": "Datadis inactive",
+      "insufficient_balance":"Insufficient balance within the community",
+      "low_balance":"Low balance within the community" 
     }
   },
   "PROPOSALS": {

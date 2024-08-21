@@ -279,7 +279,9 @@
       "updated_datadis": "Datadis actualitzat",
       "datadis_error": "Errors en el datadis",
       "datadis_active": "Datadis actiu",
-      "datadis_inactive": "Datadis inactiu"
+      "datadis_inactive": "Datadis inactiu",
+      "insufficient_balance":"Saldo insuficient a dins de la comunitat",
+      "low_balance":"Saldo baix a dins de la comunitat"
     }
   },
   "PROPOSALS": {
