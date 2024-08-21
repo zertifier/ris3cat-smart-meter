@@ -39,6 +39,7 @@ export class ZertipowerService {
   // Angular http client cannot do that.
   constructor(
     private readonly authStore: AuthStoreService,
+    private userStore:UserStoreService,
     public readonly authApiService: ZertiauthApiService,
     private http: HttpClient
   ) {
@@ -79,7 +80,6 @@ export class ZertipowerService {
           if(!ignoredErrors.includes(errorMsg)){
             swal.fire('Error', errorMsg, 'error');
           }
-          
         } else {
           console.log("Network Error", error.message);
           swal.fire('Error', 'Network Error', 'error');
@@ -92,7 +92,7 @@ export class ZertipowerService {
     this.energyStats = new ZertipowerEnergyStats(this.axiosClient);
     this.auth = new ZertipowerAuthService(this.axiosClient);
 
-    this.communities = new ZertipowerCommunitiesService(this.axiosClient, this.http, this.authApiService, this.authStore);
+    this.communities = new ZertipowerCommunitiesService(this.axiosClient, this.http ,this.userStore); //this.authApiService
     this.customers = new ZertipowerCustomersService(this.axiosClient);
     this.cups = new ZertipowerCupsService(this.axiosClient);
     this.locations = new ZertipowerLocationService(this.axiosClient);
