@@ -209,6 +209,7 @@
       },
        "buyingPrice":"Preu de compra",
       "sellingPrice":"Preu de venda",
+      "availableBalance":"Saldo disponible",
       "results": {
         "before": "Abans",
         "now": "Ara",

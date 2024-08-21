@@ -211,7 +211,8 @@
         "surplus": "Surplus"
       },
        "buyingPrice":"Buying price",
-      "sellingPrice":"selling price"
+      "sellingPrice":"selling price",
+      "availableBalance":"Balance available"
     },
     "tooltips": {
       "ekw": "EKW: Fictional currency for buying and selling energy on this platform."

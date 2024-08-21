@@ -78,6 +78,7 @@ export class SharePageComponent implements OnDestroy{
 
   tradesData!: TradeInterface[]
   customerId!: number;
+  customer:any;
 
   communityData!:CommunityResponse | any;
   communityId$ = this.userStore.selectOnly(this.userStore.$.communityId).subscribe(async (communityId:any)=>{
@@ -96,16 +97,15 @@ export class SharePageComponent implements OnDestroy{
   ) {
     this.subscriptions.push(
       this.userStore
-        .selectOnly(state => state).subscribe((data) => {
+        .selectOnly(state => state).subscribe(async (data) => {
         if (data.user) {
           this.customerId = data.user.customer_id!
           this.getData()
+          this.customer = await this.zertipower.customers.getCustomerById(this.customerId)
         }
       })
     )
-
   }
-
 
   async getData(){
     console.log(this.fromDate,this.toDate)

@@ -213,7 +213,8 @@
         "surplus": "Excedente"
       },
       "buyingPrice":"Precio de compra",
-      "sellingPrice":"Precio de venta"
+      "sellingPrice":"Precio de venta",
+      "availableBalance":"Saldo disponible"
     },
     "tooltips": {
       "ekw": "EKW: Moneda ficticia para la compra y venta de energía en esta plataforma."

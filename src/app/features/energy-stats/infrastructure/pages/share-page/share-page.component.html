@@ -6,9 +6,12 @@
       <!-- <p class="mt-4 fs-5"> {{ t('texts.chooseData') }} </p> -->
 
       <div class="w-100 mb-3 d-flex flex-column">
+        @if(customer){
+        <span>{{ t('texts.availableBalance') }} : <b class="color-tertiary">{{customer.balance}} EKW</b></span>
+        }
         @if(communityData && communityData.energyPrice) {
-        <span>{{ t('texts.buyingPrice') }} : <b class="color-tertiary">{{communityData.energyPrice}}€/kWh</b></span>
-        <span>{{ t('texts.sellingPrice') }} : <b class="color-tertiary"> {{communityData.energyPrice}}€/kWh</b></span>
+        <span>{{ t('texts.buyingPrice') }} : <b class="color-tertiary">{{communityData.energyPrice}} €/kWh</b></span>
+        <span>{{ t('texts.sellingPrice') }} : <b class="color-tertiary"> {{communityData.energyPrice}} €/kWh</b></span>
         }
       </div>
 
