@@ -27,7 +27,7 @@ export class BuyModalComponent {
 
   openStripe(){
     const user = this.userStore.snapshotOnly(state => state.user);
-    window.location.href = this.stripeService.getCheckoutUrl(user!.id!, 3)
+    window.location.href = this.stripeService.getCheckoutUrl(user!.wallet_address!, 1)
   }
 
 }

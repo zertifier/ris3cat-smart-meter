@@ -15,6 +15,7 @@ import { ZertipowerService } from '../../../../../shared/infrastructure/services
 import { CustomerDTO } from '../../../../../shared/infrastructure/services/zertipower/customers/ZertipowerCustomersService';
 import {BuyModalComponent} from "@features/user/infrastructure/pages/user-wallet-page/buy-modal/buy-modal.component";
 import {ActivatedRoute, Params} from "@angular/router";
+import {MintStatus, StripeService} from "@shared/infrastructure/services/zertipower/stripe/stripe.service";
 
 @Component({
   selector: 'app-user-wallet-page',
@@ -60,6 +61,7 @@ export class UserWalletPageComponent implements AfterViewInit, OnDestroy {
     private modalService: NgbModal,
     private zertipowerService:ZertipowerService,
     private route: ActivatedRoute,
+    private stripeService: StripeService,
     private translocoService: TranslocoService
   ) {
     this.subscriptions.push(
@@ -165,7 +167,7 @@ export class UserWalletPageComponent implements AfterViewInit, OnDestroy {
     this.activeSection = activeSection;
   }
 
-  stripeCheckoutManagement(params: Params){
+  async stripeCheckoutManagement(params: Params){
     const sessionId = params['session_id'];
     if (sessionId) {
       if (params['success'] == 'false'){
@@ -177,14 +179,58 @@ export class UserWalletPageComponent implements AfterViewInit, OnDestroy {
         return
       }
       if (params['success'] == 'true') {
+        const loadingSwal = await Swal.fire({
+          text: "S'esta processant la teva petició",
+          didOpen: () => {
+            Swal.showLoading();
 
+          }
+        })
+
+        this.stripeService.mintStatus.subscribe((status) => {
+          loadingSwal.dismiss
+
+          this.swalMintStatus(status)
+        })
+
+
+        this.stripeService.setMintStatus(sessionId)
 
       }
     }
-
-
   }
 
+  async swalMintStatus(status: MintStatus){
+    switch (status){
+      case "ACCEPTED":
+        Swal.hideLoading()
+        Swal.update({
+        icon: 'success',
+        text: "El pagament s'ha reatlizat correctament",
+        showConfirmButton: true,
+        confirmButtonText: "D'acord"
+      })
+        break;
+      case "ERROR":
+        Swal.hideLoading()
+        Swal.update({
+        icon: 'error',
+        text: "Hi ha hagut un problema amb la petició. D'aquí uns minuts ho tornarem a intentar automàticament",
+        showConfirmButton: true,
+        confirmButtonText: "D'acord"
+      })
+        break;
+
+      case "MINTING": Swal.fire({
+        text: "S'esta processant la teva petició",
+        didOpen: () => {
+          Swal.showLoading();
+
+        }
+      })
+        break
+    }
+  }
   ngOnDestroy() {
     this.subscriptions.forEach(s => s.unsubscribe())
   }
