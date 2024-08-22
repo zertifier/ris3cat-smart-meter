@@ -187,11 +187,13 @@ export class UserWalletPageComponent implements AfterViewInit, OnDestroy {
           }
         })
 
-        this.stripeService.mintStatus.subscribe((status) => {
-          loadingSwal.dismiss
+        this.subscriptions.push(
+          this.stripeService.mintStatus.subscribe((status) => {
+            loadingSwal.dismiss
 
-          this.swalMintStatus(status)
-        })
+            this.swalMintStatus(status)
+          })
+        )
 
 
         this.stripeService.setMintStatus(sessionId)
