@@ -212,6 +212,7 @@ export class UserWalletPageComponent implements AfterViewInit, OnDestroy {
         showConfirmButton: true,
         confirmButtonText: this.translocoService.translate('GENERIC.texts.okay')
       })
+
         break;
       case "ERROR":
         Swal.hideLoading()
@@ -232,6 +233,7 @@ export class UserWalletPageComponent implements AfterViewInit, OnDestroy {
       })
         break
     }
+    this.getAllBalances(this.walletAddress)
   }
   ngOnDestroy() {
     this.subscriptions.forEach(s => s.unsubscribe())
