@@ -16,20 +16,22 @@ import { CustomerDTO } from '../../../../../shared/infrastructure/services/zerti
 import {BuyModalComponent} from "@features/user/infrastructure/pages/user-wallet-page/buy-modal/buy-modal.component";
 import {ActivatedRoute, Params} from "@angular/router";
 import {MintStatus, StripeService} from "@shared/infrastructure/services/zertipower/stripe/stripe.service";
+import {QrGeneratorComponent} from "@shared/infrastructure/components/qr-generator/qr-generator.component";
 
 @Component({
   selector: 'app-user-wallet-page',
   standalone: true,
-    imports: [
-        AsyncPipe,
-        FormsModule,
-        QuestionBadgeComponent,
-        DecimalPipe,
-        NoRoundDecimalPipe,
-        NgIf,
-        TranslocoDirective,
-        CommonModule
-    ],
+  imports: [
+    AsyncPipe,
+    FormsModule,
+    QuestionBadgeComponent,
+    DecimalPipe,
+    NoRoundDecimalPipe,
+    NgIf,
+    TranslocoDirective,
+    CommonModule,
+    QrGeneratorComponent
+  ],
   templateUrl: './user-wallet-page.component.html',
   styleUrl: './user-wallet-page.component.scss'
 })

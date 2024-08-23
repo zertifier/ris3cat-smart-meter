@@ -28,6 +28,7 @@
     "@types/html-to-text": "9.0.4",
     "@zertifier/rx-store": "1.0.0",
     "@zertifier/zertiauthjs": "1.0.0",
+    "angularx-qrcode": "18.0.1",
     "axios": "1.6.8",
     "bootstrap": "^5.3.2",
     "chart.js": "^4.4.2",
