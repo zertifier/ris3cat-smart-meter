@@ -22,11 +22,12 @@ export class QrGeneratorComponent{
   @Input() qrText!:  string | undefined | null;
   @Input() btnPxWidth?: string;
   @Input() btnClasses?: string;
+  @Input() modalSize: 'xl' | 'lg' | 'md' | 'sm' = 'md';
 
   constructor() {
   }
 
   openQrModal(content: TemplateRef<any>) {
-    this.modalService.open(content)
+    this.modalService.open(content, { size: this.modalSize})
   }
 }
