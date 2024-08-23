@@ -7,7 +7,7 @@
 
 <ng-template #qrModal>
   <div class="modal-header border-0">
-    <button type="button" class="btn-close shadow-none" aria-label="Close" (click)="modalService.dismissAll()"></button>
+    <button type="button" class="btn-close shadow-none" aria-label="Close" (click)="activeModal.dismiss()"></button>
   </div>
   <div class="modal-body">
     <h4 class="modal-title text-center mb-4" >La teva wallet</h4>
@@ -15,7 +15,7 @@
     <qrcode class="text-center" *ngIf="qrText" [qrdata]="qrText" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
   </div>
   <div class="modal-footer justify-content-center border-0 my-4">
-    <button type="button" class="btn btn-outline-dark mx-3 footer-btn " (click)="modalService.dismissAll()">
+    <button type="button" class="btn btn-outline-dark mx-3 footer-btn " (click)="activeModal.dismiss()">
       {{'GENERIC.texts.close' | transloco}}
     </button>
   </div>

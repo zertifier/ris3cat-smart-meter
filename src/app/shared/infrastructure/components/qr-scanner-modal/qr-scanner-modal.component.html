@@ -1,0 +1,15 @@
+<div class="modal-header border-0">
+  <button type="button" class="btn-close shadow-none" aria-label="Close" (click)="activeModal.dismiss()"></button>
+</div>
+<div class="modal-body">
+  <h4 class="modal-title text-center mb-4" >La teva wallet</h4>
+
+  <ngx-scanner-qrcode #scanner [isBeep]="false"></ngx-scanner-qrcode>
+
+  <button (click)="scanner.start()"> start</button>
+</div>
+<div class="modal-footer justify-content-center border-0 my-4">
+  <button type="button" class="btn btn-outline-dark mx-3 footer-btn " (click)="activeModal.dismiss()">
+    {{'GENERIC.texts.close' | transloco}}
+  </button>
+</div>

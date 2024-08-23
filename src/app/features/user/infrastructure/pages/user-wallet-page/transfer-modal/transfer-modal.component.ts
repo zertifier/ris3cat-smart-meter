@@ -14,6 +14,7 @@ import { ApiService } from "../../../../../../shared/infrastructure/services/api
 import { TranslocoDirective, TranslocoPipe, TranslocoService } from "@jsverse/transloco";
 import { ZertipowerService } from '../../../../../../shared/infrastructure/services/zertipower/zertipower.service';
 import { CustomerDTO } from '../../../../../../shared/infrastructure/services/zertipower/customers/ZertipowerCustomersService';
+import {QrScannerComponent} from "@shared/infrastructure/components/qr-scanner/qr-scanner.component";
 
 @Component({
   selector: 'app-transfer-modal',
@@ -25,7 +26,8 @@ import { CustomerDTO } from '../../../../../../shared/infrastructure/services/ze
     NoRoundDecimalPipe,
     NgIf,
     TranslocoDirective,
-    TranslocoPipe
+    TranslocoPipe,
+    QrScannerComponent
   ],
   providers: [NoRoundDecimalPipe],
   templateUrl: './transfer-modal.component.html',

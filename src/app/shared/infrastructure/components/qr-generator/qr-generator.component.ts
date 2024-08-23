@@ -1,7 +1,7 @@
-import {AfterViewInit, Component, inject, Input, TemplateRef} from '@angular/core';
+import {Component, inject, Input, TemplateRef} from '@angular/core';
 import {QRCodeModule} from "angularx-qrcode";
 import {NgClass, NgIf} from "@angular/common";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {TranslocoPipe} from "@jsverse/transloco";
 
 @Component({
@@ -18,6 +18,7 @@ import {TranslocoPipe} from "@jsverse/transloco";
 })
 export class QrGeneratorComponent{
   public modalService = inject(NgbModal);
+  public activeModal = inject(NgbActiveModal);
 
   @Input() qrText!:  string | undefined | null;
   @Input() btnPxWidth?: string;
