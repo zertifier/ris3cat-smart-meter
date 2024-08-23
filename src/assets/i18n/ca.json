@@ -189,11 +189,22 @@
         }
       },
       "buy": {
-        "title": "Mètode de pagament"
+        "title": "Mètode de pagament",
+        "texts": {
+          "qtyLabel": "Quantiat a comprar",
+          "qtyPlaceholder": "Prova afegint 3"
+        },
+        "swal": {
+          "qtyError": "La quantitat ha de ser superior a 0",
+          "userError": "Primer has d'iniciar sessió"
+        }
       }
     },
     "swal": {
-      "stripeCheckoutError": "Hi ha hagut un error processant la teva petició. Tonra-ho a intentar en uns mintus."
+      "stripeCheckoutError": "Hi ha hagut un error processant la teva petició. Tonra-ho a intentar en uns mintus.",
+      "stripeMintSuccess": "El pagament s'ha reatlizat correctament",
+      "stripeMintError": "Hi ha hagut un problema amb la petició. D'aquí uns minuts ho tornarem a intentar automàticament",
+      "stripeMintingWait": "S'esta processant la teva petició"
     }
   },
   "SHARE-ENERGY": {

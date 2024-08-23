@@ -208,23 +208,23 @@ export class UserWalletPageComponent implements AfterViewInit, OnDestroy {
         Swal.hideLoading()
         Swal.update({
         icon: 'success',
-        text: "El pagament s'ha reatlizat correctament",
+        text: this.translocoService.translate('MY-WALLET.swal.stripeMintSuccess'),
         showConfirmButton: true,
-        confirmButtonText: "D'acord"
+        confirmButtonText: this.translocoService.translate('GENERIC.texts.okay')
       })
         break;
       case "ERROR":
         Swal.hideLoading()
         Swal.update({
         icon: 'error',
-        text: "Hi ha hagut un problema amb la petició. D'aquí uns minuts ho tornarem a intentar automàticament",
+        text: this.translocoService.translate('MY-WALLET.swal.stripeMintError'),
         showConfirmButton: true,
-        confirmButtonText: "D'acord"
+        confirmButtonText: this.translocoService.translate('GENERIC.texts.okay')
       })
         break;
 
       case "MINTING": Swal.fire({
-        text: "S'esta processant la teva petició",
+        text: this.translocoService.translate('MY-WALLET.swal.stripeMintingWait'),
         didOpen: () => {
           Swal.showLoading();
 

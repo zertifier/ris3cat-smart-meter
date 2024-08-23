@@ -7,20 +7,42 @@
     {{ t('modals.buy.title') }}
   </h4>
   <div class="modal-body px-lg-5">
-    <button class="btn btn-primary my-3 w-100 rounded-3 form-button" (click)="openStripe()">
-      Visa
-    </button>
+    <ul class="row justify-content px-0">
+      <div class="col-6">
+        <button class="btn my-3 w-100 rounded-3 form-button" (click)="buyType = 'VISA'"
+                [ngClass]="buyType === 'VISA' ? 'btn-tertiary' : 'btn-secondary'">
+          Visa
+        </button>
+      </div>
 
+      <div class="col-6">
+        <button class="btn my-3 w-100 rounded-3 form-button" (click)="buyType = 'CRYPTO'"
+                [ngClass]="buyType === 'CRYPTO' ? 'btn-tertiary' : 'btn-secondary'">
+          Crypto
+        </button>
+      </div>
 
-    <button class="btn btn-secondary my-3 w-100 rounded-3 form-button">
-      Crypto
-    </button>
+    </ul>
+
+    <ng-container *ngIf="buyType === 'VISA'" )>
+      <div>
+        <label class="form-label"> {{ t('modals.buy.texts.qtyLabel') }} </label>
+        <input class="form-control bg-white border-secondary border-2 shadow-none" [(ngModel)]="qty"
+               placeholder="{{ t('modals.buy.texts.qtyPlaceholder') }}" min="1" type="number">
+      </div>
+
+      <button class="btn btn-primary my-3 w-100 rounded-3 form-button" (click)="openStripe()"
+              [ngClass]="{'disabled' : qty <= 0 || !qty}">
+        Comprar
+      </button>
+    </ng-container>
+
   </div>
   <div class="modal-footer border-0 mb-5">
     <div class="mx-auto">
       <button type="button" class="btn btn-outline-dark mx-3 footer-btn" (click)="activeModal.close('Close click')"
               >
-        {{'GENERIC.texts.cancel' | transloco}}
+        {{'GENERIC.texts.close' | transloco}}
       </button>
     </div>
   </div>

@@ -188,8 +188,22 @@
         }
       },
       "buy": {
-        "title": "Método de pago"
+        "title": "Método de pago",
+        "texts": {
+          "qtyLabel": "Cantidad a comprar",
+          "qtyPlaceholder": "Prueba añadiendo 3"
+        },
+        "swal": {
+          "qtyError": "La cantidad debe ser superior a 0",
+          "userError": "Primero debes iniciar sesión"
+        }
       }
+    },
+    "swal": {
+      "stripeCheckoutError": "Hubo un error al procesar tu solicitud. Por favor, inténtalo de nuevo en unos minutos.",
+      "stripeMintSuccess": "El pago se completó con éxito.",
+      "stripeMintError": "Hubo un problema con la solicitud. Lo intentaremos de nuevo automáticamente en unos minutos.",
+      "stripeMintingWait": "Tu solicitud está siendo procesada."
     }
   },
   "SHARE-ENERGY": {

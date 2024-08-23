@@ -145,40 +145,40 @@
     "title": "My wallet",
     "texts": {
       "identityLabel": "Identity",
-      "transferInfo": "To relate a transfer, choose what you want to transfer",
-      "energyAmount": "Energy balance",
-      "tokenAmount": "Balance",
+      "transferInfo": "To make a transfer, choose what you want to transfer",
+      "energyAmount": "Energy tokens",
+      "tokenAmount": "Blockchain balance",
       "communityShare": "Community shares",
-      "addEnergy": "Afegir tokens",
-      "transferEnergy": "Transfer balance",
-      "transferToken": "Transfer XDAI",
+      "addEnergy": "Add tokens",
+      "transferEnergy": "Transfer tokens",
+      "transferToken": "Transfer balance",
       "transferShare": "Transfer shares",
-      "platformSection":"Platform",
-      "blockchainSection":"Blockchain",
-      "communityBalance":"Energetic balance inside the CCE",
-      "addBalance":"Add tokens",
-      "pullOutBalance":"Pull out tokens"
+      "platformSection": "Platform",
+      "blockchainSection": "Blockchain",
+      "communityBalance": "Energy balance within the CCE",
+      "addBalance": "Add tokens",
+      "pullOutBalance": "Withdraw tokens"
     },
     "tooltips": {
-      "identity": "Identity allows to identify your user within the Blockchain.",
-      "energy": "This balance will be used to purchase energy from the community.",
+      "identity": "The identity allows your user to be identified within the Blockchain.",
+      "energy": "This balance will be used for purchasing energy within the community.",
       "token": "Balance for transactions.",
-      "shares": "These are the Shares that the community has."
+      "shares": "These are the shares that the community holds."
     },
     "modals": {
       "transfer": {
         "transferTitle": "Transfer",
         "addTitle": "Add",
-        "pullOutTitle": "Pull out",
+        "pullOutTitle": "Withdraw",
         "texts": {
           "balanceLabel": "Balance",
           "toLabel": "Recipient",
           "toPlaceholder": "example@email.com / 0xA...",
-          "toBottomText": "Write the email or identity number of the recipient",
+          "toBottomText": "Enter the recipient's email or identity number",
           "amountLabel": "Amount"
         },
         "swal": {
-          "blockchainError": "Problems with the blockchain.",
+          "blockchainError": "Blockchain issues.",
           "tryAgainError": "Try again in a few minutes.",
           "checkTryAgainError": "Check it and try again.",
           "wrongDestinyError": "Incorrect recipient.",
@@ -186,10 +186,25 @@
         }
       },
       "buy": {
-        "title": "Payment method"
+        "title": "Payment method",
+        "texts": {
+          "qtyLabel": "Quantity to buy",
+          "qtyPlaceholder": "Try adding 3"
+        },
+        "swal": {
+          "qtyError": "The quantity must be greater than 0",
+          "userError": "You must log in first"
+        }
       }
+    },
+    "swal": {
+      "stripeCheckoutError": "There was an error processing your request. Please try again in a few minutes.",
+      "stripeMintSuccess": "The payment was completed successfully.",
+      "stripeMintError": "There was a problem with the request. We will automatically try again in a few minutes.",
+      "stripeMintingWait": "Your request is being processed."
     }
   },
+
   "SHARE-ENERGY": {
     "navbar": "Share energy",
     "title": "Share energy",
