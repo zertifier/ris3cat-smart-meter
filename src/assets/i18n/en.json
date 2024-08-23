@@ -208,12 +208,16 @@
         "buy": "Received",
         "sell": "Sent"
       },
+      "emitter":"Emitter",
+      "receiver":"Receiver",
       "results": {
         "before": "Before",
         "now": "Now",
         "consumption": "Consumption",
         "surplus": "Surplus"
       },
+      "myShares":"My shares",
+      "communitaryShares":"Communitary shares",
        "buyingPrice":"Buying price",
       "sellingPrice":"selling price",
       "availableBalance":"Balance available"

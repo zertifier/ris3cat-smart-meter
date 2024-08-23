@@ -210,6 +210,8 @@
         "buy": "Recibido",
         "sell": "Enviado"
       },
+      "emitter":"Emisor",
+      "receiver":"Receptor",
       "results": {
         "before": "Antes",
         "now": "Ahora",
@@ -218,7 +220,9 @@
       },
       "buyingPrice":"Precio de compra",
       "sellingPrice":"Precio de venta",
-      "availableBalance":"Saldo disponible"
+      "availableBalance":"Saldo disponible",
+      "myShares":"Mi compartición",
+      "communitaryShares":"Compartición communitária"
     },
     "tooltips": {
       "ekw": "EKW: Moneda ficticia para la compra y venta de energía en esta plataforma."

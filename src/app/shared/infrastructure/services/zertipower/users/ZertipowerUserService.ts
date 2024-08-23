@@ -14,6 +14,11 @@ export class ZertipowerUserService {
     return response.data.data;
   }
 
+  async getUserByCupsId(id: number): Promise<UserResponseDTO[] | undefined> {
+    const response = await this.axios.get<HttpResponse<UserResponseDTO[]>>(`/users/cups/${id}`);
+    return response.data.data;
+  }
+
   async get(criteria: LegacyCriteria): Promise<UserResponseDTO[]> {
     const response = await this.axios.get<HttpResponse<UserResponseDTO[]>>("/users", {params: {criteria}});
     return response.data.data;

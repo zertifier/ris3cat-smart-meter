@@ -211,6 +211,8 @@
         "buy": "Rebut",
         "sell": "Enviat"
       },
+      "emitter":"Emissor",
+      "receiver":"Receptor",
        "buyingPrice":"Preu de compra",
       "sellingPrice":"Preu de venda",
       "availableBalance":"Saldo disponible",
@@ -219,7 +221,9 @@
         "now": "Ara",
         "consumption": "Consum",
         "surplus": "Exedent"
-      }
+      },
+      "myShares":"La meva compartició",
+      "communitaryShares":"Compartició communitària"
     },
     "tooltips": {
       "ekw": "EKW: Moneda fictícia per a la venda/compra d'energia en aquesta plataforma."
