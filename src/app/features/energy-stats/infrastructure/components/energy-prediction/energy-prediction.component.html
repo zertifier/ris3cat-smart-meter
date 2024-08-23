@@ -1,6 +1,61 @@
 <ng-container *transloco="let t; prefix: 'PREDICTIONS'">
-  <h5 style="margin: 2rem 0 2rem 0;" class="fw-bold">{{ t('energy.title') }}</h5>
-  <div class="mb-3" style="max-width: 250px">
-    <app-energy-prediction-chart [dataset]="datasets" [labels]="labels"/>
+  <!-- <h5 style="margin: 2rem 0 2rem 0;" class="fw-bold">{{ t('energy.title') }}</h5> -->
+  <div class="mb-3">
+    <!-- <app-energy-prediction-chart [dataset]="datasets" [labels]="labels"/> -->
+
+<!-- PREDICCIÓ PRODUCCIÓ ENERGIA -->
+<div class="row">
+  <h5 style="margin: 2rem 0 2rem 0;" class="fw-bold text-center">{{ t('energy.titleProduction') }}</h5>
+</div>
+<div class="row">
+  @for(prediction of productionPrediction; track $index) {
+    <div class="col-4 col-md-2 d-flex flex-column mb-3" >
+      @if(prediction.value>-1){
+        <div class="circle production">{{prediction.value}}</div>
+        <div class="text-center mt-2">{{prediction.date}}</div>
+      } 
+      @else {
+        <div class="circle unavailable text-center">{{ t('energy.unavailable') }}</div>
+        <div class="text-center mt-2">{{prediction.date}}</div>
+      }
+    </div>
+  }
+</div>
+<!--  -->
+
+<!-- PREDICCIÓ EXCEDENT ENERGIA -->
+<div class="row">
+  <h5 style="margin: 2rem 0 2rem 0;" class="fw-bold text-center">{{ t('energy.titleSurplus') }}</h5>
+</div>
+<div class="row">
+  @for(prediction of surplusPrediction; track $index) {
+    <div class="col-4 col-md-2 d-flex flex-column mb-3" >
+      @if(prediction.value>-1){
+        <div class="circle production">{{prediction.value}}</div>
+        <div class="text-center mt-2">{{prediction.date}}</div>
+      } 
+      @else {
+        <div class="circle unavailable text-center">{{ t('energy.unavailable') }}</div>
+        <div class="text-center mt-2">{{prediction.date}}</div>
+      }
+    </div>
+  }
+</div>
+<!--  -->
+
+    <!-- PREDICCIÓ CONSUM ENERGIA -->
+    <div class="row">
+      <h5 style="margin: 2rem 0 2rem 0;" class="fw-bold text-center">{{ t('energy.titleConsumption') }}</h5>
+    </div>
+    <div class="row">
+      @for(prediction of consumptionPrediction; track $index) {
+        <div class="col-4 col-md-2 d-flex flex-column mb-3" >
+          <div class="circle consumption">{{prediction.value}}</div>
+          <div class="text-center mt-2">{{prediction.date}}</div>
+        </div>
+      }
+    </div>
+    <!--  -->
+
   </div>
 </ng-container>

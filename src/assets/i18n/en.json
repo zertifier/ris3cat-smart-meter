@@ -129,7 +129,11 @@
       "title": "Weather forecast"
     },
     "energy": {
-      "title": "Community energy prediction"
+      "title": "Community energy prediction",
+      "titleConsumption":"Energy consumption prediction",
+      "titleProduction":"Energy production prediction",
+      "titleSurplus":"Energy surplus prediction",
+      "unavailable":"Unavailable"
     }
   },
   "PROFILE": {

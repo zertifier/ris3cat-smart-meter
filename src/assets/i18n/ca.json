@@ -131,7 +131,11 @@
       "title": "Predicció metereologica"
     },
     "energy": {
-      "title": "Predicció d'energia comunitaria"
+      "title": "Predicció d'energia comunitaria",
+      "titleConsumption":"Predicció consum d'energia",
+      "titleProduction":"Predicció producció d'energia",
+      "titleSurplus":"Predicció excedent d'energia",
+      "unavailable":"No disponible"
     }
   },
   "PROFILE": {
