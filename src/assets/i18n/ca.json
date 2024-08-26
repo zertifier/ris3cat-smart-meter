@@ -180,7 +180,8 @@
         "addTitle": "Afegir",
         "pullOutTitle": "Retirar",
         "texts": {
-          "balanceLabel": "Saldo",
+          "balanceLabel": "Saldo energètic dins de la CCE",
+          "EKW_Balance":"EKW disponibles",
           "toLabel": "Destinatari",
           "toPlaceholder": "exemple@correu.com / 0xA...",
           "toBottomText": "Escriu el correu o número d'identitat del destinatari",
