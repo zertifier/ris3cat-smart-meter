@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { AsyncPipe, CommonModule, DecimalPipe, NgIf } from "@angular/common";
 import { UserStoreService } from "../../services/user-store.service";
 import { EthersService } from "@shared/infrastructure/services/ethers.service";
@@ -69,7 +69,8 @@ export class UserWalletPageComponent implements AfterViewInit, OnDestroy {
     private zertipowerService: ZertipowerService,
     private route: ActivatedRoute,
     private stripeService: StripeService,
-    private translocoService: TranslocoService
+    private translocoService: TranslocoService,
+    private cdr: ChangeDetectorRef
   ) {
     this.subscriptions.push(
       this.userStore$.subscribe((store) => {

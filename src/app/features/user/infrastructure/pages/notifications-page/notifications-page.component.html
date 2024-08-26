@@ -4,6 +4,14 @@
 
         <div class="my-3">
 
+            @if(email){
+                <span>Les notificacions seràn enviades al següent correu: </span>
+                <span><b>{{email}}</b></span>
+            }
+            @if(!email){
+                <span>Afegeix un correu al teu perfil per rebre notificacions.</span>
+            }
+
             <div class="row justify-content-center">
                 @for (category of notifications.categories; track category) {
                 <div class="col-12 col-md-3">

@@ -30,16 +30,28 @@ import { NotificationsService } from '../../services/notifications.service';
 export class NotificationsPageComponent {
 
     notifications: any = {}
+    userStore$ = this.userStore.selectOnly(state => state);
+    email = '';
 
-    constructor(private notificationsService: NotificationsService, private translate: TranslocoService) {
+    constructor(
+        private notificationsService: NotificationsService,
+        private translate: TranslocoService,
+        private userStore: UserStoreService) {
+
         notificationsService.getNotifications().subscribe((notificationsResponse: any) => {
             console.log(notificationsResponse)
             this.notifications = notificationsResponse.data;
         })
+
+        this.userStore$.subscribe((store:any) => {
+            if (store && store.user?.email) {
+                this.email = store.user?.email;
+            }
+        })
     }
 
     updateNotifications() {
-        this.notificationsService.setNotifications(this.notifications).subscribe(res=>{console.log(res)})
+        this.notificationsService.setNotifications(this.notifications).subscribe(res => { console.log(res) })
     }
 
     getTranslation(name: string): string {
