@@ -11,8 +11,8 @@ export type MintStatus = 'MINTING' | 'ACCEPTED' | 'ERROR'
   providedIn: 'root'
 })
 export class StripeService {
-  // baseUrl = environment.zertipower_url
-  baseUrl = 'http://localhost:3000'
+  baseUrl = environment.zertipower_url
+  // baseUrl = 'http://localhost:3000'
 
   mintStatus: BehaviorSubject<MintStatus> = new BehaviorSubject<MintStatus>('MINTING')
 
