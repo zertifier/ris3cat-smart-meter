@@ -15,6 +15,7 @@ import { NoRoundDecimalPipe } from "@shared/infrastructure/pipes/no-round-decima
 import { Subscription } from "rxjs";
 import { UserStoreService } from "@features/user/infrastructure/services/user-store.service";
 import { CommunityResponse } from '../../../../../shared/infrastructure/services/zertipower/communities/ZertipowerCommunitiesService';
+import { TextShorterPipe } from '../../../../../shared/infrastructure/pipes/wallet-address-shortener.pipe';
 
 
 @Component({
@@ -34,6 +35,7 @@ import { CommunityResponse } from '../../../../../shared/infrastructure/services
     DecimalPipe,
     DatePipe,
     NoRoundDecimalPipe,
+    TextShorterPipe
   ],
   providers: [
     MonitoringService,

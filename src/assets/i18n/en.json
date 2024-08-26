@@ -241,7 +241,8 @@
       "communitaryShares":"Communitary shares",
        "buyingPrice":"Buying price",
       "sellingPrice":"selling price",
-      "availableBalance":"Balance available"
+      "availableBalance":"Balance available",
+      "anonymous": "Anonymous"
     },
     "tooltips": {
       "ekw": "EKW: Currency for buying and selling energy on this platform."
@@ -267,7 +268,7 @@
         "lessConsumption": "Users with less consumption",
         "moreSurplus": "Users with more surplus"
       },
-      "wallet": "Wallet",
+      "wallet": "Identity",
       "amount": "Amount",
       "anonymous": "Anonymous"
     }

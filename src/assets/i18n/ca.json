@@ -128,10 +128,10 @@
   },
   "PREDICTIONS": {
     "meteorologic": {
-      "title": "Predicció metereologica"
+      "title": "Predicció metereològica"
     },
     "energy": {
-      "title": "Predicció d'energia comunitaria",
+      "title": "Predicció d'energia comunitària",
       "titleConsumption":"Predicció consum d'energia",
       "titleProduction":"Predicció producció d'energia",
       "titleSurplus":"Predicció excedent d'energia",
@@ -243,7 +243,8 @@
         "surplus": "Exedent"
       },
       "myShares":"La meva compartició",
-      "communitaryShares":"Compartició communitària"
+      "communitaryShares":"Compartició communitària",
+      "anonymous": "Anònim"
     },
     "tooltips": {
       "ekw": "EKW: Moneda per a la venda/compra d'energia en aquesta plataforma."
@@ -269,7 +270,7 @@
         "lessConsumption": "Usuaris que tenen menys consum",
         "moreSurplus": "Usuaris que tenen més excedent"
       },
-      "wallet": "Cartera",
+      "wallet": "Identitat",
       "amount": "Quantitat",
       "anonymous": "Anònim"
     }

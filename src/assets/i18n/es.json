@@ -242,7 +242,8 @@
       "sellingPrice":"Precio de venta",
       "availableBalance":"Saldo disponible",
       "myShares":"Mi compartición",
-      "communitaryShares":"Compartición communitária"
+      "communitaryShares":"Compartición communitária",
+      "anonymous": "Anónimo"
     },
     "tooltips": {
       "ekw": "EKW: Moneda para la compra y venta de energía en esta plataforma."
@@ -268,7 +269,7 @@
         "lessConsumption": "Usuarios que tienen menos consumo",
         "moreSurplus": "Usuarios que tienen más excedente"
       },
-      "wallet": "Cartera",
+      "wallet": "Identidad",
       "amount": "Cantidad",
       "anonymous": "Anónimo"
     }
