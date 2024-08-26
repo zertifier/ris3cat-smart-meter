@@ -203,7 +203,7 @@ export class UserWalletPageComponent implements AfterViewInit, OnDestroy {
         )
 
 
-        this.stripeService.setMintStatus(sessionId)
+        // this.stripeService.setMintStatus(sessionId)
 
       }
     }
