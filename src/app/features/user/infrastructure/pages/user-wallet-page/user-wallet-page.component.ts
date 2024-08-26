@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {AsyncPipe, CommonModule, DecimalPipe, NgIf} from "@angular/common";
 import {UserStoreService} from "../../services/user-store.service";
 import {EthersService} from "@shared/infrastructure/services/ethers.service";
@@ -7,7 +7,7 @@ import {QuestionBadgeComponent} from "@shared/infrastructure/components/question
 import {filter, Subscription} from "rxjs";
 import Swal from "sweetalert2";
 import {DaoService} from "@features/governance/infrastructure/services/dao.service";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {TransferModalComponent} from "./transfer-modal/transfer-modal.component";
 import {NoRoundDecimalPipe} from "@shared/infrastructure/pipes/no-round-decimal.pipe";
 import {TranslocoDirective, TranslocoService} from "@jsverse/transloco";
@@ -16,20 +16,25 @@ import { CustomerDTO } from '../../../../../shared/infrastructure/services/zerti
 import {BuyModalComponent} from "@features/user/infrastructure/pages/user-wallet-page/buy-modal/buy-modal.component";
 import {ActivatedRoute, Params} from "@angular/router";
 import {MintStatus, StripeService} from "@shared/infrastructure/services/zertipower/stripe/stripe.service";
+import {QrGeneratorComponent} from "@shared/infrastructure/components/qr-generator/qr-generator.component";
 
 @Component({
   selector: 'app-user-wallet-page',
   standalone: true,
-    imports: [
-        AsyncPipe,
-        FormsModule,
-        QuestionBadgeComponent,
-        DecimalPipe,
-        NoRoundDecimalPipe,
-        NgIf,
-        TranslocoDirective,
-        CommonModule
-    ],
+  imports: [
+    AsyncPipe,
+    FormsModule,
+    QuestionBadgeComponent,
+    DecimalPipe,
+    NoRoundDecimalPipe,
+    NgIf,
+    TranslocoDirective,
+    CommonModule,
+    QrGeneratorComponent
+  ],
+  providers: [
+    NgbActiveModal
+  ],
   templateUrl: './user-wallet-page.component.html',
   styleUrl: './user-wallet-page.component.scss'
 })
@@ -53,6 +58,8 @@ export class UserWalletPageComponent implements AfterViewInit, OnDestroy {
   userActionType: 'balance' | 'tokens' | 'betas' = 'balance';
 
   subscriptions: Subscription[] = [];
+
+  // public activeModal = inject(NgbActiveModal);
 
   constructor(
     private userStore: UserStoreService,

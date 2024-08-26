@@ -20,7 +20,7 @@
             class="form-control form-control-lg bg-white border-secondary border-2 shadow-none"
             [ngModel]="currentAmount | noRoundDecimal: 4">
           <button class="btn btn-tertiary rounded-end-3 form-button" type="button">XDAI</button>
-        
+
           }
 
           @if(userActionType=='balance' && customer && customer.balance >= 0 && this.userAction == 'pullOut'){
@@ -38,8 +38,11 @@
         {{ t('modals.transfer.texts.toLabel') }}
       </label>
       <div class="d-block">
-        <input type="text" class="form-control form-control-lg bg-white border-secondary border-2 shadow-none"
-          placeholder="{{ t('modals.transfer.texts.toPlaceholder') }}" [(ngModel)]="toDirection">
+        <app-qr-scanner (scanResult)="toDirection = $event">
+          <input type="text" class="form-control form-control-lg bg-white border-secondary border-2 shadow-none"
+                 placeholder="{{ t('modals.transfer.texts.toPlaceholder') }}" [(ngModel)]="toDirection">
+        </app-qr-scanner>
+
       </div>
       <small>{{ t('modals.transfer.texts.toBottomText') }}</small>
     </div>
