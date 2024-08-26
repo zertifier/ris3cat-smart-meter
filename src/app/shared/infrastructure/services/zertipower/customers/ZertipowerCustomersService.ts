@@ -22,6 +22,7 @@ export class ZertipowerCustomersService {
   }
 
   async getCustomerById(customerId: number) {
+    await this.get();
     if (this.customers.length > 0) {
       return this.customers.find(customer => customer.id == customerId)
     } else {

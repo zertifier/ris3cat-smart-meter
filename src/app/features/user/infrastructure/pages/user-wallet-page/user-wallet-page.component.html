@@ -50,12 +50,12 @@
               </div>
 
               <button class="btn btn-secondary bg-primary ms-0 ms-lg-3 mt-2 mt-lg-0 rounded-3 btn-default-length"
-                      type="button" (click)="openTransferModal('EKW', chainBalance, 'add','balance')">
+                      type="button" (click)="openTransferModal('EKW', ekwBalance, 'add','balance')">
                 {{ t('texts.addBalance') }}
               </button>
 
               <button class="btn btn-quaternary ms-0 ms-lg-3 mt-2 mt-lg-0 rounded-3 btn-default-length" type="button"
-                      (click)="openTransferModal('EKW', ekwBalance,'pullOut','balance')">
+                      (click)="openTransferModal('EKW', customer.balance,'pullOut','balance')">
                 {{ t('texts.pullOutBalance') }}
               </button>
 

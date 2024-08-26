@@ -1,22 +1,22 @@
-import {AfterViewInit, Component, inject, OnDestroy, OnInit} from '@angular/core';
-import {AsyncPipe, CommonModule, DecimalPipe, NgIf} from "@angular/common";
-import {UserStoreService} from "../../services/user-store.service";
-import {EthersService} from "@shared/infrastructure/services/ethers.service";
-import {FormsModule} from "@angular/forms";
-import {QuestionBadgeComponent} from "@shared/infrastructure/components/question-badge/question-badge.component";
-import {filter, Subscription} from "rxjs";
+import { AfterViewInit, Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { AsyncPipe, CommonModule, DecimalPipe, NgIf } from "@angular/common";
+import { UserStoreService } from "../../services/user-store.service";
+import { EthersService } from "@shared/infrastructure/services/ethers.service";
+import { FormsModule } from "@angular/forms";
+import { QuestionBadgeComponent } from "@shared/infrastructure/components/question-badge/question-badge.component";
+import { filter, Subscription } from "rxjs";
 import Swal from "sweetalert2";
-import {DaoService} from "@features/governance/infrastructure/services/dao.service";
-import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {TransferModalComponent} from "./transfer-modal/transfer-modal.component";
-import {NoRoundDecimalPipe} from "@shared/infrastructure/pipes/no-round-decimal.pipe";
-import {TranslocoDirective, TranslocoService} from "@jsverse/transloco";
+import { DaoService } from "@features/governance/infrastructure/services/dao.service";
+import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { TransferModalComponent } from "./transfer-modal/transfer-modal.component";
+import { NoRoundDecimalPipe } from "@shared/infrastructure/pipes/no-round-decimal.pipe";
+import { TranslocoDirective, TranslocoService } from "@jsverse/transloco";
 import { ZertipowerService } from '../../../../../shared/infrastructure/services/zertipower/zertipower.service';
 import { CustomerDTO } from '../../../../../shared/infrastructure/services/zertipower/customers/ZertipowerCustomersService';
-import {BuyModalComponent} from "@features/user/infrastructure/pages/user-wallet-page/buy-modal/buy-modal.component";
-import {ActivatedRoute, Params} from "@angular/router";
-import {MintStatus, StripeService} from "@shared/infrastructure/services/zertipower/stripe/stripe.service";
-import {QrGeneratorComponent} from "@shared/infrastructure/components/qr-generator/qr-generator.component";
+import { BuyModalComponent } from "@features/user/infrastructure/pages/user-wallet-page/buy-modal/buy-modal.component";
+import { ActivatedRoute, Params } from "@angular/router";
+import { MintStatus, StripeService } from "@shared/infrastructure/services/zertipower/stripe/stripe.service";
+import { QrGeneratorComponent } from "@shared/infrastructure/components/qr-generator/qr-generator.component";
 
 @Component({
   selector: 'app-user-wallet-page',
@@ -50,7 +50,7 @@ export class UserWalletPageComponent implements AfterViewInit, OnDestroy {
   voteWeight: number = 0
   communityId?: number
   customerId!: number
-  customer:CustomerDTO | undefined;
+  customer: CustomerDTO | undefined;
   walletAddress!: string;
 
   activeSection: 'Platform' | 'Blockchain' = 'Platform';
@@ -66,7 +66,7 @@ export class UserWalletPageComponent implements AfterViewInit, OnDestroy {
     private ethersService: EthersService,
     private daoService: DaoService,
     private modalService: NgbModal,
-    private zertipowerService:ZertipowerService,
+    private zertipowerService: ZertipowerService,
     private route: ActivatedRoute,
     private stripeService: StripeService,
     private translocoService: TranslocoService
@@ -88,7 +88,6 @@ export class UserWalletPageComponent implements AfterViewInit, OnDestroy {
       this.route.queryParams.subscribe(params => {
         if (params['blockchain'] == 'true') {
           this.activeSection = 'Blockchain'
-
           //Check if transloco is ready
           this.subscriptions.push(
             this.translocoService.events$.pipe(
@@ -97,36 +96,35 @@ export class UserWalletPageComponent implements AfterViewInit, OnDestroy {
               this.stripeCheckoutManagement(params)
             })
           )
-
-
-
         }
-
       })
     )
   }
 
   async getAllBalances(wallet: string) {
-    this.ethersService.getEKWBalance(wallet,).then((balance) => {
+    this.ethersService.getEKWBalance(wallet).then((balance) => {
       this.ekwBalance = balance
+      console.log("ekw", balance)
     })
     this.ethersService.getChainBalance(wallet).then((balance) => {
       this.chainBalance = balance
+      console.log("chain", balance)
     })
-    if (this.communityId){
+    if (this.communityId) {
       this.daoService.getDaoBalance(wallet, this.communityId).then((balance) => {
         this.voteWeight = balance
+        console.log("vote", balance)
       })
     }
     this.customer = await this.zertipowerService.customers.getCustomerById(this.customerId)
-
+    console.log("customer", this.customer)
   }
 
-  openTransferModal(type: 'DAO' | 'XDAI' | 'EKW', currentAmount: number, userAction:string, userActionType:string) {
-    const modalRef = this.modalService.open(TransferModalComponent, {size: 'lg'})
+  openTransferModal(type: 'DAO' | 'XDAI' | 'EKW', currentAmount: number, userAction: string, userActionType: string) {
+    const modalRef = this.modalService.open(TransferModalComponent, { size: 'lg' })
     modalRef.componentInstance.type = type
 
-    if(currentAmount){
+    if (currentAmount) {
       modalRef.componentInstance.currentAmount = currentAmount;
     }
 
@@ -134,27 +132,28 @@ export class UserWalletPageComponent implements AfterViewInit, OnDestroy {
     modalRef.componentInstance.userAction = userAction
     modalRef.componentInstance.userActionType = userActionType
 
-    if(this.customer){
+    if (this.customer) {
       modalRef.componentInstance.customer = this.customer
     }
 
-    modalRef.componentInstance.updateData.subscribe((res:boolean)=>{
-      if(res){
-        this.getAllBalances(this.walletAddress)
-      }
-    })
+    // modalRef.componentInstance.updateData.subscribe((res:boolean)=>{
+    //   if(res){
+    //     this.getAllBalances(this.walletAddress)
+    //   }
+    // })
 
     this.subscriptions.push(
       modalRef.closed.subscribe({
         next: () => {
+          console.log("modal closed")
           this.getAllBalances(this.walletAddress)
         }
       })
     )
   }
 
-  openAddEkwModal(){
-    const modalRef = this.modalService.open(BuyModalComponent, {size: 'lg'})
+  openAddEkwModal() {
+    const modalRef = this.modalService.open(BuyModalComponent, { size: 'lg' })
     this.subscriptions.push(
       modalRef.closed.subscribe({
         next: () => {
@@ -176,14 +175,14 @@ export class UserWalletPageComponent implements AfterViewInit, OnDestroy {
     })
   }
 
-  changeSection(activeSection: 'Platform' | 'Blockchain'){
+  changeSection(activeSection: 'Platform' | 'Blockchain') {
     this.activeSection = activeSection;
   }
 
-  async stripeCheckoutManagement(params: Params){
+  async stripeCheckoutManagement(params: Params) {
     const sessionId = params['session_id'];
     if (sessionId) {
-      if (params['success'] == 'false'){
+      if (params['success'] == 'false') {
         Swal.fire({
           icon: "error",
           text: this.translocoService.translate('MY-WALLET.swal.stripeCheckoutError'),
@@ -215,26 +214,26 @@ export class UserWalletPageComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  async swalMintStatus(status: MintStatus){
-    switch (status){
+  async swalMintStatus(status: MintStatus) {
+    switch (status) {
       case "ACCEPTED":
         Swal.hideLoading()
         Swal.update({
-        icon: 'success',
-        text: this.translocoService.translate('MY-WALLET.swal.stripeMintSuccess'),
-        showConfirmButton: true,
-        confirmButtonText: this.translocoService.translate('GENERIC.texts.okay')
-      })
+          icon: 'success',
+          text: this.translocoService.translate('MY-WALLET.swal.stripeMintSuccess'),
+          showConfirmButton: true,
+          confirmButtonText: this.translocoService.translate('GENERIC.texts.okay')
+        })
 
         break;
       case "ERROR":
         Swal.hideLoading()
         Swal.update({
-        icon: 'error',
-        text: this.translocoService.translate('MY-WALLET.swal.stripeMintError'),
-        showConfirmButton: true,
-        confirmButtonText: this.translocoService.translate('GENERIC.texts.okay')
-      })
+          icon: 'error',
+          text: this.translocoService.translate('MY-WALLET.swal.stripeMintError'),
+          showConfirmButton: true,
+          confirmButtonText: this.translocoService.translate('GENERIC.texts.okay')
+        })
         break;
 
       case "MINTING": Swal.fire({

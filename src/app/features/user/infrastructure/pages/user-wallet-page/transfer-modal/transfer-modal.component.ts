@@ -69,7 +69,7 @@ export class TransferModalComponent implements OnDestroy {
     } else if (this.type == 'XDAI' || (this.type == 'EKW' && this.userAction == 'add')) {
       const gasPrice = await this.ethersService.getCurrentGasPrice()
       this.amountToTransfer = parseFloat(this.noRoundDecimal.transform((this.currentAmount - gasPrice), 4))
-    } else if (this.userAction == 'pullOut') {
+    } else if (this.type == 'EKW' && this.userAction == 'pullOut') {
       this.amountToTransfer = this.customer?.balance;
     }
   }
