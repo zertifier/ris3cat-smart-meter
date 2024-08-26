@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {
@@ -14,6 +14,7 @@ import { ApiService } from "../../../../../../shared/infrastructure/services/api
 import { TranslocoDirective, TranslocoPipe, TranslocoService } from "@jsverse/transloco";
 import { ZertipowerService } from '../../../../../../shared/infrastructure/services/zertipower/zertipower.service';
 import { CustomerDTO } from '../../../../../../shared/infrastructure/services/zertipower/customers/ZertipowerCustomersService';
+import { QrScannerComponent } from "@shared/infrastructure/components/qr-scanner/qr-scanner.component";
 
 @Component({
   selector: 'app-transfer-modal',
@@ -25,7 +26,8 @@ import { CustomerDTO } from '../../../../../../shared/infrastructure/services/ze
     NoRoundDecimalPipe,
     NgIf,
     TranslocoDirective,
-    TranslocoPipe
+    TranslocoPipe,
+    QrScannerComponent
   ],
   providers: [NoRoundDecimalPipe],
   templateUrl: './transfer-modal.component.html',
@@ -45,6 +47,7 @@ export class TransferModalComponent implements OnDestroy {
 
   @Input() userAction: 'add' | 'pullOut' | 'transfer' = 'add';
   @Input() userActionType: 'balance' | 'tokens' | 'betas' = 'balance';
+  @Output() updateData = new EventEmitter<boolean>();
 
   subscriptions: Subscription[] = [];
 
@@ -105,13 +108,18 @@ export class TransferModalComponent implements OnDestroy {
         }
 
         this.zertipowerService.communities.deposit(this.amountToTransfer!)
-          .subscribe({
-            next: (res: any) => { Swal.fire('', 'saldo depositat', 'success') },
-            error: (error: any) => { }
+          .then(
+            (res: any) => {
+              Swal.fire('', 'saldo depositat', 'success')
+              this.updateData.emit(true);
+            }
+          ).catch((error: any) => {
+
+          }).finally(() => {
+            this.loading = false;
+            this.activeModal.close();
           })
 
-        this.loading = false;
-        this.activeModal.close();
         return;
 
       }
@@ -127,13 +135,17 @@ export class TransferModalComponent implements OnDestroy {
         }
 
         this.zertipowerService.communities.witdraw(this.amountToTransfer!)
-          .subscribe({
-            next: (res: any) => { Swal.fire('', 'saldo depositat', 'success') },
-            error: (error: any) => { }
+          .then(
+            (res: any) => {
+              Swal.fire('', 'saldo retirat', 'success')
+              this.updateData.emit(true);
+            }
+          ).catch((error: any) => { }).finally(() => {
+            this.loading = false;
+            this.activeModal.close();
           })
 
-        this.loading = false;
-        this.activeModal.close();
+
         return;
 
       }

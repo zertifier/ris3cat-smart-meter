@@ -444,7 +444,18 @@
       "language": "Idioma"
     }
   },
-
+  "QR": {
+    "import": {
+      "title": "Escaneja el QR",
+      "swal": {
+        "success": "QR importat correctament",
+        "error": "QR invàlid, només acceptem wallets"
+      }
+    },
+    "export": {
+      "title": "La teva wallet"
+    }
+  },
   "GENERIC": {
     "texts": {
       "months": {

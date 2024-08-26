@@ -7,7 +7,9 @@ import { UserStoreService } from "@features/user/infrastructure/services/user-st
 import { StripeService } from "@shared/infrastructure/services/zertipower/stripe/stripe.service";
 import { FormsModule } from "@angular/forms";
 import Swal from "sweetalert2";
-// import { createCowSwapWidget, CowSwapWidgetParams } from '@cowprotocol/widget-lib'
+
+// @ts-ignore
+//import { createCowSwapWidget, CowSwapWidgetParams } from '@cowprotocol/widget-lib'
 
 export type BuyType = "VISA" | "CRYPTO"
 
@@ -43,8 +45,7 @@ export class BuyModalComponent implements OnInit {
     this.createCryptoModal();
   }
 
-  createCryptoModal() {
-    
+  createCryptoModal() {    
     // let widgetContainer = this.el.nativeElement.querySelector('#cowswap-widget');
     // if (!widgetContainer) {
     //   widgetContainer = this.renderer.createElement('div');

@@ -46,14 +46,14 @@ export class ZertipowerCommunitiesService {
       pk,
       balance
     }
-    return this.http.put(`${ChartEntity.COMMUNITIES}/balance/deposit`, body);
+    return this.axios.put(`${ChartEntity.COMMUNITIES}/balance/deposit`, body);
   }
 
   witdraw(balance: number) {
     const body = {
       balance
     }
-    return this.http.put(`${ChartEntity.COMMUNITIES}/balance/witdraw`, body);
+    return this.axios.put(`${ChartEntity.COMMUNITIES}/balance/witdraw`, body);
   }
 
   private async getEnergyStats(resource: ChartEntity, resourceId: number, source: string, date: Date, dateRange: DateRange) {

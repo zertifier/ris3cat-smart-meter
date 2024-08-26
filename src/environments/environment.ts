@@ -4,6 +4,6 @@ export const environment = {
   real_time_energy_url: "https://api-public-ris3cat.zertifier.com",
   zertirpcs_url: "https://zertirpc.zertifier.com",
   defaultRpc: 'https://rpc.ankr.com/gnosis',
-  erc20_contract: "0x354F8703d5755BF063FC9018D073c1cFc069Ec46",
+  erc20_contract: "0x23d73f4B834166a3D48BE7b6F0411b6cd049506b",
   production: true,
 };

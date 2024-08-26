@@ -11,8 +11,8 @@ export type MintStatus = 'MINTING' | 'ACCEPTED' | 'ERROR'
   providedIn: 'root'
 })
 export class StripeService {
-  // baseUrl = environment.zertipower_url
-  baseUrl = 'http://localhost:3000'
+  baseUrl = environment.zertipower_url
+  // baseUrl = 'http://localhost:3000'
 
   mintStatus: BehaviorSubject<MintStatus> = new BehaviorSubject<MintStatus>('MINTING')
 
@@ -34,10 +34,7 @@ export class StripeService {
     const url = `${this.baseUrl}/stripe/session/${sessionId}/status`
     const socket = this.getMintSocket(sessionId)
 
-    socket.on('isMinted', (status: MintStatus) => {
-      this.mintStatus.next(status)
-      socket.close()
-    });
+
 
     const subscription = this.httpClient.get<HttpResponse<MintStatus>>(url).subscribe({
       next: data => {
@@ -49,6 +46,12 @@ export class StripeService {
         console.log(err)
       }
     })
+
+    socket.on('isMinted', (status: MintStatus) => {
+      subscription.unsubscribe()
+      socket.close()
+      this.mintStatus.next(status)
+    });
   }
 
   getMintSocket(sessionId: string){

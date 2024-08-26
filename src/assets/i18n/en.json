@@ -438,6 +438,19 @@
       "language": "Language"
     }
   },
+
+  "QR": {
+    "import": {
+      "title": "Scan the QR",
+      "swal": {
+        "success": "QR successfully imported",
+        "error": "Invalid QR, only wallets are accepted"
+      }
+    },
+    "export": {
+      "title": "Your wallet"
+    }
+  },
   "GENERIC": {
     "texts": {
       "months": {
