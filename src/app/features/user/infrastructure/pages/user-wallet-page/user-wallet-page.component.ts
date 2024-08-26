@@ -32,6 +32,9 @@ import {QrGeneratorComponent} from "@shared/infrastructure/components/qr-generat
     CommonModule,
     QrGeneratorComponent
   ],
+  providers: [
+    NgbActiveModal
+  ],
   templateUrl: './user-wallet-page.component.html',
   styleUrl: './user-wallet-page.component.scss'
 })
@@ -56,7 +59,7 @@ export class UserWalletPageComponent implements AfterViewInit, OnDestroy {
 
   subscriptions: Subscription[] = [];
 
-  public activeModal = inject(NgbActiveModal);
+  // public activeModal = inject(NgbActiveModal);
 
   constructor(
     private userStore: UserStoreService,

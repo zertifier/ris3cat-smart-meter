@@ -1,7 +1,8 @@
-import {AfterViewInit, Component, EventEmitter, inject, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, inject, OnDestroy, ViewChild} from '@angular/core';
 import {NgxScannerQrcodeComponent, NgxScannerQrcodeModule} from "ngx-scanner-qrcode";
 import {TranslocoPipe} from "@jsverse/transloco";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-qr-scanner-modal',
@@ -10,26 +11,40 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
     NgxScannerQrcodeModule,
     TranslocoPipe,
   ],
-  providers: [NgbActiveModal],
   templateUrl: './qr-scanner-modal.component.html',
   styleUrl: './qr-scanner-modal.component.scss'
 })
-export class QrScannerModalComponent  implements AfterViewInit{
+export class QrScannerModalComponent implements AfterViewInit, OnDestroy {
   activeModal = inject(NgbActiveModal);
   @ViewChild('scanner') scanner: NgxScannerQrcodeComponent | undefined;
 
-  @Output() scanResult = new EventEmitter<string>();
 
+  subscriptions: Subscription[] = []
 
   ngAfterViewInit() {
-    this.scanner?.isReady.subscribe((isReady) => {
-      if (isReady)
-        this.scanner!.start().subscribe((result: string) => {
-          this.scanResult.emit(result);
-          this.scanner?.stop()
-          this.activeModal.dismiss()
-        });
-    })
+    if (this.scanner)
+      this.subscriptions.push(
+        this.scanner.isReady.subscribe((isReady) => {
+          if (isReady)
+            this.subscriptions.push(
+              this.scanner!.start().subscribe(() => {
+                this.subscriptions.push(
+                  this.scanner!.event.subscribe((qrResult) => {
+                    if (qrResult) {
+                      this.scanner?.stop()
+                      this.activeModal.close(qrResult[0].value)
+                    }
+                  })
+                )
+              })
+            )
+        })
+      )
+
   }
 
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe())
+  }
 }

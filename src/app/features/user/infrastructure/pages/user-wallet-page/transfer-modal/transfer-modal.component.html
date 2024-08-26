@@ -38,7 +38,7 @@
         {{ t('modals.transfer.texts.toLabel') }}
       </label>
       <div class="d-block">
-        <app-qr-scanner >
+        <app-qr-scanner (scanResult)="toDirection = $event">
           <input type="text" class="form-control form-control-lg bg-white border-secondary border-2 shadow-none"
                  placeholder="{{ t('modals.transfer.texts.toPlaceholder') }}" [(ngModel)]="toDirection">
         </app-qr-scanner>
