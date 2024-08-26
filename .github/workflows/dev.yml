@@ -12,8 +12,8 @@ jobs:
     steps:
       - name: Pull changes
         run: |
-          git restore .
           cd /home/megatro/apps/dockers/Ris3Cat/dev-ris3cat-smart-meter
+          git restore .
           echo "Pulling and rebasing changes from github"
           git pull --rebase
 
