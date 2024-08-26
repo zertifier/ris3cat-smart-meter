@@ -36,6 +36,7 @@ export class QrScannerComponent {
   @Input() btnClasses?: string;
   @Input() modalSize: 'xl' | 'lg' | 'md' | 'sm' = 'md';
 
+  defaultClasses = 'bg-white border-secondary border-2 border-start-0 shadow-none rounded-end-3'
   openQrModal() {
     const qrModal = this.modalService.open(QrScannerModalComponent, {size: this.modalSize})
     qrModal.closed.subscribe((qrResult) => {

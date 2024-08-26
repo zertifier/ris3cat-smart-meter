@@ -2,7 +2,7 @@
 
 <div class="input-group">
   <ng-content/>
-  <button class="input-group-text border-0" [ngClass]="btnClasses" (click)="openQrModal()"
+  <button class="d-flex justify-content-center align-items-center" [ngClass]="btnClasses ? btnClasses : defaultClasses" (click)="openQrModal()"
           [style]="{'width': btnPxWidth || '50px'}">
     <i class="fa-solid fa-qrcode"></i>
   </button>
