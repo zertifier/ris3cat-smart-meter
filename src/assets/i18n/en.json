@@ -149,14 +149,14 @@
       "energyAmount": "Energy tokens",
       "tokenAmount": "Blockchain balance",
       "communityShare": "Community shares",
-      "addEnergy": "Add tokens",
+      "addEnergy": "Buy tokens",
       "transferEnergy": "Transfer tokens",
       "transferToken": "Transfer balance",
       "transferShare": "Transfer shares",
       "platformSection": "Platform",
       "blockchainSection": "Blockchain",
       "communityBalance": "Energy balance within the CCE",
-      "addBalance": "Add tokens",
+      "addBalance": "Buy tokens",
       "pullOutBalance": "Withdraw tokens"
     },
     "tooltips": {

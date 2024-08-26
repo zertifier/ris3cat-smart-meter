@@ -151,14 +151,14 @@
       "energyAmount": "Saldo energético",
       "tokenAmount": "Saldo",
       "communityShare": "Participaciones de la comunidad",
-      "addEnergy": "Afegir tokens",
+      "addEnergy": "Comprar tokens",
       "transferEnergy": "Transferir saldo",
       "transferToken": "Transferir XDAI",
       "transferShare": "Transferir betas",
       "platformSection":"Plataforma",
       "blockchainSection":"Blockchain",
       "communityBalance":"Saldo energético dentro de la CCE",
-      "addBalance":"Añadir tokens",
+      "addBalance":"Comprar tokens",
       "pullOutBalance":"Retirar tokens"
     },
     "tooltips": {
