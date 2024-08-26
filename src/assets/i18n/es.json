@@ -90,9 +90,12 @@
         "networkActiveConsumption": "Consumo de la red activos",
         "surplus": "Excedente",
         "surplusActive": "Excedente activos",
-        "surplusActiveShared": "Excedente activos compartido"
-
-
+        "surplusActiveShared": "Excedente activos compartido",
+        "totalProduction": "Producción total",
+        "totalActiveProduction": "Producción activa total",
+        "totalConsumption": "Consumo total",
+        "totalSurplus": "Excedente total",
+        "totalCo2": "CO2 total compensado"
       },
       "displayLegend": "Mostrar la leyenda",
       "maximize": "Ampliar",

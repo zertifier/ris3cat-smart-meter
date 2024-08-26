@@ -90,8 +90,12 @@
         "networkActiveConsumption": "Consum de la xarxa actius",
         "surplus": "Excedent",
         "surplusActive": "Excedent actius",
-        "surplusActiveShared": "Excedent actius comprartit"
-
+        "surplusActiveShared": "Excedent actius comprartit",
+        "totalProduction": "Total producció",
+        "totalActiveProduction": "Total producció activa",
+        "totalConsumption": "Total consum ",
+        "totalSurplus": "Total excedent",
+        "totalCo2": "Total CO2 compensat"
 
       },
       "displayLegend": "Mostrar la llegenda",
@@ -191,7 +195,7 @@
       "buy": {
         "title": "Mètode de pagament",
         "texts": {
-          "qtyLabel": "Quantiat a comprar",
+          "qtyLabel": "Quantitat a comprar",
           "qtyPlaceholder": "Prova afegint 3"
         },
         "swal": {

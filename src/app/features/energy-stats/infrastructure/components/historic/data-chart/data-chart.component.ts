@@ -122,7 +122,7 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
             // production = production - productionActives.
             //
             // The problem comes when it's necessary to display the tooltip. It has to show the correct values.
-            if (context.dataset.label === "Producció" && chartEntity.selectedChartEntity === ChartEntity.COMMUNITIES) {
+            if (context.dataset.stack === "Production" && chartEntity.selectedChartEntity === ChartEntity.COMMUNITIES) {
               const value = context.raw;
               const register = this.chartStoreService.snapshot().lastFetchedStats[context.dataIndex];
               // Here the correct production es being calculated to show the correct value on tooltip
@@ -131,7 +131,7 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
               formattedValue = total.toLocaleString();
             }
 
-            if (context.dataset.label === "Consum" && chartEntity.selectedChartEntity === ChartEntity.CUPS) {
+            if (context.dataset.stack === "Consumption" && chartEntity.selectedChartEntity === ChartEntity.CUPS) {
               const showEnergy = this.chartStoreService.snapshot().selectedChartResource === ChartResource.ENERGY;
               const register = this.chartStoreService.snapshot().lastFetchedStats[context.dataIndex];
               const consumption = showEnergy ? register.kwhIn : +(register.kwhInPrice * register.kwhIn).toFixed(2);
@@ -150,11 +150,11 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
 
             if (chartEntity.selectedChartEntity === ChartEntity.COMMUNITIES) {
               const stat = this.chartStoreService.snapshot().lastFetchedStats[context.dataIndex];
-              if (context.dataset.label === "Excedent actius") {
+              if (context.dataset.stack === "Active surplus") {
                 labels.push(`Membres actius: ${stat.activeMembers}`);
                 labels.push(`----------------`);
 
-              } else if (context.dataset.label === "Producció") {
+              } else if (context.dataset.stack === "Production") {
                 for (const cups of stat.communitiesCups) {
                   if (cups.kwhOut > 0)
                     labels.push(`${cups.reference || cups.cups} : ${cups.kwhOut || 0} KWh`)

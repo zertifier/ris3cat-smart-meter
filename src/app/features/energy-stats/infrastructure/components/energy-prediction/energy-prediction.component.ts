@@ -25,6 +25,7 @@ export class EnergyPredictionComponent implements OnInit, OnDestroy {
   @Input() community: boolean = true;
   datasets: ChartDataset[] = [
     {
+      id: "production",
       color: StatsColors.COMMUNITY_PRODUCTION,
       label: 'Producció',
       data: [1, 2, 3, 4, 5, 6],
@@ -71,6 +72,7 @@ export class EnergyPredictionComponent implements OnInit, OnDestroy {
 
     this.datasets = [
       {
+        id: "production",
         color: StatsColors.COMMUNITY_PRODUCTION,
         label: 'Producció',
         data: Array.from(dailyPrediction.values()),
