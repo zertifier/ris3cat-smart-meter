@@ -4,7 +4,7 @@ import {UserStoreService} from "../../services/user-store.service";
 import {EthersService} from "@shared/infrastructure/services/ethers.service";
 import {FormsModule} from "@angular/forms";
 import {QuestionBadgeComponent} from "@shared/infrastructure/components/question-badge/question-badge.component";
-import {filter, Subscription} from "rxjs";
+import {filter, first, Subscription} from "rxjs";
 import Swal from "sweetalert2";
 import {DaoService} from "@features/governance/infrastructure/services/dao.service";
 import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
@@ -92,8 +92,10 @@ export class UserWalletPageComponent implements AfterViewInit, OnDestroy {
           //Check if transloco is ready
           this.subscriptions.push(
             this.translocoService.events$.pipe(
-              filter(e => e.type === 'translationLoadSuccess')
+              filter(e => e.type === 'translationLoadSuccess'), first()
             ).subscribe(() => {
+              console.log("bbbb")
+
               this.stripeCheckoutManagement(params)
             })
           )
@@ -186,24 +188,24 @@ export class UserWalletPageComponent implements AfterViewInit, OnDestroy {
         return
       }
       if (params['success'] == 'true') {
-        const loadingSwal = await Swal.fire({
+        /*const loadingSwal = await Swal.fire({
           text: "S'esta processant la teva petició",
           didOpen: () => {
             Swal.showLoading();
-
           }
-        })
+        })*/
+        // loadingSwal.dismiss
 
         this.subscriptions.push(
           this.stripeService.mintStatus.subscribe((status) => {
-            loadingSwal.dismiss
+            // loadingSwal.dismiss
 
             this.swalMintStatus(status)
           })
         )
 
 
-        // this.stripeService.setMintStatus(sessionId)
+        this.stripeService.setMintStatus(sessionId)
 
       }
     }
@@ -213,7 +215,7 @@ export class UserWalletPageComponent implements AfterViewInit, OnDestroy {
     switch (status){
       case "ACCEPTED":
         Swal.hideLoading()
-        Swal.update({
+        Swal.fire({
         icon: 'success',
         text: this.translocoService.translate('MY-WALLET.swal.stripeMintSuccess'),
         showConfirmButton: true,
@@ -223,7 +225,7 @@ export class UserWalletPageComponent implements AfterViewInit, OnDestroy {
         break;
       case "ERROR":
         Swal.hideLoading()
-        Swal.update({
+        Swal.fire({
         icon: 'error',
         text: this.translocoService.translate('MY-WALLET.swal.stripeMintError'),
         showConfirmButton: true,
