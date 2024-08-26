@@ -34,10 +34,7 @@ export class StripeService {
     const url = `${this.baseUrl}/stripe/session/${sessionId}/status`
     const socket = this.getMintSocket(sessionId)
 
-    socket.on('isMinted', (status: MintStatus) => {
-      this.mintStatus.next(status)
-      socket.close()
-    });
+
 
     const subscription = this.httpClient.get<HttpResponse<MintStatus>>(url).subscribe({
       next: data => {
@@ -49,6 +46,12 @@ export class StripeService {
         console.log(err)
       }
     })
+
+    socket.on('isMinted', (status: MintStatus) => {
+      subscription.unsubscribe()
+      socket.close()
+      this.mintStatus.next(status)
+    });
   }
 
   getMintSocket(sessionId: string){
