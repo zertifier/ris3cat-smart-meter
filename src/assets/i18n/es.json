@@ -135,7 +135,9 @@
       "titleConsumption":"Predicción de consumo energético",
       "titleProduction":"Predicción de producción energético",
       "titleSurplus":"Predicción de excedente energético",
-      "unavailable":"No disponible"
+      "unavailable":"No disponible",
+      "surplusDescription":"* Solo hay dos días disponibles de la predicción del excedente.",
+      "productionDescription":"* Solo hay 2 días disponibles de la predicción de producción."
     }
   },
   "PROFILE": {
@@ -155,6 +157,7 @@
       "energyAmount": "Saldo energético",
       "tokenAmount": "Saldo",
       "communityShare": "Participaciones de la comunidad",
+      "addEnergy": "Afegir tokens",
       "transferEnergy": "Transferir saldo",
       "transferToken": "Transferir XDAI",
       "transferShare": "Transferir betas",
@@ -189,7 +192,24 @@
           "wrongDestinyError": "Destinatario incorrecto.",
           "success": "Transferencia enviada correctamente."
         }
+      },
+      "buy": {
+        "title": "Método de pago",
+        "texts": {
+          "qtyLabel": "Cantidad a comprar",
+          "qtyPlaceholder": "Prueba añadiendo 3"
+        },
+        "swal": {
+          "qtyError": "La cantidad debe ser superior a 0",
+          "userError": "Primero debes iniciar sesión"
+        }
       }
+    },
+    "swal": {
+      "stripeCheckoutError": "Hubo un error al procesar tu solicitud. Por favor, inténtalo de nuevo en unos minutos.",
+      "stripeMintSuccess": "El pago se completó con éxito.",
+      "stripeMintError": "Hubo un problema con la solicitud. Lo intentaremos de nuevo automáticamente en unos minutos.",
+      "stripeMintingWait": "Tu solicitud está siendo procesada."
     }
   },
   "SHARE-ENERGY": {
@@ -225,7 +245,7 @@
       "communitaryShares":"Compartición communitária"
     },
     "tooltips": {
-      "ekw": "EKW: Moneda ficticia para la compra y venta de energía en esta plataforma."
+      "ekw": "EKW: Moneda para la compra y venta de energía en esta plataforma."
     }
   },
   "STATUS": {

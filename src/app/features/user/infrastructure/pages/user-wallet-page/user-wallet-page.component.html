@@ -111,8 +111,8 @@
               <input readonly id="wallet" type="text"
                 class="form-control form-control-lg bg-white border-secondary border-2 shadow-none"
                 [value]="wallet$ | async">
-                
-                  
+
+
             </div>
 
             <a [href]="'https://gnosisscan.io/address/' + (wallet$ | async)" target="_blank" type="button" class="btn btn-secondary bg-primary ms-0 ms-lg-3 mt-2 mt-lg-0 rounded-3 btn-default-length d-flex justify-content-center align-items-center" >
@@ -150,6 +150,10 @@
             <button class="btn btn-secondary bg-primary ms-0 ms-lg-3 mt-2 mt-lg-0 rounded-3 btn-default-length"
               type="button" (click)="openTransferModal('EKW', ekwBalance, 'transfer','tokens')">
               {{ t('texts.transferEnergy') }}
+            </button>
+            <button class="btn btn-secondary bg-primary ms-0 ms-lg-3 mt-2 mt-lg-0 rounded-3 btn-default-length"
+              type="button" (click)="openAddEkwModal()">
+              {{ t('texts.addEnergy') }}
             </button>
           </div>
 

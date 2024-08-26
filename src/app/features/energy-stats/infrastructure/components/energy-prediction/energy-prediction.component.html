@@ -11,8 +11,8 @@
   @for(prediction of productionPrediction; track $index) {
     <div class="col-4 col-md-2 d-flex flex-column mb-3" >
       @if(prediction.value>-1){
-        <div class="circle production">{{prediction.value}}</div>
-        <div class="text-center mt-2">{{prediction.date}}</div>
+        <div class="circle production">{{prediction.value}} kWh</div>
+        <div class="text-center mt-2">{{prediction.date}} </div>
       } 
       @else {
         <div class="circle unavailable text-center">{{ t('energy.unavailable') }}</div>
@@ -20,6 +20,7 @@
       }
     </div>
   }
+  {{ t('energy.productionDescription') }}
 </div>
 <!--  -->
 
@@ -31,7 +32,7 @@
   @for(prediction of surplusPrediction; track $index) {
     <div class="col-4 col-md-2 d-flex flex-column mb-3" >
       @if(prediction.value>-1){
-        <div class="circle production">{{prediction.value}}</div>
+        <div class="circle surplus">{{prediction.value}} kWh</div>
         <div class="text-center mt-2">{{prediction.date}}</div>
       } 
       @else {
@@ -40,7 +41,9 @@
       }
     </div>
   }
+  {{ t('energy.surplusDescription') }}
 </div>
+
 <!--  -->
 
     <!-- PREDICCIÓ CONSUM ENERGIA -->
@@ -50,7 +53,7 @@
     <div class="row">
       @for(prediction of consumptionPrediction; track $index) {
         <div class="col-4 col-md-2 d-flex flex-column mb-3" >
-          <div class="circle consumption">{{prediction.value}}</div>
+          <div class="circle consumption">{{prediction.value}} kWh</div>
           <div class="text-center mt-2">{{prediction.date}}</div>
         </div>
       }
