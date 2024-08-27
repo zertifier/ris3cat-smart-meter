@@ -4,7 +4,7 @@
   <div class="row justify-content-evenly mb-3">
     <div class="col-12 col-lg-4">
       <h5 class="subtitle">{{ t('texts.dataType.title') }}</h5>
-      <select class="form-select w-100" readonly (change)="setChartResource($event)">
+      <select class="form-select w-100 bg-white" readonly (change)="setChartResource($event)">
         <option [value]="ChartResource.ENERGY" [selected]="(chartResource$ | async) === ChartResource.ENERGY">
           {{ t('texts.dataType.types.energy') }}
         </option>
@@ -22,7 +22,7 @@
           <strong>{{ t('texts.communityModel.types.cce') }}</strong> {{ t('tooltips.communityModel.cce') }}
         </app-question-badge>
       </h5>
-      <select class="form-select w-100" (change)="setChartType($event)">
+      <select class="form-select w-100 bg-white" (change)="setChartType($event)">
         <option [selected]="(chartType$ | async) === ChartType.ACC">{{ t('texts.communityModel.types.acc') }}</option>
         <option [selected]="(chartType$ | async) === ChartType.CCE">{{ t('texts.communityModel.types.cce') }}</option>
       </select>
@@ -34,7 +34,7 @@
           {{ t('tooltips.dataSource') }}
         </app-question-badge>
       </h5>
-      <select class="form-select w-100">
+      <select class="form-select w-100 bg-white">
         <option selected>{{ t('texts.dataSource.types.datadis') }}</option>
       </select>
     </div>

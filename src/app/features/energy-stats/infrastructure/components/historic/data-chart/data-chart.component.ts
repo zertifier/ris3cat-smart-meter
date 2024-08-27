@@ -135,7 +135,7 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
               const showEnergy = this.chartStoreService.snapshot().selectedChartResource === ChartResource.ENERGY;
               const register = this.chartStoreService.snapshot().lastFetchedStats[context.dataIndex];
               const consumption = showEnergy ? register.kwhIn : +(register.kwhInPrice * register.kwhIn).toFixed(2);
-              formattedValue = consumption.toLocaleString();
+              if (consumption) consumption.toLocaleString();
             }
 
             const unit = this.getLabelText(chartEntity);
