@@ -64,6 +64,10 @@
         <app-chart-legend [labels]="legendLabels"/>
       </div>
         }
+    <div *ngIf="datasets.length">
+      <hr class="my-5">
+      <app-data-totals [datasets]="datasets"/>
+    </div>
 
   } @else {
     <div class="w-100 d-flex justify-content-center flex-column gap-2 align-items-center">

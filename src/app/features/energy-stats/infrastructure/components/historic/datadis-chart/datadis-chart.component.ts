@@ -20,6 +20,9 @@ import {
 import {ChartDataset} from "@shared/infrastructure/interfaces/ChartDataset";
 import dayjs from '@shared/utils/dayjs';
 import {TranslocoDirective, TranslocoService} from "@jsverse/transloco";
+import {
+  DataTotalsComponent
+} from "@features/energy-stats/infrastructure/components/historic/data-totals/data-totals.component";
 
 @Component({
   selector: 'app-datadis-chart',
@@ -30,7 +33,8 @@ import {TranslocoDirective, TranslocoService} from "@jsverse/transloco";
     DataChartComponent,
     NgIf,
     JsonPipe,
-    TranslocoDirective
+    TranslocoDirective,
+    DataTotalsComponent
   ],
   templateUrl: './datadis-chart.component.html',
   styleUrl: './datadis-chart.component.scss'
@@ -144,6 +148,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
 
                 if (cce) {
                   datasets.push({
+                    id: "surplusActiveShared",
                     order: 2,
                     label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.surplusActiveShared'),
                     // tooltipText: community ? 'Quantitat d’energia per compartir que es produeix i no es consumeix dels participans actius.' : 'Quantitat d’energia per compartir que es produeix i no es consumeix dels participans actius.',
@@ -153,29 +158,32 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                   })
                 } else {
                   datasets.push({
+                    id: "surplusActive",
                     order: 2,
                     label: community ? this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.surplusActive') : this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.surplus'),
                     // tooltipText: community ? 'Quantitat d’energia que es produeix i no es consumeix dels participans actius.' : 'Quantitat d\'energia que es produeix i no es consumeix.',
                     tooltipText: community ? this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.community.surplusActive') : this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.cups.surplusActive') ,
                     color: StatsColors.SURPLUS,
                     data: mappedData.map(d => d.surplus),
-                    stack: 'Stack 2',
+                    stack: 'Active surplus',
                   })
                 }
 
                 if (community) {
                   datasets.unshift(
                     {
+                      id: "productionActive",
                       order: 0,
                       // label: 'Producció actius',
                       label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.productionActive'),
                       tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.community.activeProduction') ,
                       color: StatsColors.ACTIVE_COMMUNITY_PRODUCTION,
                       data: mappedData.map(d => d.productionActives),
-                      stack: 'Excedent',
+                      stack: 'Production',
                       yAxisID: 'y'
                     },
                     {
+                      id: "production",
                       order: 3,
                       color: StatsColors.COMMUNITY_PRODUCTION,
                       // label: 'Producció',
@@ -188,10 +196,11 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                         }
                         return d.production - d.productionActives;
                       }),
-                      stack: 'Excedent',
+                      stack: 'Production',
                       yAxisID: 'y'
                     },
                     {
+                      id: "networkActiveConsumption",
                       // label: 'Consum del a xarxa actius',
                       label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.networkActiveConsumption'),
                       data: mappedData.map(d => {
@@ -216,6 +225,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                   // })
                 } else {
                   datasets.unshift({
+                    id: "networkConsumption",
                     // label: 'Consum de la xarxa',
                     label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.networkConsumption'),
                     color: StatsColors.SELF_CONSUMPTION,
@@ -228,6 +238,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                     yAxisID: 'y'
                   })
                   datasets.unshift({
+                    id: "production",
                     // label: 'Producció',
                     label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.production'),
                     // tooltipText: 'Producció proporcional comunitaria',
@@ -350,6 +361,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.datasets = []
     this.subscriptions.forEach(s => s.unsubscribe());
   }
 }

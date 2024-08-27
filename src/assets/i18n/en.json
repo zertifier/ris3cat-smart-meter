@@ -90,7 +90,12 @@
         "networkActiveConsumption": "Active network consumption",
         "surplus": "Surplus",
         "surplusActive": "Active surplus",
-        "surplusActiveShared": "Active shared surplus"
+        "surplusActiveShared": "Active shared surplus",
+        "totalProduction": "Total Production",
+        "totalActiveProduction": "Total Active Production",
+        "totalConsumption": "Total Consumption",
+        "totalSurplus": "Total Surplus",
+        "totalCo2": "Total CO2 Offset"
       },
       "displayLegend": "Show legend",
       "maximize": "Maximize",

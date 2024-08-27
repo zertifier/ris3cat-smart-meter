@@ -3,61 +3,63 @@
   <div class="mb-3">
     <!-- <app-energy-prediction-chart [dataset]="datasets" [labels]="labels"/> -->
 
-<!-- PREDICCIÓ PRODUCCIÓ ENERGIA -->
-<div class="row">
-  <h5 style="margin: 2rem 0 2rem 0;" class="fw-bold text-center">{{ t('energy.titleProduction') }}</h5>
-</div>
-<div class="row">
-  @for(prediction of productionPrediction; track $index) {
-    <div class="col-4 col-md-2 d-flex flex-column mb-3" >
-      @if(prediction.value>-1){
-        <div class="circle production">{{prediction.value}} kWh</div>
-        <div class="text-center mt-2">{{prediction.date}} </div>
-      } 
-      @else {
-        <div class="circle unavailable text-center">{{ t('energy.unavailable') }}</div>
-        <div class="text-center mt-2">{{prediction.date}}</div>
-      }
+    <!-- PREDICCIÓ PRODUCCIÓ ENERGIA -->
+    <div *ngIf="productionPrediction.length">
+      <div class="row">
+        <h5 style="margin: 2rem 0 2rem 0;" class="fw-bold text-center">{{ t('energy.titleProduction') }}</h5>
+      </div>
+      <div class="row">
+        @for (prediction of productionPrediction; track $index) {
+          <div class="col-4 col-md-2 d-flex flex-column mb-3">
+            @if (prediction.value > -1) {
+              <div class="circle production">{{ prediction.value }} kWh</div>
+              <div class="text-center mt-2">{{ prediction.date }}</div>
+            } @else {
+              <div class="circle unavailable text-center">{{ t('energy.unavailable') }}</div>
+              <div class="text-center mt-2">{{ prediction.date }}</div>
+            }
+          </div>
+        }
+        {{ t('energy.productionDescription') }}
+      </div>
     </div>
-  }
-  {{ t('energy.productionDescription') }}
-</div>
-<!--  -->
+    <!--  -->
 
-<!-- PREDICCIÓ EXCEDENT ENERGIA -->
-<div class="row">
-  <h5 style="margin: 2rem 0 2rem 0;" class="fw-bold text-center">{{ t('energy.titleSurplus') }}</h5>
-</div>
-<div class="row">
-  @for(prediction of surplusPrediction; track $index) {
-    <div class="col-4 col-md-2 d-flex flex-column mb-3" >
-      @if(prediction.value>-1){
-        <div class="circle surplus">{{prediction.value}} kWh</div>
-        <div class="text-center mt-2">{{prediction.date}}</div>
-      } 
-      @else {
-        <div class="circle unavailable text-center">{{ t('energy.unavailable') }}</div>
-        <div class="text-center mt-2">{{prediction.date}}</div>
-      }
+    <!-- PREDICCIÓ EXCEDENT ENERGIA -->
+    <div *ngIf="surplusPrediction.length">
+      <h5 style="margin: 2rem 0 2rem 0;" class="fw-bold text-center">{{ t('energy.titleSurplus') }}</h5>
+      <div class="row">
+        @for (prediction of surplusPrediction; track $index) {
+          <div class="col-4 col-md-2 d-flex flex-column mb-3">
+            @if (prediction.value > -1) {
+              <div class="circle surplus">{{ prediction.value }} kWh</div>
+              <div class="text-center mt-2">{{ prediction.date }}</div>
+            } @else {
+              <div class="circle unavailable text-center">{{ t('energy.unavailable') }}</div>
+              <div class="text-center mt-2">{{ prediction.date }}</div>
+            }
+          </div>
+        }
+        {{ t('energy.surplusDescription') }}
+      </div>
     </div>
-  }
-  {{ t('energy.surplusDescription') }}
-</div>
 
-<!--  -->
+
+    <!--  -->
 
     <!-- PREDICCIÓ CONSUM ENERGIA -->
-    <div class="row">
+    <div *ngIf="consumptionPrediction.length">
       <h5 style="margin: 2rem 0 2rem 0;" class="fw-bold text-center">{{ t('energy.titleConsumption') }}</h5>
+      <div class="row">
+        @for (prediction of consumptionPrediction; track $index) {
+          <div class="col-4 col-md-2 d-flex flex-column mb-3">
+            <div class="circle consumption">{{ prediction.value }} kWh</div>
+            <div class="text-center mt-2">{{ prediction.date }}</div>
+          </div>
+        }
+      </div>
     </div>
-    <div class="row">
-      @for(prediction of consumptionPrediction; track $index) {
-        <div class="col-4 col-md-2 d-flex flex-column mb-3" >
-          <div class="circle consumption">{{prediction.value}} kWh</div>
-          <div class="text-center mt-2">{{prediction.date}}</div>
-        </div>
-      }
-    </div>
+
     <!--  -->
 
   </div>

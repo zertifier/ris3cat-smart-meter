@@ -10,13 +10,15 @@ import { getDayTranslated } from "@shared/utils/DatesUtils";
 import { Subscription } from "rxjs";
 import moment from 'moment';
 import 'moment/locale/ca';
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-energy-prediction',
   standalone: true,
   imports: [
     EnergyPredictionChartComponent,
-    TranslocoDirective
+    TranslocoDirective,
+    NgIf
   ],
   templateUrl: './energy-prediction.component.html',
   styleUrl: './energy-prediction.component.scss'
@@ -27,6 +29,7 @@ export class EnergyPredictionComponent implements OnInit, OnDestroy {
   @Input() community: boolean = true;
   datasets: ChartDataset[] = [
     {
+      id: "production",
       color: StatsColors.COMMUNITY_PRODUCTION,
       label: 'Producció',
       data: [1, 2, 3, 4, 5, 6],
@@ -71,9 +74,6 @@ export class EnergyPredictionComponent implements OnInit, OnDestroy {
       consumptionPredictionResponse = await this.energyPredictionService.getCommunityConsumptionPrediction(cupsId, weekInit, weekEnd)
     }
 
-
-    console.log("consumption prediction", this.consumptionPrediction)
-
     this.consumptionPrediction = consumptionPredictionResponse.map((consumptionPredictionDay: any, index: number) => {
       consumptionPredictionDay.date = moment(consumptionPredictionDay.date, 'YYYY-MM-DD').format('dddd')
       let value = consumptionPredictionDay.consumption
@@ -89,30 +89,36 @@ export class EnergyPredictionComponent implements OnInit, OnDestroy {
       const value = dailyPrediction.get(parsedDate) || 0;
       dailyPrediction.set(parsedDate, value + predictionEntry.value);
     }
-    console.log("dailyPrediction", dailyPrediction)
 
     const productionPredictionArray: Array<{ date: string, value: number }> = Array.from(
       dailyPrediction,
-      ([date, value]) => ({ date, value: value })
+      ([date, value]) => ({date, value: value})
     );
 
-    // productionPredictionArray.map((production, index) => {
-    //   if (production && production.value && (production.date == this.consumptionPrediction[index].date)) {
-    //     this.productionPrediction.push(production);
-    //     let surplusPrediction = production.value - this.consumptionPrediction[index].value;
-    //     if (surplusPrediction > 0) {
-    //       this.surplusPrediction.push({date:production.date,value:surplusPrediction})
-    //     } else {
-    //       this.surplusPrediction.push({date:production.date,value:0})
-    //     }
-    //   } else {
-    //     this.productionPrediction.push({date:production.date,value:-1})
+    this.datasets = [
+      {
+        id: "production",
+        color: StatsColors.COMMUNITY_PRODUCTION,
+        label: 'Producció',
+        data: Array.from(dailyPrediction.values()),
+        // productionPredictionArray.map((production, index) => {
+        //   if (production && production.value && (production.date == this.consumptionPrediction[index].date)) {
+        //     this.productionPrediction.push(production);
+        //     let surplusPrediction = production.value - this.consumptionPrediction[index].value;
+        //     if (surplusPrediction > 0) {
+        //       this.surplusPrediction.push({date:production.date,value:surplusPrediction})
+        //     } else {
+        //       this.surplusPrediction.push({date:production.date,value:0})
+        //     }
+        //   } else {
+        //     this.productionPrediction.push({date:production.date,value:-1})
     //     this.surplusPrediction.push({date:production.date,value:-1})
     //   }
     // })
+        }]
 
     this.consumptionPrediction.map((consumption, index) => {
-      if (productionPredictionArray[index] && productionPredictionArray[index].value 
+      if (productionPredictionArray[index] && productionPredictionArray[index].value
         && (productionPredictionArray[index].date == this.consumptionPrediction[index].date)) {
           productionPredictionArray[index].value = Number(productionPredictionArray[index].value.toFixed(2))
         this.productionPrediction.push(productionPredictionArray[index]);
@@ -127,8 +133,6 @@ export class EnergyPredictionComponent implements OnInit, OnDestroy {
         this.surplusPrediction.push({date:consumption.date,value:-1})
       }
     })
-
-    console.log("production prediction", productionPredictionArray)
 
     // this.datasets = [
     //   {
