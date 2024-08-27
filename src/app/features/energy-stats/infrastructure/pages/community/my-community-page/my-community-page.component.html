@@ -1,4 +1,4 @@
-<ng-container *transloco="let t; prefix: 'MY-COMMUNITY'">
+<ng-container *transloco="let t; prefix: 'MY-COMMUNITY'" class="w-100">
   <div class="container-page">
     <div class="d-flex flex-wrap justify-content-between flex-wrap-reverse gap-5">
       <h4 style="font-weight: 600;">{{ t('title') }}</h4>
@@ -66,7 +66,7 @@
     </div>
   </div>
 
-  <div class="container-page-cups mb-5">
+  <div class="row mx-0 mb-5">
     <div class="col-12 prediction-container">
       <app-energy-prediction [community]="true" />
     </div>
