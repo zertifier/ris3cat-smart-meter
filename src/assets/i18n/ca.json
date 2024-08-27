@@ -158,14 +158,14 @@
       "energyAmount": "Tokens energètics",
       "tokenAmount": "Saldo blockchain",
       "communityShare": "Betas de la comunitat",
-      "addEnergy": "Afegir tokens",
+      "addEnergy": "Comprar tokens",
       "transferEnergy": "Transferir tokens",
       "transferToken": "Transferir saldo",
       "transferShare": "Transferir betas",
       "platformSection":"Plataforma",
       "blockchainSection":"Blockchain",
       "communityBalance":"Saldo energètic dins de la CCE",
-      "addBalance":"Afegir tokens",
+      "addBalance":"Comprar tokens",
       "pullOutBalance":"Retirar tokens"
     },
     "tooltips": {
