@@ -5,9 +5,7 @@
 
     <!-- PREDICCIÓ PRODUCCIÓ ENERGIA -->
     <div *ngIf="productionPrediction.length">
-      <div class="row">
-        <h5 style="margin: 2rem 0 2rem 0;" class="fw-bold text-center">{{ t('energy.titleProduction') }}</h5>
-      </div>
+      <h5 style="margin: 2rem 0 2rem 0;" class="fw-bold text-center">{{ t('energy.titleProduction') }}</h5>
       <div class="row">
         @for (prediction of productionPrediction; track $index) {
           <div class="col-4 col-md-2 d-flex flex-column mb-3">
