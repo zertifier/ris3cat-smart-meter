@@ -56,7 +56,8 @@
       "dataType": {
         "title": "Tipo de datos",
         "types": {
-          "energy": "Energía KWH"
+          "energy": "Energía (kWh)",
+          "energyPrice": "Precio energético"
         }
       },
       "communityModel": {
@@ -168,13 +169,16 @@
       "blockchainSection":"Blockchain",
       "communityBalance":"Saldo energético dentro de la CCE",
       "addBalance":"Comprar tokens",
-      "pullOutBalance":"Retirar tokens"
+      "pullOutBalance":"Retirar tokens",
+      "pkLabel":"Clave privada"
     },
     "tooltips": {
       "identity": "La identidad permite identificar tu usuario dentro de la Cadena de Bloques.",
       "energy": "Este saldo se usará para la compra de energía a la comunidad.",
       "token": "Saldo para las transacciones.",
-      "shares": "Son las Participaciones que tiene la comunidad."
+      "shares": "Son las Participaciones que tiene la comunidad.",
+      "pk":"La clave privada es suficiente para acceder a tus tokens. No es recomendable compartirla.",
+      "webSwap":"Puedes comprar EKW a través de otra criptomoneda."
     },
     "modals": {
       "transfer": {
@@ -200,7 +204,8 @@
         "title": "Método de pago",
         "texts": {
           "qtyLabel": "Cantidad a comprar",
-          "qtyPlaceholder": "Prueba añadiendo 3"
+          "qtyPlaceholder": "Prueba añadiendo 3",
+          "buy":"Comprar"
         },
         "swal": {
           "qtyError": "La cantidad debe ser superior a 0",
@@ -212,7 +217,8 @@
       "stripeCheckoutError": "Hubo un error al procesar tu solicitud. Por favor, inténtalo de nuevo en unos minutos.",
       "stripeMintSuccess": "El pago se completó con éxito.",
       "stripeMintError": "Hubo un problema con la solicitud. Lo intentaremos de nuevo automáticamente en unos minutos.",
-      "stripeMintingWait": "Tu solicitud está siendo procesada."
+      "stripeMintingWait": "Tu solicitud está siendo procesada.",
+      "copyPk":"Clave privada copiada"
     }
   },
   "SHARE-ENERGY": {

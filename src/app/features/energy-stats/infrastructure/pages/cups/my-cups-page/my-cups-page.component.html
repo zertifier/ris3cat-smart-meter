@@ -60,6 +60,7 @@
     </div>
 
     <div class="row justify-content-around w-100" style="margin: 2rem 0">
+
       <div class="col-6 col-lg my-3">
         <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.CONSUMPTION"
           label="{{ t('texts.consumption') }}" [text]="powerFlow().buy.toFixed(2) + ' KWH'" />
@@ -67,13 +68,13 @@
 
       <div class="col-6 col-lg my-3">
         <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
-          label="{{ t('texts.selfConsumption') }}" [text]="powerFlow().inHouse.toFixed(2) + ' KWH'" />
+          label="{{ t('texts.selfConsumption') }}" [text]="powerFlow().inHouse.toFixed(2) + ' kWh'" />
       </div>
 
       <div class="col-6 col-lg my-3">
         <app-stat-display [disabled]="powerFlow().production === 0" width="20%"
           [color]="StatsColors.COMMUNITY_PRODUCTION" label="{{ t('texts.generatedEnergy') }}"
-          [text]="powerFlow().production.toFixed(2) + ' KWH'" />
+          [text]="powerFlow().production.toFixed(2) + ' kWh'" />
       </div>
 
       <div class="col-6 col-lg my-3">
@@ -89,9 +90,8 @@
     <hr>
 
     <div style="margin-bottom: 2rem;">
-      <app-historic-chart />
+      <app-historic-chart [chartType]="'cups'"/>
     </div>
-
 
   </div>
 

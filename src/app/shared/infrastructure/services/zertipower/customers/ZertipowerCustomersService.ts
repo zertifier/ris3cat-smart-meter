@@ -18,7 +18,7 @@ export class ZertipowerCustomersService {
   customers: CustomerDTO[] = [];
 
   constructor(private axios: Axios) {
-    this.get().catch(err => { console.log(err) })
+    //this.get().catch(err => { console.log(err) })
   }
 
   async getCustomerById(customerId: number) {

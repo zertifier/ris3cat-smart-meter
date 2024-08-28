@@ -1,4 +1,4 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, ViewChild} from '@angular/core';
 import {CalendarModule} from "primeng/calendar";
 import {ChartLegendComponent} from "../chart-legend/chart-legend.component";
 import {DataChartComponent} from "../data-chart/data-chart.component";
@@ -40,6 +40,9 @@ import {TranslocoDirective} from "@jsverse/transloco";
   styleUrl: './historic-chart.component.scss'
 })
 export class HistoricChartComponent {
+
+  @Input({ required: false }) chartType: 'community' | 'cups' = 'cups';
+
   date$ = this.chartStoreService.selectOnly(state => state.date);
   origin$ = this.chartStoreService.selectOnly(state => state.origin)
   maxDate = new Date();

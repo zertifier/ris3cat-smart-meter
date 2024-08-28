@@ -1,4 +1,4 @@
-import { Component,Renderer2,ElementRef  } from '@angular/core';
+import { Component, Renderer2, ElementRef } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { TranslocoDirective, TranslocoPipe, TranslocoService } from "@jsverse/transloco";
 import { NgClass, NgIf } from "@angular/common";
@@ -7,6 +7,7 @@ import { UserStoreService } from "@features/user/infrastructure/services/user-st
 import { StripeService } from "@shared/infrastructure/services/zertipower/stripe/stripe.service";
 import { FormsModule } from "@angular/forms";
 import Swal from "sweetalert2";
+import { QuestionBadgeComponent } from '../../../../../../shared/infrastructure/components/question-badge/question-badge.component';
 
 // @ts-ignore
 //import { createCowSwapWidget, CowSwapWidgetParams } from '@cowprotocol/widget-lib'
@@ -21,7 +22,8 @@ export type BuyType = "VISA" | "CRYPTO"
     NgIf,
     TranslocoPipe,
     NgClass,
-    FormsModule
+    FormsModule,
+    QuestionBadgeComponent
   ],
   templateUrl: './buy-modal.component.html',
   styleUrl: './buy-modal.component.scss'
@@ -41,11 +43,13 @@ export class BuyModalComponent implements OnInit {
 
   }
 
-  ngOnInit() {
-    this.createCryptoModal();
-  }
+  ngOnInit() { }
 
-  createCryptoModal() {    
+  openSwap() {
+
+    let url = `https://www.sushi.com/swap?chainId=100&token0=0x57Feb6FD4732B6f55Fec0ED2458F2BCe34a1F6DA&token1=0x23d73f4B834166a3D48BE7b6F0411b6cd049506b&swapAmount=${this.qty}`
+    window.open(url, '_blank');
+
     // let widgetContainer = this.el.nativeElement.querySelector('#cowswap-widget');
     // if (!widgetContainer) {
     //   widgetContainer = this.renderer.createElement('div');
