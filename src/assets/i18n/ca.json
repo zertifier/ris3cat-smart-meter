@@ -56,7 +56,8 @@
       "dataType": {
         "title": "Tipus de dades",
         "types": {
-          "energy": "Energia KWH"
+          "energy": "Energia (kWh)",
+          "energyPrice": "Preu energètic"
         }
       },
       "communityModel": {
@@ -166,13 +167,16 @@
       "blockchainSection":"Blockchain",
       "communityBalance":"Saldo energètic dins de la CCE",
       "addBalance":"Comprar tokens",
-      "pullOutBalance":"Retirar tokens"
+      "pullOutBalance":"Retirar tokens",
+      "pkLabel":"Clau privada"
     },
     "tooltips": {
       "identity": "La identitat permet identificar el teu usuari a dintre de la Cadena de Blocks.",
       "energy": "Aquest saldo es farà servir per a la compra d'energia a la comunitat.",
       "token": "Saldo per les transaccions.",
-      "shares": "Són les Participacions que té la comunitat."
+      "shares": "Són les Participacions que té la comunitat.",
+      "pk":"La clau privada és suficient per accedir als teus tokens. No és recomanable compartir-la amb ningú.",
+      "webSwap":"Pots comprar EKW a través d'una altra criptomoneda."
     },
     "modals": {
       "transfer": {
@@ -192,14 +196,16 @@
           "tryAgainError": "Torna-ho a intentar en uns minuts.",
           "checkTryAgainError": "Revisa-ho i torna-ho a intentar.",
           "wrongDestinyError": "Destinatari incorrecte.",
-          "success": "Transferència enviada correctament."
+          "success": "Transferència enviada correctament.",
+          "copyPk":"Clau privada copiada."
         }
       },
       "buy": {
         "title": "Mètode de pagament",
         "texts": {
-          "qtyLabel": "Quantiat a comprar",
-          "qtyPlaceholder": "Prova afegint 3"
+          "qtyLabel": "Quantitat a comprar",
+          "qtyPlaceholder": "Prova afegint 3",
+          "buy":"Comprar"
         },
         "swal": {
           "qtyError": "La quantitat ha de ser superior a 0",
@@ -211,7 +217,8 @@
       "stripeCheckoutError": "Hi ha hagut un error processant la teva petició. Tonra-ho a intentar en uns mintus.",
       "stripeMintSuccess": "El pagament s'ha reatlizat correctament",
       "stripeMintError": "Hi ha hagut un problema amb la petició. D'aquí uns minuts ho tornarem a intentar automàticament",
-      "stripeMintingWait": "S'esta processant la teva petició"
+      "stripeMintingWait": "S'esta processant la teva petició",
+      "copyPk":"Clau privada copiada."
     }
   },
   "SHARE-ENERGY": {

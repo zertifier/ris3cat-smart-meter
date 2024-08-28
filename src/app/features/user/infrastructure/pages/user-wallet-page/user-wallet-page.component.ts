@@ -17,6 +17,7 @@ import { BuyModalComponent } from "@features/user/infrastructure/pages/user-wall
 import { ActivatedRoute, Params } from "@angular/router";
 import { MintStatus, StripeService } from "@shared/infrastructure/services/zertipower/stripe/stripe.service";
 import { QrGeneratorComponent } from "@shared/infrastructure/components/qr-generator/qr-generator.component";
+import { bootstrapApplication } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-user-wallet-page',
@@ -27,10 +28,10 @@ import { QrGeneratorComponent } from "@shared/infrastructure/components/qr-gener
     QuestionBadgeComponent,
     DecimalPipe,
     NoRoundDecimalPipe,
-    NgIf,
     TranslocoDirective,
     CommonModule,
-    QrGeneratorComponent
+    QrGeneratorComponent,
+    CommonModule
   ],
   providers: [
     NgbActiveModal
@@ -52,6 +53,10 @@ export class UserWalletPageComponent implements AfterViewInit, OnDestroy {
   customerId!: number
   customer: CustomerDTO | undefined;
   walletAddress!: string;
+  
+  pk:string = '';
+  textOrPwd:'text'|'password'='password';
+  isPasswordVisible:boolean=false;
 
   activeSection: 'Platform' | 'Blockchain' = 'Platform';
   userAction: 'add' | 'pullOut' | 'transfer' = 'add';
@@ -79,6 +84,7 @@ export class UserWalletPageComponent implements AfterViewInit, OnDestroy {
           this.customerId = store.user?.customer_id!
           this.walletAddress = store.user?.wallet_address
           this.getAllBalances(this.walletAddress)
+          this.pk = this.userStore.snapshotOnly(state => state.user?.wallet?.privateKey)!;
         }
       })
     )
@@ -253,4 +259,23 @@ export class UserWalletPageComponent implements AfterViewInit, OnDestroy {
   ngOnDestroy() {
     this.subscriptions.forEach(s => s.unsubscribe())
   }
+
+  togglePasswordVisibility(){
+    this.isPasswordVisible=!this.isPasswordVisible;
+    if(this.isPasswordVisible){
+      this.textOrPwd='text'
+    } else {
+      this.textOrPwd='password'
+    }
+  }
+
+  copyToClipboard(elementToCopy:any) {
+    navigator.clipboard.writeText(elementToCopy).then(() => {
+      Swal.fire({title:this.translocoService.translate('MY-WALLET.swal.copyPk'),'timer':1000,'showConfirmButton':false})
+    }).catch(err => {
+      console.error('Error al copiar el texto: ', err);
+    });
+  }
+
+
 }

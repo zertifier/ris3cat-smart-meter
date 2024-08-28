@@ -21,9 +21,15 @@ import {TranslocoDirective, TranslocoPipe} from "@jsverse/transloco";
 })
 export class CupsModalComponent implements AfterViewInit{
 
-  @Input() cups?: UserCups | undefined
-  reference: string = ''
-  loading: boolean = false
+  @Input() cups?: UserCups | undefined;
+  reference: string = '';
+  loading: boolean = false;
+  energyBlocks:any = {
+    provider:0,
+    valle:0,
+    llano:0,
+    punta:0
+  };
 
   constructor(
     public readonly activeModal: NgbActiveModal,

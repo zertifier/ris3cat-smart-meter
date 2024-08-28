@@ -8,9 +8,11 @@
         <option [value]="ChartResource.ENERGY" [selected]="(chartResource$ | async) === ChartResource.ENERGY">
           {{ t('texts.dataType.types.energy') }}
         </option>
-        <!--      <option [value]="ChartResource.PRICE" [selected]="(chartResource$ | async) === ChartResource.PRICE">Preu-->
-        <!--        energètic-->
-        <!--      </option>-->
+        @if(chartType=='cups'){
+        <option [value]="ChartResource.PRICE" [selected]="(chartResource$ | async) === ChartResource.PRICE">
+          {{ t('texts.dataType.types.energyPrice') }}
+        </option>
+        }
       </select>
     </div>
 
@@ -43,19 +45,19 @@
   <div class="row justify-content-evenly my-4">
     <div class="col-12 col-lg-4 mt-2 m-lg-0">
       <button (click)="setDateRange(DateRange.DAY)" class="btn rounded-4 py-3 w-100 text-center"
-              [ngClass]="(dateRange$ | async) === DateRange.DAY ? 'btn-active' : 'btn-inactive'">
+        [ngClass]="(dateRange$ | async) === DateRange.DAY ? 'btn-active' : 'btn-inactive'">
         <span class="d-block">{{ t('texts.dates.daily') }}</span>
       </button>
     </div>
     <div class="col-12 col-lg-4 mt-2 m-lg-0">
       <button (click)="setDateRange(DateRange.MONTH)" class="btn rounded-4 py-3 w-100 text-center"
-              [ngClass]="(dateRange$ | async) === DateRange.MONTH ? 'btn-active' : 'btn-inactive'">
+        [ngClass]="(dateRange$ | async) === DateRange.MONTH ? 'btn-active' : 'btn-inactive'">
         <span class="d-block">{{ t('texts.dates.monthly') }}</span>
       </button>
     </div>
     <div class="col-12 col-lg-4 mt-2 m-lg-0">
       <button (click)="setDateRange(DateRange.YEAR)" class="btn rounded-4 py-3 w-100 text-center"
-              [ngClass]="(dateRange$ | async) === DateRange.YEAR ? 'btn-active' : 'btn-inactive'">
+        [ngClass]="(dateRange$ | async) === DateRange.YEAR ? 'btn-active' : 'btn-inactive'">
         <span class="d-block">{{ t('texts.dates.yearly') }}</span>
       </button>
     </div>
@@ -69,20 +71,18 @@
   <div class="row justify-content-center">
     <div class="col-md-3 mb-4">
       <p-calendar [maxDate]="maxDate" (onSelect)="setDate($event)" (ngModelChange)="setInputDate($event)"
-                  [ngModel]="date$ | async" iconDisplay="input"
-                  [dateFormat]="(dateFormat$ | async) || 'yy'" [showIcon]="true" styleClass="w-100"
-                  [view]="(calendarView$ | async) || 'month'"/>
+        [ngModel]="date$ | async" iconDisplay="input" [dateFormat]="(dateFormat$ | async) || 'yy'" [showIcon]="true"
+        styleClass="w-100" [view]="(calendarView$ | async) || 'month'" />
 
     </div>
   </div>
 
   @switch (origin$ | async) {
-    @case (ChartOrigins.DATADIS) {
-      <app-datadis-chart/>
-    }
-    @default {
-      <h3>{{ t('texts.noDisplay') }}</h3>
-    }
+  @case (ChartOrigins.DATADIS) {
+  <app-datadis-chart />
+  }
+  @default {
+  <h3>{{ t('texts.noDisplay') }}</h3>
+  }
   }
 </ng-container>
-

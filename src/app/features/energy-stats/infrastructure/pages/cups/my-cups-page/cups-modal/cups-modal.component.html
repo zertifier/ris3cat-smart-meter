@@ -1,4 +1,5 @@
 <ng-container *transloco="let t; prefix: 'MY-CUPS'">
+
   <div class="modal-header border-0">
     <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
   </div>
@@ -12,22 +13,41 @@
 
     <div class="mt-4">
       <label class="form-label">{{ t('modals.modifyCups.texts.nameLabel') }}</label>
-      <input class="form-control bg-white border-2 border-primary shadow-none" [(ngModel)]="reference" placeholder="{{ t('modals.modifyCups.texts.namePlaceholder') }}">
+      <input class="form-control bg-white border-2 border-primary shadow-none" [(ngModel)]="reference"
+        placeholder="{{ t('modals.modifyCups.texts.namePlaceholder') }}">
     </div>
+
+    <!--
+    
+    <label class="form-label mt-4"><b>Prices</b></label>
+
+    <div class="mt-2">
+      <label class="form-label">Valle</label>
+      <input class="form-control bg-white border-2 border-primary shadow-none" [(ngModel)]="energyBlocks.valle" placeholder="">
+    </div>
+
+    <div class="mt-2">
+      <label class="form-label">Llano</label>
+      <input class="form-control bg-white border-2 border-primary shadow-none" [(ngModel)]="energyBlocks.llano" placeholder="">
+    </div>
+
+    <div class="mt-2">
+      <label class="form-label">Punta</label>
+      <input class="form-control bg-white border-2 border-primary shadow-none" [(ngModel)]="energyBlocks.punta" placeholder="">
+    </div>
+
+    -->
 
   </div>
 
   <div class="modal-footer border-0 justify-content-center mb-3">
-    <button type="button" class="btn btn-primary w-100"
-            (click)="save()" [disabled]="loading"
-            style="max-width: 255px">
+    <button type="button" class="btn btn-primary w-100" (click)="save()" [disabled]="loading" style="max-width: 255px">
       {{'GENERIC.texts.save' | transloco}} <i *ngIf="loading" class="fa-solid fa-spinner fa-spin"></i>
     </button>
-    <button type="button" class="btn btn-outline-secondary w-100"
-            (click)="activeModal.close('Close click')" [disabled]="loading"
-            style="max-width: 255px">
+    <button type="button" class="btn btn-outline-secondary w-100" (click)="activeModal.close('Close click')"
+      [disabled]="loading" style="max-width: 255px">
       {{'GENERIC.texts.close' | transloco}}
     </button>
   </div>
-</ng-container>
 
+</ng-container>
