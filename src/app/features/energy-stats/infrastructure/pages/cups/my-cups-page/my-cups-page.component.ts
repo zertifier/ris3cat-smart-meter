@@ -1,6 +1,6 @@
 import {Component, computed, OnDestroy, OnInit, signal} from '@angular/core';
 import {ChartModule} from "primeng/chart";
-import {AsyncPipe, JsonPipe, NgStyle} from "@angular/common";
+import {AsyncPipe, CommonModule, JsonPipe, NgStyle} from "@angular/common";
 import {MonitoringService, PowerStats} from "../../../services/monitoring.service";
 import {StatsColors} from "../../../../domain/StatsColors";
 import {CalendarModule} from "primeng/calendar";
@@ -66,7 +66,8 @@ import { ZertipowerService } from '../../../../../../shared/infrastructure/servi
     MetereologicPredictionComponent,
     TranslocoPipe,
     TranslocoDirective,
-    LanguageComponent
+    LanguageComponent,
+    CommonModule
   ],
   templateUrl: './my-cups-page.component.html',
   styleUrl: './my-cups-page.component.scss'
