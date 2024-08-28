@@ -20,40 +20,64 @@
       </span>
       <span>{{ t('texts.activeMembers') }} {{ (activeMembers$ | async) }}</span>
       @if(communityData && communityData.energyPrice) {
-        <span>{{ t('texts.buyingPrice') }} : <b class="color-tertiary"> {{communityData.energyPrice}}€/kWh</b></span>
-        <span>{{ t('texts.sellingPrice') }} : <b class="color-tertiary"> {{communityData.energyPrice}}€/kWh </b></span>
+      <span>{{ t('texts.buyingPrice') }} : <b class="color-tertiary"> {{communityData.energyPrice}}€/kWh</b></span>
+      <span>{{ t('texts.sellingPrice') }} : <b class="color-tertiary"> {{communityData.energyPrice}}€/kWh </b></span>
       }
       <span><i class="fa-solid fa-battery-full"></i> 0%</span>
     </div>
     <div class="row justify-content-evenly w-100 mt-2" style="margin-bottom: 2rem;">
 
       <div class="col-6 col-lg my-3">
+        @if(powerFlow().buy){
         <app-stat-display [disabled]="powerFlow().buy === 0" width="20%" [color]="StatsColors.CONSUMPTION"
           label="{{ t('texts.consumption') }}" [text]="powerFlow().buy.toFixed(2) + ' KWH'" />
+        }
+        @else{
+        <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
+          label="{{ t('texts.selfConsumption') }}" [text]="'--'" />
+        }
       </div>
 
       <div class="col-6 col-lg my-3">
+        @if(powerFlow().inHouse){
         <app-stat-display [disabled]="powerFlow().inHouse === 0" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
           label="{{ t('texts.selfConsumption') }}" [text]="powerFlow().inHouse.toFixed(2) + ' KWH'" />
+        }
+        @else{
+        <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
+          label="{{ t('texts.selfConsumption') }}" [text]="'--'" />
+        }
       </div>
 
 
       <div class="col-6 col-lg my-3">
+        @if(powerFlow().production){
         <app-stat-display [disabled]="powerFlow().production === 0" width="20%"
           [color]="StatsColors.COMMUNITY_PRODUCTION" label="{{ t('texts.generatedEnergy') }}"
           [text]="powerFlow().production.toFixed(2) + ' KWH'" />
+        }
+        @else{
+        <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
+          label="{{ t('texts.selfConsumption') }}" [text]="'--'" />
+        }
       </div>
 
       <div class="col-6 col-lg my-3">
+        @if(powerFlow().sell){
         <app-stat-display [disabled]="powerFlow().sell === 0" width="20%" [color]="StatsColors.SURPLUS"
           label="{{ t('texts.surplus') }}" [text]="powerFlow().sell.toFixed(2) + ' KWH'" />
+        }
+        @else{
+        <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
+          label="{{ t('texts.selfConsumption') }}" [text]="'--'" />
+        }
       </div>
     </div>
 
     <hr>
 
     <div style="margin-bottom: 2rem;">
-      <app-historic-chart [chartType]="'community'"/>
+      <app-historic-chart [chartType]="'community'" />
     </div>
 
   </div>
