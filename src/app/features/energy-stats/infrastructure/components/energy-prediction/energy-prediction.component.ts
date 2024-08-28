@@ -10,7 +10,7 @@ import { getDayTranslated } from "@shared/utils/DatesUtils";
 import { Subscription } from "rxjs";
 import moment from 'moment';
 import 'moment/locale/ca';
-import {NgIf} from "@angular/common";
+import { NgIf } from "@angular/common";
 
 @Component({
   selector: 'app-energy-prediction',
@@ -43,9 +43,9 @@ export class EnergyPredictionComponent implements OnInit, OnDestroy {
   energyPredictionService = inject(EnergyPredictionService);
   userStoreService = inject(UserStoreService);
 
-  consumptionPrediction: {date:string,value:number}[] = [];
-  productionPrediction: {date:string,value:number}[] = [];
-  surplusPrediction: {date:string,value:number}[] = [];
+  consumptionPrediction: { date: string, value: number }[] = [];
+  productionPrediction: { date: string, value: number }[] = [];
+  surplusPrediction: { date: string, value: number }[] = [];
 
   subscriptions: Subscription[] = [];
   async ngOnInit() {
@@ -59,6 +59,7 @@ export class EnergyPredictionComponent implements OnInit, OnDestroy {
   }
 
   async getPrediction() {
+
     let weekInit = moment().format('YYYY-MM-DD')
     let weekEnd = moment().add(5, 'days').format('YYYY-MM-DD')
     let productionPredictionResponse;
@@ -71,20 +72,11 @@ export class EnergyPredictionComponent implements OnInit, OnDestroy {
     } else {
       const cupsId = this.userStoreService.snapshotOnly(this.userStoreService.$.cupsId);
       productionPredictionResponse = await this.energyPredictionService.getCupsPrediction(cupsId);
-      consumptionPredictionResponse = await this.energyPredictionService.getCommunityConsumptionPrediction(cupsId, weekInit, weekEnd)
+      consumptionPredictionResponse = await this.energyPredictionService.getCupsConsumptionPrediction(cupsId, weekInit, weekEnd)
     }
-
-    this.consumptionPrediction = consumptionPredictionResponse.map((consumptionPredictionDay: any, index: number) => {
-      consumptionPredictionDay.date = moment(consumptionPredictionDay.date, 'YYYY-MM-DD').format('dddd')
-      let value = consumptionPredictionDay.consumption
-      return { date: consumptionPredictionDay.date, value }
-    })
 
     const dailyPrediction: Map<string, number> = new Map();
     for (const predictionEntry of productionPredictionResponse) {
-      // const parsedDate = dayjs(predictionEntry.time).format("YYYY-MM-DD");
-      // const parsedDate = dayjs(predictionEntry.time).format("dddd DD");
-      //const parsedDate = `${getDayTranslated(this.translocoService, dayjs.utc(predictionEntry.time).day())} ${dayjs.utc(predictionEntry.time).format("DD")}`;
       const parsedDate = moment(predictionEntry.time).format('dddd');
       const value = dailyPrediction.get(parsedDate) || 0;
       dailyPrediction.set(parsedDate, value + predictionEntry.value);
@@ -92,47 +84,47 @@ export class EnergyPredictionComponent implements OnInit, OnDestroy {
 
     const productionPredictionArray: Array<{ date: string, value: number }> = Array.from(
       dailyPrediction,
-      ([date, value]) => ({date, value: value})
+      ([date, value]) => ({ date, value: value })
     );
 
-    this.datasets = [
-      {
-        id: "production",
-        color: StatsColors.COMMUNITY_PRODUCTION,
-        label: 'Producció',
-        data: Array.from(dailyPrediction.values()),
-        // productionPredictionArray.map((production, index) => {
-        //   if (production && production.value && (production.date == this.consumptionPrediction[index].date)) {
-        //     this.productionPrediction.push(production);
-        //     let surplusPrediction = production.value - this.consumptionPrediction[index].value;
-        //     if (surplusPrediction > 0) {
-        //       this.surplusPrediction.push({date:production.date,value:surplusPrediction})
-        //     } else {
-        //       this.surplusPrediction.push({date:production.date,value:0})
-        //     }
-        //   } else {
-        //     this.productionPrediction.push({date:production.date,value:-1})
-    //     this.surplusPrediction.push({date:production.date,value:-1})
-    //   }
-    // })
-        }]
+    if (consumptionPredictionResponse) {
 
-    this.consumptionPrediction.map((consumption, index) => {
-      if (productionPredictionArray[index] && productionPredictionArray[index].value
-        && (productionPredictionArray[index].date == this.consumptionPrediction[index].date)) {
+      this.consumptionPrediction = consumptionPredictionResponse.map((consumptionPredictionDay: any, index: number) => {
+        consumptionPredictionDay.date = moment(consumptionPredictionDay.date, 'YYYY-MM-DD').format('dddd')
+        let value = consumptionPredictionDay.consumption
+        return { date: consumptionPredictionDay.date, value }
+      })
+
+      this.consumptionPrediction.map((consumption, index) => {
+        if (productionPredictionArray[index] && productionPredictionArray[index].value
+          && (productionPredictionArray[index].date == this.consumptionPrediction[index].date)) {
           productionPredictionArray[index].value = Number(productionPredictionArray[index].value.toFixed(2))
-        this.productionPrediction.push(productionPredictionArray[index]);
-        let surplusPrediction = productionPredictionArray[index].value - this.consumptionPrediction[index].value;
-        if (surplusPrediction > 0) {
-          this.surplusPrediction.push({date:consumption.date,value:surplusPrediction})
+          this.productionPrediction.push(productionPredictionArray[index]);
+          let surplusPrediction = productionPredictionArray[index].value - this.consumptionPrediction[index].value;
+          if (surplusPrediction > 0) {
+            this.surplusPrediction.push({ date: consumption.date, value: surplusPrediction })
+          } else {
+            this.surplusPrediction.push({ date: consumption.date, value: 0 })
+          }
         } else {
-          this.surplusPrediction.push({date:consumption.date,value:0})
+          this.productionPrediction.push({ date: consumption.date, value: -1 })
+          this.surplusPrediction.push({ date: consumption.date, value: -1 })
         }
-      } else {
-        this.productionPrediction.push({date:consumption.date,value:-1})
-        this.surplusPrediction.push({date:consumption.date,value:-1})
-      }
-    })
+      })
+
+    } else {
+
+      productionPredictionArray.map((productionPredictionElement:any)=>{
+        
+        if(!productionPredictionElement.value){
+          productionPredictionElement.value= -1;
+        } else {
+          productionPredictionElement.value = productionPredictionElement.value.toFixed(2)
+        }
+        this.productionPrediction.push(productionPredictionElement)
+      });
+
+    }
 
     // this.datasets = [
     //   {
