@@ -11,7 +11,7 @@
       <div class="col-6">
         <button class="btn my-3 w-100 rounded-3 form-button" (click)="buyType = 'VISA'"
           [ngClass]="buyType === 'VISA' ? 'btn-tertiary' : 'btn-secondary'">
-          Visa
+          {{ t('modals.buy.creditCard') }}
         </button>
       </div>
 
@@ -25,6 +25,7 @@
     </ul>
 
     <ng-container *ngIf="buyType === 'VISA'" )>
+      
       <div>
         <label class="form-label"> {{ t('modals.buy.texts.qtyLabel') }} </label>
         <input class="form-control bg-white border-secondary border-2 shadow-none" [(ngModel)]="qty"

@@ -1,12 +1,14 @@
 import {AfterViewInit, ChangeDetectorRef, Component, Input} from '@angular/core';
 import {ChartDataset} from "@shared/infrastructure/interfaces/ChartDataset";
 import {TranslocoDirective} from "@jsverse/transloco";
+import { QuestionBadgeComponent } from '../../../../../../shared/infrastructure/components/question-badge/question-badge.component';
 
 @Component({
   selector: 'app-data-totals',
   standalone: true,
   imports: [
-    TranslocoDirective
+    TranslocoDirective,
+    QuestionBadgeComponent
   ],
   templateUrl: './data-totals.component.html',
   styleUrl: './data-totals.component.scss'

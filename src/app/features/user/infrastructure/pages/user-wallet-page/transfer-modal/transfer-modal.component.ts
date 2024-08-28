@@ -102,7 +102,7 @@ export class TransferModalComponent implements OnDestroy {
         if ((this.amountToTransfer || 0) > maxAmount) {
           //TODO: swal error: insuficient funds
 
-          Swal.fire('', 'saldo insuficient', 'warning')
+          Swal.fire('', this.translocoService.translate('MY-WALLET.modals.texts.insuficientFunds'), 'warning')
 
           this.loading = false;
           this.activeModal.close();
@@ -112,7 +112,7 @@ export class TransferModalComponent implements OnDestroy {
         this.zertipowerService.communities.deposit(this.amountToTransfer!)
           .then(
             (res: any) => {
-              Swal.fire('', 'saldo depositat', 'success')
+              Swal.fire('', this.translocoService.translate('MY-WALLET.modals.texts.balanceAdded'), 'success')
               this.updateData.emit(true);
             }
           ).catch((error: any) => {
@@ -139,7 +139,7 @@ export class TransferModalComponent implements OnDestroy {
         this.zertipowerService.communities.witdraw(this.amountToTransfer!)
           .then(
             (res: any) => {
-              Swal.fire('', 'saldo retirat', 'success')
+              Swal.fire('', this.translocoService.translate('MY-WALLET.modals.texts.balancewithdrawn'), 'success')
               this.updateData.emit(true);
             }
           ).catch((error: any) => { }).finally(() => {
@@ -248,7 +248,7 @@ export class TransferModalComponent implements OnDestroy {
   displayTransferError() {
     return Swal.fire({
       icon: 'error',
-      title: this.translocoService.translate('MY-WALLET.modals.swal.blockchainError'),
+      title: this.translocoService.translate('MY-WALLET.swal.blockchainError'),
       text: this.translocoService.translate('MY-WALLET.modals.swal.tryAgainError')
     })
   }
@@ -256,7 +256,7 @@ export class TransferModalComponent implements OnDestroy {
   displayWrongDestinationError() {
     return Swal.fire({
       icon: 'error',
-      title: this.translocoService.translate('MY-WALLET.modals.swal.wrongDestinyError'),
+      title: this.translocoService.translate('MY-WALLET.swal.wrongDestinyError'),
       text: this.translocoService.translate('MY-WALLET.modals.swal.checkTryAgainError')
     })
   }

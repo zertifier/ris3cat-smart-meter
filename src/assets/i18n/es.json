@@ -96,7 +96,8 @@
         "totalActiveProduction": "Producción activa total",
         "totalConsumption": "Consumo total",
         "totalSurplus": "Excedente total",
-        "totalCo2": "CO2 total compensado"
+        "totalCo2": "CO2 total compensado",
+        "totalCo2Badge":"El CO2 compensado se calcula a partir de la producción."
       },
       "displayLegend": "Mostrar la leyenda",
       "maximize": "Ampliar",
@@ -168,7 +169,7 @@
       "platformSection":"Plataforma",
       "blockchainSection":"Blockchain",
       "communityBalance":"Saldo energético dentro de la CCE",
-      "addBalance":"Comprar tokens",
+      "addBalance":"Ingresar tokens",
       "pullOutBalance":"Retirar tokens",
       "pkLabel":"Clave privada"
     },
@@ -190,7 +191,10 @@
           "toLabel": "Destinatario",
           "toPlaceholder": "ejemplo@correo.com / 0xA...",
           "toBottomText": "Escribe el correo o número de identidad del destinatario",
-          "amountLabel": "Cantidad"
+          "amountLabel": "Cantidad",
+          "balanceAdded":"Saldo ingresado correctamente.",
+          "insuficientFunds":"Saldo insuficiente.",
+          "balancewithdrawn":"Saldo retirado correctamente."
         },
         "swal": {
           "blockchainError": "Problemas con la cadena de bloques.",
@@ -204,8 +208,9 @@
         "title": "Método de pago",
         "texts": {
           "qtyLabel": "Cantidad a comprar",
-          "qtyPlaceholder": "Prueba añadiendo 3",
-          "buy":"Comprar"
+          "qtyPlaceholder": "Escoge una cantidad",
+          "buy":"Comprar",
+          "creditCard":"Targeta de crédito"
         },
         "swal": {
           "qtyError": "La cantidad debe ser superior a 0",
@@ -218,7 +223,7 @@
       "stripeMintSuccess": "El pago se completó con éxito.",
       "stripeMintError": "Hubo un problema con la solicitud. Lo intentaremos de nuevo automáticamente en unos minutos.",
       "stripeMintingWait": "Tu solicitud está siendo procesada.",
-      "copyPk":"Clave privada copiada"
+      "copyPk":"Texto copiado."
     }
   },
   "SHARE-ENERGY": {

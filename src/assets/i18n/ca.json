@@ -94,9 +94,10 @@
         "surplusActiveShared": "Excedent actius comprartit",
         "totalProduction": "Total producció",
         "totalActiveProduction": "Total producció activa",
-        "totalConsumption": "Total consum ",
-        "totalSurplus": "Total excedent",
-        "totalCo2": "Total CO2 compensat"
+        "totalConsumption": "Total consum actius",
+        "totalSurplus": "Total excedent actius",
+        "totalCo2": "Total CO2 compensat",
+        "totalCo2Badge":"El CO2 compensat es calcula a partir de la producció."
 
       },
       "displayLegend": "Mostrar la llegenda",
@@ -170,7 +171,7 @@
       "platformSection":"Plataforma",
       "blockchainSection":"Blockchain",
       "communityBalance":"Saldo energètic dins de la CCE",
-      "addBalance":"Comprar tokens",
+      "addBalance":"Ingressar tokens",
       "pullOutBalance":"Retirar tokens",
       "pkLabel":"Clau privada"
     },
@@ -193,7 +194,10 @@
           "toLabel": "Destinatari",
           "toPlaceholder": "exemple@correu.com / 0xA...",
           "toBottomText": "Escriu el correu o número d'identitat del destinatari",
-          "amountLabel": "Quantitat"
+          "amountLabel": "Quantitat",
+          "balanceAdded":"Saldo ingressat correctament.",
+          "insuficientFunds":"Saldo insuficient.",
+          "balancewithdrawn":"Saldo retirat correctament."
         },
         "swal": {
           "blockchainError": "Problemes amb la cadena de blocs.",
@@ -201,15 +205,16 @@
           "checkTryAgainError": "Revisa-ho i torna-ho a intentar.",
           "wrongDestinyError": "Destinatari incorrecte.",
           "success": "Transferència enviada correctament.",
-          "copyPk":"Clau privada copiada."
+          "copy":"Text copiat."
         }
       },
       "buy": {
         "title": "Mètode de pagament",
         "texts": {
-          "qtyLabel": "Quantittat a comprar",
-          "qtyPlaceholder": "Prova afegint 3",
-          "buy":"Comprar"
+          "qtyLabel": "Quantitat a comprar",
+          "qtyPlaceholder": "Tria la quantitat",
+          "buy":"Comprar",
+          "creditCard":"Targeta de crèdit"
         },
         "swal": {
           "qtyError": "La quantitat ha de ser superior a 0",
@@ -222,7 +227,7 @@
       "stripeMintSuccess": "El pagament s'ha reatlizat correctament",
       "stripeMintError": "Hi ha hagut un problema amb la petició. D'aquí uns minuts ho tornarem a intentar automàticament",
       "stripeMintingWait": "S'esta processant la teva petició",
-      "copyPk":"Clau privada copiada."
+      "copy":"Text copiat."
     }
   },
   "SHARE-ENERGY": {

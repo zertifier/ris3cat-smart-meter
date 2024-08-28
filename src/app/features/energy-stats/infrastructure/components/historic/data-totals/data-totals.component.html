@@ -17,8 +17,15 @@
       <span>{{ totalSurplus }} kWh</span>
     </div>
     <div class="col my-3 text-center">
-      <h5>{{ t('texts.chartLabels.totalCo2') }}</h5>
+      <h5>{{ t('texts.chartLabels.totalCo2') }}
+        <app-question-badge>
+          <div class="my-3">
+            {{ t('texts.chartLabels.totalCo2Badge') }}
+          </div>
+        </app-question-badge>
+      </h5>  
       <span>{{ totalCo2.toFixed(2) }} tn CO2</span>
+     
     </div>
   </div>
 </ng-container>

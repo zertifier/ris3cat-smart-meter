@@ -271,11 +271,10 @@ export class UserWalletPageComponent implements AfterViewInit, OnDestroy {
 
   copyToClipboard(elementToCopy:any) {
     navigator.clipboard.writeText(elementToCopy).then(() => {
-      Swal.fire({title:this.translocoService.translate('MY-WALLET.swal.copyPk'),'timer':1000,'showConfirmButton':false})
+      Swal.fire({title:this.translocoService.translate('MY-WALLET.swal.copy'),'timer':1000,'showConfirmButton':false})
     }).catch(err => {
       console.error('Error al copiar el texto: ', err);
     });
   }
-
 
 }

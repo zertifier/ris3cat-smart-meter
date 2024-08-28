@@ -96,7 +96,8 @@
         "totalActiveProduction": "Total Active Production",
         "totalConsumption": "Total Consumption",
         "totalSurplus": "Total Surplus",
-        "totalCo2": "Total CO2 Offset"
+        "totalCo2": "Total CO2 Offset",
+        "totalCo2Badge":"The CO2 Offset is calculated based on the production."
       },
       "displayLegend": "Show legend",
       "maximize": "Maximize",
@@ -168,7 +169,7 @@
       "platformSection": "Platform",
       "blockchainSection": "Blockchain",
       "communityBalance": "Energy balance within the CCE",
-      "addBalance": "Buy tokens",
+      "addBalance": "Earn tokens",
       "pullOutBalance": "Withdraw tokens",
       "pkLabel":"Private key"
     },
@@ -190,7 +191,10 @@
           "toLabel": "Recipient",
           "toPlaceholder": "example@email.com / 0xA...",
           "toBottomText": "Enter the recipient's email or identity number",
-          "amountLabel": "Amount"
+          "amountLabel": "Amount",
+          "balanceAdded":"Balance added.",
+          "insuficientFunds":"Insufficient funds.",
+          "balancewithdrawn":"Balance withdrawn."
         },
         "swal": {
           "blockchainError": "Blockchain issues.",
@@ -204,8 +208,9 @@
         "title": "Payment method",
         "texts": {
           "qtyLabel": "Quantity to buy",
-          "qtyPlaceholder": "Try adding 3",
-          "buy":"Buy"
+          "qtyPlaceholder": "Add a quantity",
+          "buy":"Buy",
+          "creditCard":"Credit card"
         },
         "swal": {
           "qtyError": "The quantity must be greater than 0",
@@ -218,7 +223,7 @@
       "stripeMintSuccess": "The payment was completed successfully.",
       "stripeMintError": "There was a problem with the request. We will automatically try again in a few minutes.",
       "stripeMintingWait": "Your request is being processed.",
-      "copyPk":"Private key copied."
+      "copy":"The text has been copied."
     }
   },
 
