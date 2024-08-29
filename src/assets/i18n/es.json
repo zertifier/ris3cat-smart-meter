@@ -142,6 +142,9 @@
       "titleConsumption":"Predicción de consumo energético",
       "titleProduction":"Predicción de producción energético",
       "titleSurplus":"Predicción de excedente energético",
+      "titleActivesConsumption":"Predicción de consumo energético de los miembros activos",
+      "titleActivesProduction":"Predicción de producción energético de los miembros activos",
+      "titleActivesSurplus":"Predicción de excedente energético de los miembros activos",
       "unavailable":"No disponible",
       "surplusDescription":"* Como máximo, solo estarán disponibles 2 días de la predicción del excedente.",
       "productionDescription":"* Como máximo, solo estarán disponibles 2 días de la predicción de la producción."

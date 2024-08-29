@@ -142,6 +142,9 @@
       "titleConsumption":"Energy consumption prediction",
       "titleProduction":"Energy production prediction",
       "titleSurplus":"Energy surplus prediction",
+      "titleActivesConsumption":"Energy consumption prediction of active members",
+      "titleActivesProduction":"Energy production prediction of active members",
+      "titleActivesSurplus":"Energy surplus prediction of active members",
       "unavailable":"Unavailable",
       "surplusDescription":"* At most, only 2 days of the surplus forecast will be available.", 
       "productionDescription":"* At most, only 2 days of the production forecast will be available."

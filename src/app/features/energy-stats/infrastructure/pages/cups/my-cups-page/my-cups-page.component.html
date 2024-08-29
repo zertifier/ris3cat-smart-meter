@@ -47,7 +47,15 @@
       </div>
 
       <span>CUPS: {{ getSelectedCupsCode() | async }}</span>
-      <span>{{ t('texts.assignedProd') }}: {{ surplusDistribution$ | async }}%
+
+      <span>
+      @if(surplusDistribution$ | async){
+        <span>{{ t('texts.assignedProd') }}: {{ surplusDistribution$ | async }}%</span>
+      }
+      @else{
+        <span>{{ t('texts.assignedProd') }}: 0%</span>
+      }
+      
         <app-question-badge>
           {{ t('tooltips.assignedProd') }}
         </app-question-badge>

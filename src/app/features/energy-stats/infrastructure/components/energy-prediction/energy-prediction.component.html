@@ -5,7 +5,12 @@
 
     <!-- PREDICCIÓ PRODUCCIÓ ENERGIA -->
     <div *ngIf="productionPrediction.length">
-      <h5 style="margin: 2rem 0 2rem 0;" class="fw-bold text-center">{{ t('energy.titleProduction') }}</h5>
+      @if(community){
+        <h5 style="margin: 2rem 0 2rem 0;" class="fw-bold text-center">{{ t('energy.titleActivesProduction') }}</h5>
+      }
+      @else{
+        <h5 style="margin: 2rem 0 2rem 0;" class="fw-bold text-center">{{ t('energy.titleProduction') }}</h5>
+      }
       <div class="row mx-0">
         @for (prediction of productionPrediction; track $index) {
           <div class="col-4 col-md-2 d-flex flex-column mb-3">
@@ -27,7 +32,12 @@
 
     <!-- PREDICCIÓ EXCEDENT ENERGIA -->
     <div *ngIf="surplusPrediction.length">
-      <h5 style="margin: 2rem 0 2rem 0;" class="fw-bold text-center">{{ t('energy.titleSurplus') }}</h5>
+      @if(community){
+      <h5 style="margin: 2rem 0 2rem 0;" class="fw-bold text-center">{{ t('energy.titleActivesSurplus') }}</h5>
+      }
+      @else{
+        <h5 style="margin: 2rem 0 2rem 0;" class="fw-bold text-center">{{ t('energy.titleSurplus') }}</h5>
+      }
       <div class="row mx-0">
         @for (prediction of surplusPrediction; track $index) {
           <div class="col-4 col-md-2 d-flex flex-column mb-3">
@@ -52,7 +62,12 @@
 
     <!-- PREDICCIÓ CONSUM ENERGIA -->
     <div *ngIf="consumptionPrediction.length">
-      <h5 style="margin: 2rem 0 2rem 0;" class="fw-bold text-center">{{ t('energy.titleConsumption') }}</h5>
+      @if(community){
+      <h5 style="margin: 2rem 0 2rem 0;" class="fw-bold text-center">{{ t('energy.titleActivesConsumption') }}</h5>
+      }
+      @else{
+        <h5 style="margin: 2rem 0 2rem 0;" class="fw-bold text-center">{{ t('energy.titleConsumption') }}</h5>  
+      }
       <div class="row mx-0">
         @for (prediction of consumptionPrediction; track $index) {
           <div class="col-4 col-md-2 d-flex flex-column mb-3">
