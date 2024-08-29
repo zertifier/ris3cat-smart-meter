@@ -169,6 +169,10 @@ export class MyCommunityPageComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(s => s.unsubscribe())
   }
 
+  isValidNumber(value: any): boolean {
+    return typeof value === 'number' && !isNaN(value);
+  }
+
   isDevMode = isDevMode;
   protected readonly environment = environment;
 }

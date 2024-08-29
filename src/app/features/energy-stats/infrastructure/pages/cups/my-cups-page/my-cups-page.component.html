@@ -63,49 +63,49 @@
 
       <div class="col-6 col-lg my-3">
 
-        @if(powerFlow().buy){
+        @if(isValidNumber(powerFlow().buy)){
         <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.CONSUMPTION"
           label="{{ t('texts.consumption') }}" [text]="powerFlow().buy.toFixed(2) + ' KWH'" />
         }
         @else{
           <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
-          label="{{ t('texts.selfConsumption') }}" [text]="'--'" />
+          label="{{ t('texts.selfConsumption') }}" [text]="t('texts.unavailable')" />
         }
       </div>
 
       <div class="col-6 col-lg my-3">
 
-        @if(powerFlow().inHouse){
+        @if(isValidNumber(powerFlow().inHouse)){
           <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
           label="{{ t('texts.selfConsumption') }}" [text]="powerFlow().inHouse.toFixed(2) + ' kWh'" />
         }
         @else{
           <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
-          label="{{ t('texts.selfConsumption') }}" [text]="'--'" />
+          label="{{ t('texts.selfConsumption') }}" [text]="t('texts.unavailable')" />
         }
 
       </div>
 
       <div class="col-6 col-lg my-3">
-        @if(powerFlow().production){
+        @if(isValidNumber(powerFlow().production)){
         <app-stat-display [disabled]="powerFlow().production === 0" width="20%"
           [color]="StatsColors.COMMUNITY_PRODUCTION" label="{{ t('texts.generatedEnergy') }}"
           [text]="powerFlow().production.toFixed(2) + ' kWh'" />
         } 
         @else{
           <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
-          label="{{ t('texts.selfConsumption') }}" [text]="'--'" />
+          label="{{ t('texts.selfConsumption') }}" [text]="t('texts.unavailable')" />
         }
       </div>
 
       <div class="col-6 col-lg my-3">
-        @if(powerFlow().sell){
+        @if(isValidNumber(powerFlow().sell)){
         <app-stat-display [disabled]="powerFlow().sell === 0" width="20%" [color]="StatsColors.SURPLUS"
           label="{{ t('texts.surplus') }}" [text]="powerFlow().sell.toFixed(2) + ' KWH'" />
         }
         @else{
           <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
-          label="{{ t('texts.selfConsumption') }}" [text]="'--'" />
+          label="{{ t('texts.selfConsumption') }}" [text]="t('texts.unavailable')" />
         }
       </div>
     </div>

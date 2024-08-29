@@ -12,7 +12,8 @@
       "generatedEnergy": "Energía generada",
       "surplus": "Excedente",
       "buyingPrice":"Precio de compra",
-      "sellingPrice":"Precio de venta"
+      "sellingPrice":"Precio de venta",
+      "unavailable":"No disponible"
     },
     "tooltips": {
       "assignedProd": "El porcentaje de la energía producida que se le asigna a este CUPS"
@@ -44,7 +45,8 @@
       "generatedEnergy": "Energía generada",
       "surplus": "Excedente",
       "buyingPrice":"Precio de compra",
-      "sellingPrice":"Precio de venta"
+      "sellingPrice":"Precio de venta",
+      "unavailable":"No disponible"
     },
     "tooltips": {
       "assignedProd": "El porcentaje de la energía producida que se le asigna a este CUPS"
@@ -141,8 +143,8 @@
       "titleProduction":"Predicción de producción energético",
       "titleSurplus":"Predicción de excedente energético",
       "unavailable":"No disponible",
-      "surplusDescription":"* Solo hay dos días disponibles de la predicción del excedente.",
-      "productionDescription":"* Solo hay 2 días disponibles de la predicción de producción."
+      "surplusDescription":"* Como máximo, solo estarán disponibles 2 días de la predicción del excedente.",
+      "productionDescription":"* Como máximo, solo estarán disponibles 2 días de la predicción de la producción."
     }
   },
   "PROFILE": {

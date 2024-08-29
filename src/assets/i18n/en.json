@@ -12,7 +12,8 @@
       "generatedEnergy": "Energy generated",
       "surplus": "Surplus",
       "buyingPrice":"Buying price",
-      "sellingPrice":"selling price"
+      "sellingPrice":"selling price",
+      "unavailable":"Unavailable"
     },
     "tooltips": {
       "assignedProd": "The percentage of energy produced that is assigned to this CUPS"
@@ -44,7 +45,8 @@
       "generatedEnergy": "Energy generated",
       "surplus": "Surplus",
       "buyingPrice":"Buying price",
-      "sellingPrice":"selling price"
+      "sellingPrice":"selling price",
+      "unavailable":"Unavailable"
     },
     "tooltips": {
       "assignedProd": "The percentage of energy produced that is assigned to this CUPS"
@@ -141,8 +143,8 @@
       "titleProduction":"Energy production prediction",
       "titleSurplus":"Energy surplus prediction",
       "unavailable":"Unavailable",
-      "surplusDescription":"* Only two days of surplus prediction are available.", 
-      "productionDescription":"* Only two days of production prediction are available."
+      "surplusDescription":"* At most, only 2 days of the surplus forecast will be available.", 
+      "productionDescription":"* At most, only 2 days of the production forecast will be available."
     }
   },
   "PROFILE": {

@@ -1,40 +1,40 @@
-import {Component, computed, OnDestroy, OnInit, signal} from '@angular/core';
-import {ChartModule} from "primeng/chart";
-import {AsyncPipe, CommonModule, JsonPipe, NgStyle} from "@angular/common";
-import {MonitoringService, PowerStats} from "../../../services/monitoring.service";
-import {StatsColors} from "../../../../domain/StatsColors";
-import {CalendarModule} from "primeng/calendar";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {UserStoreService} from "@features/user/infrastructure/services/user-store.service";
-import {ChartLegendComponent} from "../../../components/historic/chart-legend/chart-legend.component";
-import {DataChartComponent} from "../../../components/historic/data-chart/data-chart.component";
-import {StatDisplayComponent} from "../../../components/realtime/stat-display/stat-display.component";
+import { Component, computed, OnDestroy, OnInit, signal } from '@angular/core';
+import { ChartModule } from "primeng/chart";
+import { AsyncPipe, CommonModule, JsonPipe, NgStyle } from "@angular/common";
+import { MonitoringService, PowerStats } from "../../../services/monitoring.service";
+import { StatsColors } from "../../../../domain/StatsColors";
+import { CalendarModule } from "primeng/calendar";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { UserStoreService } from "@features/user/infrastructure/services/user-store.service";
+import { ChartLegendComponent } from "../../../components/historic/chart-legend/chart-legend.component";
+import { DataChartComponent } from "../../../components/historic/data-chart/data-chart.component";
+import { StatDisplayComponent } from "../../../components/realtime/stat-display/stat-display.component";
 import {
   ConsumptionItem,
   ConsumptionItemsComponent
 } from "../../../components/realtime/consumption-items/consumption-items.component";
-import {HistoricChartComponent} from "../../../components/historic/historic-chart/historic-chart.component";
-import {map, Subscription} from "rxjs";
-import {NavbarComponent} from "@shared/infrastructure/components/navbar/navbar.component";
-import {FooterComponent} from "@shared/infrastructure/components/footer/footer.component";
-import {QuestionBadgeComponent} from "@shared/infrastructure/components/question-badge/question-badge.component";
-import {MonitoringStoreService} from "../../../services/monitoring-store.service";
-import {getMonth, getMonthTranslated} from "@shared/utils/DatesUtils";
+import { HistoricChartComponent } from "../../../components/historic/historic-chart/historic-chart.component";
+import { map, Subscription } from "rxjs";
+import { NavbarComponent } from "@shared/infrastructure/components/navbar/navbar.component";
+import { FooterComponent } from "@shared/infrastructure/components/footer/footer.component";
+import { QuestionBadgeComponent } from "@shared/infrastructure/components/question-badge/question-badge.component";
+import { MonitoringStoreService } from "../../../services/monitoring-store.service";
+import { getMonth, getMonthTranslated } from "@shared/utils/DatesUtils";
 import dayjs from "@shared/utils/dayjs";
-import {KnobModule} from "primeng/knob";
-import {PowerflowGausComponent} from "../../../components/powerflow-gaus/powerflow-gaus.component";
-import {UpdateUserCupsAction} from "@features/user/actions/update-user-cups-action.service";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {SelectCupsService} from "../../../../actions/select-cups.service";
-import {CupsModalComponent} from "./cups-modal/cups-modal.component";
-import {environment} from "@environments/environment";
-import {EnergyPredictionComponent} from "../../../components/energy-prediction/energy-prediction.component";
+import { KnobModule } from "primeng/knob";
+import { PowerflowGausComponent } from "../../../components/powerflow-gaus/powerflow-gaus.component";
+import { UpdateUserCupsAction } from "@features/user/actions/update-user-cups-action.service";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { SelectCupsService } from "../../../../actions/select-cups.service";
+import { CupsModalComponent } from "./cups-modal/cups-modal.component";
+import { environment } from "@environments/environment";
+import { EnergyPredictionComponent } from "../../../components/energy-prediction/energy-prediction.component";
 import {
   MetereologicPredictionComponent
 } from "../../../components/metereologic-prediction/metereologic-prediction.component";
-import {TranslocoDirective, TranslocoPipe, TranslocoService} from "@jsverse/transloco";
-import {LanguageComponent} from "@core/layouts/language/language.component";
-import {state} from "@angular/animations";
+import { TranslocoDirective, TranslocoPipe, TranslocoService } from "@jsverse/transloco";
+import { LanguageComponent } from "@core/layouts/language/language.component";
+import { state } from "@angular/animations";
 import _default from "chart.js/dist/core/core.interaction";
 import index = _default.modes.index;
 import { CommunityResponse, ZertipowerCommunitiesService } from '../../../../../../shared/infrastructure/services/zertipower/communities/ZertipowerCommunitiesService';
@@ -113,7 +113,7 @@ export class MyCupsPageComponent implements OnInit, OnDestroy {
       icon: 'fa-solid fa-car',
     },
   ];
-  readonly powerFlow = signal<PowerStats>({production: 0, buy: 0, inHouse: 0, sell: 0})
+  readonly powerFlow = signal<PowerStats>({ production: 0, buy: 0, inHouse: 0, sell: 0 })
   readonly knobValue = computed(() => {
     const consumptionRatio = (this.powerFlow().sell * 100) / this.powerFlow().production;
     if (isNaN(consumptionRatio)) {
@@ -124,8 +124,8 @@ export class MyCupsPageComponent implements OnInit, OnDestroy {
   });
   protected readonly StatsColors = StatsColors;
   cupsReference$ = this.userStore.selectOnly(this.userStore.$.cupsReference);
-  communityData!:CommunityResponse | any;
-  communityId$ = this.userStore.selectOnly(this.userStore.$.communityId).subscribe(async (communityId:any)=>{
+  communityData!: CommunityResponse | any;
+  communityId$ = this.userStore.selectOnly(this.userStore.$.communityId).subscribe(async (communityId: any) => {
     this.communityData = await this.zertipowerService.communities.getCommunityById(communityId)
   });
   cups$ = this.userStore.selectOnly(state => state.cups);
@@ -156,7 +156,7 @@ export class MyCupsPageComponent implements OnInit, OnDestroy {
         .getPowerFlow()
         .subscribe(value => {
           const surplusDistribution = this.userStore.snapshotOnly(state => state.surplusDistribution) / 100;
-          const {production, buy, inHouse, sell} = value;
+          const { production, buy, inHouse, sell } = value;
           this.powerFlow.set({
             production: production * surplusDistribution / 1000,
             inHouse: inHouse * surplusDistribution / 1000,
@@ -172,12 +172,12 @@ export class MyCupsPageComponent implements OnInit, OnDestroy {
 
   selectCups(event: any) {
     const value: number = event.target.value;
-    this.userStore.patchState({selectedCupsIndex: value});
+    this.userStore.patchState({ selectedCupsIndex: value });
   }
 
 
-  openEditModal(){
-    const modalRef = this.ngbModal.open(CupsModalComponent, {size: 'lg'})
+  openEditModal() {
+    const modalRef = this.ngbModal.open(CupsModalComponent, { size: 'lg' })
 
     const selectedCupsIndex = this.userStore.snapshotOnly((state) => state.selectedCupsIndex)
     this.cups$.subscribe((cups) => {
@@ -191,7 +191,7 @@ export class MyCupsPageComponent implements OnInit, OnDestroy {
 
   }
 
-  getSelectedCupsCode(){
+  getSelectedCupsCode() {
     return this.cups$.pipe(
       map(cups => {
         const selectedCupsIndex = this.userStore.snapshotOnly(state => state.selectedCupsIndex);
@@ -200,7 +200,11 @@ export class MyCupsPageComponent implements OnInit, OnDestroy {
     );
   }
 
-    protected readonly environment = environment;
+  isValidNumber(value: any): boolean {
+    return typeof value === 'number' && !isNaN(value);
+  }
+
+  protected readonly environment = environment;
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(s => s.unsubscribe())
