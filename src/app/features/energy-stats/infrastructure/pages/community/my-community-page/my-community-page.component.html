@@ -26,6 +26,7 @@
       <span *ngIf="communityData">
          {{ t('texts.tradeTypeLabel', {type: getTradeTypeTranslation(communityData.tradeType)}) }}
       </span>
+
       <span>
         {{ t('texts.communityMembers') }} {{ totalMembers$ | async }}
       </span>
