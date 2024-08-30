@@ -106,7 +106,7 @@ export class EnergyPredictionComponent implements OnInit, OnDestroy {
     //insert non existent data (surplus included):
     for (let i = moment(weekInit); i.isBefore(moment(weekEnd)); i.add(1, 'days')) {
 
-      console.log(i.format('YYYY-MM-DD'));
+      //console.log(i.format('YYYY-MM-DD'));
       let weekDay = moment(i, 'YYYY-MM-DD').format('dddd')
 
       if (!this.consumptionPrediction[index]) {
@@ -131,7 +131,7 @@ export class EnergyPredictionComponent implements OnInit, OnDestroy {
       index++;
     }
 
-    console.log("this.productionPrediction,this.consumptionPrediction,this.surplusPrediction",this.productionPrediction,this.consumptionPrediction,this.surplusPrediction)
+    //console.log("this.productionPrediction,this.consumptionPrediction,this.surplusPrediction",this.productionPrediction,this.consumptionPrediction,this.surplusPrediction)
 
     // if (consumptionPredictionResponse) {
 

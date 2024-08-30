@@ -1,28 +1,29 @@
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {AsyncPipe, JsonPipe, NgIf} from "@angular/common";
-import {ChartLegendComponent, DataLabel} from "../chart-legend/chart-legend.component";
-import {DataChartComponent} from "../data-chart/data-chart.component";
-import {combineLatest, Subscription} from "rxjs";
-import {StatsColors} from "../../../../domain/StatsColors";
-import {ChartStoreService} from "../../../services/chart-store.service";
-import {UserStoreService} from "@features/user/infrastructure/services/user-store.service";
-import {ChartResource} from "../../../../domain/ChartResource";
-import {ChartEntity} from "../../../../domain/ChartEntity";
-import {DateRange} from "../../../../domain/DateRange";
-import {ChartType} from "../../../../domain/ChartType";
-import {DatadisEnergyStat} from "@shared/infrastructure/services/zertipower/DTOs/EnergyStatDTO";
-import {ZertipowerService} from "@shared/infrastructure/services/zertipower/zertipower.service";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AsyncPipe, JsonPipe, NgIf } from "@angular/common";
+import { ChartLegendComponent, DataLabel } from "../chart-legend/chart-legend.component";
+import { DataChartComponent } from "../data-chart/data-chart.component";
+import { combineLatest, Subscription } from "rxjs";
+import { StatsColors } from "../../../../domain/StatsColors";
+import { ChartStoreService } from "../../../services/chart-store.service";
+import { UserStoreService } from "@features/user/infrastructure/services/user-store.service";
+import { ChartResource } from "../../../../domain/ChartResource";
+import { ChartEntity } from "../../../../domain/ChartEntity";
+import { DateRange } from "../../../../domain/DateRange";
+import { ChartType } from "../../../../domain/ChartType";
+import { DatadisEnergyStat } from "@shared/infrastructure/services/zertipower/DTOs/EnergyStatDTO";
+import { ZertipowerService } from "@shared/infrastructure/services/zertipower/zertipower.service";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import {
   BreakPoints,
   ScreenBreakPointsService
 } from "@shared/infrastructure/services/screen-break-points.service";
-import {ChartDataset} from "@shared/infrastructure/interfaces/ChartDataset";
+import { ChartDataset } from "@shared/infrastructure/interfaces/ChartDataset";
 import dayjs from '@shared/utils/dayjs';
-import {TranslocoDirective, TranslocoService} from "@jsverse/transloco";
+import { TranslocoDirective, TranslocoService } from "@jsverse/transloco";
 import {
   DataTotalsComponent
 } from "@features/energy-stats/infrastructure/components/historic/data-totals/data-totals.component";
+import moment from 'moment';
 
 @Component({
   selector: 'app-datadis-chart',
@@ -80,6 +81,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
   @ViewChild('secondChart') secondChart!: DataChartComponent;
   @ViewChild('maximizedChart') maximizedChart!: ElementRef;
   @ViewChild('legendModal') legendModal!: ElementRef;
+
   currentBreakpoint$ = this.breakpointsService.observeBreakpoints();
   protected readonly BreakPoints = BreakPoints;
 
@@ -94,7 +96,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
   }
 
   public maximizeChart() {
-    this.ngbModal.open(this.maximizedChart, {fullscreen: true});
+    this.ngbModal.open(this.maximizedChart, { fullscreen: true });
   }
 
   async ngOnInit(): Promise<void> {
@@ -102,7 +104,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
       this.translocoService.langChanges$.subscribe(() => {
         const chartParametrs$ = this.chartStoreService
           .selectOnly(this.chartStoreService.$.params);
-        const selectedCups$ = this.userStore.selectOnly(state => ({selectedCupsIndex: state.selectedCupsIndex}))
+        const selectedCups$ = this.userStore.selectOnly(state => ({ selectedCupsIndex: state.selectedCupsIndex }))
         this.subscriptions.push(
           combineLatest([chartParametrs$, selectedCups$])
             .subscribe(
@@ -118,12 +120,12 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                 const cupId = this.userStore.snapshotOnly(this.userStore.$.cupsId);
                 const communityId = this.userStore.snapshotOnly(this.userStore.$.communityId);
                 const data = await this.fetchEnergyStats(date, dateRange, cupId, communityId);
-                this.chartStoreService.patchState({lastFetchedStats: data});
+                this.chartStoreService.patchState({ lastFetchedStats: data });
 
                 // Create labels
                 // let labels: string[] = ["Gener", "Febrer", "Març", "Abril", "Maig", "Juny", "Juliol", "Agost", "Setembre", "Octubre", "Novembre", "Desembre"];
                 let labels: string[] = [];
-                this.translocoService.selectTranslate('GENERIC.texts.monthsArray').subscribe((monthsArray)=>{
+                this.translocoService.selectTranslate('GENERIC.texts.monthsArray').subscribe((monthsArray) => {
                   labels = monthsArray
                   if (dateRange === DateRange.MONTH) {
                     labels = data.map(d => {
@@ -162,7 +164,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                     order: 2,
                     label: community ? this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.surplusActive') : this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.surplus'),
                     // tooltipText: community ? 'Quantitat d’energia que es produeix i no es consumeix dels participans actius.' : 'Quantitat d\'energia que es produeix i no es consumeix.',
-                    tooltipText: community ? this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.community.surplusActive') : this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.cups.surplusActive') ,
+                    tooltipText: community ? this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.community.surplusActive') : this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.cups.surplusActive'),
                     color: StatsColors.SURPLUS,
                     data: mappedData.map(d => d.surplus),
                     stack: 'Active surplus',
@@ -176,7 +178,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                       order: 0,
                       // label: 'Producció actius',
                       label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.productionActive'),
-                      tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.community.activeProduction') ,
+                      tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.community.activeProduction'),
                       color: StatsColors.ACTIVE_COMMUNITY_PRODUCTION,
                       data: mappedData.map(d => d.productionActives),
                       stack: 'Production',
@@ -189,7 +191,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                       // label: 'Producció',
                       label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.production'),
                       // tooltipText: 'Producció total de la comunitat',
-                      tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.community.production') ,
+                      tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.community.production'),
                       data: mappedData.map(d => {
                         if (!d.production) {
                           return 0;
@@ -206,7 +208,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                       data: mappedData.map(d => {
                         return d.consumption;
                       }),
-                      tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.community.networkActiveConsumption') ,
+                      tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.community.networkActiveConsumption'),
                       stack: 'Consumption',
                       order: 0,
                       color: StatsColors.SELF_CONSUMPTION,
@@ -278,7 +280,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                 });
 
                 this.mobileLabels = this.legendLabels.map(d => {
-                  return {...d, radius: '2.5rem'}
+                  return { ...d, radius: '2.5rem' }
                 })
               }),
         );
@@ -287,7 +289,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
   }
 
   public showLegendModal() {
-    this.ngbModal.open(this.legendModal, {size: "xl"});
+    this.ngbModal.open(this.legendModal, { size: "xl" });
   }
 
   async fetchEnergyStats(date: Date, range: DateRange, cupId: number, communityId: number) {
@@ -298,16 +300,16 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
       const selectedChart = this.chartStoreService.snapshotOnly(state => state.selectedChartEntity);
       if (selectedChart === ChartEntity.CUPS) {
         const response = await this.zertipower.energyStats.getCupEnergyStats(cupId, 'datadis', date, range);
-        this.userStore.patchState({activeMembers: response.totalActiveMembers || 0});
-        this.userStore.patchState({totalMembers: response.totalMembers || 0});
+        this.userStore.patchState({ activeMembers: response.totalActiveMembers || 0 });
+        this.userStore.patchState({ totalMembers: response.totalMembers || 0 });
         data = response.stats;
       } else {
         if (!communityId) {
           return [];
         }
         const response = await this.zertipower.energyStats.getCommunityEnergyStats(communityId, 'datadis', date, range);
-        this.userStore.patchState({activeMembers: response.totalActiveMembers || 0});
-        this.userStore.patchState({totalMembers: response.totalMembers || 0});
+        this.userStore.patchState({ activeMembers: response.totalActiveMembers || 0 });
+        this.userStore.patchState({ totalMembers: response.totalMembers || 0 });
         data = response.stats;
 
       }
@@ -325,16 +327,44 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
     production: number,
     productionActives: number,
     gridConsumption: number,
+    virtualProduction: number,
+    virtualConsumption: number
   }[] {
     const showEnergy = chartResource === ChartResource.ENERGY;
-    // const cce = chartType === ChartType.CCE;
+    const cce = chartType === ChartType.CCE;
+
     return data.map(d => {
-      const consumption = showEnergy ? d.kwhIn : +(d.kwhInPrice * d.kwhIn).toFixed(2);
-      const surplus = showEnergy ? d.kwhOut : +(d.kwhOutPrice * d.kwhOut).toFixed(2);
+
+      let virtualProduction = d.kwhOutVirtual
+      let virtualConsumption = d.kwhInVirtual
+
+      if (cce) {
+
+        if (virtualConsumption) {
+          // console.log("", moment(d.infoDt).format('DD/MM/YYYY'))
+          // console.log("cupsId", d.cupsId)
+          // console.log("communityCups", d.communitiesCups)
+          // console.log("kwIn", d.kwhIn)
+          // console.log("v. In", virtualConsumption)
+          d.kwhIn = virtualConsumption;
+        }
+        if (virtualProduction) {
+          // console.log("", moment(d.infoDt).format('DD/MM/YYYY'))
+          // console.log("cupsId", d.cupsId)
+          // console.log("communityCups", d.communitiesCups)
+          // console.log("kwOut", d.kwhOut)
+          // console.log("v. Out", virtualProduction)
+          d.kwhOut = virtualProduction;
+        }
+      }
+
+      const consumption = showEnergy ? d.kwhIn : + (d.kwhInPrice * d.kwhIn).toFixed(2);
+      const surplus = showEnergy ? d.kwhOut : + (d.kwhOutPrice * d.kwhOut).toFixed(2);
       let productionActives = showEnergy ? d.productionActives : +(d.kwhInPrice * d.productionActives).toFixed(2);
       const virtualSurplus = showEnergy ? d.kwhOutVirtual : +(d.kwhOutPriceCommunity * d.kwhOutVirtual).toFixed(2);
       let production = showEnergy ? d.production : +(d.kwhInPrice * d.production).toFixed(2);
       let gridConsumption = consumption - production;
+
       if (gridConsumption < 0 || isNaN(gridConsumption)) {
         gridConsumption = 0;
       }
@@ -356,6 +386,8 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
         production,
         productionActives,
         gridConsumption,
+        virtualProduction,
+        virtualConsumption
       }
     })
   }

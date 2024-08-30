@@ -8,11 +8,11 @@
         <option [value]="ChartResource.ENERGY" [selected]="(chartResource$ | async) === ChartResource.ENERGY">
           {{ t('texts.dataType.types.energy') }}
         </option>
-        @if(chartType=='cups'){
+        <!-- @if(chartType=='cups'){ -->
         <option [value]="ChartResource.PRICE" [selected]="(chartResource$ | async) === ChartResource.PRICE">
           {{ t('texts.dataType.types.energyPrice') }}
         </option>
-        }
+        <!-- } -->
       </select>
     </div>
 

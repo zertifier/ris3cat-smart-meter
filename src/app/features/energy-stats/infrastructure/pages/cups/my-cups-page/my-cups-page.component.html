@@ -50,10 +50,10 @@
 
       <span>
       @if(surplusDistribution$ | async){
-        <span>{{ t('texts.assignedProd') }}: {{ surplusDistribution$ | async }}%</span>
+        <span>{{ t('texts.assignedProd') }}: {{ surplusDistribution$ | async }}% </span>
       }
       @else{
-        <span>{{ t('texts.assignedProd') }}: 0%</span>
+        <span>{{ t('texts.assignedProd') }}: 0% </span>
       }
       
         <app-question-badge>
