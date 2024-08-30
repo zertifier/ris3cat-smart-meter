@@ -2,9 +2,9 @@ import {Component, computed, isDevMode, OnDestroy, OnInit, signal} from '@angula
 import {ChartModule} from "primeng/chart";
 import {MonitoringService, PowerStats} from "../../../services/monitoring.service";
 import {map, Subscription} from "rxjs";
-import {AsyncPipe, JsonPipe, NgClass, NgStyle} from "@angular/common";
+import {AsyncPipe, JsonPipe, NgClass, NgIf, NgStyle} from "@angular/common";
 import {StatsColors} from "../../../../domain/StatsColors";
-import {NgbNav, NgbNavContent, NgbNavItem, NgbNavLinkButton, NgbNavOutlet} from "@ng-bootstrap/ng-bootstrap";
+import {NgbModal, NgbNav, NgbNavContent, NgbNavItem, NgbNavLinkButton, NgbNavOutlet} from "@ng-bootstrap/ng-bootstrap";
 
 import {CalendarModule} from "primeng/calendar";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -36,6 +36,9 @@ import {EnergyPredictionComponent} from "../../../components/energy-prediction/e
 import {TranslocoDirective, TranslocoService} from "@jsverse/transloco";
 import { CommunityResponse } from '../../../../../../shared/infrastructure/services/zertipower/communities/ZertipowerCommunitiesService';
 import { ZertipowerService } from '../../../../../../shared/infrastructure/services/zertipower/zertipower.service';
+import {
+  CommunityModalComponent
+} from "@features/energy-stats/infrastructure/pages/community/my-community-page/community-modal/community-modal.component";
 
 @Component({
   selector: 'app-my-community-page',
@@ -66,7 +69,8 @@ import { ZertipowerService } from '../../../../../../shared/infrastructure/servi
     EnergyPredictionChartComponent,
     MetereologicPredictionComponent,
     EnergyPredictionComponent,
-    TranslocoDirective
+    TranslocoDirective,
+    NgIf
   ],
   templateUrl: './my-community-page.component.html',
   styleUrl: './my-community-page.component.scss'
@@ -137,7 +141,8 @@ export class MyCommunityPageComponent implements OnInit, OnDestroy {
     private readonly userStore: UserStoreService,
     private readonly monitoringStore: MonitoringStoreService,
     private readonly translocoService: TranslocoService,
-    private readonly zertipowerService:ZertipowerService
+    private readonly zertipowerService:ZertipowerService,
+    private readonly ngbModal: NgbModal,
   ) {
   }
 
@@ -167,6 +172,14 @@ export class MyCommunityPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(s => s.unsubscribe())
+  }
+
+  openEditModal(){
+    console.log('modal')
+    const modalRef = this.ngbModal.open(CommunityModalComponent, { size: 'lg' })
+    modalRef.componentInstance.community = this.communityData
+    modalRef.componentInstance.tradeType = "PREFERRED"
+
   }
 
   isValidNumber(value: any): boolean {

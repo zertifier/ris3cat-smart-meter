@@ -17,7 +17,7 @@ export interface CommunityResponse {
   createdAt: string,
   updatedAt: string
 }
-
+export type TradeTypes = 'PREFERRED' | 'EQUITABLE'
 export class ZertipowerCommunitiesService {
 
   constructor(private readonly axios: Axios,
@@ -37,6 +37,11 @@ export class ZertipowerCommunitiesService {
 
   async getCommunityById(id: number) {
     const response = await this.axios.get<HttpResponse<CommunityResponse[]>>(`${ChartEntity.COMMUNITIES}/${id}`);
+    return response.data.data;
+  }
+
+  async updateNameAndTradetype(id: number, community: {name: string, tradeType: TradeTypes}){
+    const response = await this.axios.put<HttpResponse<CommunityResponse[]>>(`${ChartEntity.COMMUNITIES}/${id}/trade-types`, community);
     return response.data.data;
   }
 

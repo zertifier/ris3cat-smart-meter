@@ -16,7 +16,15 @@
     </div>
 
     <div class="w-100 d-flex flex-column">
-      <span>{{ t('texts.communityMembers') }} {{ totalMembers$ | async }}
+      <div *ngIf="communityData" class="d-flex mb-3" style="max-width: 20rem">
+        <input [ngModel]="communityData.name" class="form-control border-2 border-primary shadow-none disabled" readonly/>
+        <button class="btn btn-primary bg-primary me-3 ms-0 ms-md-3 rounded-3" (click)="openEditModal()"
+                style="min-width: 65px; min-height: 40px">
+          <i class="fa-solid fa-pencil"></i>
+        </button>
+      </div>
+      <span>
+        {{ t('texts.communityMembers') }} {{ totalMembers$ | async }}
       </span>
       <span>{{ t('texts.activeMembers') }} {{ (activeMembers$ | async) }}</span>
       @if(communityData && communityData.energyPrice) {
