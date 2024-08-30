@@ -46,10 +46,26 @@
       "surplus": "Excedent",
       "buyingPrice":"Preu de compra",
       "sellingPrice":"Preu de venda",
-      "unavailable":"No disponible"
+      "unavailable":"No disponible",
+      "tradeTypePref": "Preferit",
+      "tradeTypeEqui": "Equitatiu"
     },
     "tooltips": {
       "assignedProd": "El percentatge de l'energia produïda que se li assigna a aquest CUPS"
+    },
+    "modals": {
+      "modifyCommunity": {
+        "title": "Modificar la comunitat",
+        "texts": {
+          "nameLabel": "Nom de la comunitat",
+          "namePlaceholder": "Per exemple: Olot",
+          "tradeTypeLabel": "Tipus de compartició d'energia"
+        },
+        "swal": {
+          "success": "Comunitat modificada correctament",
+          "error": "Hi ha hagut un error guardant la comunitat. Torna-ho a intentar d'aqui una estona"
+        }
+      }
     }
   },
   "HISTORIC-CHART": {
