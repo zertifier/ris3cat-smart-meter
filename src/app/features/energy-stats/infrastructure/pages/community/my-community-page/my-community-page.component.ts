@@ -34,7 +34,10 @@ import {
 import {environment} from "@environments/environment";
 import {EnergyPredictionComponent} from "../../../components/energy-prediction/energy-prediction.component";
 import {TranslocoDirective, TranslocoService} from "@jsverse/transloco";
-import { CommunityResponse } from '../../../../../../shared/infrastructure/services/zertipower/communities/ZertipowerCommunitiesService';
+import {
+  CommunityResponse,
+  TradeTypes
+} from '../../../../../../shared/infrastructure/services/zertipower/communities/ZertipowerCommunitiesService';
 import { ZertipowerService } from '../../../../../../shared/infrastructure/services/zertipower/zertipower.service';
 import {
   CommunityModalComponent
@@ -133,6 +136,7 @@ export class MyCommunityPageComponent implements OnInit, OnDestroy {
   communityData!:CommunityResponse | any;
   communityId$ = this.userStore.selectOnly(this.userStore.$.communityId).subscribe(async (communityId:any)=>{
     this.communityData = await this.zertipowerService.communities.getCommunityById(communityId)
+    console.log(this.communityData, "DATA")
   });
 
   constructor(
@@ -175,11 +179,15 @@ export class MyCommunityPageComponent implements OnInit, OnDestroy {
   }
 
   openEditModal(){
-    console.log('modal')
     const modalRef = this.ngbModal.open(CommunityModalComponent, { size: 'lg' })
     modalRef.componentInstance.community = this.communityData
-    modalRef.componentInstance.tradeType = "PREFERRED"
+  }
 
+  getTradeTypeTranslation(type: TradeTypes){
+    switch (type){
+      case 'PREFERRED': return this.translocoService.translate('MY-COMMUNITY.texts.tradeTypePref')
+      case 'EQUITABLE': return this.translocoService.translate('MY-COMMUNITY.texts.tradeTypeEqui')
+    }
   }
 
   isValidNumber(value: any): boolean {

@@ -47,6 +47,7 @@
       "buyingPrice": "Buying price",
       "sellingPrice": "selling price",
       "unavailable": "Unavailable",
+      "tradeTypeLabel": "Share type: {{type}}",
       "tradeTypePref": "Preferred",
       "tradeTypeEqui": "Equitable"
     },

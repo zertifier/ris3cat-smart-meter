@@ -25,7 +25,6 @@ import Swal from "sweetalert2";
 })
 export class CommunityModalComponent {
   @Input() community: CommunityResponse | any;
-  @Input() tradeType: TradeTypes | undefined;
 
   loading = false
 
@@ -40,7 +39,7 @@ export class CommunityModalComponent {
   save() {
     this.loading = true
     this.zertipowerService.communities
-      .updateNameAndTradetype(this.community.id, {name: this.community.name, tradeType: this.tradeType!})
+      .updateNameAndTradetype(this.community.id, {name: this.community.name, tradeType: this.community.tradeType!})
       .then((res) => {
           Swal.fire({
             icon: 'success',
