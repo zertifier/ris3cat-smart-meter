@@ -47,7 +47,8 @@
       "buyingPrice":"Preu de compra",
       "sellingPrice":"Preu de venda",
       "unavailable":"No disponible",
-      "tradeTypePref": "Preferit",
+      "tradeTypeLabel": "Tipus de compartició: {{type}}",
+      "tradeTypePref": "Preferent",
       "tradeTypeEqui": "Equitatiu"
     },
     "tooltips": {

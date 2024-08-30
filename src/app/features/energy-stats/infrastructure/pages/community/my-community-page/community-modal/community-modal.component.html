@@ -18,9 +18,9 @@
     </div>
 
 
-   <div class="mt-4" *ngIf="tradeType">
+   <div class="mt-4" *ngIf="community.tradeType">
      <label class="form-label">{{ t('modals.modifyCommunity.texts.tradeTypeLabel') }}</label>
-     <select class="form-select bg-white border-2 border-primary shadow-none" [(ngModel)]="tradeType">
+     <select class="form-select bg-white border-2 border-primary shadow-none" [(ngModel)]="community.tradeType">
        <option [value]="'EQUITABLE'"> {{ t('texts.tradeTypeEqui') }} </option>
        <option [value]="'PREFERRED'"> {{ t('texts.tradeTypePref') }} </option>
      </select>

@@ -8,6 +8,8 @@ import { ZertiauthApiService } from "../../../../../features/auth/infrastructure
 import { AuthStoreService } from "../../../../../features/auth/infrastructure/services/auth-store.service";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { UserStoreService } from "../../../../../features/user/infrastructure/services/user-store.service";
+import {TranslocoService} from "@jsverse/transloco";
+import {inject} from "@angular/core";
 
 export interface CommunityResponse {
   id: number,
@@ -15,7 +17,8 @@ export interface CommunityResponse {
   test: boolean,
   energyPrice: number,
   createdAt: string,
-  updatedAt: string
+  updatedAt: string,
+  tradeType: TradeTypes
 }
 export type TradeTypes = 'PREFERRED' | 'EQUITABLE'
 export class ZertipowerCommunitiesService {
@@ -83,7 +86,7 @@ export class ZertipowerCommunitiesService {
       totalActiveMembers: number,
       totalMembers: number,
       stats: EnergyStatDTO[]
-    }>>(`/${resource}/${resourceId}/stats/${source}/${range}/${formattedDate}`);
+    }>>(`/${resource}/${resourceId}/stats/${source}/${range!}/${formattedDate}`);
     return {
       ...response.data.data,
       stats: response.data.data.stats.map(r => ({
