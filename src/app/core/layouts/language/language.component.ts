@@ -41,4 +41,19 @@ export class LanguageComponent {
   getCurrentLang(){
     return this.translocoService.getActiveLang()
   }
+
+  
+  // setMomentLang(activeLang:string){
+  //   switch (activeLang) {
+  //     case 'en': moment.locale('en-gb');
+  //       break;
+  //     case 'es': moment.locale('es');
+  //       break;
+  //     case 'ca': moment.locale('ca');
+  //       break;
+  //     default: moment.locale('ca');
+  //       break;
+  //   }
+  //   this.translocoLoader.momentSubject.next(activeLang)
+  // }
 }

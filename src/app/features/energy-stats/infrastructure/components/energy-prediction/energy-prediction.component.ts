@@ -10,7 +10,12 @@ import { getDayTranslated } from "@shared/utils/DatesUtils";
 import { Subscription } from "rxjs";
 import moment from 'moment';
 import 'moment/locale/ca';
+import 'moment/locale/es';
+import 'moment/locale/en-gb';
+
 import { NgIf } from "@angular/common";
+import { LanguageComponent } from '../../../../../core/layouts/language/language.component';
+import { TranslocoHttpLoader } from '../../../../../transloco-loader';
 
 @Component({
   selector: 'app-energy-prediction',
@@ -49,7 +54,7 @@ export class EnergyPredictionComponent implements OnInit, OnDestroy {
 
   subscriptions: Subscription[] = [];
   async ngOnInit() {
-    moment.locale('ca');
+    
     this.subscriptions.push(
       this.translocoService.langChanges$.subscribe(async () => {
         this.elements = []
@@ -60,10 +65,14 @@ export class EnergyPredictionComponent implements OnInit, OnDestroy {
 
   async getPrediction() {
 
+    const activeLang = this.translocoService.getActiveLang()
+    moment.locale(activeLang);
+
     let weekInit = moment().format('YYYY-MM-DD')
     let weekEnd = moment().add(6, 'days').format('YYYY-MM-DD')
     let productionPredictionResponse: any[];
     let consumptionPredictionResponse: any[];
+    this.surplusPrediction = [];
 
     if (this.community) {
       const communityId = this.userStoreService.snapshotOnly(this.userStoreService.$.communityId);
