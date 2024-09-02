@@ -181,6 +181,12 @@ export class MyCommunityPageComponent implements OnInit, OnDestroy {
   openEditModal(){
     const modalRef = this.ngbModal.open(CommunityModalComponent, { size: 'lg' })
     modalRef.componentInstance.community = this.communityData
+
+    this.subscriptions.push(
+      modalRef.closed.subscribe(async () => {
+        this.communityData = await this.zertipowerService.communities.getCommunityById(this.communityData.id)
+      })
+    )
   }
 
   getTradeTypeTranslation(type: TradeTypes){

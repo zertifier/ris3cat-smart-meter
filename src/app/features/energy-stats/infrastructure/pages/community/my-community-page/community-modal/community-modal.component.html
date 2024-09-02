@@ -11,16 +11,16 @@
       </h4>
     </div>
 
-    <div class="mt-4">
+    <div *ngIf="modifyCommunity" class="mt-4">
       <label class="form-label">{{ t('modals.modifyCommunity.texts.nameLabel') }}</label>
-      <input class="form-control bg-white border-2 border-primary shadow-none" [(ngModel)]="community.name"
+      <input class="form-control bg-white border-2 border-primary shadow-none" [(ngModel)]="modifyCommunity.name"
              placeholder="{{ t('modals.modifyCommunity.texts.namePlaceholder') }}">
     </div>
 
 
-   <div class="mt-4" *ngIf="community.tradeType">
+   <div class="mt-4" *ngIf="modifyCommunity">
      <label class="form-label">{{ t('modals.modifyCommunity.texts.tradeTypeLabel') }}</label>
-     <select class="form-select bg-white border-2 border-primary shadow-none" [(ngModel)]="community.tradeType">
+     <select class="form-select bg-white border-2 border-primary shadow-none" [(ngModel)]="modifyCommunity.tradeType">
        <option [value]="'EQUITABLE'"> {{ t('texts.tradeTypeEqui') }} </option>
        <option [value]="'PREFERRED'"> {{ t('texts.tradeTypePref') }} </option>
      </select>
