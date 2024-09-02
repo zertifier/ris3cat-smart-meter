@@ -18,6 +18,8 @@ import { Chart } from "chart.js";
 import { ChartEntity } from "../../../../domain/ChartEntity";
 import { AsyncPipe, NgIf } from "@angular/common";
 import { ChartDataset } from "@shared/infrastructure/interfaces/ChartDataset";
+import {TranslocoService} from "@jsverse/transloco";
+import {UserStoreService} from "@features/user/infrastructure/services/user-store.service";
 
 @Component({
   selector: 'app-data-chart',
@@ -44,7 +46,8 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
 
   private textColorSecondary = 'rgba(0, 0, 0, 0.54)';
   private surfaceBorder = 'rgba(0, 0, 0, 0.12)';
-
+  private totalMembers$ = this.userStore.selectOnly(state => state.totalMembers);
+  private activeMembers$ = this.userStore.selectOnly(state => state.activeMembers);
   private options: any = {
     maintainAspectRatio: false,
     indexAxis: 'x',
@@ -150,17 +153,20 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
 
             if (chartEntity.selectedChartEntity === ChartEntity.COMMUNITIES) {
               const stat = this.chartStoreService.snapshot().lastFetchedStats[context.dataIndex];
-              if (context.dataset.stack === "Active surplus") {
-                labels.push(`Membres actius: ${stat.activeMembers}`);
+              if (context.dataset.label === this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.surplusActive')) {
+                this.activeMembers$.subscribe((total) => {
+                  labels.push(this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.totalActiveMembers', {total}));
+                })
                 labels.push(`----------------`);
 
-              } else if (context.dataset.stack === "Production") {
+              } else if (context.dataset.label === this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.production')) {
                 for (const cups of stat.communitiesCups) {
                   if (cups.kwhOut > 0)
                     labels.push(`${cups.reference || cups.cups} : ${cups.kwhOut || 0} KWh`)
                 }
-                // Todo: change 31 to the real number
-                labels.push(`Total membres: 31`);
+                this.totalMembers$.subscribe((total) => {
+                  labels.push(this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.totalMembers', {total}));
+                })
               }
             }
             return labels;
@@ -171,7 +177,9 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
   };
 
   constructor(
-    private chartStoreService: ChartStoreService
+    private chartStoreService: ChartStoreService,
+    private translocoService: TranslocoService,
+    private readonly userStore: UserStoreService,
   ) {
   }
 

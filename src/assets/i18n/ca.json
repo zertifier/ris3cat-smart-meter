@@ -116,7 +116,9 @@
         "totalConsumption": "Total consum actius",
         "totalSurplus": "Total excedent actius",
         "totalCo2": "Total CO2 compensat",
-        "totalCo2Badge":"El CO2 compensat es calcula a partir de la producció."
+        "totalCo2Badge":"El CO2 compensat es calcula a partir de la producció.",
+        "totalMembers": "Total membres: {{total}}",
+        "totalActiveMembers": "Membres actius: {{total}}"
 
       },
       "displayLegend": "Mostrar la llegenda",
