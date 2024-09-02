@@ -116,7 +116,9 @@
         "totalConsumption": "Total Consumption",
         "totalSurplus": "Total Surplus",
         "totalCo2": "Total CO2 Offset",
-        "totalCo2Badge": "The CO2 Offset is calculated based on the production."
+        "totalCo2Badge": "The CO2 Offset is calculated based on the production.",
+        "totalMembers": "Total members: {{total}}",
+        "totalActiveMembers": "Active members: {{total}}"
       },
       "displayLegend": "Show legend",
       "maximize": "Maximize",

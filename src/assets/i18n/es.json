@@ -116,7 +116,9 @@
         "totalConsumption": "Consumo total",
         "totalSurplus": "Excedente total",
         "totalCo2": "CO2 total compensado",
-        "totalCo2Badge":"El CO2 compensado se calcula a partir de la producción."
+        "totalCo2Badge":"El CO2 compensado se calcula a partir de la producción.",
+        "totalMembers": "Total de miembros: {{total}}",
+        "totalActiveMembers": "Miembros activos: {{total}}"
       },
       "displayLegend": "Mostrar la leyenda",
       "maximize": "Ampliar",
