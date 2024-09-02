@@ -49,7 +49,8 @@ export class ProposalsPageComponent implements OnDestroy {
     this.subscriptions.push(
       this.userStore.selectOnly(this.userStore.$.communityId).subscribe((community) => {
         this.communityId = community
-        this.getAllProposals()
+        if (community)
+          this.getAllProposals()
       }),
       this.userStore
         .selectOnly(state => state).subscribe((data) => {
