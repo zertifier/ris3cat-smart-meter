@@ -257,6 +257,7 @@
       "chooseData": "Elige el intervalo de fechas que deseas consultar",
       "from": "Desde",
       "to": "Hasta",
+      "totalShared":"Total compartido",
       "date": "Fecha",
       "action": "Acción",
       "amount": "Cantidad",

@@ -256,6 +256,7 @@
       "chooseData": "Choose which data range you want to consult",
       "from": "From",
       "to": "To",
+      "totalShared":"Total shared",
       "date": "Date",
       "action": "Action",
       "amount": "Amount",

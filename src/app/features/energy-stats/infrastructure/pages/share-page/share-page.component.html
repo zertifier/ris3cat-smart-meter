@@ -28,19 +28,28 @@
       </div>
 
       <div class="row">
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-4">
           <label class="form-label">
             {{ t('texts.from') }}
           </label>
           <p-calendar [(ngModel)]="fromDate" iconDisplay="input" [showIcon]="true" view="date" (onClose)="getData()"
             [maxDate]="maxDate" [dateFormat]="'dd/mm/yy'" styleClass="w-100" />
         </div>
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-4">
           <label class="form-label">
             {{ t('texts.to') }}
           </label>
           <p-calendar [(ngModel)]="toDate" iconDisplay="input" [showIcon]="true" view="date" (onClose)="getData()"
             [maxDate]="maxDate" [minDate]="minToDate" [dateFormat]="'dd/mm/yy'" styleClass="w-100" />
+        </div>
+        <div class="col-12 col-md-4">
+          <label class="form-label">
+            {{ t('texts.totalShared') }}
+          </label>
+          <div class="input-group w-100">
+            <input [(ngModel)]="totalShared" class="form-control disabled" readonly disabled/>
+            <span class="input-group-text">kWh</span>
+          </div>
         </div>
       </div>
     </div>

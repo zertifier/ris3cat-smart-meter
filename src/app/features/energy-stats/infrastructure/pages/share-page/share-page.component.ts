@@ -68,7 +68,9 @@ export class SharePageComponent implements OnDestroy {
 
   infoDisplay: 'community' | 'customer' = 'customer';
 
-  tradeTypeVisible = false
+  tradeTypeVisible = false;
+
+  totalShared:number=0;
 
 
   subscriptions: Subscription[] = [];
@@ -104,6 +106,9 @@ export class SharePageComponent implements OnDestroy {
     this.minToDate = dayjs(this.fromDate).toDate();
     this.customerTradesData = await this.zertipower.trades.getTradesByCustomer(this.customerId, dayjs(this.fromDate).format('YYYY-MM-DD'), dayjs(this.toDate).format('YYYY-MM-DD'))
     console.log("customer trades data", this.customerTradesData)
+    this.totalShared = 0;
+    this.customerTradesData.map((trade)=>{this.totalShared += Number(trade.tradedKwh)})
+    this.totalShared = Number(this.totalShared.toFixed(2))
   }
 
   async getCommunityTradesData() {
@@ -111,6 +116,9 @@ export class SharePageComponent implements OnDestroy {
     this.minToDate = dayjs(this.fromDate).toDate();
     this.communityTradesData = await this.zertipower.trades.getTradesByCommunity(this.communityId, dayjs(this.fromDate).format('YYYY-MM-DD'), dayjs(this.toDate).format('YYYY-MM-DD'))
     console.log("community trades data", this.communityTradesData)
+    this.totalShared = 0;
+    this.communityTradesData.map((trade)=>{this.totalShared += Number(trade.tradedKwh)})
+    this.totalShared = Number(this.totalShared.toFixed(2))
   }
 
   ngOnDestroy(): void {
