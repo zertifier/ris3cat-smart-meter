@@ -32,7 +32,6 @@ export class DataTotalsComponent {
 
     this.chartStoreService
       .selectOnly(this.chartStoreService.$.params).subscribe((params) => {
-      console.log(params, "PARAMS")
       this.data = params.lastFetchedStats
       this.startCalculate()
     })
