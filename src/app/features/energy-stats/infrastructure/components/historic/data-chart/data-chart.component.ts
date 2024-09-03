@@ -154,9 +154,9 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
             if (chartEntity.selectedChartEntity === ChartEntity.COMMUNITIES) {
               const stat = this.chartStoreService.snapshot().lastFetchedStats[context.dataIndex];
               if (context.dataset.label === this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.surplusActive')) {
-                this.activeMembers$.subscribe((total) => {
+                this.subscriptions.push(this.activeMembers$.subscribe((total) => {
                   labels.push(this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.totalActiveMembers', {total}));
-                })
+                }))
                 labels.push(`----------------`);
 
               } else if (context.dataset.label === this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.production')) {
@@ -164,9 +164,9 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
                   if (cups.kwhOut > 0)
                     labels.push(`${cups.reference || cups.cups} : ${cups.kwhOut || 0} KWh`)
                 }
-                this.totalMembers$.subscribe((total) => {
+                this.subscriptions.push(this.totalMembers$.subscribe((total) => {
                   labels.push(this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.totalMembers', {total}));
-                })
+                }))
               }
             }
             return labels;

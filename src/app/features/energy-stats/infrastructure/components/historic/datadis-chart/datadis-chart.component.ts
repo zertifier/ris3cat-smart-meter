@@ -127,7 +127,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                 // Create labels
                 // let labels: string[] = ["Gener", "Febrer", "Març", "Abril", "Maig", "Juny", "Juliol", "Agost", "Setembre", "Octubre", "Novembre", "Desembre"];
                 let labels: string[] = [];
-                this.translocoService.selectTranslate('GENERIC.texts.monthsArray').subscribe((monthsArray) => {
+                this.subscriptions.push(this.translocoService.selectTranslate('GENERIC.texts.monthsArray').subscribe((monthsArray) => {
                   labels = monthsArray
                   if (dateRange === DateRange.MONTH) {
                     labels = data.map(d => {
@@ -138,7 +138,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                       return dayjs.utc(d.infoDt).format('HH');
                     })
                   }
-                })
+                }))
 
 
                 const cce = chartType === ChartType.CCE;

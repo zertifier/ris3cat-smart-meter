@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnDestroy, ViewChild} from '@angular/core';
 import {CalendarModule} from "primeng/calendar";
 import {ChartLegendComponent} from "../chart-legend/chart-legend.component";
 import {DataChartComponent} from "../data-chart/data-chart.component";
@@ -39,7 +39,7 @@ import {TranslocoDirective} from "@jsverse/transloco";
   templateUrl: './historic-chart.component.html',
   styleUrl: './historic-chart.component.scss'
 })
-export class HistoricChartComponent {
+export class HistoricChartComponent implements OnDestroy {
 
   @Input({ required: false }) chartType: 'community' | 'cups' = 'cups';
 
@@ -83,6 +83,10 @@ export class HistoricChartComponent {
     private readonly screenBreakpoints: ScreenBreakPointsService,
     private readonly ngbModal: NgbModal,
   ) {
+  }
+
+  ngOnDestroy(): void {
+    
   }
 
   setChartType(event: Event) {
