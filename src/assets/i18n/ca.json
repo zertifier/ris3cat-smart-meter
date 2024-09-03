@@ -303,7 +303,7 @@
   "STATS": {
     "navbar": "Estadístiques",
     "title": "Estadístiques",
-    "subTitle": "Rànquing",
+    "subTitle": "Rànquing dels members actius",
     "texts": {
       "monthLabel": "Trïa el mes que vols veure",
       "typeLabel": "Quines dades vols veure?",
