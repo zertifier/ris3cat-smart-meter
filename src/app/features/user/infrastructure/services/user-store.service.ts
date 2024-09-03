@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {RxStore} from "@zertifier/rx-store";
 import {Wallet} from "ethers";
+import { Observable } from 'rxjs';
 
 export interface UserProfile {
   id: number,
@@ -56,5 +57,9 @@ export class UserStoreService extends RxStore<UserStore> {
 
   constructor() {
     super(defaultValues);
+  }
+
+  get(): Observable<any> {
+    return this.select();
   }
 }

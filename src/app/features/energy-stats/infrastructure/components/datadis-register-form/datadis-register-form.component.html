@@ -7,7 +7,7 @@
 
   <hr>
 
-  <p>Emplena els següents camps per a associar els teus C.U.P.S. al teu perfil de la plataforma</p>
+  <p>Emplena els següents camps per a associar els teus CUPS al teu perfil de la plataforma</p>
 
   <form class="d-flex flex-column gap-5" [formGroup]="formData">
     <div>
@@ -52,10 +52,10 @@
     </div>
 
     <div>
-      <label for="cups">C.U.P.S. <span class="text-danger">*</span></label>
+      <label for="cups">CUPS <span class="text-danger">*</span></label>
       <input type="text" id="cups" class="form-control" formControlName="cups"/>
       <app-validation-hint [condition]="formData.controls.cups.invalid">
-        C.U.P.S. no vàlid
+        CUPS no vàlid
       </app-validation-hint>
     </div>
 

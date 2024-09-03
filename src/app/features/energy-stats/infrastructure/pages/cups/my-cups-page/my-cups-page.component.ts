@@ -126,7 +126,9 @@ export class MyCupsPageComponent implements OnInit, OnDestroy {
   cupsReference$ = this.userStore.selectOnly(this.userStore.$.cupsReference);
   communityData!: CommunityResponse | any;
   communityId$ = this.userStore.selectOnly(this.userStore.$.communityId).subscribe(async (communityId: any) => {
-    this.communityData = await this.zertipowerService.communities.getCommunityById(communityId)
+    if(communityId){
+      this.communityData = await this.zertipowerService.communities.getCommunityById(communityId)
+    }
   });
   cups$ = this.userStore.selectOnly(state => state.cups);
   selectedCupsIndex$ = this.userStore.selectOnly(state => state.selectedCupsIndex);

@@ -31,6 +31,12 @@ export class ZertipowerCustomersService {
     }
   }
 
+  public async datadisActive(customerId: number) {
+    const response = await this.axios.get(`/customers/datadis-active/${customerId}`);
+    const body = response.data;
+    return body.data;
+  }
+
   public async get(): Promise<CustomerDTO[]> {
     const response = await this.axios.get('/customers');
     this.customers = response.data.data;

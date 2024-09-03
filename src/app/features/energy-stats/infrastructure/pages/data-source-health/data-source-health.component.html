@@ -3,27 +3,52 @@
     <h2>{{ t('title') }}</h2>
     <p>{{ t('texts.statusInfo') }}</p>
 
+    @if(datadisCups){
+    @for(cups of datadisCups; track cups){
+    <div class="card mb-2">
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div class="d-flex align-items-center gap-2">
+            <h3 class="m-0">Datadis</h3>
+            <h5 class="m-0">{{cups.cups}}</h5>
+            <i class="fa-solid fa-circle fa-fade"
+              [ngClass]="{'text-success': cups.active, 'text-danger': !cups.active}"></i>
+          </div>
+          <span class="d-flex align-items-center">
+            @if (lastUpdate$ | async) {
+            {{ t('texts.lastUpdate') }} {{ lastUpdate | async }}
+            } @else {
+            {{ t('texts.noLastUpdate') }}
+            }
+          </span>
+        </div>
+      </div>
+    </div>
+    }
+    }
 
-    <div class="card">
+
+    <!-- <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between">
           <div class="d-flex align-items-center gap-2">
             <h3 class="m-0">Datadis</h3>
             @if (lastUpdate$ | async) {
-              <i class="fa-solid fa-circle fa-fade" [ngClass]="{'text-success': this.active, 'text-danger': !this.active}"></i>
+            <i class="fa-solid fa-circle fa-fade"
+              [ngClass]="{'text-success': this.active, 'text-danger': !this.active}"></i>
             }
           </div>
 
           <span class="d-flex align-items-center">
-        @if (lastUpdate$ | async) {
-          {{ t('texts.lastUpdate') }} {{ lastUpdate | async }}
-        } @else {
-          {{ t('texts.noLastUpdate') }}
-        }
-        </span>
+            @if (lastUpdate$ | async) {
+            {{ t('texts.lastUpdate') }} {{ lastUpdate | async }}
+            } @else {
+            {{ t('texts.noLastUpdate') }}
+            }
+          </span>
         </div>
       </div>
-    </div>
+    </div> -->
+
   </div>
 </ng-container>
-

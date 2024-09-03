@@ -1,11 +1,26 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Duration} from "@shared/utils/Duration";
 import {ZertipowerService} from "@shared/infrastructure/services/zertipower/zertipower.service";
-import {UserStoreService} from "../../../../user/infrastructure/services/user-store.service";
+import {UserProfile, UserStoreService} from "../../../../user/infrastructure/services/user-store.service";
 import {AsyncPipe, NgClass} from "@angular/common";
 import {BehaviorSubject, map} from "rxjs";
 import dayjs from "@shared/utils/dayjs";
 import {TranslocoDirective} from "@jsverse/transloco";
+import { MonitoringService } from '../../services/monitoring.service';
+
+interface supply {
+  address: string
+  cups: string
+  postalCode: string
+  province: string
+  municipality: string
+  distributor: string
+  validDateFrom: string
+  validDateTo: string
+  pointType: number
+  distributorCode: number
+  authorizedNif?: string
+}
 
 @Component({
   selector: 'app-data-source-health',
@@ -29,10 +44,13 @@ export class DataSourceHealthComponent implements OnInit, OnDestroy {
   }))
   timeoutIdentifier!: number
   active: boolean = false;
+  
+  datadisCups:any[]=[];
 
   constructor(
     private readonly zertipower: ZertipowerService,
     private readonly userStore: UserStoreService,
+    private readonly monitoringService: MonitoringService
   ) {
   }
 
@@ -44,11 +62,21 @@ export class DataSourceHealthComponent implements OnInit, OnDestroy {
   }
 
   private async updateStatus() {
-    const {cups, selectedCupsIndex} = this.userStore.snapshot();
-    const selectedCups = cups[selectedCupsIndex];
-
-    this.active = await this.zertipower.cups.datadisActive(selectedCups.id);
-    this.lastUpdate$.next(new Date());
+    this.userStore.selectOnly(this.userStore.$.profileLoaded).subscribe(async (profileLoaded) => {
+      if(profileLoaded){
+        const {cups, selectedCupsIndex, user} = await this.userStore.snapshot();
+        if(user && user.customer_id){
+          let datadisActiveResponse:any = await this.zertipower.customers.datadisActive(user.customer_id);
+          if(datadisActiveResponse.cupsInfo){
+            this.datadisCups=datadisActiveResponse.cupsInfo;
+          }
+        }
+        // this.monitoringService.getPowerFlow().subscribe(res=>{
+        //   console.log(res)
+        // })
+        this.lastUpdate$.next(new Date());
+      }
+    })
   }
 
   ngOnDestroy(): void {

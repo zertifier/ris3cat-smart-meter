@@ -14,10 +14,13 @@ export const errorCatchingInterceptor: HttpInterceptorFn = (request, next) => {
       
       let ignore = [
         'https://api-smart-meter-dev-ris3cat.zertifier.com/monitoring/powerflow/',
-        'https://zertirpc.zertifier.com/100/rpc'
+        'https://zertirpc.zertifier.com/100/rpc',
+        'https://api-dev-ris3cat.zertifier.com/energy-prediction'
       ]
 
-      if (!ignore.includes(request.url)) {
+      let urlToIgnore = ignore.find(ignoreUrl=>{request.url.includes(ignoreUrl)})
+
+      if (urlToIgnore){
 
         if (e.error.msg) {
           errorMsg = e.error.msg;
