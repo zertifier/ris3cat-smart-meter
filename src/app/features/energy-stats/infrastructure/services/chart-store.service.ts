@@ -35,9 +35,9 @@ const defaultValues: ChartStore = {
 export class ChartStoreService extends RxStore<ChartStore> {
   $ = {
     params(state: ChartStore) {
-      const {dateRange, date, selectedChartResource, origin, selectedChartEntity, chartType} = state;
+      const {dateRange, date, selectedChartResource, origin, selectedChartEntity, chartType, lastFetchedStats} = state;
       return {
-        dateRange, date, selectedChartResource, origin, selectedChartEntity, chartType
+        dateRange, date, selectedChartResource, origin, selectedChartEntity, chartType, lastFetchedStats
       }
     }
   }

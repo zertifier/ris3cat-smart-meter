@@ -15,9 +15,9 @@ import {DatadisEnergyStat} from "@shared/infrastructure/services/zertipower/DTOs
   templateUrl: './data-totals.component.html',
   styleUrl: './data-totals.component.scss'
 })
-export class DataTotalsComponent implements AfterViewInit{
+export class DataTotalsComponent {
   @Input() datasets!: ChartDataset[]
-  @Input() data!: DatadisEnergyStat[]
+  data!: DatadisEnergyStat[]
 
   totalProduction = 0
   totalActiveProduction = 0
@@ -33,24 +33,9 @@ export class DataTotalsComponent implements AfterViewInit{
     this.chartStoreService
       .selectOnly(this.chartStoreService.$.params).subscribe((params) => {
       console.log(params, "PARAMS")
+      this.data = params.lastFetchedStats
+      this.startCalculate()
     })
-  }
-
-  ngAfterViewInit() {
-    if (this.data)
-      this.data.forEach((data) => {
-        this.setTotals(data)
-      })/*
-      this.datasets.forEach((dataset) => {
-        if (dataset.id == 'production') this.setVariables(dataset.data, 'production')
-        if (dataset.id == 'productionActive') this.setVariables(dataset.data, 'productionActive')
-        if (dataset.id == 'networkActiveConsumption') this.setVariables(dataset.data, 'networkActiveConsumption')
-        if (dataset.id == 'surplusActive') this.setVariables(dataset.data, 'surplusActive')
-      })*/
-
-    this.totalCo2 = this.totalProduction * 0.00026
-    this.cdr.detectChanges(); // removes console error
-
   }
 
 /*  setVariables(data: any[], type: 'networkActiveConsumption' | 'production' | 'productionActive' | 'surplusActive'){
@@ -68,6 +53,14 @@ export class DataTotalsComponent implements AfterViewInit{
         }
   }*/
 
+  startCalculate(){
+    if (this.data)
+      this.data.forEach((data) => {
+        this.setTotals(data)
+      })
+    this.totalCo2 = this.totalProduction * 0.00026
+    this.cdr.detectChanges(); // removes console error
+  }
 
   setTotals(data: any){
     if (data.production) this.totalProduction += parseInt(data.production)
