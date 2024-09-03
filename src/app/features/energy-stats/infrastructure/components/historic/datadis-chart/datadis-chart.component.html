@@ -64,7 +64,7 @@
         <app-chart-legend [labels]="legendLabels"/>
       </div>
         }
-    <div *ngIf="datasets.length">
+    <div *ngIf="datasets.length && data.length">
       <hr class="my-5">
       <app-data-totals [datasets]="datasets"/>
     </div>

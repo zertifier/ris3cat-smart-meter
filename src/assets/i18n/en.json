@@ -299,7 +299,7 @@
   "STATS": {
     "navbar": "Stats",
     "title": "Stats",
-    "subTitle": "Ranking",
+    "subTitle": "Ranking of the active members",
     "texts": {
       "monthLabel": "Select the month you want to see",
       "typeLabel": "What data do you want to see?",

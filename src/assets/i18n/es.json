@@ -300,7 +300,7 @@
   "STATS": {
     "navbar": "Estadísticas",
     "title": "Estadísticas",
-    "subTitle": "Ranking",
+    "subTitle": "Ranking de los miembros activos",
     "texts": {
       "monthLabel": "Elige el mes que quieres ver",
       "typeLabel": "¿Qué datos quieres ver?",
