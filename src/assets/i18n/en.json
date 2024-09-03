@@ -11,9 +11,9 @@
       "selfConsumption": "Self-consumption",
       "generatedEnergy": "Energy generated",
       "surplus": "Surplus",
-      "buyingPrice":"Buying price",
-      "sellingPrice":"selling price",
-      "unavailable":"Unavailable"
+      "buyingPrice": "Buying price",
+      "sellingPrice": "selling price",
+      "unavailable": "Unavailable"
     },
     "tooltips": {
       "assignedProd": "The percentage of energy produced that is assigned to this CUPS"
@@ -44,12 +44,29 @@
       "selfConsumption": "Self-consumption",
       "generatedEnergy": "Energy generated",
       "surplus": "Surplus",
-      "buyingPrice":"Buying price",
-      "sellingPrice":"selling price",
-      "unavailable":"Unavailable"
+      "buyingPrice": "Buying price",
+      "sellingPrice": "selling price",
+      "unavailable": "Unavailable",
+      "tradeTypeLabel": "Share type: {{type}}",
+      "tradeTypePref": "Preferred",
+      "tradeTypeEqui": "Equitable"
     },
     "tooltips": {
       "assignedProd": "The percentage of energy produced that is assigned to this CUPS"
+    },
+    "modals": {
+      "modifyCommunity": {
+        "title": "Modify the community",
+        "texts": {
+          "nameLabel": "Community name",
+          "namePlaceholder": "For example: Olot",
+          "tradeTypeLabel": "Type of energy sharing"
+        },
+        "swal": {
+          "success": "Community successfully modified",
+          "error": "There was an error saving the community. Please try again later"
+        }
+      }
     }
   },
   "HISTORIC-CHART": {
@@ -81,7 +98,7 @@
         "yearly": "Yearly"
       },
       "noDisplay": "Nothing to show",
-      "chartDataInputText":"Choose a month/year to see the consumption.",
+      "chartDataInputText": "Choose a month/year to see the consumption.",
       "chartBottomText": "· Learn about energy spending in detail by clicking on each type of consumption. The chart will show individualized consumption information.",
       "chartBottomCommunityText": "· This statistic indicates the data of the {{activeMembers}} active members out of a total of {{totalMembers}} community members.",
       "chartUpdateWarning": "· Please note that data updates are not daily.",
@@ -99,7 +116,9 @@
         "totalConsumption": "Total Consumption",
         "totalSurplus": "Total Surplus",
         "totalCo2": "Total CO2 Offset",
-        "totalCo2Badge":"The CO2 Offset is calculated based on the production."
+        "totalCo2Badge": "The CO2 Offset is calculated based on the production.",
+        "totalMembers": "Total members: {{total}}",
+        "totalActiveMembers": "Active members: {{total}}"
       },
       "displayLegend": "Show legend",
       "maximize": "Maximize",
@@ -108,7 +127,7 @@
     "tooltips": {
       "chartLabels": {
         "community": {
-          "CO2Savings":"",
+          "CO2Savings": "",
           "production": "Total community production.",
           "activeProduction": "Production of active participants",
           "networkConsumption": "Consumption that the electricity company will bill.",
@@ -117,14 +136,13 @@
           "sharedSurplusActive": "Amount of energy to share that is produced and not consumed by active participants."
         },
         "cups": {
-          "CO2Savings":"",
+          "CO2Savings": "",
           "networkConsumption": "Consumption that the electricity company will bill.",
           "production": "Proportional community production.",
           "networkActiveConsumption": "Amount of energy we consume.",
           "surplusActive": "Amount of energy produced and not consumed.",
           "sharedSurplusActive": "Amount of energy to share that is produced and not consumed by active participants."
         }
-
       },
       "communityModel": {
         "acc": "(Shared Self-Consumption)",
@@ -139,15 +157,15 @@
     },
     "energy": {
       "title": "Community energy prediction",
-      "titleConsumption":"Energy consumption prediction",
-      "titleProduction":"Energy production prediction",
-      "titleSurplus":"Energy surplus prediction",
-      "titleActivesConsumption":"Energy consumption prediction of active members",
-      "titleActivesProduction":"Energy production prediction of active members",
-      "titleActivesSurplus":"Energy surplus prediction of active members",
-      "unavailable":"Unavailable",
-      "surplusDescription":"* At most, only 2 days of the surplus forecast will be available.", 
-      "productionDescription":"* At most, only 2 days of the production forecast will be available."
+      "titleConsumption": "Energy consumption prediction",
+      "titleProduction": "Energy production prediction",
+      "titleSurplus": "Energy surplus prediction",
+      "titleActivesConsumption": "Energy consumption prediction of active members",
+      "titleActivesProduction": "Energy production prediction of active members",
+      "titleActivesSurplus": "Energy surplus prediction of active members",
+      "unavailable": "Unavailable",
+      "surplusDescription": "* At most, only 2 days of the surplus forecast will be available.",
+      "productionDescription": "* At most, only 2 days of the production forecast will be available."
     }
   },
   "PROFILE": {
@@ -155,7 +173,7 @@
     "title": "My profile",
     "texts": {
       "nameLabel": "Name (required)",
-      "lastnameLabel":"Last name (required)"
+      "lastnameLabel": "Last name (required)"
     }
   },
   "MY-WALLET": {
@@ -176,15 +194,15 @@
       "communityBalance": "Energy balance within the CCE",
       "addBalance": "Earn tokens",
       "pullOutBalance": "Withdraw tokens",
-      "pkLabel":"Private key"
+      "pkLabel": "Private key"
     },
     "tooltips": {
       "identity": "The identity allows your user to be identified within the Blockchain.",
       "energy": "This balance will be used for purchasing energy within the community.",
       "token": "Balance for transactions.",
       "shares": "These are the shares that the community holds.",
-      "pk":"The private key is sufficient to access your tokens. It is not advisable to share it with anyone.",
-      "webSwap":"You can buy EKW using another cryptocurrency."
+      "pk": "The private key is sufficient to access your tokens. It is not advisable to share it with anyone.",
+      "webSwap": "You can buy EKW using another cryptocurrency."
     },
     "modals": {
       "transfer": {
@@ -197,9 +215,9 @@
           "toPlaceholder": "example@email.com / 0xA...",
           "toBottomText": "Enter the recipient's email or identity number",
           "amountLabel": "Amount",
-          "balanceAdded":"Balance added.",
-          "insuficientFunds":"Insufficient funds.",
-          "balancewithdrawn":"Balance withdrawn."
+          "balanceAdded": "Balance added.",
+          "insuficientFunds": "Insufficient funds.",
+          "balancewithdrawn": "Balance withdrawn."
         },
         "swal": {
           "blockchainError": "Blockchain issues.",
@@ -214,8 +232,8 @@
         "texts": {
           "qtyLabel": "Quantity to buy",
           "qtyPlaceholder": "Add a quantity",
-          "buy":"Buy",
-          "creditCard":"Credit card"
+          "buy": "Buy",
+          "creditCard": "Credit card"
         },
         "swal": {
           "qtyError": "The quantity must be greater than 0",
@@ -228,10 +246,9 @@
       "stripeMintSuccess": "The payment was completed successfully.",
       "stripeMintError": "There was a problem with the request. We will automatically try again in a few minutes.",
       "stripeMintingWait": "Your request is being processed.",
-      "copy":"The text has been copied."
+      "copy": "The text has been copied."
     }
   },
-
   "SHARE-ENERGY": {
     "navbar": "Share energy",
     "title": "Share energy",
@@ -250,19 +267,19 @@
         "buy": "Received",
         "sell": "Sent"
       },
-      "emitter":"Emitter",
-      "receiver":"Receiver",
+      "emitter": "Emitter",
+      "receiver": "Receiver",
       "results": {
         "before": "Before",
         "now": "Now",
         "consumption": "Consumption",
         "surplus": "Surplus"
       },
-      "myShares":"My shares",
-      "communitaryShares":"Communitary shares",
-       "buyingPrice":"Buying price",
-      "sellingPrice":"selling price",
-      "availableBalance":"Balance available",
+      "myShares": "My shares",
+      "communitaryShares": "Communitary shares",
+      "buyingPrice": "Buying price",
+      "sellingPrice": "selling price",
+      "availableBalance": "Balance available",
       "anonymous": "Anonymous"
     },
     "tooltips": {
@@ -301,10 +318,10 @@
   "INTEGRATIONS": {
     "navbar": "Integrations",
     "title": "Integrations",
-    "texts":{
+    "texts": {
       "token": "API token",
-      "refreshPermanentToken":"Refresh",
-      "documentation":"See docs"
+      "refreshPermanentToken": "Refresh",
+      "documentation": "See docs"
     }
   },
   "NOTIFICATIONS": {
@@ -326,8 +343,8 @@
       "datadis_error": "Datadis errors",
       "datadis_active": "Datadis active",
       "datadis_inactive": "Datadis inactive",
-      "insufficient_balance":"Insufficient balance within the community",
-      "low_balance":"Low balance within the community" 
+      "insufficient_balance": "Insufficient balance within the community",
+      "low_balance": "Low balance within the community"
     }
   },
   "PROPOSALS": {
@@ -385,7 +402,6 @@
       "successCreate": "Proposal saved successfully"
     }
   },
-
   "PARTICIPANTS": {
     "navbar": "Participants",
     "title": "Participants",
@@ -412,7 +428,6 @@
         "sharePlaceholder": "e.g.:5000"
       },
       "remove": {
-
       },
       "swal": {
         "activate": {
@@ -444,7 +459,6 @@
       "wait": "Please wait."
     }
   },
-
   "LOGOUT": {
     "navbar": "Log out",
     "modal": {
@@ -459,7 +473,6 @@
       "language": "Language"
     }
   },
-
   "QR": {
     "import": {
       "title": "Scan the QR",
@@ -502,7 +515,15 @@
         "November",
         "December"
       ],
-      "daysArray": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "daysArray": [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
       "save": "Save",
       "cancel": "Cancel",
       "close": "Close",
@@ -511,7 +532,7 @@
       "yes": "Yes",
       "no": "No",
       "okay": "Okay",
-      "confifrm":"Confirm"
+      "confifrm": "Confirm"
     }
   }
 }

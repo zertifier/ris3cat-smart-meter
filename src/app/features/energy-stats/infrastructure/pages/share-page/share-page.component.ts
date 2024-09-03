@@ -67,7 +67,9 @@ export class SharePageComponent implements OnDestroy {
   });
 
   infoDisplay: 'community' | 'customer' = 'customer';
-  
+
+  tradeTypeVisible = false
+
 
   subscriptions: Subscription[] = [];
   constructor(
