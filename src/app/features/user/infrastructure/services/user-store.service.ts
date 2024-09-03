@@ -59,7 +59,4 @@ export class UserStoreService extends RxStore<UserStore> {
     super(defaultValues);
   }
 
-  get(): Observable<any> {
-    return this.select();
-  }
 }
