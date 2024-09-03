@@ -72,6 +72,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
     .selectOnly(state => state.selectedChartEntity === ChartEntity.COMMUNITIES);
 
   datasets: ChartDataset[] = [];
+  data!: DatadisEnergyStat[]
   labels: string[] = [];
   legendLabels: DataLabel[] = [];
   mobileLabels: DataLabel[] = [];
@@ -120,6 +121,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                 const cupId = this.userStore.snapshotOnly(this.userStore.$.cupsId);
                 const communityId = this.userStore.snapshotOnly(this.userStore.$.communityId);
                 const data = await this.fetchEnergyStats(date, dateRange, cupId, communityId);
+                this.data = data
                 this.chartStoreService.patchState({ lastFetchedStats: data });
 
                 // Create labels
