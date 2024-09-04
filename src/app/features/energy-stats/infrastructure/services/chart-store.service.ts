@@ -6,6 +6,7 @@ import {ChartResource} from "../../domain/ChartResource";
 import {ChartType} from "../../domain/ChartType";
 import {ChartOrigins} from "../../domain/ChartOrigins";
 import {DatadisEnergyStat} from "../../../../shared/infrastructure/services/zertipower/DTOs/EnergyStatDTO";
+import {Subject} from "rxjs";
 
 export interface ChartStore {
   dateRange: DateRange,
@@ -35,15 +36,22 @@ const defaultValues: ChartStore = {
 export class ChartStoreService extends RxStore<ChartStore> {
   $ = {
     params(state: ChartStore) {
-      const {dateRange, date, selectedChartResource, origin, selectedChartEntity, chartType, lastFetchedStats} = state;
+      const {dateRange, date, selectedChartResource, origin, selectedChartEntity, chartType} = state;
       return {
-        dateRange, date, selectedChartResource, origin, selectedChartEntity, chartType, lastFetchedStats
+        dateRange, date, selectedChartResource, origin, selectedChartEntity, chartType
       }
     }
   }
 
+  chartData$: Subject<DatadisEnergyStat[]> = new Subject()
+  chartData: DatadisEnergyStat[] = [];
+
   constructor() {
     super(defaultValues);
+
+    this.chartData$.subscribe((data) => {
+      this.chartData = data
+    })
   }
 
   public setChartType(chartType: ChartType) {
