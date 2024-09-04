@@ -1,9 +1,12 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
-import { ChartDataset } from "@shared/infrastructure/interfaces/ChartDataset";
-import { TranslocoDirective } from "@jsverse/transloco";
-import { QuestionBadgeComponent } from '../../../../../../shared/infrastructure/components/question-badge/question-badge.component';
-import { ChartStoreService } from "@features/energy-stats/infrastructure/services/chart-store.service";
-import { DatadisEnergyStat } from "@shared/infrastructure/services/zertipower/DTOs/EnergyStatDTO";
+import {AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy} from '@angular/core';
+import {ChartDataset} from "@shared/infrastructure/interfaces/ChartDataset";
+import {TranslocoDirective} from "@jsverse/transloco";
+import {
+  QuestionBadgeComponent
+} from '../../../../../../shared/infrastructure/components/question-badge/question-badge.component';
+import {ChartStoreService} from "@features/energy-stats/infrastructure/services/chart-store.service";
+import {DatadisEnergyStat} from "@shared/infrastructure/services/zertipower/DTOs/EnergyStatDTO";
+import {Subject, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-data-totals',
@@ -24,20 +27,31 @@ export class DataTotalsComponent implements OnDestroy {
   totalConsumption = 0
   totalSurplus = 0
   totalCo2 = 0
-  chartStoreServiceSuscription: any;
+  chartStoreServiceSubcription!: Subscription;
   chartDataType!: any;
-  chartDataTypeSymbol:'kWh'|'€'='kWh'
+  chartDataTypeSymbol: 'kWh' | '€' = 'kWh'
+
+  subscriptions: Subscription[] =[]
 
   constructor(
     private cdr: ChangeDetectorRef,
     private readonly chartStoreService: ChartStoreService,
-
   ) {
 
-    this.chartStoreServiceSuscription = this.chartStoreService
-      .selectOnly(this.chartStoreService.$.params).subscribe((params) => {
+    this.data = this.chartStoreService.chartData
+   /* this.subscriptions.push(
+      this.chartStoreService
+        .chartData$.subscribe((data) => {
+        console.log(data, "data")
+
+      })
+    )*/
+
+    this.subscriptions.push(
+      this.chartStoreService
+        .selectOnly(this.chartStoreService.$.params).subscribe((params) => {
         this.resetValues();
-        this.data = params.lastFetchedStats
+        this.data = this.chartStoreService.chartData
         this.chartDataType = params.selectedChartResource;
         if (this.chartDataType == 'energy') {
           this.chartDataTypeSymbol = 'kWh'
@@ -47,10 +61,11 @@ export class DataTotalsComponent implements OnDestroy {
           this.startPriceCalculate()
         }
       })
+    )
   }
 
   ngOnDestroy(): void {
-    this.chartStoreServiceSuscription.unsubscribe();
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
   /*  setVariables(data: any[], type: 'networkActiveConsumption' | 'production' | 'productionActive' | 'surplusActive'){
@@ -74,6 +89,9 @@ export class DataTotalsComponent implements OnDestroy {
     this.data.forEach((data) => {
       this.setEnergyTotals(data)
     })
+      this.data.forEach((data) => {
+        this.setEnergyTotals(data)
+      })
     this.totalCo2 = this.totalProduction * 0.00026
 
     //this.cdr.detectChanges(); // removes console error
@@ -92,6 +110,9 @@ export class DataTotalsComponent implements OnDestroy {
     for (let data of this.data) {
       this.setPriceTotals(data)
     }
+      for (let data of this.data) {
+        this.setPriceTotals(data)
+      }
     this.roundPriceTotals();
     this.totalCo2 = this.totalProduction * 0.00026
     //this.cdr.detectChanges(); // removes console error
@@ -106,10 +127,10 @@ export class DataTotalsComponent implements OnDestroy {
   }
 
   roundPriceTotals() {
-    this.totalProduction= Number(this.totalProduction.toFixed(2))
-    this.totalActiveProduction= Number(this.totalActiveProduction.toFixed(2))
-    this.totalConsumption= Number(this.totalConsumption.toFixed(2))
-    this.totalSurplus= Number(this.totalSurplus.toFixed(2))
+    this.totalProduction = Number(this.totalProduction.toFixed(2))
+    this.totalActiveProduction = Number(this.totalActiveProduction.toFixed(2))
+    this.totalConsumption = Number(this.totalConsumption.toFixed(2))
+    this.totalSurplus = Number(this.totalSurplus.toFixed(2))
   }
 
   resetValues() {
