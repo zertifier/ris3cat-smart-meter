@@ -6,43 +6,50 @@
       <!-- <p class="mt-4 fs-5"> {{ t('texts.chooseData') }} </p> -->
 
       <div class="w-100 mb-3 d-flex flex-column">
-        @if(customer){
-        <span class="my-2">{{ t('texts.availableBalance') }} : <b class="color-tertiary">{{customer.balance}} EKW</b></span>
+        @if (customer) {
+          <span class="my-2">{{ t('texts.availableBalance') }} : <b class="color-tertiary">{{ customer.balance }}
+            EKW</b></span>
         }
-        @if(communityData && communityData.energyPrice) {
-        <span>{{ t('texts.buyingPrice') }} : <b class="color-tertiary">{{communityData.energyPrice}} €/kWh</b></span>
-        <span>{{ t('texts.sellingPrice') }} : <b class="color-tertiary"> {{communityData.energyPrice}} €/kWh</b></span>
+        @if (communityData && communityData.energyPrice) {
+          <span>{{ t('texts.buyingPrice') }} : <b class="color-tertiary">{{ communityData.energyPrice }}
+            €/kWh</b></span>
+          <span>{{ t('texts.sellingPrice') }} : <b class="color-tertiary"> {{ communityData.energyPrice }}
+            €/kWh</b></span>
         }
       </div>
 
       <div class="row">
         <div class="col-12 mb-2">
-          <button class="btn" [ngClass]="{'btn-active':infoDisplay=='customer','btn-secondary':infoDisplay=='community'}"
-                  (click)="infoDisplay='customer'; getData()">{{ t('texts.myShares') }}</button>
+          <button class="btn"
+                  [ngClass]="{'btn-active':infoDisplay=='customer','btn-secondary':infoDisplay=='community'}"
+                  (click)="infoDisplay='customer'; getData()">{{ t('texts.myShares') }}
+          </button>
         </div>
 
         <div class="col-12  mb-2">
-          <button class="btn" [ngClass]="{'btn-active':infoDisplay=='community','btn-secondary':infoDisplay=='customer'}"
-                  (click)="infoDisplay='community'; getData()">{{ t('texts.communitaryShares') }}</button>
+          <button class="btn"
+                  [ngClass]="{'btn-active':infoDisplay=='community','btn-secondary':infoDisplay=='customer'}"
+                  (click)="infoDisplay='community'; getData()">{{ t('texts.communitaryShares') }}
+          </button>
         </div>
       </div>
 
       <div class="row">
-        <div class="col-12 col-md-4">
+        <div class="col-12 col-md-4 my-2">
           <label class="form-label">
             {{ t('texts.from') }}
           </label>
           <p-calendar [(ngModel)]="fromDate" iconDisplay="input" [showIcon]="true" view="date" (onClose)="getData()"
-            [maxDate]="maxDate" [dateFormat]="'dd/mm/yy'" styleClass="w-100" />
+                      [maxDate]="maxDate" [dateFormat]="'dd/mm/yy'" styleClass="w-100"/>
         </div>
-        <div class="col-12 col-md-4">
+        <div class="col-12 col-md-4 my-2">
           <label class="form-label">
             {{ t('texts.to') }}
           </label>
           <p-calendar [(ngModel)]="toDate" iconDisplay="input" [showIcon]="true" view="date" (onClose)="getData()"
-            [maxDate]="maxDate" [minDate]="minToDate" [dateFormat]="'dd/mm/yy'" styleClass="w-100" />
+                      [maxDate]="maxDate" [minDate]="minToDate" [dateFormat]="'dd/mm/yy'" styleClass="w-100"/>
         </div>
-        <div class="col-12 col-md-4">
+        <div class="col-12 col-md-4 my-2">
           <label class="form-label">
             {{ t('texts.totalShared') }}
           </label>
@@ -54,149 +61,235 @@
       </div>
     </div>
 
-    <div class="row" *ngIf="infoDisplay=='customer'">
+    <!-- CUSTOMER DATA -->
+    <div class="row" >
 
-    <div *ngIf="!loading" class="overflow-y-scroll" style="max-height: 440px">
-      <table class="table table-striped align-middle">
-        <thead>
-          <tr class="border-2 border-end-0 border-start-0 border-tertiary" style="height: 50px !important;">
-            <th style="max-width: 20%; width: 100%" scope="col">{{ t('texts.date') }}</th>
-            <th style="max-width: 20%; width: 100%" scope="col">{{ t('texts.action') }}</th>
-            <th style="max-width: 20%; width: 100%" scope="col">{{ t('texts.amount') }}</th>
-            <th style="max-width: 10%; width: 100%" scope="col">{{ t('texts.total') }}</th>
-            <th style="max-width: 10%; width: 100%" scope="col">{{ t('texts.emitter') }}</th>
-            <th style="max-width: 10%; width: 100%" scope="col">{{ t('texts.receiver') }}</th>
-            <th style="max-width: 10%; width: 100%" scope="col">{{ t('texts.result') }}</th>
-            <!-- <th scope="col">{{ t('texts.result') }}</th> -->
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let data of customerTradesData" style="height: 50px">
-            <td>{{ data.infoDt | date:'dd-MM-yyyy HH:mm' }}</td>
-            <td>
+      <div *ngIf="!loading" class="overflow-y-scroll" style="max-height: 440px">
+        <div class="d-none d-lg-block">
+          <table class="table table-striped align-middle ">
+            <thead>
+            <tr class="border-2 border-end-0 border-start-0 border-tertiary" style="height: 50px !important;">
+              <th style="max-width: 20%; width: 100%" scope="col">{{ t('texts.date') }}</th>
+              <th style="max-width: 15%; width: 100%" scope="col">{{ t('texts.action') }}</th>
+              <th style="max-width: 15%; width: 100%" scope="col">{{ t('texts.amount') }}</th>
+              <th style="max-width: 20%; width: 100%" scope="col">{{ t('texts.total') }}</th>
+              <th style="max-width: 10%; width: 100%" scope="col">{{ t('texts.emitter') }}</th>
+              <th style="max-width: 10%; width: 100%" scope="col">{{ t('texts.receiver') }}</th>
+              <th style="max-width: 15%; width: 100%" scope="col">{{ t('texts.result') }}</th>
+              <!-- <th scope="col">{{ t('texts.result') }}</th> -->
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let data of tradesData" style="height: 50px">
+              <td>{{ data.infoDt | date:'dd-MM-yyyy HH:mm' }}</td>
+              <td>
               <span *ngIf="data.action == 'BUY'"
-                class="badge buy-badge d-flex align-items-center justify-content-center fw-normal"> {{
-                t('texts.actions.buy') }} </span>
-              <span *ngIf="data.action == 'SELL'"
-                class="badge text-bg-success d-flex align-items-center justify-content-center fw-normal"> {{
-                t('texts.actions.sell') }} </span>
-            </td>
-            <td>
-              {{ data.tradedKwh | noRoundDecimal:3 }} kWh
-            </td>
-            <td>
-              <span *ngIf="data.cost > 0">{{ data.action === 'BUY' ? '-' : (data.action === 'SELL' ? '+' : '') }}</span>
-              {{ data.cost | noRoundDecimal:3 }} EKW
-              <app-question-badge>
-                <div class="my-3">
-                  {{ t('tooltips.ekw') }}
-                </div>
-              </app-question-badge>
-            </td>
+                    class="badge buy-badge d-flex align-items-center justify-content-center fw-normal">
+                {{ t('texts.actions.buy') }}
+              </span>
+                <span *ngIf="data.action == 'SELL'"
+                      class="badge text-bg-success d-flex align-items-center justify-content-center fw-normal">
+                  {{ t('texts.actions.sell') }}
+                </span>
+              </td>
+              <td>
+                {{ data.tradedKwh | noRoundDecimal:3 }} kWh
+              </td>
+              <td>
+                <span
+                  *ngIf="data.cost > 0">{{ data.action === 'BUY' ? '-' : (data.action === 'SELL' ? '+' : '') }}</span>
+                {{ data.cost | noRoundDecimal:3 }} EKW
+                <app-question-badge>
+                  <div class="my-3">
+                    {{ t('tooltips.ekw') }}
+                  </div>
+                </app-question-badge>
+              </td>
 
-            <td>
-              {{(data.fromWalletAddress || '' | TextShorter:6:4) ||  t('texts.anonymous')}}
-            </td>
+              <td>
+                {{ (data.fromWalletAddress || '' | TextShorter:6:4) || t('texts.anonymous') }}
+              </td>
 
-            <td>
-              {{(data.toWalletAddress || '' | TextShorter:6:4) ||  t('texts.anonymous')}}
-            </td>
+              <td>
+                {{ (data.toWalletAddress || '' | TextShorter:6:4) || t('texts.anonymous') }}
+              </td>
 
-            <td><span class="text-decoration-line-through d-block" style="font-size: 14px">{{ data.previousKwh |
-                noRoundDecimal:3}} kWh</span>
-              <span class="fw-semibold">{{ data.currentKwh | noRoundDecimal:3 }} kWh</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="mt-2">
-      <p *ngIf="customerTradesData && customerTradesData.length">
-        {{ t('texts.bottomTable') }}
-      </p>
-      <p class="text-center" *ngIf=" !customerTradesData || !customerTradesData.length">
-        {{ t('texts.noData') }}
-      </p>
-    </div>
-
-  </div>
-
-  <!-- COMMUNITY DATA -->
-
-  <div class="row" *ngIf="infoDisplay=='community'">
-
-    <div *ngIf="!loading" class="overflow-y-scroll" style="max-height: 440px">
-      <table class="table table-striped align-middle">
-        <thead>
-          <tr class="border-2 border-end-0 border-start-0 border-tertiary" style="height: 50px !important;">
-            <th style="max-width: 20%; width: 100%" scope="col">{{ t('texts.date') }}</th>
-            <th style="max-width: 20%; width: 100%" scope="col">{{ t('texts.action') }}</th>
-            <th style="max-width: 20%; width: 100%" scope="col">{{ t('texts.amount') }}</th>
-            <th style="max-width: 10%; width: 100%" scope="col">{{ t('texts.total') }}</th>
-            <th style="max-width: 10%; width: 100%" scope="col">{{ t('texts.emitter') }}</th>
-            <th style="max-width: 10%; width: 100%" scope="col">{{ t('texts.receiver') }}</th>
-            <th style="max-width: 10%; width: 100%" scope="col">{{ t('texts.result') }}</th>
-            <!-- <th scope="col">{{ t('texts.result') }}</th> -->
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let data of communityTradesData" style="height: 50px">
-            <td>{{ data.infoDt | date:'dd-MM-yyyy HH:mm' }}</td>
-            <td>
-              <span *ngIf="data.action == 'BUY'"
-                class="badge buy-badge d-flex align-items-center justify-content-center fw-normal"> {{
-                t('texts.actions.buy') }} </span>
-              <span *ngIf="data.action == 'SELL'"
-                class="badge text-bg-success d-flex align-items-center justify-content-center fw-normal"> {{
-                t('texts.actions.sell') }} </span>
-            </td>
-            <td>
-              {{ data.tradedKwh | noRoundDecimal:3 }} kWh
-            </td>
-            <td>
-              <span *ngIf="data.cost > 0">{{ data.action === 'BUY' ? '-' : (data.action === 'SELL' ? '+' : '') }}</span>
-              {{ data.cost | noRoundDecimal:3 }} EKW
-              <app-question-badge>
-                <div class="my-3">
-                  {{ t('tooltips.ekw') }}
-                </div>
-              </app-question-badge>
-            </td>
-
-            <td>
-              {{(data.fromWalletAddress || '' | TextShorter:6:4) ||  t('texts.anonymous')}}
-            </td>
-
-            <td>
-              {{(data.toWalletAddress || '' | TextShorter:6:4) ||  t('texts.anonymous')}}
-            </td>
-
-            <td><span class="text-decoration-line-through d-block" style="font-size: 14px">{{ data.previousKwh |
-                noRoundDecimal:3}} kWh</span>
-              <span class="fw-semibold">{{ data.currentKwh | noRoundDecimal:3 }} kWh</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="mt-2">
-      <p *ngIf="communityTradesData && communityTradesData.length">
-        {{ t('texts.bottomTable') }}
-      </p>
-      <!-- <p class="text-center" *ngIf=" !communityTradesData || !communityTradesData.length">
-        {{ t('texts.noData') }}
-      </p> -->
-      <div *ngIf=" !communityTradesData || !communityTradesData.length" class="d-flex justify-content-center">
-        <div class="spinner-border" role="status">
-          <span class="sr-only">Loading...</span>
+              <td>
+                <span class="text-decoration-line-through d-block" style="font-size: 14px">{{
+                  data.previousKwh |
+                    noRoundDecimal:3
+                }} kWh</span>
+                <span class="fw-semibold">{{ data.currentKwh | noRoundDecimal:3 }} kWh</span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
         </div>
+
+        <div class="d-block d-lg-none">
+          <div *ngFor="let data of tradesData" class="card my-3 border-2 border-tertiary">
+            <div class="card-body">
+              <div class="mt-2 mb-4">
+                <span *ngIf="data.action == 'BUY'"
+                      class="badge buy-badge d-flex align-items-center justify-content-center fw-normal">
+                  {{ t('texts.actions.buy') }}
+                </span>
+                <span *ngIf="data.action == 'SELL'"
+                      class="badge text-bg-success d-flex align-items-center justify-content-center fw-normal">
+                  {{ t('texts.actions.sell') }}
+                </span>
+              </div>
+
+              <div class="row">
+                <div class="col-6 border-end-custom py-3 px-4">
+                  <p class="fw-semibold mb-1">{{t('texts.amount')}}</p>
+                  <span class="mx-auto">
+                    {{ data.tradedKwh | noRoundDecimal:3 }} kWh
+                  </span>
+                </div>
+                <div class="col-6 border-start-custom py-3 px-4">
+                  <div class="mx-auto card-custom-div">
+                    <p class="fw-semibold mb-1">{{t('texts.total')}}</p>
+                    <span *ngIf="data.cost > 0">
+                    {{ data.action === 'BUY' ? '-' : (data.action === 'SELL' ? '+' : '') }}
+                  </span>
+                    {{ data.cost | noRoundDecimal:3 }} EKW
+                    <app-question-badge>
+                      <div class="my-3">
+                        {{ t('tooltips.ekw') }}
+                      </div>
+                    </app-question-badge>
+                  </div>
+                </div>
+                <div class="col-6 border-end-custom py-3 px-4">
+                  <p class="fw-semibold mb-1">{{t('texts.emitter')}}</p>
+                  <span class="mx-auto">
+                    {{ (data.fromWalletAddress || '' | TextShorter:6:4) || t('texts.anonymous') }}
+                  </span>
+                </div>
+                <div class="col-6 border-start-custom py-3 px-4">
+                  <div class="mx-auto card-custom-div">
+                    <p class="fw-semibold mb-1">{{t('texts.receiver')}}</p>
+                    <span class="mx-auto">
+                    {{ (data.toWalletAddress || '' | TextShorter:6:4) || t('texts.anonymous') }}
+                    </span>
+                  </div>
+
+                </div>
+                <div class="col-6 border-end-custom border-tertiary py-3 px-4">
+                  <p class="fw-semibold mb-1">{{t('texts.mobileEnergyCurrent')}}</p>
+                  <span>
+                    {{data.previousKwh | noRoundDecimal:3 }} kWh</span>
+                </div>
+                <div class="col-6 border-start-custom border-tertiary py-3 px-4">
+                  <div class="mx-auto card-custom-div">
+                    <p class="fw-semibold mb-1">{{t('texts.mobileEnergyLeft')}}</p>
+                    <span>{{ data.currentKwh | noRoundDecimal:3 }} kWh</span>
+                  </div>
+
+                </div>
+              </div>
+              <div class="text-end mt-4">
+                <span class="text-body-secondary">{{ data.infoDt | date:'dd-MM-yyyy HH:mm' }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-2">
+        <p *ngIf="tradesData && tradesData.length">
+          {{ t('texts.bottomTable') }}
+        </p>
+        <p class="text-center" *ngIf=" !tradesData || !tradesData.length">
+          {{ t('texts.noData') }}
+        </p>
       </div>
 
     </div>
 
-  </div>
+    <!-- COMMUNITY DATA -->
+
+   <!-- <div class="row" *ngIf="infoDisplay=='community'">
+
+      <div *ngIf="!loading" class="overflow-y-scroll" style="max-height: 440px">
+        <div class="d-none d-lg-block">
+          <table class="table table-striped align-middle">
+            <thead>
+            <tr class="border-2 border-end-0 border-start-0 border-tertiary" style="height: 50px !important;">
+              <th style="max-width: 20%; width: 100%" scope="col">{{ t('texts.date') }}</th>
+              <th style="max-width: 20%; width: 100%" scope="col">{{ t('texts.action') }}</th>
+              <th style="max-width: 20%; width: 100%" scope="col">{{ t('texts.amount') }}</th>
+              <th style="max-width: 10%; width: 100%" scope="col">{{ t('texts.total') }}</th>
+              <th style="max-width: 10%; width: 100%" scope="col">{{ t('texts.emitter') }}</th>
+              <th style="max-width: 10%; width: 100%" scope="col">{{ t('texts.receiver') }}</th>
+              <th style="max-width: 10%; width: 100%" scope="col">{{ t('texts.result') }}</th>
+              &lt;!&ndash; <th scope="col">{{ t('texts.result') }}</th> &ndash;&gt;
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let data of communityTradesData" style="height: 50px">
+              <td>{{ data.infoDt | date:'dd-MM-yyyy HH:mm' }}</td>
+              <td>
+              <span *ngIf="data.action == 'BUY'"
+                    class="badge buy-badge d-flex align-items-center justify-content-center fw-normal"> {{
+                  t('texts.actions.buy')
+                }} </span>
+                <span *ngIf="data.action == 'SELL'"
+                      class="badge text-bg-success d-flex align-items-center justify-content-center fw-normal"> {{
+                    t('texts.actions.sell')
+                  }} </span>
+              </td>
+              <td>
+                {{ data.tradedKwh | noRoundDecimal:3 }} kWh
+              </td>
+              <td>
+                <span
+                  *ngIf="data.cost > 0">{{ data.action === 'BUY' ? '-' : (data.action === 'SELL' ? '+' : '') }}</span>
+                {{ data.cost | noRoundDecimal:3 }} EKW
+                <app-question-badge>
+                  <div class="my-3">
+                    {{ t('tooltips.ekw') }}
+                  </div>
+                </app-question-badge>
+              </td>
+
+              <td>
+                {{ (data.fromWalletAddress || '' | TextShorter:6:4) || t('texts.anonymous') }}
+              </td>
+
+              <td>
+                {{ (data.toWalletAddress || '' | TextShorter:6:4) || t('texts.anonymous') }}
+              </td>
+
+              <td><span class="text-decoration-line-through d-block" style="font-size: 14px">{{
+                  data.previousKwh |
+                    noRoundDecimal:3
+                }} kWh</span>
+                <span class="fw-semibold">{{ data.currentKwh | noRoundDecimal:3 }} kWh</span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="mt-2">
+        <p *ngIf="communityTradesData && communityTradesData.length">
+          {{ t('texts.bottomTable') }}
+        </p>
+        &lt;!&ndash; <p class="text-center" *ngIf=" !communityTradesData || !communityTradesData.length">
+          {{ t('texts.noData') }}
+        </p> &ndash;&gt;
+        <div *ngIf=" !communityTradesData || !communityTradesData.length" class="d-flex justify-content-center">
+          <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>-->
 
 
   </div>

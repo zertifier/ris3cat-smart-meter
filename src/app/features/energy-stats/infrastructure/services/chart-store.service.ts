@@ -43,15 +43,10 @@ export class ChartStoreService extends RxStore<ChartStore> {
     }
   }
 
-  chartData$: Subject<DatadisEnergyStat[]> = new Subject()
-  chartData: DatadisEnergyStat[] = [];
 
   constructor() {
     super(defaultValues);
 
-    this.chartData$.subscribe((data) => {
-      this.chartData = data
-    })
   }
 
   public setChartType(chartType: ChartType) {
