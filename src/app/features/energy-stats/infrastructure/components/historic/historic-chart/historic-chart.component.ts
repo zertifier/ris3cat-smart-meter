@@ -45,7 +45,6 @@ export class HistoricChartComponent implements AfterViewInit {
   @Input({ required: false }) chartType: 'community' | 'cups' = 'cups';
 
   date$ = this.chartStoreService.selectOnly(state => {
-    console.log(state.date, "AAAAAAAA")
     return state.date
   });
   origin$ = this.chartStoreService.selectOnly(state => state.origin)
