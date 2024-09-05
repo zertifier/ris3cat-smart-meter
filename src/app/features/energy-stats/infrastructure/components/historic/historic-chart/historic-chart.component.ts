@@ -20,6 +20,8 @@ import {
 } from "../../../../../../shared/infrastructure/services/screen-break-points.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {TranslocoDirective} from "@jsverse/transloco";
+import moment from "moment";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-historic-chart',
@@ -41,12 +43,15 @@ import {TranslocoDirective} from "@jsverse/transloco";
 })
 export class HistoricChartComponent implements OnDestroy {
 
-  @Input({ required: false }) chartType: 'community' | 'cups' = 'cups';
+  @Input({required: false}) chartType: 'community' | 'cups' = 'cups';
 
+  /*
   date$ = this.chartStoreService.selectOnly(state => {
     console.log(state.date)
-    return state.date
-  });
+    console.log(moment(state.date).toDate())
+    this.selectedDate = state.date
+    return moment(state.date).toDate()
+  });*/
   origin$ = this.chartStoreService.selectOnly(state => state.origin)
   maxDate = new Date();
   chartType$ = this.chartStoreService.selectOnly(state => state.chartType);
@@ -74,6 +79,9 @@ export class HistoricChartComponent implements OnDestroy {
 
   dateRange$ = this.chartStoreService.selectOnly(state => state.dateRange)
   currentBreakpoint$ = this.screenBreakpoints.observeBreakpoints();
+  selectedDate = moment().toDate();
+
+  subscriptions: Subscription[] = []
   protected readonly DateRange = DateRange;
   protected readonly ChartOrigins = ChartOrigins;
   protected readonly ChartResource = ChartResource;
@@ -86,10 +94,16 @@ export class HistoricChartComponent implements OnDestroy {
     private readonly screenBreakpoints: ScreenBreakPointsService,
     private readonly ngbModal: NgbModal,
   ) {
+    this.subscriptions.push(
+      this.chartStoreService.selectOnly(this.chartStoreService.$.params).subscribe((param) => {
+        this.selectedDate = param.date
+        return param.date
+      })
+    )
   }
 
   ngOnDestroy(): void {
-
+    this.subscriptions.forEach((sub) => sub.unsubscribe())
   }
 
   setChartType(event: Event) {
@@ -118,8 +132,8 @@ export class HistoricChartComponent implements OnDestroy {
     this.chartStoreService.setDate(date);
   }
 
-  setInputDate(date: Date){
-    if (date && date.getTime()){
+  setInputDate(date: Date) {
+    if (date && date.getTime()) {
       this.chartStoreService.setDate(date);
     }
   }
