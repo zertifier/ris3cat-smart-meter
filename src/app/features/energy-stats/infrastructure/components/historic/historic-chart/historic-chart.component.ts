@@ -44,7 +44,10 @@ export class HistoricChartComponent implements AfterViewInit {
 
   @Input({ required: false }) chartType: 'community' | 'cups' = 'cups';
 
-  date$ = this.chartStoreService.selectOnly(state => state.date);
+  date$ = this.chartStoreService.selectOnly(state => {
+    console.log(state.date, "AAAAAAAA")
+    return state.date
+  });
   origin$ = this.chartStoreService.selectOnly(state => state.origin)
   maxDate = new Date();
   chartType$ = this.chartStoreService.selectOnly(state => state.chartType);
@@ -59,6 +62,7 @@ export class HistoricChartComponent implements AfterViewInit {
     }
   });
   dateFormat$ = this.chartStoreService.selectOnly(state => {
+    this.chartStoreService.setDate(state.date)
     switch (state.dateRange) {
       case DateRange.MONTH:
         return 'mm-yy'

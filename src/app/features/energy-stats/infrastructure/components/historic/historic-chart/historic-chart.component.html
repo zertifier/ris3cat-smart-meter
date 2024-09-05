@@ -74,6 +74,7 @@
         [ngModel]="date$ | async" iconDisplay="input" [dateFormat]="(dateFormat$ | async) || 'yy'" [showIcon]="true"
         styleClass="w-100" [view]="(calendarView$ | async) || 'month'" />
 
+{{date$ | async}}
     </div>
   </div>
 
