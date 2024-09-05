@@ -2,19 +2,19 @@
   <div class="row mx-0 justify-content-center">
     <div class="col my-3 text-center">
       <h5>{{ t('texts.chartLabels.totalProduction') }}</h5>
-      <span>{{ totalProduction }} {{chartDataTypeSymbol}}</span>
+      <span>{{ totalProduction | number:'1.0-2': 'es' }} {{ chartDataTypeSymbol }}</span>
     </div>
     <div class="col my-3 text-center">
       <h5>{{ t('texts.chartLabels.totalActiveProduction') }}</h5>
-      <span>{{ totalActiveProduction }} {{chartDataTypeSymbol}}</span>
+      <span>{{ totalActiveProduction | number:'1.0-2': 'es' }} {{ chartDataTypeSymbol }}</span>
     </div>
     <div class="col my-3 text-center">
       <h5>{{ t('texts.chartLabels.totalConsumption') }}</h5>
-      <span>{{ totalConsumption }} {{chartDataTypeSymbol}}</span>
+      <span>{{ totalConsumption | number:'1.0-2': 'es' }} {{ chartDataTypeSymbol }}</span>
     </div>
     <div class="col my-3 text-center">
       <h5>{{ t('texts.chartLabels.totalSurplus') }}</h5>
-      <span>{{ totalSurplus }} {{chartDataTypeSymbol}}</span>
+      <span>{{ totalSurplus | number:'1.0-2': 'es' }} {{ chartDataTypeSymbol }}</span>
     </div>
     <div class="col my-3 text-center">
       <h5>{{ t('texts.chartLabels.totalCo2') }}
@@ -23,9 +23,9 @@
             {{ t('texts.chartLabels.totalCo2Badge') }}
           </div>
         </app-question-badge>
-      </h5>  
-      <span>{{ totalCo2.toFixed(2) }} tn CO2</span>
-     
+      </h5>
+      <span>{{ totalCo2 | number:'1.0-2': 'es' }} tn CO2</span>
+
     </div>
   </div>
 </ng-container>

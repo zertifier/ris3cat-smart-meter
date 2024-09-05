@@ -121,7 +121,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                 const cupId = this.userStore.snapshotOnly(this.userStore.$.cupsId);
                 const communityId = this.userStore.snapshotOnly(this.userStore.$.communityId);
                 const data = await this.fetchEnergyStats(date, dateRange, cupId, communityId);
-                this.chartStoreService.chartData$.next(data)
+                // this.chartStoreService.chartData$.next(data)
                 this.data = data
                 this.chartStoreService.patchState({ lastFetchedStats: data });
 
@@ -159,7 +159,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                     // tooltipText: community ? 'Quantitat d’energia per compartir que es produeix i no es consumeix dels participans actius.' : 'Quantitat d’energia per compartir que es produeix i no es consumeix dels participans actius.',
                     tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.community.sharedSurplusActive'),
                     color: StatsColors.VIRTUAL_SURPLUS,
-                    data: mappedData.map(d => d.virtualSurplus),
+                    data: mappedData.map(d => d.virtualSurplus.toFixed(2)),
                   })
                 } else {
                   datasets.push({
@@ -169,7 +169,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                     // tooltipText: community ? 'Quantitat d’energia que es produeix i no es consumeix dels participans actius.' : 'Quantitat d\'energia que es produeix i no es consumeix.',
                     tooltipText: community ? this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.community.surplusActive') : this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.cups.surplusActive'),
                     color: StatsColors.SURPLUS,
-                    data: mappedData.map(d => d.surplus),
+                    data: mappedData.map(d => parseFloat(d.surplus + '').toFixed(2)),
                     stack: 'Active surplus',
                   })
                 }
@@ -183,7 +183,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                       label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.productionActive'),
                       tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.community.activeProduction'),
                       color: StatsColors.ACTIVE_COMMUNITY_PRODUCTION,
-                      data: mappedData.map(d => d.productionActives),
+                      data: mappedData.map(d => parseFloat(d.productionActives + '').toFixed(2)),
                       stack: 'Production',
                       yAxisID: 'y'
                     },
@@ -209,7 +209,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                       // label: 'Consum del a xarxa actius',
                       label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.networkActiveConsumption'),
                       data: mappedData.map(d => {
-                        return d.consumption;
+                        return parseFloat(d.consumption + '').toFixed(2);
                       }),
                       tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.community.networkActiveConsumption'),
                       stack: 'Consumption',
@@ -235,7 +235,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                     label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.networkConsumption'),
                     color: StatsColors.SELF_CONSUMPTION,
                     data: mappedData.map(d => {
-                      return d.gridConsumption
+                      return parseFloat(d.gridConsumption + '').toFixed(2)
                     }),
                     // tooltipText: 'Consum que facturarà la companyia elèctrica',
                     tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.cups.networkConsumption'),
@@ -249,7 +249,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                     // tooltipText: 'Producció proporcional comunitaria',
                     tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.cups.production'),
                     color: StatsColors.COMMUNITY_PRODUCTION,
-                    data: mappedData.map(d => d.production),
+                    data: mappedData.map(d => parseFloat(d.production + '').toFixed(2)),
                     stack: 'Production',
                     yAxisID: 'y'
                   })

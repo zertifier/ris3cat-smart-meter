@@ -33,6 +33,7 @@ import {UserStoreService} from "@features/user/infrastructure/services/user-stor
   templateUrl: './data-chart.component.html',
   styleUrl: './data-chart.component.scss'
 })
+
 export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
   data!: {
     datasets: any[],
@@ -125,19 +126,24 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
             // production = production - productionActives.
             //
             // The problem comes when it's necessary to display the tooltip. It has to show the correct values.
-            if (context.dataset.stack === "Production" && chartEntity.selectedChartEntity === ChartEntity.COMMUNITIES) {
+            if (context.dataset.label === this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.productionActive')
+              && chartEntity.selectedChartEntity === ChartEntity.COMMUNITIES) {
               const value = context.raw;
               const register = this.chartStoreService.snapshot().lastFetchedStats[context.dataIndex];
               // Here the correct production es being calculated to show the correct value on tooltip
               // production = production + productionActives
-              const total = parseFloat(register.productionActives + '') + parseFloat(value);
-              formattedValue = total.toLocaleString();
+
+
+              // const total = parseFloat(register.productionActives + '').toFixed(2);
+              const total = parseFloat(register.productionActives + '');
+              // formattedValue = total.toLocaleString();
             }
 
-            if (context.dataset.stack === "Consumption" && chartEntity.selectedChartEntity === ChartEntity.CUPS) {
+            if (context.dataset.stack === "Consumption"
+              && chartEntity.selectedChartEntity === ChartEntity.CUPS) {
               const showEnergy = this.chartStoreService.snapshot().selectedChartResource === ChartResource.ENERGY;
               const register = this.chartStoreService.snapshot().lastFetchedStats[context.dataIndex];
-              const consumption = showEnergy ? register.kwhIn : +(register.kwhInPrice * register.kwhIn).toFixed(2);
+              const consumption = showEnergy ? register.kwhIn.toFixed(2) : +(register.kwhInPrice * register.kwhIn).toFixed(2);
               if (consumption) consumption.toLocaleString();
             }
 
