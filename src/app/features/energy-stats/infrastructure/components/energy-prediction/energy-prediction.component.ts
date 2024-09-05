@@ -88,7 +88,7 @@ export class EnergyPredictionComponent implements OnInit, OnDestroy {
     if (productionPredictionResponse) {
       const dailyPrediction: Map<string, number> = new Map();
       for (const predictionEntry of productionPredictionResponse) {
-        const parsedDate = moment(predictionEntry.time).format('dddd');
+        const parsedDate = moment.utc(predictionEntry.time).format('dddd');
         const value = dailyPrediction.get(parsedDate) || 0;
         dailyPrediction.set(parsedDate, value + predictionEntry.value);
       }
