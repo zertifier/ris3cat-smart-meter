@@ -62,7 +62,7 @@
     </div>
 
     <!-- CUSTOMER DATA -->
-    <div class="row" *ngIf="infoDisplay=='customer'">
+    <div class="row" >
 
       <div *ngIf="!loading" class="overflow-y-scroll" style="max-height: 440px">
         <div class="d-none d-lg-block">
@@ -70,17 +70,17 @@
             <thead>
             <tr class="border-2 border-end-0 border-start-0 border-tertiary" style="height: 50px !important;">
               <th style="max-width: 20%; width: 100%" scope="col">{{ t('texts.date') }}</th>
-              <th style="max-width: 20%; width: 100%" scope="col">{{ t('texts.action') }}</th>
-              <th style="max-width: 20%; width: 100%" scope="col">{{ t('texts.amount') }}</th>
-              <th style="max-width: 10%; width: 100%" scope="col">{{ t('texts.total') }}</th>
+              <th style="max-width: 15%; width: 100%" scope="col">{{ t('texts.action') }}</th>
+              <th style="max-width: 15%; width: 100%" scope="col">{{ t('texts.amount') }}</th>
+              <th style="max-width: 20%; width: 100%" scope="col">{{ t('texts.total') }}</th>
               <th style="max-width: 10%; width: 100%" scope="col">{{ t('texts.emitter') }}</th>
               <th style="max-width: 10%; width: 100%" scope="col">{{ t('texts.receiver') }}</th>
-              <th style="max-width: 10%; width: 100%" scope="col">{{ t('texts.result') }}</th>
+              <th style="max-width: 15%; width: 100%" scope="col">{{ t('texts.result') }}</th>
               <!-- <th scope="col">{{ t('texts.result') }}</th> -->
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let data of customerTradesData" style="height: 50px">
+            <tr *ngFor="let data of tradesData" style="height: 50px">
               <td>{{ data.infoDt | date:'dd-MM-yyyy HH:mm' }}</td>
               <td>
               <span *ngIf="data.action == 'BUY'"
@@ -114,7 +114,8 @@
                 {{ (data.toWalletAddress || '' | TextShorter:6:4) || t('texts.anonymous') }}
               </td>
 
-              <td><span class="text-decoration-line-through d-block" style="font-size: 14px">{{
+              <td>
+                <span class="text-decoration-line-through d-block" style="font-size: 14px">{{
                   data.previousKwh |
                     noRoundDecimal:3
                 }} kWh</span>
@@ -126,7 +127,7 @@
         </div>
 
         <div class="d-block d-lg-none">
-          <div *ngFor="let data of customerTradesData" class="card my-3 border-tertiary">
+          <div *ngFor="let data of tradesData" class="card my-3 border-tertiary">
             <div class="card-body">
               <div class="mt-2 mb-4">
                 <span *ngIf="data.action == 'BUY'"
@@ -140,33 +141,67 @@
               </div>
 
               <div class="row">
-                <div class="col-6 border-end border-tertiary px-4">
-                  aaaaa
+                <div class="col-6 border-end-custom py-3 px-4">
+                  <p class="fw-semibold mb-1">{{t('texts.amount')}}</p>
+                  <span class="mx-auto">
+                    {{ data.tradedKwh | noRoundDecimal:3 }} kWh
+                  </span>
                 </div>
-                <div class="col-6 border-start border-tertiary px-4">
-                  aaaaa
+                <div class="col-6 border-start-custom py-3 px-4">
+                  <div class="mx-auto card-custom-div">
+                    <p class="fw-semibold mb-1">{{t('texts.total')}}</p>
+                    <span *ngIf="data.cost > 0">
+                    {{ data.action === 'BUY' ? '-' : (data.action === 'SELL' ? '+' : '') }}
+                  </span>
+                    {{ data.cost | noRoundDecimal:3 }} EKW
+                    <app-question-badge>
+                      <div class="my-3">
+                        {{ t('tooltips.ekw') }}
+                      </div>
+                    </app-question-badge>
+                  </div>
                 </div>
-                <div class="col-6 border-end border-tertiary px-4">
-                  aaaaa
+                <div class="col-6 border-end-custom py-3 px-4">
+                  <p class="fw-semibold mb-1">{{t('texts.emitter')}}</p>
+                  <span class="mx-auto">
+                    {{ (data.fromWalletAddress || '' | TextShorter:6:4) || t('texts.anonymous') }}
+                  </span>
                 </div>
-                <div class="col-6 border-start border-tertiary px-4">
-                  aaaaa
+                <div class="col-6 border-start-custom py-3 px-4">
+                  <div class="mx-auto card-custom-div">
+                    <p class="fw-semibold mb-1">{{t('texts.receiver')}}</p>
+                    <span class="mx-auto">
+                    {{ (data.toWalletAddress || '' | TextShorter:6:4) || t('texts.anonymous') }}
+                    </span>
+                  </div>
+
+                </div>
+                <div class="col-6 border-end-custom border-tertiary py-3 px-4">
+                  <p class="fw-semibold mb-1">{{t('texts.mobileEnergyCurrent')}}</p>
+                  <span>
+                    {{data.previousKwh | noRoundDecimal:3 }} kWh</span>
+                </div>
+                <div class="col-6 border-start-custom border-tertiary py-3 px-4">
+                  <div class="mx-auto card-custom-div">
+                    <p class="fw-semibold mb-1">{{t('texts.mobileEnergyLeft')}}</p>
+                    <span>{{ data.currentKwh | noRoundDecimal:3 }} kWh</span>
+                  </div>
+
                 </div>
               </div>
-             <div class="w-100">
-
-               aaaaa
-             </div>
+              <div class="text-end mt-4">
+                <span class="text-body-secondary">{{ data.infoDt | date:'dd-MM-yyyy HH:mm' }}</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       <div class="mt-2">
-        <p *ngIf="customerTradesData && customerTradesData.length">
+        <p *ngIf="tradesData && tradesData.length">
           {{ t('texts.bottomTable') }}
         </p>
-        <p class="text-center" *ngIf=" !customerTradesData || !customerTradesData.length">
+        <p class="text-center" *ngIf=" !tradesData || !tradesData.length">
           {{ t('texts.noData') }}
         </p>
       </div>
@@ -175,7 +210,7 @@
 
     <!-- COMMUNITY DATA -->
 
-    <div class="row" *ngIf="infoDisplay=='community'">
+   <!-- <div class="row" *ngIf="infoDisplay=='community'">
 
       <div *ngIf="!loading" class="overflow-y-scroll" style="max-height: 440px">
         <div class="d-none d-lg-block">
@@ -189,7 +224,7 @@
               <th style="max-width: 10%; width: 100%" scope="col">{{ t('texts.emitter') }}</th>
               <th style="max-width: 10%; width: 100%" scope="col">{{ t('texts.receiver') }}</th>
               <th style="max-width: 10%; width: 100%" scope="col">{{ t('texts.result') }}</th>
-              <!-- <th scope="col">{{ t('texts.result') }}</th> -->
+              &lt;!&ndash; <th scope="col">{{ t('texts.result') }}</th> &ndash;&gt;
             </tr>
             </thead>
             <tbody>
@@ -237,16 +272,15 @@
             </tbody>
           </table>
         </div>
-
       </div>
 
       <div class="mt-2">
         <p *ngIf="communityTradesData && communityTradesData.length">
           {{ t('texts.bottomTable') }}
         </p>
-        <!-- <p class="text-center" *ngIf=" !communityTradesData || !communityTradesData.length">
+        &lt;!&ndash; <p class="text-center" *ngIf=" !communityTradesData || !communityTradesData.length">
           {{ t('texts.noData') }}
-        </p> -->
+        </p> &ndash;&gt;
         <div *ngIf=" !communityTradesData || !communityTradesData.length" class="d-flex justify-content-center">
           <div class="spinner-border" role="status">
             <span class="sr-only">Loading...</span>
@@ -255,7 +289,7 @@
 
       </div>
 
-    </div>
+    </div>-->
 
 
   </div>
