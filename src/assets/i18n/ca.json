@@ -267,6 +267,8 @@
       "amount": "Quantitat",
       "total": "Total",
       "result": "Resultat",
+      "mobileEnergyLeft": "Et queden",
+      "mobileEnergyCurrent": "Tens",
       "bottomTable": "Tingueu en compte que l'actualització de dades no és diària.",
       "noData": "No hi ha dades. Prova un altre rang de dies.",
       "actions": {
