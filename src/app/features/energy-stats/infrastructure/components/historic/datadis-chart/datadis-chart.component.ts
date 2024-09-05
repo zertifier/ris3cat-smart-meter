@@ -101,6 +101,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit(): Promise<void> {
+    this.chartStoreService.isLoading$.next(true)
     this.subscriptions.push(
       this.translocoService.langChanges$.subscribe(() => {
         const chartParametrs$ = this.chartStoreService
@@ -285,6 +286,8 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                 this.mobileLabels = this.legendLabels.map(d => {
                   return { ...d, radius: '2.5rem' }
                 })
+                this.chartStoreService.isLoading$.next(false)
+
               }),
         );
       })
@@ -296,6 +299,8 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
   }
 
   async fetchEnergyStats(date: Date, range: DateRange, cupId: number, communityId: number) {
+    this.chartStoreService.isLoading$.next(true)
+
     this.chartStoreService.snapshotOnly(state => state.origin);
     this.chartStoreService.fetchingData(true);
     let data: DatadisEnergyStat[];
@@ -317,9 +322,12 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
 
       }
       // this.latestFetchedStats = data;
+
       return data;
     } finally {
       this.chartStoreService.fetchingData(false);
+      this.chartStoreService.isLoading$.next(false)
+
     }
   }
 

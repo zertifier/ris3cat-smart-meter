@@ -75,6 +75,8 @@ export class HistoricChartComponent implements AfterViewInit {
   });
   chartResource$ = this.chartStoreService.selectOnly(state => state.selectedChartResource);
 
+  loading = false;
+
   dateRange$ = this.chartStoreService.selectOnly(state => state.dateRange)
   currentBreakpoint$ = this.screenBreakpoints.observeBreakpoints();
   protected readonly DateRange = DateRange;
@@ -85,7 +87,7 @@ export class HistoricChartComponent implements AfterViewInit {
 
   constructor(
     private readonly monitoringService: MonitoringService,
-    private readonly chartStoreService: ChartStoreService,
+    public readonly chartStoreService: ChartStoreService,
     private readonly screenBreakpoints: ScreenBreakPointsService,
     private readonly ngbModal: NgbModal,
   ) {
@@ -101,8 +103,10 @@ export class HistoricChartComponent implements AfterViewInit {
   }
 
   setDateRange(range: DateRange) {
+    this.loading = true
     this.chartStoreService.setDateRange(range);
     this.chartStoreService.setDate(new Date());
+    this.loading = false
   }
 
   setChartResource(event: Event) {
