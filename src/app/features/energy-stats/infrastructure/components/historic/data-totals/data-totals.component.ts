@@ -84,13 +84,10 @@ export class DataTotalsComponent implements OnDestroy {
   startEnergyCalculate() {
 
     if (this.data)
-      //console.log(this.data)
     this.data.forEach((data) => {
       this.setEnergyTotals(data)
     })
-      this.data.forEach((data) => {
-        this.setEnergyTotals(data)
-      })
+
     this.totalCo2 = this.totalProduction * 0.00026
 
     //this.cdr.detectChanges(); // removes console error

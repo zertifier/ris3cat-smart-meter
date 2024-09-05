@@ -13,7 +13,7 @@ import {RouterLink} from "@angular/router";
 export class AppLogoComponent implements OnInit {
   public logoUrl = '';
 
-  @Input() width: string = '15rem';
+  @Input() height: string = '58px';
 
   constructor(private ngZone: NgZone) {
   }

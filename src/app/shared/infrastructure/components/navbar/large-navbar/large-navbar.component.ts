@@ -38,13 +38,13 @@ import {TranslocoPipe} from "@jsverse/transloco";
 export class LargeNavbarComponent {
   currentBreakpoint$ = this.screenBreakpoints.observeBreakpoints();
   hideLogo$ = this.currentBreakpoint$.pipe(map(val => val <= BreakPoints.LG));
-  logoWidth$ = this.currentBreakpoint$.pipe(map(value => {
+  logoHeight$ = this.currentBreakpoint$.pipe(map(value => {
     switch (value) {
       case BreakPoints.XL:
-        return '10rem';
+        return '58px';
       case BreakPoints.XXL:
         // return '15rem';
-        return '270px';
+        return '58px';
       default:
         return '';
     }

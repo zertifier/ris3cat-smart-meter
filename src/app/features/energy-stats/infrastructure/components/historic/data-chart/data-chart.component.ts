@@ -136,7 +136,7 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
 
               // const total = parseFloat(register.productionActives + '').toFixed(2);
               const total = parseFloat(register.productionActives + '');
-              // formattedValue = total.toLocaleString();
+              formattedValue = total.toLocaleString();
             }
 
             /*if (context.dataset.stack === "Consumption"

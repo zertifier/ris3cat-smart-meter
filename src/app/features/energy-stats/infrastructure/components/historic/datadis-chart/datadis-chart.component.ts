@@ -189,7 +189,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                         if (!d.production) {
                           return 0;
                         }
-                        return d.production - d.productionActives;
+                        return d.production;
                       }),
                       stack: 'Production',
                       yAxisID: 'y'
