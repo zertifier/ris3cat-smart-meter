@@ -66,6 +66,7 @@ export class HistoricChartComponent implements OnDestroy {
     }
   });
   dateFormat$ = this.chartStoreService.selectOnly(state => {
+    console.log(state.dateRange)
     switch (state.dateRange) {
       case DateRange.MONTH:
         return 'mm-yy'
