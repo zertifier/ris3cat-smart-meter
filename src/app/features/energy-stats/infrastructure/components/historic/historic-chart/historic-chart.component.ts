@@ -52,6 +52,8 @@ export class HistoricChartComponent implements AfterViewInit {
   maxDate = new Date();
   chartType$ = this.chartStoreService.selectOnly(state => state.chartType);
   calendarView$ = this.chartStoreService.selectOnly(state => {
+    this.chartStoreService.setDate(state.date)
+
     switch (state.dateRange) {
       case DateRange.MONTH:
         return 'month'
