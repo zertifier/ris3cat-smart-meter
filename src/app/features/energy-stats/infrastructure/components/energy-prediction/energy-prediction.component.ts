@@ -84,8 +84,6 @@ export class EnergyPredictionComponent implements OnInit, OnDestroy {
       consumptionPredictionResponse = await this.energyPredictionService.getCupsConsumptionPrediction(cupsId, weekInit, weekEnd).catch(error=>{return []})
     }
 
-    let productionPredictionArray: Array<{ date: string, value: number }> = [];
-
     //format production if exist
     if (productionPredictionResponse) {
       const dailyPrediction: Map<string, number> = new Map();
@@ -101,12 +99,15 @@ export class EnergyPredictionComponent implements OnInit, OnDestroy {
     }
 
     //format consumption if exist
-    if (!consumptionPredictionResponse) {
-      consumptionPredictionResponse = []
-      this.consumptionPrediction = consumptionPredictionResponse.map((consumptionPredictionDay: any, index: number) => {
-        consumptionPredictionDay.date = moment(consumptionPredictionDay.date, 'YYYY-MM-DD').format('dddd')
-        let value = Number(consumptionPredictionDay.consumption.toFixed(2))
-        return { date: consumptionPredictionDay.date, value }
+    if (consumptionPredictionResponse) {
+      this.consumptionPrediction = consumptionPredictionResponse.filter((consumptionPredictionDay: any, index: number) => {
+        let date = moment(consumptionPredictionDay.date, 'YYYY-MM-DD')
+        console.log(weekInit,date,weekEnd)
+        return date.isSameOrAfter(weekInit) && date.isBefore(weekEnd)
+      }).map((consumptionPredictionDay: any, index: number) => {
+          consumptionPredictionDay.date = moment(consumptionPredictionDay.date, 'YYYY-MM-DD').format('dddd')
+          let value = Number(consumptionPredictionDay.consumption.toFixed(2))
+          return { date: consumptionPredictionDay.date, value }
       })
     }
 
@@ -115,7 +116,6 @@ export class EnergyPredictionComponent implements OnInit, OnDestroy {
     //insert non existent data (surplus included):
     for (let i = moment(weekInit); i.isBefore(moment(weekEnd)); i.add(1, 'days')) {
 
-      //console.log(i.format('YYYY-MM-DD'));
       let weekDay = moment(i, 'YYYY-MM-DD').format('dddd')
 
       if (!this.consumptionPrediction[index]) {
@@ -140,55 +140,6 @@ export class EnergyPredictionComponent implements OnInit, OnDestroy {
       index++;
     }
 
-    //console.log("this.productionPrediction,this.consumptionPrediction,this.surplusPrediction",this.productionPrediction,this.consumptionPrediction,this.surplusPrediction)
-
-    // if (consumptionPredictionResponse) {
-
-    //   this.consumptionPrediction = consumptionPredictionResponse.map((consumptionPredictionDay: any, index: number) => {
-    //     consumptionPredictionDay.date = moment(consumptionPredictionDay.date, 'YYYY-MM-DD').format('dddd')
-    //     let value = consumptionPredictionDay.consumption
-    //     return { date: consumptionPredictionDay.date, value }
-    //   })
-
-    //   this.consumptionPrediction.map((consumption, index) => {
-    //     if (productionPredictionArray[index] && productionPredictionArray[index].value
-    //       && (productionPredictionArray[index].date == this.consumptionPrediction[index].date)) {
-    //       productionPredictionArray[index].value = Number(productionPredictionArray[index].value.toFixed(2))
-    //       this.productionPrediction.push(productionPredictionArray[index]);
-    //       let surplusPrediction = productionPredictionArray[index].value - this.consumptionPrediction[index].value;
-    //       if (surplusPrediction > 0) {
-    //         this.surplusPrediction.push({ date: consumption.date, value: surplusPrediction })
-    //       } else {
-    //         this.surplusPrediction.push({ date: consumption.date, value: 0 })
-    //       }
-    //     } else {
-    //       this.productionPrediction.push({ date: consumption.date, value: -1 })
-    //       this.surplusPrediction.push({ date: consumption.date, value: -1 })
-    //     }
-    //   })
-
-    // } else {
-
-    //   productionPredictionArray.map((productionPredictionElement: any) => {
-
-    //     if (!productionPredictionElement.value) {
-    //       productionPredictionElement.value = -1;
-    //     } else {
-    //       productionPredictionElement.value = productionPredictionElement.value.toFixed(2)
-    //     }
-    //     this.productionPrediction.push(productionPredictionElement)
-    //   });
-
-    // }
-
-    // this.datasets = [
-    //   {
-    //     color: StatsColors.COMMUNITY_PRODUCTION,
-    //     label: 'Producció',
-    //     data: Array.from(dailyPrediction.values()),
-    //   }
-    // ];
-    // this.labels = Array.from(dailyPrediction.keys());
   }
   ngOnDestroy(): void {
     this.subscriptions.forEach(s => s.unsubscribe());
