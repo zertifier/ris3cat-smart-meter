@@ -73,8 +73,8 @@
       <p-calendar [maxDate]="maxDate" (onSelect)="setDate($event)" (ngModelChange)="setInputDate($event)"
         [ngModel]="date$ | async" iconDisplay="input" [dateFormat]="(dateFormat$ | async) || 'yy'" [showIcon]="true"
         styleClass="w-100" [view]="(calendarView$ | async) || 'month'" />
-      <p-calendar [maxDate]="maxDate" (onSelect)="setDate($event)" (ngModelChange)="setInputDate($event)"
-        [ngModel]="date$ | async" iconDisplay="input"  [showIcon]="true"
+      <p-calendar [maxDate]="maxDate"
+        [(ngModel)]="date$ | async" iconDisplay="input"
         styleClass="w-100" />
 
 {{date$ | async}}
