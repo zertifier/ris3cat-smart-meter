@@ -105,6 +105,9 @@
       "chartLabels": {
         "CO2Savings": "CO2 savings",
         "production": "Production",
+        "community": {
+          "production": "Total production"
+        },
         "productionActive": "Active production",
         "networkConsumption": "Network consumption",
         "networkActiveConsumption": "Active network consumption",

@@ -105,6 +105,9 @@
       "chartLabels": {
         "CO2Savings": "Estalvi en CO2",
         "production": "Producció",
+        "community": {
+          "production": "Producció total"
+        },
         "productionActive": "Producció actius",
         "networkConsumption": "Consum de la xarxa",
         "networkActiveConsumption": "Consum de la xarxa actius",

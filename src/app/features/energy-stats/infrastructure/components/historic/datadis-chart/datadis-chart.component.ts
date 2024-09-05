@@ -176,23 +176,13 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
 
                 if (community) {
                   datasets.unshift(
-                    {
-                      id: "productionActive",
-                      order: 0,
-                      // label: 'Producció actius',
-                      label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.productionActive'),
-                      tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.community.activeProduction'),
-                      color: StatsColors.ACTIVE_COMMUNITY_PRODUCTION,
-                      data: mappedData.map(d => parseFloat(d.productionActives + '').toFixed(2)),
-                      stack: 'Production',
-                      yAxisID: 'y'
-                    },
+
                     {
                       id: "production",
                       order: 3,
                       color: StatsColors.COMMUNITY_PRODUCTION,
                       // label: 'Producció',
-                      label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.production'),
+                      label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.community.production'),
                       // tooltipText: 'Producció total de la comunitat',
                       tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.community.production'),
                       data: mappedData.map(d => {
@@ -201,6 +191,16 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                         }
                         return d.production - d.productionActives;
                       }),
+                      stack: 'Production',
+                      yAxisID: 'y'
+                    },{
+                      id: "productionActive",
+                      order: 0,
+                      // label: 'Producció actius',
+                      label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.productionActive'),
+                      tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.community.activeProduction'),
+                      color: StatsColors.ACTIVE_COMMUNITY_PRODUCTION,
+                      data: mappedData.map(d => parseFloat(d.productionActives + '').toFixed(2)),
                       stack: 'Production',
                       yAxisID: 'y'
                     },
