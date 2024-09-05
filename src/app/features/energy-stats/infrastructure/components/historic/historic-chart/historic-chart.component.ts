@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnDestroy, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild} from '@angular/core';
 import {CalendarModule} from "primeng/calendar";
 import {ChartLegendComponent} from "../chart-legend/chart-legend.component";
 import {DataChartComponent} from "../data-chart/data-chart.component";
@@ -21,7 +21,6 @@ import {
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {TranslocoDirective} from "@jsverse/transloco";
 import moment from "moment";
-import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-historic-chart',
@@ -41,17 +40,11 @@ import {Subscription} from "rxjs";
   templateUrl: './historic-chart.component.html',
   styleUrl: './historic-chart.component.scss'
 })
-export class HistoricChartComponent implements OnDestroy {
+export class HistoricChartComponent implements AfterViewInit {
 
-  @Input({required: false}) chartType: 'community' | 'cups' = 'cups';
+  @Input({ required: false }) chartType: 'community' | 'cups' = 'cups';
 
-  /*
-  date$ = this.chartStoreService.selectOnly(state => {
-    console.log(state.date)
-    console.log(moment(state.date).toDate())
-    this.selectedDate = state.date
-    return moment(state.date).toDate()
-  });*/
+  date$ = this.chartStoreService.selectOnly(state => state.date);
   origin$ = this.chartStoreService.selectOnly(state => state.origin)
   maxDate = new Date();
   chartType$ = this.chartStoreService.selectOnly(state => state.chartType);
@@ -66,8 +59,6 @@ export class HistoricChartComponent implements OnDestroy {
     }
   });
   dateFormat$ = this.chartStoreService.selectOnly(state => {
-    this.selectedDate = state.date
-    console.log(state.dateRange)
     switch (state.dateRange) {
       case DateRange.MONTH:
         return 'mm-yy'
@@ -81,9 +72,6 @@ export class HistoricChartComponent implements OnDestroy {
 
   dateRange$ = this.chartStoreService.selectOnly(state => state.dateRange)
   currentBreakpoint$ = this.screenBreakpoints.observeBreakpoints();
-  selectedDate = moment().toDate();
-
-  subscriptions: Subscription[] = []
   protected readonly DateRange = DateRange;
   protected readonly ChartOrigins = ChartOrigins;
   protected readonly ChartResource = ChartResource;
@@ -96,16 +84,10 @@ export class HistoricChartComponent implements OnDestroy {
     private readonly screenBreakpoints: ScreenBreakPointsService,
     private readonly ngbModal: NgbModal,
   ) {
-    this.subscriptions.push(
-      this.chartStoreService.selectOnly(this.chartStoreService.$.params).subscribe((param) => {
-        this.selectedDate = param.date
-        return param.date
-      })
-    )
   }
 
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((sub) => sub.unsubscribe())
+  ngAfterViewInit(): void {
+    this.date$ = this.chartStoreService.selectOnly(state => state.date);
   }
 
   setChartType(event: Event) {
@@ -134,8 +116,8 @@ export class HistoricChartComponent implements OnDestroy {
     this.chartStoreService.setDate(date);
   }
 
-  setInputDate(date: Date) {
-    if (date && date.getTime()) {
+  setInputDate(date: Date){
+    if (date && date.getTime()){
       this.chartStoreService.setDate(date);
     }
   }
