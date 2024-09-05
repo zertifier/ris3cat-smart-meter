@@ -1,6 +1,6 @@
 {
   "MY-CUPS": {
-    "navbar": "Mi contador",
+    "navbar": "Contadores",
     "title": "Consumo y producción",
     "texts": {
       "liveWaste": "Tu gasto en vivo",
@@ -32,7 +32,7 @@
     }
   },
   "MY-COMMUNITY": {
-    "navbar": "Mi comunidad",
+    "navbar": "Comunidad",
     "title": "Consumo y producción",
     "texts": {
       "liveWaste": "Tu gasto en vivo",

@@ -1,6 +1,6 @@
 {
   "MY-CUPS": {
-    "navbar": "My counter",
+    "navbar": "Counters",
     "title": "Consumption and production",
     "texts": {
       "liveWaste": "Your live spending",
@@ -32,7 +32,7 @@
     }
   },
   "MY-COMMUNITY": {
-    "navbar": "My community",
+    "navbar": "Community",
     "title": "Consumption and production",
     "texts": {
       "liveWaste": "Your live spending",

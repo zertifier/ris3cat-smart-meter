@@ -1,6 +1,6 @@
 {
   "MY-CUPS": {
-    "navbar": "El meu comptador",
+    "navbar": "Comptadors",
     "title": "Consum i producció",
     "texts": {
       "liveWaste": "La teva despesa en viu",
@@ -32,7 +32,7 @@
     }
   },
   "MY-COMMUNITY": {
-    "navbar": "La meva comunitat",
+    "navbar": "Comunitat",
     "title": "Consum i producció",
     "texts": {
       "liveWaste": "La teva despesa en viu",
