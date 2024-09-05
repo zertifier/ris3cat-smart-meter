@@ -102,7 +102,6 @@ export class DataTotalsComponent implements OnDestroy {
 
   startPriceCalculate() {
     if (this.data)
-      //console.log(this.data)
     for (let data of this.data) {
       this.setPriceTotals(data)
     }
@@ -115,7 +114,6 @@ export class DataTotalsComponent implements OnDestroy {
   }
 
   setPriceTotals(data: any) {
-    //console.log(Number(data.kwhOut) * Number(data.kwhOutPrice), Number(data.kwhOut), Number(data.kwhOutPrice))
     if (data.production) this.totalProduction += (Number(data.production) * Number(data.kwhOutPrice))
     if (data.productionActives) this.totalActiveProduction += (Number(data.productionActives) * Number(data.kwhOutPrice))
     if (data.kwhIn) this.totalConsumption += (Number(data.kwhIn) * Number(data.kwhInPrice))
