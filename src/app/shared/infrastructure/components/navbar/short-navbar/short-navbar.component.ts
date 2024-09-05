@@ -69,9 +69,8 @@ export class ShortNavbarComponent implements OnDestroy{
 
     this.userRole = user?.role
 
-
     this.subscriptions.push(
-      this.translocoService.langChanges$.subscribe(() => {
+      this.translocoService.langChanges$.subscribe((lang) => {
         this.setButtons()
       })
     )
@@ -87,7 +86,6 @@ export class ShortNavbarComponent implements OnDestroy{
       {route: '/energy-stats/my-cup', label: this.translocoService.translate('MY-CUPS.navbar')},
       {route: '/energy-stats/share', label: this.translocoService.translate('SHARE-ENERGY.navbar')},
       {route: '/energy-stats/stats', label: this.translocoService.translate('STATS.navbar')},
-      {route: '/energy-stats/data-source-health', label: this.translocoService.translate('STATUS.navbar')},
     ]
   }
 

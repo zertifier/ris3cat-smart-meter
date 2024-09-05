@@ -30,7 +30,14 @@
               (click)="modal.dismiss()"
               [routerLink]="'/user/notifications'">
         {{ 'NOTIFICATIONS.navbar' | transloco }}
-          
+
+      </button>
+
+      <button type="button" class="btn btn-toolbar text-white" style="font-size: 1.5rem;"
+              (click)="modal.dismiss()"
+              [routerLink]="'/energy-stats/data-source-health'">
+        {{ 'STATUS.navbar' | transloco }}
+
       </button>
 
       <button type="button" class="btn btn-toolbar text-white" style="font-size: 1.5rem;"
