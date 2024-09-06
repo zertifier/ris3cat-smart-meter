@@ -36,6 +36,8 @@
     "navbar": "Community",
     "title": "Consumption and production",
     "texts": {
+      "communityPrices": "Precios comunitarios",
+      "providerPrices": "Precios del proveedor",
       "liveWaste": "Your live spending",
       "updatedAt": "Updated at ",
       "noDataRegistered": "No data has been registered",

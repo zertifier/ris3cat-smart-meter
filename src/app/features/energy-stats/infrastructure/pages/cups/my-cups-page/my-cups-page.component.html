@@ -75,7 +75,7 @@
 
         @if(isValidNumber(powerFlow().buy) && powerFlow().buy > 0){
         <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.CONSUMPTION"
-          label="{{ t('texts.consumption') }}" [text]="powerFlow().buy.toFixed(2) + ' KWH'" />
+          label="{{ t('texts.consumption') }}" [text]="powerFlow().buy.toFixed(2)" />
         }
         @else{
           <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
@@ -87,7 +87,7 @@
 
         @if(isValidNumber(powerFlow().inHouse) && powerFlow().inHouse > 0){
           <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
-          label="{{ t('texts.selfConsumption') }}" [text]="powerFlow().inHouse.toFixed(2) + ' kWh'" />
+          label="{{ t('texts.selfConsumption') }}" [text]="powerFlow().inHouse.toFixed(2)" />
         }
         @else{
           <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
@@ -100,7 +100,7 @@
         @if(isValidNumber(powerFlow().production)){
         <app-stat-display width="20%"
           [color]="StatsColors.COMMUNITY_PRODUCTION" label="{{ t('texts.generatedEnergy') }}"
-          [text]="powerFlow().production.toFixed(2) + ' kWh'" />
+          [text]="powerFlow().production.toFixed(2)" />
         }
         @else{
           <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
@@ -111,7 +111,7 @@
       <div class="col-6 col-lg my-3">
         @if(isValidNumber(powerFlow().sell) && powerFlow().sell > 0){
         <app-stat-display [disabled]="powerFlow().sell === 0" width="20%" [color]="StatsColors.SURPLUS"
-          label="{{ t('texts.surplus') }}" [text]="powerFlow().sell.toFixed(2) + ' KWH'" />
+          label="{{ t('texts.surplus') }}" [text]="powerFlow().sell.toFixed(2)" />
         }
         @else{
           <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"

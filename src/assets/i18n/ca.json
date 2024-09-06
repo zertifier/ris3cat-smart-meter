@@ -36,6 +36,8 @@
     "navbar": "Comunitat",
     "title": "Consum i producció",
     "texts": {
+      "communityPrices": "Preus comunitaris",
+      "providerPrices": "Preus del proveïdor",
       "liveWaste": "La teva despesa en viu",
       "updatedAt": "Actualitzat a les ",
       "noDataRegistered": "No s'ha registrat cap dada",
