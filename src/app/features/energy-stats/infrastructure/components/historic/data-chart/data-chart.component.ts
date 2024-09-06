@@ -48,7 +48,10 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
   private textColorSecondary = 'rgba(0, 0, 0, 0.54)';
   private surfaceBorder = 'rgba(0, 0, 0, 0.12)';
   private totalMembers$ = this.userStore.selectOnly(state => state.totalMembers);
-  private activeMembers$ = this.userStore.selectOnly(state => state.activeMembers);
+  private activeMembers$ = this.userStore.selectOnly(state => {
+    // console.log(state, "STATE")
+    return state.activeMembers
+  });
   private options: any = {
     maintainAspectRatio: false,
     indexAxis: 'x',
@@ -136,7 +139,7 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
 
               // const total = parseFloat(register.productionActives + '').toFixed(2);
               const total = parseFloat(register.productionActives + '');
-              formattedValue = total.toLocaleString();
+              // formattedValue = total.toLocaleString();
             }
 
             /*if (context.dataset.stack === "Consumption"
@@ -161,11 +164,13 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
               const stat = this.chartStoreService.snapshot().lastFetchedStats[context.dataIndex];
               if (context.dataset.label === this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.surplusActive')) {
                 this.subscriptions.push(this.activeMembers$.subscribe((total) => {
+                  // console.log(total, "TOTAL")
                   labels.push(this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.totalActiveMembers', {total}));
                 }))
                 labels.push(`----------------`);
 
-              } else if (context.dataset.label === this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.production')) {
+              // } else if (context.dataset.label === this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.production')) {
+              } else if (context.dataset.label === this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.community.production')) {
                 for (const cups of stat.communitiesCups) {
                   if (cups.kwhOut > 0)
                     labels.push(`${cups.reference || cups.cups} : ${cups.kwhOut || 0} KWh`)

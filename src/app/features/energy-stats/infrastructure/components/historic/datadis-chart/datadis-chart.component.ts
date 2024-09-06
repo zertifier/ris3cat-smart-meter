@@ -160,7 +160,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                     // tooltipText: community ? 'Quantitat d’energia per compartir que es produeix i no es consumeix dels participans actius.' : 'Quantitat d’energia per compartir que es produeix i no es consumeix dels participans actius.',
                     tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.community.sharedSurplusActive'),
                     color: StatsColors.VIRTUAL_SURPLUS,
-                    data: mappedData.map(d => d.virtualSurplus ? d.virtualSurplus.toFixed(2) : '0'),
+                    data: mappedData.map(d => d.virtualSurplus ? parseFloat(d.virtualSurplus + '').toFixed(2) : '0'),
                   })
                 } else {
                   datasets.push({
@@ -209,9 +209,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                       id: "networkActiveConsumption",
                       // label: 'Consum del a xarxa actius',
                       label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.networkActiveConsumption'),
-                      data: mappedData.map(d => {
-                        return d.consumption ? parseFloat(d.consumption + '').toFixed(2) : '0';
-                      }),
+                      data: mappedData.map(d => d.consumption ? parseFloat(d.consumption + '').toFixed(2) : '0'),
                       tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.community.networkActiveConsumption'),
                       stack: 'Consumption',
                       order: 0,
@@ -316,6 +314,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
           return [];
         }
         const response = await this.zertipower.energyStats.getCommunityEnergyStats(communityId, 'datadis', date, range);
+        // console.log(response, "RESPONSE")
         this.userStore.patchState({ activeMembers: response.totalActiveMembers || 0 });
         this.userStore.patchState({ totalMembers: response.totalMembers || 0 });
         data = response.stats;
