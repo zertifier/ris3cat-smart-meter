@@ -26,10 +26,10 @@ export const hasCupsGuard: CanActivateFn = (route) => {
       const hasCups = cups.length > 0;
 
       if (tryStatsAccess) {
-        return hasCups || router.createUrlTree(['energy-stats/my-cup/missing']);
+        return hasCups || router.createUrlTree(['energy-stats/my-cups/missing']);
       }
 
-      return !hasCups || router.createUrlTree(['energy-stats/my-cup']);
+      return !hasCups || router.createUrlTree(['energy-stats/my-cups']);
     })
   );
 };

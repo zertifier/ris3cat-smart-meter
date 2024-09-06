@@ -120,7 +120,8 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                 // Fetching data
                 const cupId = this.userStore.snapshotOnly(this.userStore.$.cupsId);
                 const communityId = this.userStore.snapshotOnly(this.userStore.$.communityId);
-                const data = await this.fetchEnergyStats(date, dateRange, cupId, communityId);
+                const customerId = this.userStore.snapshotOnly((state:any) => state.user!.customer_id);
+                const data = await this.fetchEnergyStats(date, dateRange, cupId, communityId, customerId);
                 this.chartStoreService.chartData$.next(data)
                 this.data = data
                 this.chartStoreService.patchState({ lastFetchedStats: data });
@@ -295,18 +296,20 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
     this.ngbModal.open(this.legendModal, { size: "xl" });
   }
 
-  async fetchEnergyStats(date: Date, range: DateRange, cupId: number, communityId: number) {
+  async fetchEnergyStats(date: Date, range: DateRange, cupId: number, communityId: number, customerId:number) {
     this.chartStoreService.snapshotOnly(state => state.origin);
     this.chartStoreService.fetchingData(true);
     let data: DatadisEnergyStat[];
     try {
+      //TODO: saber como se define selectedChart
       const selectedChart = this.chartStoreService.snapshotOnly(state => state.selectedChartEntity);
       if (selectedChart === ChartEntity.CUPS) {
-        const response = await this.zertipower.energyStats.getCupEnergyStats(cupId, 'datadis', date, range);
+        const response = await this.zertipower.energyStats.getCupsEnergyStats(cupId, 'datadis', date, range);
         this.userStore.patchState({ activeMembers: response.totalActiveMembers || 0 });
         this.userStore.patchState({ totalMembers: response.totalMembers || 0 });
         data = response.stats;
-      } else {
+      }
+        else if (selectedChart === ChartEntity.COMMUNITIES) {
         if (!communityId) {
           return [];
         }
@@ -314,8 +317,15 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
         this.userStore.patchState({ activeMembers: response.totalActiveMembers || 0 });
         this.userStore.patchState({ totalMembers: response.totalMembers || 0 });
         data = response.stats;
-
+      } else if (selectedChart === ChartEntity.CUSTOMERS) {
+        const response = await this.zertipower.energyStats.getCustomerEnergyStats(customerId, 'datadis', date, range);
+        this.userStore.patchState({ activeMembers: response.totalActiveMembers || 0 });
+        this.userStore.patchState({ totalMembers: response.totalMembers || 0 });
+        data = response.stats;
+      } else {
+        data = [];
       }
+
       // this.latestFetchedStats = data;
       return data;
     } finally {

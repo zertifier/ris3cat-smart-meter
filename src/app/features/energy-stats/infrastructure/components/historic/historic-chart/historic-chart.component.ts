@@ -41,7 +41,7 @@ import {TranslocoDirective} from "@jsverse/transloco";
 })
 export class HistoricChartComponent implements OnDestroy {
 
-  @Input({ required: false }) chartType: 'community' | 'cups' = 'cups';
+  @Input({ required: false }) chartType: 'community' | 'cups' | 'customers' = 'cups';
 
   date$ = this.chartStoreService.selectOnly(state => state.date);
   origin$ = this.chartStoreService.selectOnly(state => state.origin)

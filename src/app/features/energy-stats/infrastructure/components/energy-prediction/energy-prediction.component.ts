@@ -102,7 +102,6 @@ export class EnergyPredictionComponent implements OnInit, OnDestroy {
     if (consumptionPredictionResponse) {
       this.consumptionPrediction = consumptionPredictionResponse.filter((consumptionPredictionDay: any, index: number) => {
         let date = moment(consumptionPredictionDay.date, 'YYYY-MM-DD')
-        console.log(weekInit,date,weekEnd)
         return date.isSameOrAfter(weekInit) && date.isBefore(weekEnd)
       }).map((consumptionPredictionDay: any, index: number) => {
           consumptionPredictionDay.date = moment(consumptionPredictionDay.date, 'YYYY-MM-DD').format('dddd')

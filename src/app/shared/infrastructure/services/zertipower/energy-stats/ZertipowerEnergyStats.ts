@@ -8,8 +8,12 @@ import {Axios} from "axios";
 export class ZertipowerEnergyStats {
   constructor(private readonly axios: Axios) {
   }
-  public async getCupEnergyStats(cupId: number, source: string, date: Date, dateRange: DateRange) {
+  public async getCupsEnergyStats(cupId: number, source: string, date: Date, dateRange: DateRange) {
     return this.getEnergyStats(ChartEntity.CUPS, cupId, source, date, dateRange);
+  }
+
+  public async getCustomerEnergyStats(customerId: number, source: string, date: Date, dateRange: DateRange) {
+    return this.getEnergyStats(ChartEntity.CUSTOMERS, customerId, source, date, dateRange);
   }
 
   public async getCommunityEnergyStats(communityId: number, source: string, date: Date, dateRange: DateRange) {

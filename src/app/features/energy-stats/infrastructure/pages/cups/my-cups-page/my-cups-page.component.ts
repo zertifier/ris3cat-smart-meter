@@ -39,6 +39,9 @@ import _default from "chart.js/dist/core/core.interaction";
 import index = _default.modes.index;
 import { CommunityResponse, ZertipowerCommunitiesService } from '../../../../../../shared/infrastructure/services/zertipower/communities/ZertipowerCommunitiesService';
 import { ZertipowerService } from '../../../../../../shared/infrastructure/services/zertipower/zertipower.service';
+import { switchChartEntityGuard } from '../../../guards/switch-chart-entity.guard';
+import { ChartEntity } from '../../../../domain/ChartEntity';
+import { ChartStoreService } from '../../../services/chart-store.service';
 
 
 @Component({
@@ -143,7 +146,8 @@ export class MyCupsPageComponent implements OnInit, OnDestroy {
     private updateCups: UpdateUserCupsAction,
     private readonly selectCupsAction: SelectCupsService,
     private readonly translocoService: TranslocoService,
-    private readonly zertipowerService: ZertipowerService
+    private readonly zertipowerService: ZertipowerService,
+    private readonly chartStoreService: ChartStoreService
   ) {
   }
 
@@ -174,9 +178,14 @@ export class MyCupsPageComponent implements OnInit, OnDestroy {
 
   selectCups(event: any) {
     const value: number = event.target.value;
+    if(value==-1){
+      // switchChartEntityGuard(ChartEntity.CUSTOMER);
+      this.chartStoreService.patchState({selectedChartEntity: ChartEntity.CUSTOMERS});
+      return;
+    }
+    this.chartStoreService.patchState({selectedChartEntity: ChartEntity.CUPS});
     this.userStore.patchState({ selectedCupsIndex: value });
   }
-
 
   openEditModal() {
     const modalRef = this.ngbModal.open(CupsModalComponent, { size: 'lg' })

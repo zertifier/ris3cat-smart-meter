@@ -1,8 +1,8 @@
-import {Routes} from "@angular/router";
-import {switchChartEntityGuard} from "../guards/switch-chart-entity.guard";
-import {ChartEntity} from "../../domain/ChartEntity";
-import {hasCupsGuard} from "../guards/has-cups.guard";
-import {hasCommunityGuard} from "../guards/has-community.guard";
+import { Routes } from "@angular/router";
+import { switchChartEntityGuard } from "../guards/switch-chart-entity.guard";
+import { ChartEntity } from "../../domain/ChartEntity";
+import { hasCupsGuard } from "../guards/has-cups.guard";
+import { hasCommunityGuard } from "../guards/has-community.guard";
 
 // These names are used on the guards
 // Each route has a name, and the guards verify what is the
@@ -45,7 +45,7 @@ export const routes: Routes = [
         }
       },
       {
-        path: 'my-cup/missing',
+        path: 'my-cups/missing',
         loadComponent: () => import('./cups/missing-cups-page/missing-cup-page.component').then(c => c.MissingCupPageComponent),
         canActivate: [hasCupsGuard],
         data: {

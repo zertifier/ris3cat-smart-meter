@@ -13,7 +13,8 @@
       "surplus": "Surplus",
       "buyingPrice": "Buying price",
       "sellingPrice": "selling price",
-      "unavailable": "Unavailable"
+      "unavailable": "Unavailable",
+      "allCups":"All"
     },
     "tooltips": {
       "assignedProd": "The percentage of energy produced that is assigned to this CUPS"
@@ -194,7 +195,8 @@
       "communityBalance": "Energy balance within the CCE",
       "addBalance": "Earn tokens",
       "pullOutBalance": "Withdraw tokens",
-      "pkLabel": "Private key"
+      "pkLabel": "Private key",
+      "pkWarning": "For security reasons, do not reveal the private key to anyone."
     },
     "tooltips": {
       "identity": "The identity allows your user to be identified within the Blockchain.",

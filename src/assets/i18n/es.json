@@ -13,7 +13,8 @@
       "surplus": "Excedente",
       "buyingPrice":"Precio de compra",
       "sellingPrice":"Precio de venta",
-      "unavailable":"No disponible"
+      "unavailable":"No disponible",
+      "allCups":"Todos"
     },
     "tooltips": {
       "assignedProd": "El porcentaje de la energía producida que se le asigna a este CUPS"
@@ -195,7 +196,8 @@
       "communityBalance":"Saldo energético dentro de la CCE",
       "addBalance":"Ingresar tokens",
       "pullOutBalance":"Retirar tokens",
-      "pkLabel":"Clave privada"
+      "pkLabel":"Clave privada",
+      "pkWarning": "Por razones de seguridad, no reveles la clave privada a nadie."
     },
     "tooltips": {
       "identity": "La identidad permite identificar tu usuario dentro de la Cadena de Bloques.",
