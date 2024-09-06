@@ -49,7 +49,8 @@
       "unavailable":"No disponible",
       "tradeTypeLabel": "Tipos de compartición: {{type}}",
       "tradeTypePref": "Preferente",
-      "tradeTypeEqui": "Equitativo"
+      "tradeTypeEqui": "Equitativo",
+      "totalProduction": "Producción total"
     },
     "tooltips": {
       "assignedProd": "El porcentaje de la energía producida que se le asigna a este CUPS"
