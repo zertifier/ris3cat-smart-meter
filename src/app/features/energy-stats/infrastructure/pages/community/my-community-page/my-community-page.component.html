@@ -29,68 +29,66 @@
         </p>
 
         <p class="mb-0" *ngIf="communityData">
-          {{ t('texts.tradeTypeLabel', {type: getTradeTypeTranslation(communityData.tradeType)}) }}
+          {{ t('texts.tradeTypeLabel', {type: getTradeTypeTranslation(communityData.tradeType)}) }} <span class="color-tertiary fw-semibold">{{ t('texts.preferent') }}</span>
         </p>
 
         <p class="mb-0">
-          {{ t('texts.communityMembers') }} {{ totalMembers$ | async }}
+          {{ t('texts.communityMembers') }} <span class="color-tertiary fw-semibold">{{ totalMembers$ | async }}</span>
         </p>
-        <p class="mb-0">{{ t('texts.activeMembers') }} {{ (activeMembers$ | async) }}</p>
+        <p class="mb-0">{{ t('texts.activeMembers') }} <span class="color-tertiary fw-semibold">{{ (activeMembers$ | async) }}</span></p>
         <!--@if (communityData && communityData.energyPrice) {
           <p class="mb-0">{{ t('texts.buyingPrice') }} : <b class="color-tertiary"> {{ communityData.energyPrice }}
             €/kWh</b></p>
           <p class="mb-0">{{ t('texts.sellingPrice') }} : <b class="color-tertiary"> {{ communityData.energyPrice }}
             €/kWh </b></p>
         }-->
-        <p><i class="fa-solid fa-battery-full"></i> 0%</p>
+        <p><i class="fa-solid fa-battery-full me-2"></i> <span class="color-tertiary fw-semibold">0%</span></p>
       </div>
-      <div class="col-md-4 text-right">
+      <div class="col-md-4 text-end">
         <p class="mb-0 fw-semibold" *ngIf="communityData">
           {{ t('texts.communityPrices') }}
         </p>
 
         @if (communityData && communityData.energyPrice) {
-          <div class="mb-0 d-flex">
-            <div class="price-tables-label">{{ t('texts.sellingPrice') }} :</div>
+          <div class="mb-0">
+            <span class="price-tables-label">{{ t('texts.sellingPrice') }} :</span>
             <b class="color-tertiary fw-semibold"> {{ communityData.energyPrice }}€/kWh </b>
           </div>
-          <div class="mb-0 d-flex">
-            <div class="price-tables-label">{{ t('texts.punta') }} :</div>
+          <div class="mb-0">
+            <span class="price-tables-label">{{ t('texts.punta') }} :</span>
             <b class="color-tertiary fw-semibold"> {{ communityData.energyPrice }}€/kWh </b>
           </div>
-          <div class="mb-0 d-flex">
-            <div class="price-tables-label">{{ t('texts.llano') }} :</div>
+          <div class="mb-0">
+            <span class="price-tables-label">{{ t('texts.llano') }} :</span>
             <b class="color-tertiary fw-semibold"> {{ communityData.energyPrice }}€/kWh </b>
           </div>
-          <div class="mb-0 d-flex">
-            <div class="price-tables-label">{{ t('texts.valle') }} :</div>
+          <div class="mb-0">
+            <span class="price-tables-label">{{ t('texts.valle') }} :</span>
             <b class="color-tertiary fw-semibold"> {{ communityData.energyPrice }}€/kWh </b>
           </div>
         }
 
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4 text-end">
         <p class="mb-0 fw-semibold" *ngIf="communityData">
           {{ t('texts.providerPrices') }}
         </p>
 
         @if (communityData && communityData.energyPrice) {
-          <!--<p class="mb-0">{{ t('texts.buyingPrice') }} : <b class="color-tertiary"> {{ communityData.energyPrice }}
-            €/kWh</b></p>-->
-          <div class="mb-0 d-flex">
-            <div class="price-tables-label">{{ t('texts.sellingPrice') }} :</div>
+          <div class="mb-0">
+            <span class="price-tables-label">{{ t('texts.sellingPrice') }} :</span>
             <b class="color-tertiary fw-semibold"> 0.06 €/kWh </b>
           </div>
-          <div class="mb-0 d-flex">
-            <div class="price-tables-label">{{ t('texts.punta') }} :</div>
+          <div class="mb-0">
+            <span class="price-tables-label">{{ t('texts.punta') }} :</span>
             <b class="color-tertiary fw-semibold"> 0.19 €/kWh </b>
           </div>
-          <div class="mb-0 d-flex">
-            <div class=" price-tables-label">{{ t('texts.llano') }} :</div>
+          <div class="mb-0">
+            <span class=" price-tables-label">{{ t('texts.llano') }} :</span>
             <b class="color-tertiary fw-semibold"> 0.13 €/kWh </b>
           </div>
-          <div class="mb-0 d-flex">
-            <div class="price-tables-label">{{ t('texts.valle') }} :</div>
+          <div class="mb-0">
+            <span class="price-tables-label">{{ t('texts.valle') }} :</span>
             <b class="color-tertiary fw-semibold"> 0.10 €/kWh </b>
           </div>
         }
@@ -99,7 +97,7 @@
     </div>
     </div>
   <div class="container-page bg-white">
-    <h4 class="text-center">{{ t('texts.liveWaste') }} <i
+    <h4 [ngbTooltip]=" t('texts.updatedAt') + ' ' + (lastUpdate$ | async) " class="text-center">{{ t('texts.liveWaste') }} <i
           class="ms-1 fa-solid fa-rss fa-fade text-success"></i></h4>
     <div class="row justify-content-evenly w-100">
 
@@ -150,9 +148,9 @@
   <div class="container-page">
 
 
-    <div class="mb-5" style="margin-bottom: 2rem;">
+
       <app-historic-chart [chartType]="'community'"/>
-    </div>
+
 
   </div>
 
