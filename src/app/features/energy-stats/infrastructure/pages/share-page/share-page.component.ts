@@ -50,7 +50,7 @@ export class SharePageComponent implements OnDestroy {
   maxDate: Date = dayjs().toDate();
   minToDate: Date = dayjs().subtract(30).toDate();
 
-  loading: boolean = true;
+  loading: boolean = false;
 
   tradesData!: TradeInterface[]
   customerId!: number;
