@@ -9,15 +9,15 @@ import {
   SimpleChanges,
   ViewChild
 } from '@angular/core';
-import { ChartModule } from "primeng/chart";
-import { Subscription } from "rxjs";
-import { ChartStore, ChartStoreService } from "../../../services/chart-store.service";
-import { ChartResource } from "../../../../domain/ChartResource";
-import { ChartLegendComponent } from "../chart-legend/chart-legend.component";
-import { Chart } from "chart.js";
-import { ChartEntity } from "../../../../domain/ChartEntity";
-import { AsyncPipe, NgIf } from "@angular/common";
-import { ChartDataset } from "@shared/infrastructure/interfaces/ChartDataset";
+import {ChartModule} from "primeng/chart";
+import {Subscription} from "rxjs";
+import {ChartStore, ChartStoreService} from "../../../services/chart-store.service";
+import {ChartResource} from "../../../../domain/ChartResource";
+import {ChartLegendComponent} from "../chart-legend/chart-legend.component";
+import {Chart} from "chart.js";
+import {ChartEntity} from "../../../../domain/ChartEntity";
+import {AsyncPipe, NgIf} from "@angular/common";
+import {ChartDataset} from "@shared/infrastructure/interfaces/ChartDataset";
 import {TranslocoService} from "@jsverse/transloco";
 import {UserStoreService} from "@features/user/infrastructure/services/user-store.service";
 
@@ -39,8 +39,8 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
     datasets: any[],
     labels: string[]
   };
-  @Input({ required: true }) dataset: ChartDataset[] = [];
-  @Input({ required: true }) labels: string[] = [];
+  @Input({required: true}) dataset: ChartDataset[] = [];
+  @Input({required: true}) labels: string[] = [];
   @ViewChild('chart') chartElement!: ElementRef;
   private chart!: Chart;
   private subscriptions: Subscription[] = [];
@@ -115,8 +115,8 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
       tooltip: {
         callbacks: {
           label: (context: any) => {
-            const { label } = context.dataset;
-            let { formattedValue } = context;
+            const {label} = context.dataset;
+            let {formattedValue} = context;
             const chartEntity = this.chartStoreService.snapshotOnly(state => state);
 
             // To show the bars on the same stack and overlying them (like a z-index) some adjustments need to be made
@@ -163,13 +163,14 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
             if (chartEntity.selectedChartEntity === ChartEntity.COMMUNITIES) {
               const stat = this.chartStoreService.snapshot().lastFetchedStats[context.dataIndex];
               if (context.dataset.label === this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.surplusActive')) {
-                this.subscriptions.push(this.activeMembers$.subscribe((total) => {
-                  // console.log(total, "TOTAL")
-                  labels.push(this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.totalActiveMembers', {total}));
-                }))
+                /*this.subscriptions.push(this.activeMembers$.subscribe((total) => {
+                    // console.log(total, "TOTAL")
+                    labels.push(this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.totalActiveMembers', {total}));
+                  }))*/
+                labels.push(this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.totalActiveMembers', {total: stat.activeMembers || 0}));
                 labels.push(`----------------`);
 
-              // } else if (context.dataset.label === this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.production')) {
+                // } else if (context.dataset.label === this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.production')) {
               } else if (context.dataset.label === this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.community.production')) {
                 for (const cups of stat.communitiesCups) {
                   if (cups.kwhOut > 0)
@@ -274,7 +275,7 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
           }
         },
         y: {
-          stacked: true,
+          stacked: false,
           beginAtZero: true,
           min: 0,
           ticks: {
@@ -283,6 +284,7 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
               return `${value} ${label}`;
             },
             color: this.textColorSecondary
+            // color: '#a2739'
           },
           grid: {
             color: this.surfaceBorder,
@@ -352,7 +354,7 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
         //   }
         // },
         x: {
-          stacked: true,
+          stacked: false,
           ticks: {
             callback: function (value: never) {
               const label = state.selectedChartResource === ChartResource.ENERGY ? 'kWh' : '€'
@@ -383,7 +385,7 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
         stack: entry.stack,
         grouped: true,
         order: entry.order,
-        yAxisID:entry.yAxisID
+        yAxisID: entry.yAxisID
       });
     }
 
