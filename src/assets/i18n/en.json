@@ -50,7 +50,8 @@
       "unavailable": "Unavailable",
       "tradeTypeLabel": "Share type: {{type}}",
       "tradeTypePref": "Preferred",
-      "tradeTypeEqui": "Equitable"
+      "tradeTypeEqui": "Equitable",
+      "totalProduction": "Total production"
     },
     "tooltips": {
       "assignedProd": "The percentage of energy produced that is assigned to this CUPS"
