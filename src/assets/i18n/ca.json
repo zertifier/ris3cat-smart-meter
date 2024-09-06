@@ -1,6 +1,6 @@
 {
   "MY-CUPS": {
-    "navbar": "El meu comptador",
+    "navbar": "Comptadors",
     "title": "Consum i producció",
     "texts": {
       "liveWaste": "La teva despesa en viu",
@@ -33,7 +33,7 @@
     }
   },
   "MY-COMMUNITY": {
-    "navbar": "La meva comunitat",
+    "navbar": "Comunitat",
     "title": "Consum i producció",
     "texts": {
       "liveWaste": "La teva despesa en viu",
@@ -106,6 +106,9 @@
       "chartLabels": {
         "CO2Savings": "Estalvi en CO2",
         "production": "Producció",
+        "community": {
+          "production": "Producció total"
+        },
         "productionActive": "Producció actius",
         "networkConsumption": "Consum de la xarxa",
         "networkActiveConsumption": "Consum de la xarxa actius",
@@ -269,6 +272,8 @@
       "amount": "Quantitat",
       "total": "Total",
       "result": "Resultat",
+      "mobileEnergyLeft": "Et queden",
+      "mobileEnergyCurrent": "Tens",
       "bottomTable": "Tingueu en compte que l'actualització de dades no és diària.",
       "noData": "No hi ha dades. Prova un altre rang de dies.",
       "actions": {
@@ -300,7 +305,9 @@
     "texts": {
       "statusInfo": "· Aquí podras veure el estat de les fonts de dades",
       "lastUpdate": "Ultima actualització",
-      "noLastUpdate": "No hi ha actualitzacions"
+      "noLastUpdate": "No hi ha actualitzacions",
+      "connected": "Conectat",
+      "disconnected": "Sense conexió"
     }
   },
   "STATS": {

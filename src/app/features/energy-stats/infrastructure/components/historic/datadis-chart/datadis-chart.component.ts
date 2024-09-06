@@ -101,6 +101,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit(): Promise<void> {
+    this.chartStoreService.isLoading$.next(true)
     this.subscriptions.push(
       this.translocoService.langChanges$.subscribe(() => {
         const chartParametrs$ = this.chartStoreService
@@ -122,7 +123,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                 const communityId = this.userStore.snapshotOnly(this.userStore.$.communityId);
                 const customerId = this.userStore.snapshotOnly((state:any) => state.user!.customer_id);
                 const data = await this.fetchEnergyStats(date, dateRange, cupId, communityId, customerId);
-                this.chartStoreService.chartData$.next(data)
+                //this.chartStoreService.chartData$.next(data)
                 this.data = data
                 this.chartStoreService.patchState({ lastFetchedStats: data });
 
@@ -160,7 +161,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                     // tooltipText: community ? 'Quantitat d’energia per compartir que es produeix i no es consumeix dels participans actius.' : 'Quantitat d’energia per compartir que es produeix i no es consumeix dels participans actius.',
                     tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.community.sharedSurplusActive'),
                     color: StatsColors.VIRTUAL_SURPLUS,
-                    data: mappedData.map(d => d.virtualSurplus),
+                    data: mappedData.map(d => d.virtualSurplus ? parseFloat(d.virtualSurplus + '').toFixed(2) : '0'),
                   })
                 } else {
                   datasets.push({
@@ -170,38 +171,33 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                     // tooltipText: community ? 'Quantitat d’energia que es produeix i no es consumeix dels participans actius.' : 'Quantitat d\'energia que es produeix i no es consumeix.',
                     tooltipText: community ? this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.community.surplusActive') : this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.cups.surplusActive'),
                     color: StatsColors.SURPLUS,
-                    data: mappedData.map(d => d.surplus),
+                    data: mappedData.map(d => d.surplus ? parseFloat(d.surplus + '').toFixed(2) : '0'),
                     stack: 'Active surplus',
                   })
                 }
 
                 if (community) {
                   datasets.unshift(
+
                     {
+                      id: "production",
+                      order: 3,
+                      color: StatsColors.COMMUNITY_PRODUCTION,
+                      // label: 'Producció',
+                      label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.community.production'),
+                      // tooltipText: 'Producció total de la comunitat',
+                      tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.community.production'),
+                      data: mappedData.map(d => d.production ? parseFloat(d.production + '').toFixed(2) : '0'),
+                      stack: 'Production',
+                      yAxisID: 'y'
+                    },{
                       id: "productionActive",
                       order: 0,
                       // label: 'Producció actius',
                       label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.productionActive'),
                       tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.community.activeProduction'),
                       color: StatsColors.ACTIVE_COMMUNITY_PRODUCTION,
-                      data: mappedData.map(d => d.productionActives),
-                      stack: 'Production',
-                      yAxisID: 'y'
-                    },
-                    {
-                      id: "production",
-                      order: 3,
-                      color: StatsColors.COMMUNITY_PRODUCTION,
-                      // label: 'Producció',
-                      label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.production'),
-                      // tooltipText: 'Producció total de la comunitat',
-                      tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.community.production'),
-                      data: mappedData.map(d => {
-                        if (!d.production) {
-                          return 0;
-                        }
-                        return d.production - d.productionActives;
-                      }),
+                      data: mappedData.map(d => d.productionActives ? parseFloat(d.productionActives + '').toFixed(2) : '0'),
                       stack: 'Production',
                       yAxisID: 'y'
                     },
@@ -209,9 +205,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                       id: "networkActiveConsumption",
                       // label: 'Consum del a xarxa actius',
                       label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.networkActiveConsumption'),
-                      data: mappedData.map(d => {
-                        return d.consumption;
-                      }),
+                      data: mappedData.map(d => d.consumption ? parseFloat(d.consumption + '').toFixed(2) : '0'),
                       tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.community.networkActiveConsumption'),
                       stack: 'Consumption',
                       order: 0,
@@ -236,24 +230,27 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                     label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.networkConsumption'),
                     color: StatsColors.SELF_CONSUMPTION,
                     data: mappedData.map(d => {
-                      return d.gridConsumption
+                      return d.gridConsumption ? parseFloat(d.gridConsumption + '').toFixed(2) : '0'
                     }),
                     // tooltipText: 'Consum que facturarà la companyia elèctrica',
                     tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.cups.networkConsumption'),
                     stack: 'Consumption',
                     yAxisID: 'y'
                   })
-                  datasets.unshift({
+                  /*datasets.unshift({
                     id: "production",
                     // label: 'Producció',
                     label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.production'),
                     // tooltipText: 'Producció proporcional comunitaria',
                     tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.cups.production'),
                     color: StatsColors.COMMUNITY_PRODUCTION,
-                    data: mappedData.map(d => d.production),
+                    data: mappedData.map(d => {
+                      console.log(d)
+                      return d.production ? parseFloat(d.production + '').toFixed(2) : '0'
+                    }),
                     stack: 'Production',
                     yAxisID: 'y'
-                  })
+                  })*/
                   // datasets.unshift({
                   //   // label: 'co2',
                   //   label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.CO2Savings'),
@@ -286,6 +283,8 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                 this.mobileLabels = this.legendLabels.map(d => {
                   return { ...d, radius: '2.5rem' }
                 })
+                this.chartStoreService.isLoading$.next(false)
+
               }),
         );
       })
@@ -297,6 +296,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
   }
 
   async fetchEnergyStats(date: Date, range: DateRange, cupId: number, communityId: number, customerId:number) {
+    this.chartStoreService.isLoading$.next(true)
     this.chartStoreService.snapshotOnly(state => state.origin);
     this.chartStoreService.fetchingData(true);
     let data: DatadisEnergyStat[];
@@ -314,6 +314,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
           return [];
         }
         const response = await this.zertipower.energyStats.getCommunityEnergyStats(communityId, 'datadis', date, range);
+        // console.log(response, "RESPONSE")
         this.userStore.patchState({ activeMembers: response.totalActiveMembers || 0 });
         this.userStore.patchState({ totalMembers: response.totalMembers || 0 });
         data = response.stats;
@@ -327,9 +328,12 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
       }
 
       // this.latestFetchedStats = data;
+
       return data;
     } finally {
       this.chartStoreService.fetchingData(false);
+      this.chartStoreService.isLoading$.next(false)
+
     }
   }
 

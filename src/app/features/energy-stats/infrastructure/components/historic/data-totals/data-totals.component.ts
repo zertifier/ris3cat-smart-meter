@@ -7,17 +7,23 @@ import {
 import {ChartStoreService} from "@features/energy-stats/infrastructure/services/chart-store.service";
 import {DatadisEnergyStat} from "@shared/infrastructure/services/zertipower/DTOs/EnergyStatDTO";
 import {Subject, Subscription} from "rxjs";
+import {DecimalPipe, registerLocaleData} from "@angular/common";
+import localeEs from '@angular/common/locales/es';
+registerLocaleData(localeEs, 'es');
 
 @Component({
   selector: 'app-data-totals',
   standalone: true,
   imports: [
     TranslocoDirective,
-    QuestionBadgeComponent
+    QuestionBadgeComponent,
+    DecimalPipe
   ],
   templateUrl: './data-totals.component.html',
   styleUrl: './data-totals.component.scss'
 })
+
+
 export class DataTotalsComponent implements OnDestroy {
   @Input() datasets!: ChartDataset[]
   data!: DatadisEnergyStat[]
@@ -38,20 +44,12 @@ export class DataTotalsComponent implements OnDestroy {
     private readonly chartStoreService: ChartStoreService,
   ) {
 
-    this.data = this.chartStoreService.chartData
-   /* this.subscriptions.push(
-      this.chartStoreService
-        .chartData$.subscribe((data) => {
-        console.log(data, "data")
-
-      })
-    )*/
 
     this.subscriptions.push(
       this.chartStoreService
         .selectOnly(this.chartStoreService.$.params).subscribe((params) => {
         this.resetValues();
-        this.data = this.chartStoreService.chartData
+        this.data = this.chartStoreService.snapshot().lastFetchedStats
         this.chartDataType = params.selectedChartResource;
         if (this.chartDataType == 'energy') {
           this.chartDataTypeSymbol = 'kWh'
@@ -84,29 +82,26 @@ export class DataTotalsComponent implements OnDestroy {
     }*/
 
   startEnergyCalculate() {
+
     if (this.data)
-      //console.log(this.data)
     this.data.forEach((data) => {
       this.setEnergyTotals(data)
     })
-      this.data.forEach((data) => {
-        this.setEnergyTotals(data)
-      })
+
     this.totalCo2 = this.totalProduction * 0.00026
 
     //this.cdr.detectChanges(); // removes console error
   }
 
   setEnergyTotals(data: any) {
-    if (data.production) this.totalProduction += parseInt(data.production)
-    if (data.productionActives) this.totalActiveProduction += parseInt(data.productionActives)
-    if (data.kwhIn) this.totalConsumption += parseInt(data.kwhIn)
-    if (data.kwhOut) this.totalSurplus += parseInt(data.kwhOut)
+    if (data.production) this.totalProduction += parseFloat(data.production)
+    if (data.productionActives) this.totalActiveProduction += parseFloat(data.productionActives)
+    if (data.kwhIn) this.totalConsumption += parseFloat(data.kwhIn)
+    if (data.kwhOut) this.totalSurplus += parseFloat(data.kwhOut)
   }
 
   startPriceCalculate() {
     if (this.data)
-      //console.log(this.data)
     for (let data of this.data) {
       this.setPriceTotals(data)
     }
@@ -119,7 +114,6 @@ export class DataTotalsComponent implements OnDestroy {
   }
 
   setPriceTotals(data: any) {
-    //console.log(Number(data.kwhOut) * Number(data.kwhOutPrice), Number(data.kwhOut), Number(data.kwhOutPrice))
     if (data.production) this.totalProduction += (Number(data.production) * Number(data.kwhOutPrice))
     if (data.productionActives) this.totalActiveProduction += (Number(data.productionActives) * Number(data.kwhOutPrice))
     if (data.kwhIn) this.totalConsumption += (Number(data.kwhIn) * Number(data.kwhInPrice))

@@ -42,6 +42,7 @@ import { ZertipowerService } from '../../../../../../shared/infrastructure/servi
 import {
   CommunityModalComponent
 } from "@features/energy-stats/infrastructure/pages/community/my-community-page/community-modal/community-modal.component";
+import {ChartResource} from "@features/energy-stats/domain/ChartResource";
 
 @Component({
   selector: 'app-my-community-page',
@@ -136,7 +137,6 @@ export class MyCommunityPageComponent implements OnInit, OnDestroy {
   communityData!:CommunityResponse | any;
   communityId$ = this.userStore.selectOnly(this.userStore.$.communityId).subscribe(async (communityId:any)=>{
     this.communityData = await this.zertipowerService.communities.getCommunityById(communityId)
-    console.log(this.communityData, "DATA")
   });
 
   constructor(
@@ -202,4 +202,5 @@ export class MyCommunityPageComponent implements OnInit, OnDestroy {
 
   isDevMode = isDevMode;
   protected readonly environment = environment;
+    protected readonly ChartResource = ChartResource;
 }

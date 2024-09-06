@@ -52,8 +52,7 @@ export class SharePageComponent implements OnDestroy {
 
   loading: boolean = false;
 
-  customerTradesData!: TradeInterface[]
-  communityTradesData!: TradeInterface[]
+  tradesData!: TradeInterface[]
   customerId!: number;
   customer: any;
 
@@ -104,20 +103,20 @@ export class SharePageComponent implements OnDestroy {
   async getCustomerTradesData() {
     //console.log(this.fromDate, this.toDate)
     this.minToDate = dayjs(this.fromDate).toDate();
-    this.customerTradesData = await this.zertipower.trades.getTradesByCustomer(this.customerId, dayjs(this.fromDate).format('YYYY-MM-DD'), dayjs(this.toDate).format('YYYY-MM-DD'))
+    this.tradesData = await this.zertipower.trades.getTradesByCustomer(this.customerId, dayjs(this.fromDate).format('YYYY-MM-DD'), dayjs(this.toDate).format('YYYY-MM-DD'))
     //console.log("customer trades data", this.customerTradesData)
     this.totalShared = 0;
-    this.customerTradesData.map((trade)=>{this.totalShared += Number(trade.tradedKwh)})
+    this.tradesData.map((trade)=>{this.totalShared += Number(trade.tradedKwh)})
     this.totalShared = Number(this.totalShared.toFixed(2))
   }
 
   async getCommunityTradesData() {
     //console.log(this.fromDate, this.toDate)
     this.minToDate = dayjs(this.fromDate).toDate();
-    this.communityTradesData = await this.zertipower.trades.getTradesByCommunity(this.communityId, dayjs(this.fromDate).format('YYYY-MM-DD'), dayjs(this.toDate).format('YYYY-MM-DD'))
+    this.tradesData = await this.zertipower.trades.getTradesByCommunity(this.communityId, dayjs(this.fromDate).format('YYYY-MM-DD'), dayjs(this.toDate).format('YYYY-MM-DD'))
     //console.log("community trades data", this.communityTradesData)
     this.totalShared = 0;
-    this.communityTradesData.map((trade)=>{if(trade.action=='BUY'){this.totalShared += Number(trade.tradedKwh)}})
+    this.tradesData.map((trade)=>{if(trade.action=='BUY'){this.totalShared += Number(trade.tradedKwh)}})
     this.totalShared = Number(this.totalShared.toFixed(2))
   }
 

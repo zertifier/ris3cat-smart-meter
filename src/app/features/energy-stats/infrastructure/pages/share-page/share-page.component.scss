@@ -53,3 +53,17 @@ td{
   background-color: #D35400;
   color: white;
 }
+
+.border-end-custom, .border-start-custom{
+  border-color: $tertiary !important;
+}
+
+.border-end-custom{
+  border-right: solid $tertiary 0.5px;
+}
+.border-start-custom{
+  border-left: solid $tertiary 0.5px;
+}
+.card-custom-div{
+  max-width: 150px;
+}

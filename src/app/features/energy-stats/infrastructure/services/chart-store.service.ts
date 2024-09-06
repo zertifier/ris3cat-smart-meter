@@ -6,7 +6,7 @@ import {ChartResource} from "../../domain/ChartResource";
 import {ChartType} from "../../domain/ChartType";
 import {ChartOrigins} from "../../domain/ChartOrigins";
 import {DatadisEnergyStat} from "../../../../shared/infrastructure/services/zertipower/DTOs/EnergyStatDTO";
-import {Subject} from "rxjs";
+import {BehaviorSubject, Subject} from "rxjs";
 
 export interface ChartStore {
   dateRange: DateRange,
@@ -43,15 +43,12 @@ export class ChartStoreService extends RxStore<ChartStore> {
     }
   }
 
-  chartData$: Subject<DatadisEnergyStat[]> = new Subject()
-  chartData: DatadisEnergyStat[] = [];
+  isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(true)
+
 
   constructor() {
     super(defaultValues);
 
-    this.chartData$.subscribe((data) => {
-      this.chartData = data
-    })
   }
 
   public setChartType(chartType: ChartType) {

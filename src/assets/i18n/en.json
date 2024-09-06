@@ -1,6 +1,6 @@
 {
   "MY-CUPS": {
-    "navbar": "My counter",
+    "navbar": "Counters",
     "title": "Consumption and production",
     "texts": {
       "liveWaste": "Your live spending",
@@ -33,7 +33,7 @@
     }
   },
   "MY-COMMUNITY": {
-    "navbar": "My community",
+    "navbar": "Community",
     "title": "Consumption and production",
     "texts": {
       "liveWaste": "Your live spending",
@@ -106,6 +106,9 @@
       "chartLabels": {
         "CO2Savings": "CO2 savings",
         "production": "Production",
+        "community": {
+          "production": "Total production"
+        },
         "productionActive": "Active production",
         "networkConsumption": "Network consumption",
         "networkActiveConsumption": "Active network consumption",
@@ -255,34 +258,36 @@
     "navbar": "Share energy",
     "title": "Share energy",
     "texts": {
-      "chooseData": "Choose which data range you want to consult",
+      "chooseData": "Choose the time period you want to consult",
       "from": "From",
       "to": "To",
-      "totalShared":"Total shared",
+      "totalShared": "Total shared",
       "date": "Date",
       "action": "Action",
       "amount": "Amount",
       "total": "Total",
       "result": "Result",
-      "bottomTable": "Please note that data update is not daily.",
-      "noData": "There is no data. Please try another range of dates",
+      "mobileEnergyLeft": "You have left",
+      "mobileEnergyCurrent": "You have",
+      "bottomTable": "Please note that data is not updated daily.",
+      "noData": "No data available. Try another date range.",
       "actions": {
         "buy": "Received",
         "sell": "Sent"
       },
-      "emitter": "Emitter",
+      "emitter": "Sender",
       "receiver": "Receiver",
+      "buyingPrice": "Buying price",
+      "sellingPrice": "Selling price",
+      "availableBalance": "Available balance",
       "results": {
         "before": "Before",
         "now": "Now",
         "consumption": "Consumption",
         "surplus": "Surplus"
       },
-      "myShares": "My shares",
-      "communitaryShares": "Communitary shares",
-      "buyingPrice": "Buying price",
-      "sellingPrice": "selling price",
-      "availableBalance": "Balance available",
+      "myShares": "My sharing",
+      "communitaryShares": "Community sharing",
       "anonymous": "Anonymous"
     },
     "tooltips": {
@@ -295,7 +300,9 @@
     "texts": {
       "statusInfo": "· Here you can see the status of the data sources",
       "lastUpdate": "Last update",
-      "noLastUpdate": "No updates"
+      "noLastUpdate": "No updates",
+      "connected": "Connected",
+      "disconnected": "Disconnected"
     }
   },
   "STATS": {
