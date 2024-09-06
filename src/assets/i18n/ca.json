@@ -312,7 +312,7 @@
       "lastUpdate": "Ultima actualització",
       "noLastUpdate": "No hi ha actualitzacions",
       "connected": "Conectat",
-      "disconnected": "Sense conexió"
+      "disconnected": "Desconectat"
     }
   },
   "STATS": {
