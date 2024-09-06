@@ -45,12 +45,18 @@
       "generatedEnergy": "Energía generada",
       "surplus": "Excedente",
       "buyingPrice":"Precio de compra",
-      "sellingPrice":"Precio de venta",
+      "sellingPrice":"Venta",
+      "llano": "Llano",
+      "valle": "Valle",
+      "punta": "Punta",
       "unavailable":"No disponible",
       "tradeTypeLabel": "Tipos de compartición: {{type}}",
       "tradeTypePref": "Preferente",
       "tradeTypeEqui": "Equitativo",
-      "totalProduction": "Producción total"
+      "totalProduction": "Producción total",
+      "info": "Información",
+      "community": "Comunidad",
+      "provider": "Proveedor"
     },
     "tooltips": {
       "assignedProd": "El porcentaje de la energía producida que se le asigna a este CUPS"
