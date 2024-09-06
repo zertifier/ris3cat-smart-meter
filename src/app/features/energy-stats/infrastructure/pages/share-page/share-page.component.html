@@ -6,7 +6,7 @@
       <!-- <p class="mt-4 fs-5"> {{ t('texts.chooseData') }} </p> -->
       <div class="row">
         <div class="col"><h4 class="fw-semibold"> {{ t('title') }} </h4></div>
-        <div class="col-md-4 mb-3">
+        <div class="col-auto mb-3">
           <div class="btn-group w-100">
           <button class="btn"
                   [ngClass]="{'btn-active':infoDisplay=='customer','btn-secondary':infoDisplay=='community'}"
@@ -204,11 +204,15 @@
         </div>
       </div>
 
+      <div *ngIf="loading" class="text-center mt-5">
+        <i class="fa-solid fa-spinner fa-spin fs-2"></i>
+      </div>
+
       <div class="mt-2">
         <p *ngIf="tradesData && tradesData.length">
           {{ t('texts.bottomTable') }}
         </p>
-        <p class="text-center" *ngIf=" !tradesData || !tradesData.length">
+        <p class="text-center" *ngIf=" (!tradesData || !tradesData.length) && !loading">
           {{ t('texts.noData') }}
         </p>
       </div>

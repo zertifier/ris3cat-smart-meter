@@ -50,7 +50,7 @@ export class SharePageComponent implements OnDestroy {
   maxDate: Date = dayjs().toDate();
   minToDate: Date = dayjs().subtract(30).toDate();
 
-  loading: boolean = false;
+  loading: boolean = true;
 
   tradesData!: TradeInterface[]
   customerId!: number;
@@ -70,6 +70,7 @@ export class SharePageComponent implements OnDestroy {
   tradeTypeVisible = false;
 
   totalShared:number=0;
+
 
 
   subscriptions: Subscription[] = [];
@@ -93,6 +94,7 @@ export class SharePageComponent implements OnDestroy {
   }
 
   getData() {
+    this.loading = true
     if (this.infoDisplay == 'community') {
       this.getCommunityTradesData();
     } else if (this.infoDisplay == 'customer') {
@@ -108,6 +110,7 @@ export class SharePageComponent implements OnDestroy {
     this.totalShared = 0;
     this.tradesData.map((trade)=>{this.totalShared += Number(trade.tradedKwh)})
     this.totalShared = Number(this.totalShared.toFixed(2))
+    this.loading = false
   }
 
   async getCommunityTradesData() {
@@ -118,6 +121,7 @@ export class SharePageComponent implements OnDestroy {
     this.totalShared = 0;
     this.tradesData.map((trade)=>{if(trade.action=='BUY'){this.totalShared += Number(trade.tradedKwh)}})
     this.totalShared = Number(this.totalShared.toFixed(2))
+    this.loading = false
   }
 
   ngOnDestroy(): void {
