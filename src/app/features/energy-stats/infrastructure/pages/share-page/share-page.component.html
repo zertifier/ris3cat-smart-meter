@@ -1,38 +1,45 @@
 <ng-container *transloco="let t; prefix: 'SHARE-ENERGY'">
   <div class="container-page">
     <div class="my-4">
-      <h4 class="fw-semibold"> {{ t('title') }} </h4>
+
 
       <!-- <p class="mt-4 fs-5"> {{ t('texts.chooseData') }} </p> -->
-
-      <div class="w-100 mb-3 d-flex flex-column">
-        @if (customer) {
-          <span class="my-2">{{ t('texts.availableBalance') }} : <b class="color-tertiary">{{ customer.balance }}
-            EKW</b></span>
-        }
-        @if (communityData && communityData.energyPrice) {
-          <span>{{ t('texts.buyingPrice') }} : <b class="color-tertiary">{{ communityData.energyPrice }}
-            €/kWh</b></span>
-          <span>{{ t('texts.sellingPrice') }} : <b class="color-tertiary"> {{ communityData.energyPrice }}
-            €/kWh</b></span>
-        }
-      </div>
-
       <div class="row">
-        <div class="col-12 mb-2">
+        <div class="col"><h4 class="fw-semibold"> {{ t('title') }} </h4></div>
+        <div class="col-auto mb-3">
+          <div class="btn-group">
           <button class="btn"
                   [ngClass]="{'btn-active':infoDisplay=='customer','btn-secondary':infoDisplay=='community'}"
                   (click)="infoDisplay='customer'; getData()">{{ t('texts.myShares') }}
           </button>
-        </div>
 
-        <div class="col-12  mb-2">
           <button class="btn"
                   [ngClass]="{'btn-active':infoDisplay=='community','btn-secondary':infoDisplay=='customer'}"
                   (click)="infoDisplay='community'; getData()">{{ t('texts.communitaryShares') }}
           </button>
         </div>
+        </div>
       </div>
+
+      <div class="row">
+        @if (customer) {
+        <div class="col-md mb-3">
+          <span class="my-2">{{ t('texts.availableBalance') }} : <b class="color-tertiary">{{ customer.balance }}
+            EKW</b></span>
+            </div>
+        }
+        @if (communityData && communityData.energyPrice) {
+        <div class="col-md mb-3">
+          <span>{{ t('texts.buyingPrice') }} : <b class="color-tertiary">{{ communityData.energyPrice }}
+            €/kWh</b></span>
+            </div>
+            <div class="col-md mb-3">
+          <span>{{ t('texts.sellingPrice') }} : <b class="color-tertiary"> {{ communityData.energyPrice }}
+            €/kWh</b></span>
+        </div>
+        }
+      </div>
+
 
       <div class="row">
         <div class="col-12 col-md-4 my-2">

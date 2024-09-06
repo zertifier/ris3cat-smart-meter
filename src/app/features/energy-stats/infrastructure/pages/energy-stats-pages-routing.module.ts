@@ -67,7 +67,7 @@ export const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'my-cups'
+        redirectTo: 'community'
       }
     ]
   },

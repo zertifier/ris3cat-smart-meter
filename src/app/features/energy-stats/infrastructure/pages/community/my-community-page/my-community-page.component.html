@@ -1,43 +1,43 @@
 <ng-container *transloco="let t; prefix: 'MY-COMMUNITY'" class="w-100">
   <div class="container-page">
-    <div class="d-flex flex-wrap justify-content-between flex-wrap-reverse gap-5">
-      <h4 style="font-weight: 600;">{{ t('title') }}</h4>
+    <div class="row g-2 mb-2">
+      <div class="col-auto">
+         <h4 style="font-weight: 600;">{{ t('navbar') }} {{ communityData.name }}</h4>
+      </div>
+      <div class="col-auto align-bottom">
+        <button class="btn btn-primary bg-primary rounded-3 btn-sm" (click)="openEditModal()">
+          <i class="fa-solid fa-pencil"></i>
+        </button>
+      </div>
+    </div>
 
-      <div class="d-flex flex-column">
-        <p class="fst-italic">{{ t('texts.liveWaste') }} <span><i
-              class="fa-solid fa-rss fa-fade text-success"></i></span></p>
+    <div class="row">
+      <div class="col-md">
+        <p class="mb-0" *ngIf="communityData">
+         {{ t('texts.tradeTypeLabel', {type: getTradeTypeTranslation(communityData.tradeType)}) }}
+      </p>
+
+      <p class="mb-0">
+        {{ t('texts.communityMembers') }} {{ totalMembers$ | async }}
+      </p>
+      <p class="mb-0">{{ t('texts.activeMembers') }} {{ (activeMembers$ | async) }}</p>
+      @if(communityData && communityData.energyPrice) {
+      <p class="mb-0">{{ t('texts.buyingPrice') }} : <b class="color-tertiary"> {{communityData.energyPrice}}€/kWh</b></p>
+      <p class="mb-0">{{ t('texts.sellingPrice') }} : <b class="color-tertiary"> {{communityData.energyPrice}}€/kWh </b></p>
+      }
+      <p><i class="fa-solid fa-battery-full"></i> 0%</p>
+      </div>
+      <div class="col-md text-end">
+         <p class="mb-0 fst-italic">{{ t('texts.liveWaste') }} <i
+          class="ms-1 fa-solid fa-rss fa-fade text-success"></i></p>
         @if (lastUpdate$ | async) {
-        <p>{{ t('texts.updatedAt') }} {{ lastUpdate$ | async }} <span class="ms-3 text-success"
+        <p class="mb-0">{{ t('texts.updatedAt') }} {{ lastUpdate$ | async }} <span class="ms-1 text-success"
             style="font-size: 0.8rem;"><i class="fa-solid fa-circle"></i></span></p>
         } @else {
         <p>{{ t('texts.noDataRegistered') }}</p>
         }
       </div>
-    </div>
 
-    <div class="w-100 d-flex flex-column">
-      <div *ngIf="communityData" class="d-flex mb-3" style="max-width: 20rem">
-
-        <input [ngModel]="communityData.name" class="form-control border-2 border-primary shadow-none disabled" readonly/>
-
-        <button class="btn btn-primary bg-primary me-3 ms-0 ms-md-3 rounded-3" (click)="openEditModal()"
-                style="min-width: 65px; min-height: 40px">
-          <i class="fa-solid fa-pencil"></i>
-        </button>
-      </div>
-      <span *ngIf="communityData">
-         {{ t('texts.tradeTypeLabel', {type: getTradeTypeTranslation(communityData.tradeType)}) }}
-      </span>
-
-      <span>
-        {{ t('texts.communityMembers') }} {{ totalMembers$ | async }}
-      </span>
-      <span>{{ t('texts.activeMembers') }} {{ (activeMembers$ | async) }}</span>
-      @if(communityData && communityData.energyPrice) {
-      <span>{{ t('texts.buyingPrice') }} : <b class="color-tertiary"> {{communityData.energyPrice}}€/kWh</b></span>
-      <span>{{ t('texts.sellingPrice') }} : <b class="color-tertiary"> {{communityData.energyPrice}}€/kWh </b></span>
-      }
-      <span><i class="fa-solid fa-battery-full"></i> 0%</span>
     </div>
     <div class="row justify-content-evenly w-100 mt-2" style="margin-bottom: 2rem;">
 
@@ -90,7 +90,7 @@
     <hr>
 
     <div style="margin-bottom: 2rem;">
-      <app-historic-chart [chartType]="'community'" />
+      <app-historic-chart [chartType]="'community'"/>
     </div>
 
   </div>
@@ -98,14 +98,14 @@
   <div class="row mx-0" style="background-color: white;">
     <div class="col-12 prediction-container">
       <!-- <div class="d-flex justify-content-center prediction-container"> -->
-      <app-metereologic-prediction />
+      <app-metereologic-prediction/>
       <!-- </div> -->
     </div>
   </div>
 
   <div class="row mx-0 mb-5">
     <div class="col-12 prediction-container">
-      <app-energy-prediction [community]="true" />
+      <app-energy-prediction [community]="true"/>
     </div>
   </div>
 
