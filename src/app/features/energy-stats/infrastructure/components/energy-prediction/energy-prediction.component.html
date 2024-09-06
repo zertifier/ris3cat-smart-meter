@@ -1,6 +1,6 @@
 <ng-container *transloco="let t; prefix: 'PREDICTIONS'">
   <!-- <h5 style="margin: 2rem 0 2rem 0;" class="fw-bold">{{ t('energy.title') }}</h5> -->
-  <div class="mb-3">
+  <div *ngIf="!loading">
     <!-- <app-energy-prediction-chart [dataset]="datasets" [labels]="labels"/> -->
 
     <!-- PREDICCIÓ PRODUCCIÓ ENERGIA -->
@@ -81,5 +81,9 @@
 
     <!--  -->
 
+  </div>
+
+  <div *ngIf="loading" class="text-center mt-5">
+    <i class="fa-solid fa-spinner fa-spin fs-2"></i>
   </div>
 </ng-container>

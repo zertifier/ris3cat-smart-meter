@@ -52,6 +52,8 @@ export class EnergyPredictionComponent implements OnInit, OnDestroy {
   productionPrediction: { date: string, value: number }[] = [];
   surplusPrediction: { date: string, value: number }[] = [];
 
+  loading = false
+
   subscriptions: Subscription[] = [];
   async ngOnInit() {
 
@@ -64,6 +66,7 @@ export class EnergyPredictionComponent implements OnInit, OnDestroy {
   }
 
   async getPrediction() {
+    this.loading = true
 
     const activeLang = this.translocoService.getActiveLang()
     moment.locale(activeLang);
@@ -138,7 +141,7 @@ export class EnergyPredictionComponent implements OnInit, OnDestroy {
       }
       index++;
     }
-
+    this.loading = false
   }
   ngOnDestroy(): void {
     this.subscriptions.forEach(s => s.unsubscribe());
