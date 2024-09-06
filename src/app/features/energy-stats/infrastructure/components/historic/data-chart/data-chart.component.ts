@@ -136,7 +136,7 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
 
               // const total = parseFloat(register.productionActives + '').toFixed(2);
               const total = parseFloat(register.productionActives + '');
-              formattedValue = total.toLocaleString();
+              // formattedValue = total.toLocaleString();
             }
 
             /*if (context.dataset.stack === "Consumption"
@@ -165,7 +165,8 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
                 }))
                 labels.push(`----------------`);
 
-              } else if (context.dataset.label === this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.production')) {
+              // } else if (context.dataset.label === this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.production')) {
+              } else if (context.dataset.label === this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.community.production')) {
                 for (const cups of stat.communitiesCups) {
                   if (cups.kwhOut > 0)
                     labels.push(`${cups.reference || cups.cups} : ${cups.kwhOut || 0} KWh`)
