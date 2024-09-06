@@ -9,10 +9,12 @@
       <div class="card-body">
         <div class="d-flex justify-content-between">
           <div class="d-flex align-items-center gap-2">
-            <h3 class="m-0">Datadis</h3>
+            <h3 class="m-0 me-4">Datadis</h3>
             <h5 class="m-0">{{cups.cups}}</h5>
             <i class="fa-solid fa-circle fa-fade"
               [ngClass]="{'text-success': cups.active, 'text-danger': !cups.active}"></i>
+            <h5 class="m-0 text-success fa-fade" *ngIf="cups.active">{{ t('texts.connected') }}</h5>
+            <h5 class="m-0 text-danger fa-fade" *ngIf="!cups.active">{{ t('texts.disconnected') }}</h5>
           </div>
           <span class="d-flex align-items-center">
             @if (lastUpdate$ | async) {

@@ -299,7 +299,9 @@
     "texts": {
       "statusInfo": "· Aquí podrás ver el estado de las fuentes de datos",
       "lastUpdate": "Última actualización",
-      "noLastUpdate": "No hay actualizaciones"
+      "noLastUpdate": "No hay actualizaciones",
+      "connected": "Conectado",
+      "disconnected": "Sin conexión"
     }
   },
   "STATS": {
