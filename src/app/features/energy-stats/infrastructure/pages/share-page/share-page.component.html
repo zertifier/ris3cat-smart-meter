@@ -6,8 +6,8 @@
       <!-- <p class="mt-4 fs-5"> {{ t('texts.chooseData') }} </p> -->
       <div class="row">
         <div class="col"><h4 class="fw-semibold"> {{ t('title') }} </h4></div>
-        <div class="col-auto mb-3">
-          <div class="btn-group">
+        <div class="col-md-4 mb-3">
+          <div class="btn-group w-100">
           <button class="btn"
                   [ngClass]="{'btn-active':infoDisplay=='customer','btn-secondary':infoDisplay=='community'}"
                   (click)="infoDisplay='customer'; getData()">{{ t('texts.myShares') }}
