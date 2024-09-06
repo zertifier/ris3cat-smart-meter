@@ -14,7 +14,7 @@
       "buyingPrice":"Precio de compra",
       "sellingPrice":"Precio de venta",
       "unavailable":"No disponible",
-      "allCups":"Todos"
+      "allCups":"Todos los CUPS"
     },
     "tooltips": {
       "assignedProd": "El porcentaje de la energía producida que se le asigna a este CUPS"
