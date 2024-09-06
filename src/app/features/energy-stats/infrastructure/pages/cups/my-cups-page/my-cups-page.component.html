@@ -77,7 +77,7 @@
         }
         @else{
           <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
-          label="{{ t('texts.selfConsumption') }}" [text]="t('texts.unavailable')" />
+          label="{{ t('texts.consumption') }}" [text]="t('texts.unavailable')" />
         }
       </div>
 
@@ -95,14 +95,14 @@
       </div>
 
       <div class="col-6 col-lg my-3">
-        @if(isValidNumber(powerFlow().production) && powerFlow().production > 0){
-        <app-stat-display [disabled]="powerFlow().production === 0" width="20%"
+        @if(isValidNumber(powerFlow().production)){
+        <app-stat-display width="20%"
           [color]="StatsColors.COMMUNITY_PRODUCTION" label="{{ t('texts.generatedEnergy') }}"
           [text]="powerFlow().production.toFixed(2) + ' kWh'" />
         }
         @else{
           <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
-          label="{{ t('texts.selfConsumption') }}" [text]="t('texts.unavailable')" />
+          label="{{ t('texts.generatedEnergy') }}" [text]="t('texts.unavailable')" />
         }
       </div>
 
@@ -113,7 +113,7 @@
         }
         @else{
           <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
-          label="{{ t('texts.selfConsumption') }}" [text]="t('texts.unavailable')" />
+          label="{{ t('texts.surplus') }}" [text]="t('texts.unavailable')" />
         }
       </div>
     </div>
