@@ -86,7 +86,7 @@ export class SharePageComponent implements OnDestroy {
         .selectOnly((state: any) => state).subscribe(async (data: any) => {
           if (data.user) {
             this.customerId = data.user.customer_id!
-            this.getCustomerTradesData()
+            this.getData()
             this.customer = await this.zertipower.customers.getCustomerById(this.customerId)
           }
         })
