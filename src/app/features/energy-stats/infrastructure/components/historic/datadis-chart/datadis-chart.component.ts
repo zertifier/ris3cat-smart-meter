@@ -237,7 +237,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                     stack: 'Consumption',
                     yAxisID: 'y'
                   })
-                  /*datasets.unshift({
+                  datasets.unshift({
                     id: "production",
                     // label: 'Producció',
                     label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.production'),
@@ -245,12 +245,11 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                     tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.cups.production'),
                     color: StatsColors.COMMUNITY_PRODUCTION,
                     data: mappedData.map(d => {
-                      console.log(d)
                       return d.production ? parseFloat(d.production + '').toFixed(2) : '0'
                     }),
                     stack: 'Production',
                     yAxisID: 'y'
-                  })*/
+                  })
                   // datasets.unshift({
                   //   // label: 'co2',
                   //   label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.CO2Savings'),
