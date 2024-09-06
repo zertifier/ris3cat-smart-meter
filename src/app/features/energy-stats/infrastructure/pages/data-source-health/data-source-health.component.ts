@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Duration} from "@shared/utils/Duration";
 import {ZertipowerService} from "@shared/infrastructure/services/zertipower/zertipower.service";
 import {UserProfile, UserStoreService} from "../../../../user/infrastructure/services/user-store.service";
-import {AsyncPipe, NgClass} from "@angular/common";
+import {AsyncPipe, NgClass, NgIf} from "@angular/common";
 import {BehaviorSubject, map} from "rxjs";
 import dayjs from "@shared/utils/dayjs";
 import {TranslocoDirective} from "@jsverse/transloco";
@@ -25,11 +25,12 @@ interface supply {
 @Component({
   selector: 'app-data-source-health',
   standalone: true,
-    imports: [
-        NgClass,
-        AsyncPipe,
-        TranslocoDirective
-    ],
+  imports: [
+    NgClass,
+    AsyncPipe,
+    TranslocoDirective,
+    NgIf
+  ],
   templateUrl: './data-source-health.component.html',
   styleUrl: './data-source-health.component.scss'
 })
@@ -44,7 +45,7 @@ export class DataSourceHealthComponent implements OnInit, OnDestroy {
   }))
   timeoutIdentifier!: number
   active: boolean = false;
-  
+
   datadisCups:any[]=[];
 
   constructor(

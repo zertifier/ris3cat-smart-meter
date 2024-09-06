@@ -298,7 +298,9 @@
     "texts": {
       "statusInfo": "· Here you can see the status of the data sources",
       "lastUpdate": "Last update",
-      "noLastUpdate": "No updates"
+      "noLastUpdate": "No updates",
+      "connected": "Connected",
+      "disconnected": "Disconnected"
     }
   },
   "STATS": {

@@ -303,7 +303,9 @@
     "texts": {
       "statusInfo": "· Aquí podras veure el estat de les fonts de dades",
       "lastUpdate": "Ultima actualització",
-      "noLastUpdate": "No hi ha actualitzacions"
+      "noLastUpdate": "No hi ha actualitzacions",
+      "connected": "Conectat",
+      "disconnected": "Sense conexió"
     }
   },
   "STATS": {
