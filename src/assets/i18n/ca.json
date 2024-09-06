@@ -46,12 +46,18 @@
       "generatedEnergy": "Energia generada",
       "surplus": "Excedent",
       "buyingPrice":"Preu de compra",
-      "sellingPrice":"Preu de venda",
+      "sellingPrice":"Venda",
+      "llano": "Llano",
+      "valle": "Valle",
+      "punta": "Punta",
       "unavailable":"No disponible",
       "tradeTypeLabel": "Tipus de compartició: {{type}}",
       "tradeTypePref": "Preferent",
       "tradeTypeEqui": "Equitatiu",
-      "totalProduction": "Producció total"
+      "totalProduction": "Producció total",
+      "info": "Informació",
+      "community": "Comunitat",
+      "provider": "Proveïdor"
     },
     "tooltips": {
       "assignedProd": "El percentatge de l'energia produïda que se li assigna a aquest CUPS"
