@@ -186,12 +186,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                       label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.community.production'),
                       // tooltipText: 'Producció total de la comunitat',
                       tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.community.production'),
-                      data: mappedData.map(d => {
-                        if (!d.production) {
-                          return 0;
-                        }
-                        return d.production;
-                      }),
+                      data: mappedData.map(d => d.production ? parseFloat(d.production + '').toFixed(2) : '0'),
                       stack: 'Production',
                       yAxisID: 'y'
                     },{
@@ -241,17 +236,20 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                     stack: 'Consumption',
                     yAxisID: 'y'
                   })
-                  datasets.unshift({
+                  /*datasets.unshift({
                     id: "production",
                     // label: 'Producció',
                     label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.production'),
                     // tooltipText: 'Producció proporcional comunitaria',
                     tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.cups.production'),
                     color: StatsColors.COMMUNITY_PRODUCTION,
-                    data: mappedData.map(d => d.production ? parseFloat(d.production + '').toFixed(2) : '0'),
+                    data: mappedData.map(d => {
+                      console.log(d)
+                      return d.production ? parseFloat(d.production + '').toFixed(2) : '0'
+                    }),
                     stack: 'Production',
                     yAxisID: 'y'
-                  })
+                  })*/
                   // datasets.unshift({
                   //   // label: 'co2',
                   //   label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.CO2Savings'),

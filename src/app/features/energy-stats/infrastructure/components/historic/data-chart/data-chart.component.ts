@@ -275,7 +275,7 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
           }
         },
         y: {
-          stacked: true,
+          stacked: false,
           beginAtZero: true,
           min: 0,
           ticks: {
@@ -284,6 +284,7 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
               return `${value} ${label}`;
             },
             color: this.textColorSecondary
+            // color: '#a2739'
           },
           grid: {
             color: this.surfaceBorder,
@@ -353,7 +354,7 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
         //   }
         // },
         x: {
-          stacked: true,
+          stacked: false,
           ticks: {
             callback: function (value: never) {
               const label = state.selectedChartResource === ChartResource.ENERGY ? 'kWh' : '€'
