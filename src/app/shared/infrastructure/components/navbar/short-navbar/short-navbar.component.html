@@ -22,7 +22,7 @@
         <a [routerLink]="button.route" [routerLinkActive]="'active'" (click)="modal.close('')">{{ button.label }}</a>
       }
 
-      <div ngbAccordion class="d-inline-block">
+      <div ngbAccordion class="d-inline-block" *ngIf="hasCommunity">
         <div ngbAccordionItem style="min-width: 130px">
           <h2 ngbAccordionHeader>
             <button ngbAccordionButton class="me-2">{{'GOVERNOR.navbar' | transloco}}</button>
