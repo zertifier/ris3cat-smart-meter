@@ -71,7 +71,7 @@
   <div class="row justify-content-center">
     <div class="col-md-3 mb-4">
       <p-calendar (ngModelChange)="setInputDate($event)" (onSelect)="setDate($event)"  [dateFormat]="(dateFormat$ | async) || 'yy'"
-                  [view]="(calendarView$ | async) || 'month'" [ngModel]="date$ | async" [showIcon]="true"
+                  [view]="(calendarView$ | async) || 'year'" [ngModel]="date$ | async" [showIcon]="true"
                   iconDisplay="input" styleClass="w-100"/>
     </div>
   </div>
