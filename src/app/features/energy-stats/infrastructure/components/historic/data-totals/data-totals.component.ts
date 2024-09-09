@@ -132,9 +132,9 @@ export class DataTotalsComponent implements OnDestroy {
       for (let data of this.data) {
         this.setPriceTotals(data)
       }
-    for (let data of this.data) {
+    /*for (let data of this.data) {
       this.setPriceTotals(data)
-    }
+    }*/
     this.roundPriceTotals();
     this.totalCo2 = this.totalProduction * 0.00026
     //this.cdr.detectChanges(); // removes console error
