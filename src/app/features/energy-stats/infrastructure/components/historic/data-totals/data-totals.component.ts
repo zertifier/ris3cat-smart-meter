@@ -9,6 +9,7 @@ import {DatadisEnergyStat} from "@shared/infrastructure/services/zertipower/DTOs
 import {Subject, Subscription} from "rxjs";
 import {DecimalPipe, registerLocaleData} from "@angular/common";
 import localeEs from '@angular/common/locales/es';
+
 registerLocaleData(localeEs, 'es');
 
 @Component({
@@ -37,19 +38,45 @@ export class DataTotalsComponent implements OnDestroy {
   chartDataType!: any;
   chartDataTypeSymbol: 'kWh' | '€' = 'kWh'
 
-  subscriptions: Subscription[] =[]
+  subscriptions: Subscription[] = []
 
   constructor(
     private cdr: ChangeDetectorRef,
     private readonly chartStoreService: ChartStoreService,
   ) {
 
-
     this.subscriptions.push(
+      this.chartStoreService.isLoading$.subscribe((loading) => {
+        /*console.log(this.chartStoreService.snapshot().lastFetchedStats, "LOADING")
+        this.data = this.chartStoreService.snapshot().lastFetchedStats
+        this.resetValues();
+
+        this.startEnergyCalculate()*/
+        if (!loading)
+          this.subscriptions.push(
+            this.chartStoreService
+              .selectOnly(this.chartStoreService.$.params).subscribe((params) => {
+              this.resetValues();
+              this.data = this.chartStoreService.snapshot().lastFetchedStats
+              this.chartDataType = params.selectedChartResource;
+              if (this.chartDataType == 'energy') {
+                this.chartDataTypeSymbol = 'kWh'
+                this.startEnergyCalculate()
+              } else if (this.chartDataType == 'price') {
+                this.chartDataTypeSymbol = '€'
+                this.startPriceCalculate()
+              }
+            })
+          )
+      })
+    )
+    /*this.subscriptions.push(
       this.chartStoreService
         .selectOnly(this.chartStoreService.$.params).subscribe((params) => {
+        console.log(params, "pARAMS")
         this.resetValues();
         this.data = this.chartStoreService.snapshot().lastFetchedStats
+        console.log(this.data)
         this.chartDataType = params.selectedChartResource;
         if (this.chartDataType == 'energy') {
           this.chartDataTypeSymbol = 'kWh'
@@ -59,7 +86,7 @@ export class DataTotalsComponent implements OnDestroy {
           this.startPriceCalculate()
         }
       })
-    )
+    )*/
   }
 
   ngOnDestroy(): void {
@@ -84,9 +111,9 @@ export class DataTotalsComponent implements OnDestroy {
   startEnergyCalculate() {
 
     if (this.data)
-    this.data.forEach((data) => {
-      this.setEnergyTotals(data)
-    })
+      this.data.forEach((data) => {
+        this.setEnergyTotals(data)
+      })
 
     this.totalCo2 = this.totalProduction * 0.00026
 
@@ -102,12 +129,12 @@ export class DataTotalsComponent implements OnDestroy {
 
   startPriceCalculate() {
     if (this.data)
-    for (let data of this.data) {
-      this.setPriceTotals(data)
-    }
       for (let data of this.data) {
         this.setPriceTotals(data)
       }
+    for (let data of this.data) {
+      this.setPriceTotals(data)
+    }
     this.roundPriceTotals();
     this.totalCo2 = this.totalProduction * 0.00026
     //this.cdr.detectChanges(); // removes console error
