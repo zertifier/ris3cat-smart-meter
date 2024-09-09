@@ -3,6 +3,9 @@
     "navbar": "Counters",
     "title": "Consumption and production",
     "texts": {
+      "info": "Information",
+      "communityPrices": "Precios comunitarios",
+      "providerPrices": "Precios del proveedor",
       "liveWaste": "Your live spending",
       "updatedAt": "Updated at ",
       "noDataRegistered": "No data has been registered",
@@ -14,7 +17,7 @@
       "buyingPrice": "Buying price",
       "sellingPrice": "selling price",
       "unavailable": "Unavailable",
-      "allCups":"All CUPS"
+      "allCups": "All CUPS"
     },
     "tooltips": {
       "assignedProd": "The percentage of energy produced that is assigned to this CUPS"
@@ -36,6 +39,7 @@
     "navbar": "Community",
     "title": "Consumption and production",
     "texts": {
+      "info": "Information",
       "communityPrices": "Precios comunitarios",
       "providerPrices": "Precios del proveedor",
       "liveWaste": "Your live spending",
@@ -58,7 +62,6 @@
       "tradeTypePref": "Preferred",
       "tradeTypeEqui": "Equitable",
       "totalProduction": "Total production",
-      "info": "Information",
       "community": "Community",
       "provider": "Provider"
     },

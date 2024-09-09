@@ -3,6 +3,9 @@
     "navbar": "Contadores",
     "title": "Consumo y producción",
     "texts": {
+      "info": "Información",
+      "communityPrices": "Community prices",
+      "providerPrices": "Provider prices",
       "liveWaste": "Tu gasto en vivo",
       "updatedAt": "Actualizado a las ",
       "noDataRegistered": "No se ha registrado ningún dato",
@@ -11,10 +14,10 @@
       "selfConsumption": "Autoconsumo",
       "generatedEnergy": "Energía generada",
       "surplus": "Excedente",
-      "buyingPrice":"Precio de compra",
-      "sellingPrice":"Precio de venta",
-      "unavailable":"No disponible",
-      "allCups":"Todos los CUPS"
+      "buyingPrice": "Precio de compra",
+      "sellingPrice": "Precio de venta",
+      "unavailable": "No disponible",
+      "allCups": "Todos los CUPS"
     },
     "tooltips": {
       "assignedProd": "El porcentaje de la energía producida que se le asigna a este CUPS"
@@ -36,6 +39,7 @@
     "navbar": "Comunidad",
     "title": "Consumo y producción",
     "texts": {
+      "info": "Información",
       "communityPrices": "Community prices",
       "providerPrices": "Provider prices",
       "liveWaste": "Tu gasto en vivo",
@@ -47,18 +51,17 @@
       "selfConsumption": "Autoconsumo",
       "generatedEnergy": "Energía generada",
       "surplus": "Excedente",
-      "buyingPrice":"Precio de compra",
-      "sellingPrice":"Venta",
+      "buyingPrice": "Precio de compra",
+      "sellingPrice": "Venta",
       "llano": "Llano",
       "valle": "Valle",
       "punta": "Punta",
-      "unavailable":"No disponible",
+      "unavailable": "No disponible",
       "tradeTypeLabel": "Tipos de compartición:",
       "preferent": "Preferente",
       "tradeTypePref": "Preferente",
       "tradeTypeEqui": "Equitativo",
       "totalProduction": "Producción total",
-      "info": "Información",
       "community": "Comunidad",
       "provider": "Proveedor"
     },
@@ -109,7 +112,7 @@
         "yearly": "Anual"
       },
       "noDisplay": "Nada que mostrar",
-      "chartDataInputText":"Elige un mes/año para ver el consumo.",
+      "chartDataInputText": "Elige un mes/año para ver el consumo.",
       "chartBottomText": "· Conoce el gasto de energía en detalle haciendo clic en cada tipo de consumo. La gráfica mostrará la información de consumo individualizada.",
       "chartBottomCommunityText": "· Esta estadística indica los datos de los {{activeMembers}} miembros activos de un total de {{totalMembers}} miembros de la comunidad.",
       "chartUpdateWarning": "· Ten en cuenta que la actualización de datos no es diaria.",
@@ -130,7 +133,7 @@
         "totalConsumption": "Consumo total",
         "totalSurplus": "Excedente total",
         "totalCo2": "CO2 total compensado",
-        "totalCo2Badge":"El CO2 compensado se calcula a partir de la producción.",
+        "totalCo2Badge": "El CO2 compensado se calcula a partir de la producción.",
         "totalMembers": "Total de miembros: {{total}}",
         "totalActiveMembers": "Miembros activos: {{total}}"
       },
@@ -141,7 +144,7 @@
     "tooltips": {
       "chartLabels": {
         "community": {
-          "CO2Savings":"",
+          "CO2Savings": "",
           "production": "Producción total de la comunidad.",
           "activeProduction": "Producción de los participantes activos",
           "networkConsumption": "Consumo que facturará la compañía eléctrica.",
@@ -150,14 +153,13 @@
           "sharedSurplusActive": "Cantidad de energía para compartir que se produce y no se consume de los participantes activos."
         },
         "cups": {
-          "CO2Savings":"",
+          "CO2Savings": "",
           "networkConsumption": "Consumo que facturará la compañía eléctrica.",
           "production": "Producción proporcional comunitaria.",
           "networkActiveConsumption": "Cantidad de energía que gastamos.",
           "surplusActive": "Cantidad de energía que se produce y no se consume.",
           "sharedSurplusActive": "Cantidad de energía para compartir que se produce y no se consume de los participantes activos."
         }
-
       },
       "communityModel": {
         "acc": "(Auto Consumo Compartido)",
@@ -172,15 +174,15 @@
     },
     "energy": {
       "title": "Predicción de energía comunitaria",
-      "titleConsumption":"Predicción de consumo energético",
-      "titleProduction":"Predicción de producción energético",
-      "titleSurplus":"Predicción de excedente energético",
-      "titleActivesConsumption":"Predicción de consumo energético de los miembros activos",
-      "titleActivesProduction":"Predicción de producción energético de los miembros activos",
-      "titleActivesSurplus":"Predicción de excedente energético de los miembros activos",
-      "unavailable":"No disponible",
-      "surplusDescription":"* Como máximo, solo estarán disponibles 2 días de la predicción del excedente.",
-      "productionDescription":"* Como máximo, solo estarán disponibles 2 días de la predicción de la producción."
+      "titleConsumption": "Predicción de consumo energético",
+      "titleProduction": "Predicción de producción energético",
+      "titleSurplus": "Predicción de excedente energético",
+      "titleActivesConsumption": "Predicción de consumo energético de los miembros activos",
+      "titleActivesProduction": "Predicción de producción energético de los miembros activos",
+      "titleActivesSurplus": "Predicción de excedente energético de los miembros activos",
+      "unavailable": "No disponible",
+      "surplusDescription": "* Como máximo, solo estarán disponibles 2 días de la predicción del excedente.",
+      "productionDescription": "* Como máximo, solo estarán disponibles 2 días de la predicción de la producción."
     }
   },
   "PROFILE": {
@@ -188,7 +190,7 @@
     "title": "Mi perfil",
     "texts": {
       "nameLabel": "Nombre (requerido)",
-      "lastnameLabel":"Apellido (requerido)"
+      "lastnameLabel": "Apellido (requerido)"
     }
   },
   "MY-WALLET": {
@@ -204,12 +206,12 @@
       "transferEnergy": "Transferir saldo",
       "transferToken": "Transferir XDAI",
       "transferShare": "Transferir betas",
-      "platformSection":"Plataforma",
-      "blockchainSection":"Blockchain",
-      "communityBalance":"Saldo energético dentro de la CCE",
-      "addBalance":"Ingresar tokens",
-      "pullOutBalance":"Retirar tokens",
-      "pkLabel":"Clave privada",
+      "platformSection": "Plataforma",
+      "blockchainSection": "Blockchain",
+      "communityBalance": "Saldo energético dentro de la CCE",
+      "addBalance": "Ingresar tokens",
+      "pullOutBalance": "Retirar tokens",
+      "pkLabel": "Clave privada",
       "pkWarning": "Por razones de seguridad, no reveles la clave privada a nadie."
     },
     "tooltips": {
@@ -217,8 +219,8 @@
       "energy": "Este saldo se usará para la compra de energía a la comunidad.",
       "token": "Saldo para las transacciones.",
       "shares": "Son las Participaciones que tiene la comunidad.",
-      "pk":"La clave privada es suficiente para acceder a tus tokens. No es recomendable compartirla.",
-      "webSwap":"Puedes comprar EKW a través de otra criptomoneda."
+      "pk": "La clave privada es suficiente para acceder a tus tokens. No es recomendable compartirla.",
+      "webSwap": "Puedes comprar EKW a través de otra criptomoneda."
     },
     "modals": {
       "transfer": {
@@ -231,9 +233,9 @@
           "toPlaceholder": "ejemplo@correo.com / 0xA...",
           "toBottomText": "Escribe el correo o número de identidad del destinatario",
           "amountLabel": "Cantidad",
-          "balanceAdded":"Saldo ingresado correctamente.",
-          "insuficientFunds":"Saldo insuficiente.",
-          "balancewithdrawn":"Saldo retirado correctamente."
+          "balanceAdded": "Saldo ingresado correctamente.",
+          "insuficientFunds": "Saldo insuficiente.",
+          "balancewithdrawn": "Saldo retirado correctamente."
         },
         "swal": {
           "blockchainError": "Problemas con la cadena de bloques.",
@@ -248,8 +250,8 @@
         "texts": {
           "qtyLabel": "Cantidad a comprar",
           "qtyPlaceholder": "Escoge una cantidad",
-          "buy":"Comprar",
-          "creditCard":"Targeta de crédito"
+          "buy": "Comprar",
+          "creditCard": "Targeta de crédito"
         },
         "swal": {
           "qtyError": "La cantidad debe ser superior a 0",
@@ -262,7 +264,7 @@
       "stripeMintSuccess": "El pago se completó con éxito.",
       "stripeMintError": "Hubo un problema con la solicitud. Lo intentaremos de nuevo automáticamente en unos minutos.",
       "stripeMintingWait": "Tu solicitud está siendo procesada.",
-      "copyPk":"Texto copiado."
+      "copyPk": "Texto copiado."
     }
   },
   "SHARE-ENERGY": {
@@ -339,33 +341,33 @@
   "INTEGRATIONS": {
     "navbar": "Integraciones",
     "title": "Integraciones",
-    "texts":{
+    "texts": {
       "token": "API token",
-      "refreshPermanentToken":"Actualizar",
-      "documentation":"Ver documentación"
+      "refreshPermanentToken": "Actualizar",
+      "documentation": "Ver documentación"
     }
   },
   "NOTIFICATIONS": {
     "navbar": "Notificaciones",
     "title": "Notificaciones",
-    "texts":{
-      "governance":"Propuestas de la comunidad",
-      "sharing":"Compartición de energía",
-      "datadis":"Alertas del datadis",
-      "create_proposal":"Creación de propuesta",
-      "delete_proposal":"Propuesta borrada",
-      "proposal_accepted":"Propuesta aceptada",
-      "proposal_denied":"Propuesta denegada",
-      "proposal_executed":"Propusta ejecutada",
-      "proposal_expired":"Propuesta expirada",
-      "sharing_received":"Energía recibida",
-      "sharing_sent":"Energía enviada",
-      "updated_datadis":"Datadis actualitzat",
-      "datadis_error":"Errores en el datadis",
-      "datadis_active":"Datadis actiu",
-      "datadis_inactive":"Datadis inactiu",
-      "insufficient_balance":"Saldo insuficiente dentro de la comunidad",
-      "low_balance":"Saldo bajo dentro de la comunidad"
+    "texts": {
+      "governance": "Propuestas de la comunidad",
+      "sharing": "Compartición de energía",
+      "datadis": "Alertas del datadis",
+      "create_proposal": "Creación de propuesta",
+      "delete_proposal": "Propuesta borrada",
+      "proposal_accepted": "Propuesta aceptada",
+      "proposal_denied": "Propuesta denegada",
+      "proposal_executed": "Propusta ejecutada",
+      "proposal_expired": "Propuesta expirada",
+      "sharing_received": "Energía recibida",
+      "sharing_sent": "Energía enviada",
+      "updated_datadis": "Datadis actualitzat",
+      "datadis_error": "Errores en el datadis",
+      "datadis_active": "Datadis actiu",
+      "datadis_inactive": "Datadis inactiu",
+      "insufficient_balance": "Saldo insuficiente dentro de la comunidad",
+      "low_balance": "Saldo bajo dentro de la comunidad"
     }
   },
   "PROPOSALS": {
@@ -423,7 +425,6 @@
       "successCreate": "Propuesta guardada correctamente"
     }
   },
-
   "PARTICIPANTS": {
     "navbar": "Participantes",
     "title": "Participantes",
@@ -450,7 +451,6 @@
         "sharePlaceholder": "ej:5000"
       },
       "remove": {
-
       },
       "swal": {
         "activate": {
@@ -482,7 +482,6 @@
       "wait": "Por favor, espera."
     }
   },
-
   "LOGOUT": {
     "navbar": "Cerrar sesión",
     "modal": {
@@ -497,7 +496,6 @@
       "language": "Idioma"
     }
   },
-
   "QR": {
     "import": {
       "title": "Escanea el QR",
@@ -540,7 +538,15 @@
         "Noviembre",
         "Diciembre"
       ],
-      "daysArray": ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
+      "daysArray": [
+        "Domingo",
+        "Lunes",
+        "Martes",
+        "Miércoles",
+        "Jueves",
+        "Viernes",
+        "Sábado"
+      ],
       "save": "Guardar",
       "cancel": "Cancelar",
       "close": "Cerrar",
@@ -549,7 +555,7 @@
       "yes": "Sí",
       "no": "No",
       "okay": "Entendido",
-      "confirm":"Confirmar"
+      "confirm": "Confirmar"
     }
   }
 }
