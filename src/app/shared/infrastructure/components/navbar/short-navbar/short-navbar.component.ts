@@ -72,7 +72,8 @@ export class ShortNavbarComponent implements OnDestroy{
 
     this.subscriptions.push(
       this.translocoService.langChanges$.subscribe((lang) => {
-        this.setButtons()
+        if (lang)
+          this.setButtons()
       })
     )
 
