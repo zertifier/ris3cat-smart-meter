@@ -33,6 +33,11 @@ export class ZertipowerCommunitiesService {
     return response.totalActiveMembers;
   }
 
+  async getProducers(id: number) {
+    const response = await this.axios.get<HttpResponse<CommunityResponse[]>>(`${ChartEntity.COMMUNITIES}/${id}/producers`);
+    return response.data.data
+  }
+
   async getByLocationId(id: number) {
     const response = await this.axios.get<HttpResponse<CommunityResponse[]>>(`${ChartEntity.COMMUNITIES}/locations/${id}`);
     return response.data.data

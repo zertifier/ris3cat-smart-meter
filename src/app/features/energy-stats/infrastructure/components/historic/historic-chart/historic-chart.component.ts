@@ -1,9 +1,9 @@
-import {AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnDestroy, SimpleChanges, ViewChild} from '@angular/core';
 import {CalendarModule} from "primeng/calendar";
 import {ChartLegendComponent} from "../chart-legend/chart-legend.component";
 import {DataChartComponent} from "../data-chart/data-chart.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {AsyncPipe, NgClass} from "@angular/common";
+import {AsyncPipe, CommonModule, NgClass} from "@angular/common";
 import {DatadisChartComponent} from "../datadis-chart/datadis-chart.component";
 import {DateRange} from '../../../../domain/DateRange';
 import {ChartStoreService} from '../../../services/chart-store.service';
@@ -21,6 +21,9 @@ import {
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {TranslocoDirective} from "@jsverse/transloco";
 import moment from "moment";
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { ZertipowerCommunitiesService } from '../../../../../../shared/infrastructure/services/zertipower/communities/ZertipowerCommunitiesService';
+import { ZertipowerService } from '../../../../../../shared/infrastructure/services/zertipower/zertipower.service';
 
 @Component({
   selector: 'app-historic-chart',
@@ -35,12 +38,14 @@ import moment from "moment";
     FormsModule,
     DatadisChartComponent,
     QuestionBadgeComponent,
-    TranslocoDirective
+    TranslocoDirective,
+    NgMultiSelectDropDownModule,
+    CommonModule
   ],
   templateUrl: './historic-chart.component.html',
   styleUrl: './historic-chart.component.scss'
 })
-export class HistoricChartComponent implements AfterViewInit {
+export class HistoricChartComponent implements AfterViewInit, OnDestroy{
 
   @Input({ required: false }) chartType: 'community' | 'cups' | 'customers' = 'cups';
 
@@ -50,6 +55,9 @@ export class HistoricChartComponent implements AfterViewInit {
   origin$ = this.chartStoreService.selectOnly(state => state.origin)
   maxDate = new Date();
   chartType$ = this.chartStoreService.selectOnly(state => state.chartType);
+  
+  
+
   calendarView$ = this.chartStoreService.selectOnly(state => {
     this.chartStoreService.setDate(state.date)
 
@@ -85,16 +93,70 @@ export class HistoricChartComponent implements AfterViewInit {
   protected readonly ChartType = ChartType;
   @ViewChild('modalLegend') modalLegend!: ElementRef;
 
+  @Input() data:any;
+
+  cupsIdsToExclude:number[]=[];
+  dropdownList:any = [];
+  selectedItems:any = [];
+  dropdownSettings = {
+    singleSelection: false,
+    idField: 'item_id',
+    textField: 'item_text',
+    selectAllText: 'Select All',
+    unSelectAllText: 'UnSelect All',
+    includeSelectAllOption: false,
+    itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+  
   constructor(
     private readonly monitoringService: MonitoringService,
     public readonly chartStoreService: ChartStoreService,
     private readonly screenBreakpoints: ScreenBreakPointsService,
     private readonly ngbModal: NgbModal,
+    private zertipowerService: ZertipowerService
   ) {
   }
 
-  ngAfterViewInit(): void {
+  async ngAfterViewInit(){
     this.date$ = this.chartStoreService.selectOnly(state => state.date);
+  }
+
+  async ngOnChanges(changes: SimpleChanges) {
+    for (const propName in changes) {
+      if (changes.hasOwnProperty(propName)) {
+        switch (propName) {
+          case 'data':
+            if (changes['data'].currentValue) {
+              if(this.chartType==='community'){
+                this.setCommunityData(changes['data'].currentValue)
+              }
+            }
+            break;
+          default:
+            break;
+        }
+      }
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.chartStoreService.setCupsToExclude([]);
+  }
+
+  async setCommunityData(communityData:any){
+    let communityId = communityData.id;
+    let producers = await this.zertipowerService.communities.getProducers(communityId);
+    this.dropdownList = producers.map((producer:any)=>{return {item_id:producer.id,item_text:producer.cups}})
+  }
+
+  onItemSelect(item: any) {
+    this.cupsIdsToExclude = this.selectedItems.map((item:any)=>{return item.item_id});
+    this.chartStoreService.setCupsToExclude(this.cupsIdsToExclude);
+  }
+  onSelectAll(items: any) {
+    this.cupsIdsToExclude = this.selectedItems.map((item:any)=>{return item.item_id});
+    this.chartStoreService.setCupsToExclude(this.cupsIdsToExclude);
   }
 
   setChartType(event: Event) {

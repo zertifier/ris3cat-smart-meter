@@ -16,11 +16,11 @@ export class ZertipowerEnergyStats {
     return this.getEnergyStats(ChartEntity.CUSTOMERS, customerId, source, date, dateRange);
   }
 
-  public async getCommunityEnergyStats(communityId: number, source: string, date: Date, dateRange: DateRange) {
-    return this.getEnergyStats(ChartEntity.COMMUNITIES, communityId, source, date, dateRange);
+  public async getCommunityEnergyStats(communityId: number, source: string, date: Date, dateRange: DateRange, cupsIdsToExclude:number[]) {
+    return this.getEnergyStats(ChartEntity.COMMUNITIES, communityId, source, date, dateRange, cupsIdsToExclude);
   }
 
-  private async getEnergyStats(resource: ChartEntity, resourceId: number, source: string, date: Date, dateRange: DateRange) {
+  private async getEnergyStats(resource: ChartEntity, resourceId: number, source: string, date: Date, dateRange: DateRange, cupsIdsToExclude:number[] = []) {
     let range: string;
     let desiredFormat: string
     switch (dateRange) {
@@ -42,7 +42,7 @@ export class ZertipowerEnergyStats {
       totalActiveMembers: number,
       totalMembers: number,
       stats: EnergyStatDTO[]
-    }>>(`/${resource}/${resourceId}/stats/${source}/${range}/${formattedDate}`);
+    }>>(`/${resource}/${resourceId}/stats/${source}/${range}/${formattedDate}?excludeCupsIds=${cupsIdsToExclude}`);
     return {
       ...response.data.data,
       stats: response.data.data.stats.map(r => ({

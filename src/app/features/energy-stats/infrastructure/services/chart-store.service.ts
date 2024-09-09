@@ -16,7 +16,8 @@ export interface ChartStore {
   selectedChartEntity: ChartEntity,
   selectedChartResource: ChartResource,
   chartType: ChartType,
-  lastFetchedStats: DatadisEnergyStat[]
+  lastFetchedStats: DatadisEnergyStat[],
+  cupsIdsToExclude:number[]
 }
 
 const defaultValues: ChartStore = {
@@ -27,7 +28,8 @@ const defaultValues: ChartStore = {
   selectedChartEntity: ChartEntity.CUPS,
   selectedChartResource: ChartResource.ENERGY,
   chartType: ChartType.ACC,
-  lastFetchedStats: []
+  lastFetchedStats: [],
+  cupsIdsToExclude:[]
 }
 
 @Injectable({
@@ -36,9 +38,9 @@ const defaultValues: ChartStore = {
 export class ChartStoreService extends RxStore<ChartStore> {
   $ = {
     params(state: ChartStore) {
-      const {dateRange, date, selectedChartResource, origin, selectedChartEntity, chartType} = state;
+      const {dateRange, date, selectedChartResource, origin, selectedChartEntity, chartType, cupsIdsToExclude} = state;
       return {
-        dateRange, date, selectedChartResource, origin, selectedChartEntity, chartType
+        dateRange, date, selectedChartResource, origin, selectedChartEntity, chartType, cupsIdsToExclude
       }
     }
   }
@@ -61,6 +63,10 @@ export class ChartStoreService extends RxStore<ChartStore> {
 
   public setDateRange(dateRange: DateRange) {
     this.patchState({dateRange})
+  }
+
+  public setCupsToExclude(cupsIdsToExclude: number[]) {
+    this.patchState({cupsIdsToExclude})
   }
 
   public fetchingData(fetchingData: boolean) {

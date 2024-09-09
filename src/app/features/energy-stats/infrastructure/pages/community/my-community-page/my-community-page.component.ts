@@ -1,4 +1,4 @@
-import {Component, computed, isDevMode, OnDestroy, OnInit, signal} from '@angular/core';
+import {Component, computed, isDevMode, OnDestroy, OnInit, signal, ViewChild} from '@angular/core';
 import {ChartModule} from "primeng/chart";
 import {MonitoringService, PowerStats} from "../../../services/monitoring.service";
 import {map, Subscription} from "rxjs";
@@ -80,6 +80,7 @@ import {ChartResource} from "@features/energy-stats/domain/ChartResource";
   styleUrl: './my-community-page.component.scss'
 })
 export class MyCommunityPageComponent implements OnInit, OnDestroy {
+  //@ViewChild(HistoricChartComponent) historicChart!: HistoricChartComponent;
   consumptionItems: ConsumptionItem[] = [
     {
       consumption: 0.015,
@@ -136,7 +137,10 @@ export class MyCommunityPageComponent implements OnInit, OnDestroy {
 
   communityData!:CommunityResponse | any;
   communityId$ = this.userStore.selectOnly(this.userStore.$.communityId).subscribe(async (communityId:any)=>{
-    this.communityData = await this.zertipowerService.communities.getCommunityById(communityId)
+    this.communityData = await this.zertipowerService.communities.getCommunityById(communityId);
+    //console.log("ep", this.communityData)
+   // await this.historicChart.setCommunityData(this.communityData).then((res)=>console.log(res))
+
   });
 
   constructor(

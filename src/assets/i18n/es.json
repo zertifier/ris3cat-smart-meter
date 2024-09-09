@@ -99,6 +99,8 @@
         "monthly": "Mensual",
         "yearly": "Anual"
       },
+      "prosumersSelectorTitle":"Excluir prosumidores",
+      "prosumersSelectorText":"Selecciona prosumidores",
       "noDisplay": "Nada que mostrar",
       "chartDataInputText":"Elige un mes/año para ver el consumo.",
       "chartBottomText": "· Conoce el gasto de energía en detalle haciendo clic en cada tipo de consumo. La gráfica mostrará la información de consumo individualizada.",

@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AsyncPipe, JsonPipe, NgIf } from "@angular/common";
 import { ChartLegendComponent, DataLabel } from "../chart-legend/chart-legend.component";
 import { DataChartComponent } from "../data-chart/data-chart.component";
@@ -76,7 +76,6 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
   labels: string[] = [];
   legendLabels: DataLabel[] = [];
   mobileLabels: DataLabel[] = [];
-  //co2Savings:number = 0.2; //TODO: THIS IS AN EXAMPLE
 
   @ViewChild(DataChartComponent) dataChart!: DataChartComponent;
   @ViewChild('secondChart') secondChart!: DataChartComponent;
@@ -116,13 +115,15 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                 selectedChartResource,
                 selectedChartEntity,
                 chartType,
+                cupsIdsToExclude
               }]) => {
                 // Every time that params change, fetch data and update chart
                 // Fetching data
+
                 const cupId = this.userStore.snapshotOnly(this.userStore.$.cupsId);
                 const communityId = this.userStore.snapshotOnly(this.userStore.$.communityId);
                 const customerId = this.userStore.snapshotOnly((state:any) => state.user!.customer_id);
-                const data = await this.fetchEnergyStats(date, dateRange, cupId, communityId, customerId);
+                const data = await this.fetchEnergyStats(date, dateRange, cupId, communityId, customerId, cupsIdsToExclude);
                 //this.chartStoreService.chartData$.next(data)
                 this.data = data
                 this.chartStoreService.patchState({ lastFetchedStats: data });
@@ -294,7 +295,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
     this.ngbModal.open(this.legendModal, { size: "xl" });
   }
 
-  async fetchEnergyStats(date: Date, range: DateRange, cupId: number, communityId: number, customerId:number) {
+  async fetchEnergyStats(date: Date, range: DateRange, cupId: number, communityId: number, customerId:number, cupsIdsToExclude:number[] = []) {
     this.chartStoreService.isLoading$.next(true)
     this.chartStoreService.snapshotOnly(state => state.origin);
     this.chartStoreService.fetchingData(true);
@@ -312,7 +313,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
         if (!communityId) {
           return [];
         }
-        const response = await this.zertipower.energyStats.getCommunityEnergyStats(communityId, 'datadis', date, range);
+        const response = await this.zertipower.energyStats.getCommunityEnergyStats(communityId, 'datadis', date, range, cupsIdsToExclude);
         // console.log(response, "RESPONSE")
         this.userStore.patchState({ activeMembers: response.totalActiveMembers || 0 });
         this.userStore.patchState({ totalMembers: response.totalMembers || 0 });
