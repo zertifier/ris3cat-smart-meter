@@ -1,4 +1,19 @@
 {
+  "AUTH": {
+    "texts": {
+      "register": "Registro",
+      "toRegister": "Regístrate",
+      "name": "Nombre",
+      "surname": "Apellido",
+      "DNI": "DNI",
+      "back": "Volver"
+    },
+    "modals": {
+      "register": {
+        "correct": "Usuario creado correctamente"
+      }
+    }
+  },
   "MY-CUPS": {
     "navbar": "Contadores",
     "title": "Consumo y producción",
@@ -114,8 +129,8 @@
         "monthly": "Mensual",
         "yearly": "Anual"
       },
-      "prosumersSelectorTitle":"Excluir prosumidores",
-      "prosumersSelectorText":"Selecciona prosumidores",
+      "prosumersSelectorTitle": "Excluir prosumidores",
+      "prosumersSelectorText": "Selecciona prosumidores",
       "noDisplay": "Nada que mostrar",
       "chartDataInputText": "Elige un mes/año para ver el consumo.",
       "chartBottomText": "· Conoce el gasto de energía en detalle haciendo clic en cada tipo de consumo. La gráfica mostrará la información de consumo individualizada.",
@@ -455,8 +470,7 @@
         "sharesLabel": "Participación",
         "sharePlaceholder": "ej:5000"
       },
-      "remove": {
-      },
+      "remove": {},
       "swal": {
         "activate": {
           "title": "¿Aceptar este participante?",

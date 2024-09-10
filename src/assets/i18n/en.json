@@ -1,4 +1,19 @@
 {
+  "AUTH": {
+    "texts": {
+      "register": "Register",
+      "toRegister": "Sign up",
+      "name": "Name",
+      "surname": "Surname",
+      "DNI": "ID",
+      "back": "Go back"
+    },
+    "modals": {
+      "register": {
+        "correct": "User created successfully"
+      }
+    }
+  },
   "MY-CUPS": {
     "navbar": "Counters",
     "title": "Consumption and production",
@@ -114,8 +129,8 @@
         "monthly": "Monthly",
         "yearly": "Yearly"
       },
-      "prosumersSelectorTitle":"Exclude prosumers",
-      "prosumersSelectorText":"Select prosumers",
+      "prosumersSelectorTitle": "Exclude prosumers",
+      "prosumersSelectorText": "Select prosumers",
       "noDisplay": "Nothing to show",
       "chartDataInputText": "Choose a month/year to see the consumption.",
       "chartBottomText": "· Learn about energy spending in detail by clicking on each type of consumption. The chart will show individualized consumption information.",
@@ -455,8 +470,7 @@
         "sharesLabel": "Participation",
         "sharePlaceholder": "e.g.:5000"
       },
-      "remove": {
-      },
+      "remove": {},
       "swal": {
         "activate": {
           "title": "Accept this participant?",

@@ -1,4 +1,19 @@
 {
+  "AUTH": {
+    "texts": {
+      "register":"Registre",
+      "toRegister":"Registra't",
+      "name":"Nom",
+      "surname":"Cognom",
+      "DNI":"DNI",
+      "back":"Torna"
+    },
+    "modals": {
+      "register":{
+        "correct":"Usuari creat correctament"
+      }
+    }
+  },
   "MY-CUPS": {
     "navbar": "Comptadors",
     "title": "Consum i producció",
