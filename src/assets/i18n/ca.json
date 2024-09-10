@@ -78,6 +78,14 @@
       }
     }
   },
+  "MISSING-COMMUNITY": {
+    "texts": {
+      "anyAccess": "No tens accés a cap comunitat.",
+      "accessDescription": "Per a accedir a a la informació comunitària, necessites donar-te d'alta o unir-te a la comunitat.",
+      "register":"Dona't d'alta",
+      "join":"Uneix-te"
+    }
+  },
   "MY-COMMUNITY": {
     "navbar": "Comunitat",
     "title": "Consum i producció",

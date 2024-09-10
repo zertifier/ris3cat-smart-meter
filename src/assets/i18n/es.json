@@ -78,6 +78,14 @@
       }
     }
   },
+  "MISSING-COMMUNITY": {
+    "texts": {
+      "anyAccess": "No tienes acceso a ninguna comunidad.",
+      "accessDescription": "Para acceder a la información comunitaria, necesitas darte de alta o unirte a la comunidad.",
+      "register": "Darte de alta",
+      "join": "Únete"
+    }
+  },
   "MY-COMMUNITY": {
     "navbar": "Comunidad",
     "title": "Consumo y producción",

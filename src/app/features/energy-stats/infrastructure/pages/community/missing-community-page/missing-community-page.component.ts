@@ -5,6 +5,7 @@ import {
 import {NavbarComponent} from "../../../../../../shared/infrastructure/components/navbar/navbar.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {JoinCommunityModalComponent} from "./join-community-modal/join-community-modal.component";
+import { TranslocoService, TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-missing-community-page',
@@ -12,7 +13,7 @@ import {JoinCommunityModalComponent} from "./join-community-modal/join-community
   imports: [
     QuestionBadgeComponent,
     NavbarComponent,
-
+    TranslocoDirective
   ],
   templateUrl: './missing-community-page.component.html',
   styleUrl: './missing-community-page.component.scss'
