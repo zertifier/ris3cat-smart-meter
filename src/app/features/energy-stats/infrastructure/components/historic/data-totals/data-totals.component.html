@@ -29,7 +29,8 @@
     </div>
   </div>
 
-  <div class="mt-5">
+
+  <div *ngIf="displayChart" class="mt-5">
     <div class="mx-auto" style="max-width: 400px">
       <h4 class="text-center">{{ t('texts.chartLabels.totalShared') }}</h4>
       <canvas #chart></canvas>

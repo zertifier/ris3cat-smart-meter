@@ -7,7 +7,7 @@ import {
 import {ChartStoreService} from "@features/energy-stats/infrastructure/services/chart-store.service";
 import {DatadisEnergyStat} from "@shared/infrastructure/services/zertipower/DTOs/EnergyStatDTO";
 import {Subject, Subscription} from "rxjs";
-import {DecimalPipe, registerLocaleData} from "@angular/common";
+import {DecimalPipe, NgIf, registerLocaleData} from "@angular/common";
 import localeEs from '@angular/common/locales/es';
 import {Chart, registerables} from "chart.js";
 import ChartDataLabels from 'chartjs-plugin-datalabels';
@@ -20,7 +20,8 @@ registerLocaleData(localeEs, 'es');
   imports: [
     TranslocoDirective,
     QuestionBadgeComponent,
-    DecimalPipe
+    DecimalPipe,
+    NgIf
   ],
   templateUrl: './data-totals.component.html',
   styleUrl: './data-totals.component.scss'
@@ -42,6 +43,7 @@ export class DataTotalsComponent implements OnDestroy, AfterViewInit {
   chartDataTypeSymbol: 'kWh' | '€' = 'kWh'
 
   subscriptions: Subscription[] = []
+  displayChart = true
 
   chartData!: any;
 
@@ -91,6 +93,11 @@ export class DataTotalsComponent implements OnDestroy, AfterViewInit {
   loadChart() {
     if (this.chartElement ) {
       const sharedPercentage = ((this.totalSurplusVirtual + this.totalConsumptionVirtual) * 100) / (this.totalConsumption + this.totalSurplus)
+
+      if (!(this.totalConsumption + this.totalSurplus) && !sharedPercentage) {
+        this.displayChart = false
+        return
+      }
       this.setChartData(sharedPercentage)
       this.destroyChart()
 
