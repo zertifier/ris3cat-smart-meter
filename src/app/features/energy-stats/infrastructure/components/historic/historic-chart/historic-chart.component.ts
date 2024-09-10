@@ -104,7 +104,7 @@ export class HistoricChartComponent implements AfterViewInit, OnDestroy{
     textField: 'item_text',
     selectAllText: 'Select All',
     unSelectAllText: 'UnSelect All',
-    includeSelectAllOption: false,
+    enableCheckAll: false,
     itemsShowLimit: 3,
     allowSearchFilter: true
   };
@@ -154,7 +154,13 @@ export class HistoricChartComponent implements AfterViewInit, OnDestroy{
     this.cupsIdsToExclude = this.selectedItems.map((item:any)=>{return item.item_id});
     this.chartStoreService.setCupsToExclude(this.cupsIdsToExclude);
   }
+
   onSelectAll(items: any) {
+    this.cupsIdsToExclude = this.selectedItems.map((item:any)=>{return item.item_id});
+    this.chartStoreService.setCupsToExclude(this.cupsIdsToExclude);
+  }
+
+  onDeselect(items:any){
     this.cupsIdsToExclude = this.selectedItems.map((item:any)=>{return item.item_id});
     this.chartStoreService.setCupsToExclude(this.cupsIdsToExclude);
   }

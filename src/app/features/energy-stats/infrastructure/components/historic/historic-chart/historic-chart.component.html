@@ -75,7 +75,7 @@
         {{ t('texts.prosumersSelectorTitle') }}
       </p>
       <ng-multiselect-dropdown [placeholder]="t('texts.prosumersSelectorText')" [settings]="dropdownSettings" [data]="dropdownList"
-        [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+        [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)" (onDeSelect)="onDeselect($event)">
       </ng-multiselect-dropdown>
     </div>
 
