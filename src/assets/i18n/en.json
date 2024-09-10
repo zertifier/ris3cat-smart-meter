@@ -14,6 +14,31 @@
       }
     }
   },
+  "DATADIS-REGISTER": {
+    "texts": {
+      "title": "CUPS registration",
+      "subtitle": "Fill in the following fields to associate your CUPS with your profile on the platform.",
+      "serviceTitle": "Choose the service",
+      "invalidDNI": "Invalid NIF",
+      "user": "User",
+      "invalidUser": "Invalid user",
+      "password": "Password",
+      "invalidPassword": "Invalid password",
+      "invalidCups": "Invalid CUPS",
+      "addData": "Add data"
+    },
+    "modals": {
+      "errorText": "An error has occurred",
+      "successText": "The data has been saved successfully"
+    }
+  },
+  "MISSING-CUPS": {
+    "texts": {
+      "anyCupsAccess": "You don't have access to any CUPS.",
+      "cupsAccessDescription": "To access your consumption charts, you need to register or join the community.",
+      "registerCups": "Register"
+    }
+  },
   "MY-CUPS": {
     "navbar": "Counters",
     "title": "Consumption and production",
@@ -213,7 +238,11 @@
     "title": "My profile",
     "texts": {
       "nameLabel": "Name (required)",
-      "lastnameLabel": "Last name (required)"
+      "lastnameLabel": "Last name (required)",
+      "updated": "Profile updated successfully",
+      "agree": "Agree",
+      "error": "Error updating profile",
+      "errorMessage": "Please try again in a few minutes"
     }
   },
   "MY-WALLET": {

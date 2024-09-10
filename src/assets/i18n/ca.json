@@ -14,6 +14,31 @@
       }
     }
   },
+  "DATADIS-REGISTER": {
+    "texts":{
+      "title":"Alta cups",
+      "subtitle":"Emplena els següents camps per a associar els teus CUPS al teu perfil de la plataforma.",
+      "serviceTitle":"Tria el servei",
+      "invalidDNI":"NIF no vàlid",
+      "user":"Usuari",
+      "invalidUser":"Usuari no vàlid",
+      "password":"Contrasenya",
+      "invalidPassword":"Contrassenya no vàlida",
+      "invalidCups":"CUPS no vàlid",
+      "addData":"Afegir dades"
+    },
+    "modals":{
+      "errorText":"Hi ha hagut un error",
+      "successText":"Les dades s'han guardat correctament"
+    }
+  },
+  "MISSING-CUPS": {
+    "texts": {
+      "anyCupsAccess": "No tens accés a cap CUPS.",
+      "cupsAccessDescription": "Per a accedir a les gràfiques del teu consum, necessites donar-te d'alta o unir-te a la comunitat.",
+      "registerCups":"Dona't d'alta"
+    }
+  },
   "MY-CUPS": {
     "navbar": "Comptadors",
     "title": "Consum i producció",
@@ -213,7 +238,11 @@
     "title": "El meu perfil",
     "texts": {
       "nameLabel": "Nom (requerit)",
-      "lastnameLabel": "Cognom (requerit)"
+      "lastnameLabel": "Cognom (requerit)",
+      "updated":"Perfil actualitzat correctament",
+      "agree":"D'acord",
+      "error":"Error al actualitzar el perfil",
+      "errorMessage":"Torna-ho a intentar en uns minuts"
     }
   },
   "MY-WALLET": {
