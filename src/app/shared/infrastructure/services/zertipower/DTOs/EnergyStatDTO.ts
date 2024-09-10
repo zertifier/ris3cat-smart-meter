@@ -10,6 +10,9 @@ export interface EnergyStatDTO {
   kwhInVirtual: number;
   kwhInPrice: number;
   kwhOutPrice: number;
+  kwhTotal: number;
+  kwhVirtualTotal: number;
+  sharedPercentage: number;
   kwhInPriceCommunity: number;
   kwhOutPriceCommunity: number;
   type: string;
@@ -33,6 +36,9 @@ export interface DatadisEnergyStat {
   kwhInVirtual: number;
   kwhInPrice: number;
   kwhOutPrice: number;
+  kwhTotal: number;
+  kwhVirtualTotal: number;
+  sharedPercentage: number;
   kwhInPriceCommunity: number;
   kwhOutPriceCommunity: number;
   type: string;

@@ -1,14 +1,16 @@
-import {AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, ViewChild} from '@angular/core';
 import {ChartDataset} from "@shared/infrastructure/interfaces/ChartDataset";
-import {TranslocoDirective} from "@jsverse/transloco";
+import {TranslocoDirective, TranslocoService} from "@jsverse/transloco";
 import {
   QuestionBadgeComponent
 } from '../../../../../../shared/infrastructure/components/question-badge/question-badge.component';
 import {ChartStoreService} from "@features/energy-stats/infrastructure/services/chart-store.service";
 import {DatadisEnergyStat} from "@shared/infrastructure/services/zertipower/DTOs/EnergyStatDTO";
 import {Subject, Subscription} from "rxjs";
-import {DecimalPipe, registerLocaleData} from "@angular/common";
+import {DecimalPipe, NgIf, registerLocaleData} from "@angular/common";
 import localeEs from '@angular/common/locales/es';
+import {Chart, registerables} from "chart.js";
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 registerLocaleData(localeEs, 'es');
 
@@ -18,14 +20,15 @@ registerLocaleData(localeEs, 'es');
   imports: [
     TranslocoDirective,
     QuestionBadgeComponent,
-    DecimalPipe
+    DecimalPipe,
+    NgIf
   ],
   templateUrl: './data-totals.component.html',
   styleUrl: './data-totals.component.scss'
 })
 
 
-export class DataTotalsComponent implements OnDestroy {
+export class DataTotalsComponent implements OnDestroy, AfterViewInit {
   @Input() datasets!: ChartDataset[]
   data!: DatadisEnergyStat[]
 
@@ -33,25 +36,29 @@ export class DataTotalsComponent implements OnDestroy {
   totalActiveProduction = 0
   totalConsumption = 0
   totalSurplus = 0
+  totalConsumptionVirtual = 0
+  totalSurplusVirtual = 0
   totalCo2 = 0
-  chartStoreServiceSubcription!: Subscription;
   chartDataType!: any;
   chartDataTypeSymbol: 'kWh' | '€' = 'kWh'
 
   subscriptions: Subscription[] = []
+  displayChart = true
+
+  chartData!: any;
+
+  private chart!: Chart | any;
+
+  @ViewChild('chart') chartElement!: ElementRef;
 
   constructor(
     private cdr: ChangeDetectorRef,
     private readonly chartStoreService: ChartStoreService,
+    private readonly translocoService: TranslocoService
   ) {
 
     this.subscriptions.push(
       this.chartStoreService.isLoading$.subscribe((loading) => {
-        /*console.log(this.chartStoreService.snapshot().lastFetchedStats, "LOADING")
-        this.data = this.chartStoreService.snapshot().lastFetchedStats
-        this.resetValues();
-
-        this.startEnergyCalculate()*/
         if (!loading)
           this.subscriptions.push(
             this.chartStoreService
@@ -66,57 +73,47 @@ export class DataTotalsComponent implements OnDestroy {
                 this.chartDataTypeSymbol = '€'
                 this.startPriceCalculate()
               }
+              this.loadChart()
             })
           )
       })
     )
-    /*this.subscriptions.push(
-      this.chartStoreService
-        .selectOnly(this.chartStoreService.$.params).subscribe((params) => {
-        console.log(params, "pARAMS")
-        this.resetValues();
-        this.data = this.chartStoreService.snapshot().lastFetchedStats
-        console.log(this.data)
-        this.chartDataType = params.selectedChartResource;
-        if (this.chartDataType == 'energy') {
-          this.chartDataTypeSymbol = 'kWh'
-          this.startEnergyCalculate()
-        } else if (this.chartDataType == 'price') {
-          this.chartDataTypeSymbol = '€'
-          this.startPriceCalculate()
-        }
-      })
-    )*/
+
+  }
+
+  ngAfterViewInit(): void {
+    this.loadChart()
   }
 
   ngOnDestroy(): void {
+    this.destroyChart()
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
-  /*  setVariables(data: any[], type: 'networkActiveConsumption' | 'production' | 'productionActive' | 'surplusActive'){
-      for (const register of data)
-        if (register)
-          switch (type){
-            case "production": this.totalProduction += parseInt(register.toString())
-              break
-            case "productionActive": this.totalActiveProduction += parseInt(register.toString())
-              break
-            case "networkActiveConsumption": this.totalConsumption += parseInt(register.toString())
-              break
-            case "surplusActive": this.totalSurplus += parseInt(register.toString())
-              break
-          }
-    }*/
+  loadChart() {
+    if (this.chartElement ) {
+      const sharedPercentage = ((this.totalSurplusVirtual + this.totalConsumptionVirtual) * 100) / (this.totalConsumption + this.totalSurplus)
+
+      if (!(this.totalConsumption + this.totalSurplus) && !sharedPercentage) {
+        this.displayChart = false
+        return
+      }
+      this.setChartData(sharedPercentage)
+      this.destroyChart()
+
+      this.chart = new Chart(this.chartElement.nativeElement, this.chartData,);
+    }
+  }
 
   startEnergyCalculate() {
-
-    if (this.data)
+    if (this.data) {
       this.data.forEach((data) => {
         this.setEnergyTotals(data)
       })
 
-    this.totalCo2 = this.totalProduction * 0.00026
+      this.totalCo2 = this.totalProduction * 0.00026
 
+    }
     //this.cdr.detectChanges(); // removes console error
   }
 
@@ -125,6 +122,8 @@ export class DataTotalsComponent implements OnDestroy {
     if (data.productionActives) this.totalActiveProduction += parseFloat(data.productionActives)
     if (data.kwhIn) this.totalConsumption += parseFloat(data.kwhIn)
     if (data.kwhOut) this.totalSurplus += parseFloat(data.kwhOut)
+    if (data.kwhInVirtual) this.totalConsumptionVirtual += parseFloat(data.kwhInVirtual)
+    if (data.kwhOutVirtual) this.totalSurplusVirtual += parseFloat(data.kwhOutVirtual)
   }
 
   startPriceCalculate() {
@@ -147,6 +146,67 @@ export class DataTotalsComponent implements OnDestroy {
     if (data.kwhOut) this.totalSurplus += (Number(data.kwhOut) * Number(data.kwhOutPrice))
   }
 
+  setChartData(sharedPercentage: number) {
+    this.chartData = {
+      type: 'doughnut',
+      options: {
+        cutout: 80,
+        rotation: -90,
+        circumference: 180,
+        responsive: true,
+        layout: {
+          padding: {
+            top: 0,
+            bottom: 50,
+          }
+        },
+        plugins: {
+          legend: {
+            display: true,
+            position: 'bottom',
+            labels: {
+              padding: 15,
+            }
+          },
+          datalabels: {
+            color: '#fff',
+            font: {
+              size: 14
+            },
+            align: 'center',
+            formatter: (value: string) => {
+              if (value == '0' || value == '0.0' || value == '0.00') return ``
+              return value + '%';
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label:  ((tooltipItem: any)=> `${tooltipItem.raw}%`)
+            }
+          }
+        },
+
+      },
+      data: {
+        labels: [
+          this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.shared'),
+          this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.notShared')],
+        datasets: [
+          {
+            data: [sharedPercentage.toFixed(2), (100 - sharedPercentage).toFixed(2)],
+            backgroundColor: [
+              '#0e2b4c',
+              '#5f7187',
+
+            ],
+            hoverOffset: 4,
+          }
+        ]
+      },
+      plugins: [ChartDataLabels]
+    }
+  }
+
   roundPriceTotals() {
     this.totalProduction = Number(this.totalProduction.toFixed(2))
     this.totalActiveProduction = Number(this.totalActiveProduction.toFixed(2))
@@ -160,6 +220,15 @@ export class DataTotalsComponent implements OnDestroy {
     this.totalConsumption = 0
     this.totalSurplus = 0
     this.totalCo2 = 0
+    this.totalConsumptionVirtual = 0
+    this.totalSurplusVirtual = 0
+  }
+
+  destroyChart() {
+    if (this.chart) {
+      this.chart.destroy();
+      this.chart = undefined;
+    }
   }
 
 }
