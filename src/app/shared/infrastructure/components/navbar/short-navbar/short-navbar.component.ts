@@ -23,6 +23,7 @@ import {UserStoreService} from "../../../../../features/user/infrastructure/serv
 import {NgClass, NgIf} from "@angular/common";
 import {TranslocoPipe, TranslocoService} from "@jsverse/transloco";
 import {Subscription} from "rxjs";
+import {AppLogoComponent} from '@shared/infrastructure/components/app-logo/app-logo.component';
 
 @Component({
   selector: 'app-short-navbar',
@@ -44,7 +45,8 @@ import {Subscription} from "rxjs";
     NgbAccordionBody,
     NgIf,
     NgClass,
-    TranslocoPipe
+    TranslocoPipe,
+    AppLogoComponent
   ],
   templateUrl: './short-navbar.component.html',
   styleUrl: './short-navbar.component.scss'
