@@ -21,9 +21,10 @@ import {
 } from "../../../../../features/user/infrastructure/components/user-profile/user-profile-button/user-profile-button.component";
 import {UserStoreService} from "../../../../../features/user/infrastructure/services/user-store.service";
 import {NgClass, NgIf} from "@angular/common";
-import {TranslocoPipe, TranslocoService} from "@jsverse/transloco";
+import {TranslocoLoader, TranslocoPipe, TranslocoService} from "@jsverse/transloco";
 import {Subscription} from "rxjs";
 import {AppLogoComponent} from '@shared/infrastructure/components/app-logo/app-logo.component';
+import {TranslocoHttpLoader} from "../../../../../transloco-loader";
 
 @Component({
   selector: 'app-short-navbar',
@@ -67,7 +68,12 @@ export class ShortNavbarComponent implements OnDestroy{
   subscriptions: Subscription[] = [];
   hasCommunity = false
 
-  constructor(private readonly ngbModalService: NgbModal, private userStore: UserStoreService, private readonly translocoService: TranslocoService) {
+  constructor(
+    private readonly ngbModalService: NgbModal,
+    private userStore: UserStoreService,
+    private readonly translocoService: TranslocoService,
+    private translocoLoader: TranslocoHttpLoader,
+  ) {
     const user = this.userStore.snapshotOnly(state => state.user);
 
     this.userRole = user?.role
@@ -75,7 +81,11 @@ export class ShortNavbarComponent implements OnDestroy{
     this.subscriptions.push(
       this.translocoService.langChanges$.subscribe((lang) => {
         if (lang)
-          this.setButtons()
+          this.subscriptions.push(
+            this.translocoLoader.getTranslation('ca').subscribe((loaded) => {
+              if (Object.keys(loaded)) this.setButtons()
+            })
+          )
       })
     )
 
