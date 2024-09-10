@@ -1,10 +1,10 @@
 <ng-container *transloco="let t; prefix: 'MY-COMMUNITY'" class="w-100">
   <div class="container-page">
     <div class="row g-2 mb-2">
-      <div class="col-auto">
-        <h4 style="font-weight: 600;">{{ t('navbar') }} {{ communityData.name }}</h4>
+      <div *ngIf="communityData" class="col-auto">
+        <h4 style="font-weight: 600;">{{ t('navbar') }} {{ communityData.name  }}</h4>
       </div>
-      <div class="col-auto align-bottom">
+      <div *ngIf="communityData" class="col-auto align-bottom">
         <button class="btn btn-primary bg-primary rounded-3 btn-sm" (click)="openEditModal()">
           <i class="fa-solid fa-pencil"></i>
         </button>
