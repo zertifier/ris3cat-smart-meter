@@ -78,6 +78,14 @@
       }
     }
   },
+  "MISSING-COMMUNITY": {
+    "texts": {
+      "anyAccess": "You don't have access to any community.",
+      "accessDescription": "To access community information, you need to register or join the community.",
+      "register": "Register",
+      "join": "Join"
+    }
+  },
   "MY-COMMUNITY": {
     "navbar": "Community",
     "title": "Consumption and production",
