@@ -3,6 +3,12 @@
     "navbar": "Counters",
     "title": "Consumption and production",
     "texts": {
+      "info": "Information",
+      "communityPrices": "Precios comunitarios",
+      "providerPrices": "Precios del proveedor",
+      "llano": "Llano",
+      "valle": "Valle",
+      "punta": "Punta",
       "liveWaste": "Your live spending",
       "updatedAt": "Updated at ",
       "noDataRegistered": "No data has been registered",
@@ -14,7 +20,7 @@
       "buyingPrice": "Buying price",
       "sellingPrice": "selling price",
       "unavailable": "Unavailable",
-      "allCups":"All CUPS"
+      "allCups": "All CUPS"
     },
     "tooltips": {
       "assignedProd": "The percentage of energy produced that is assigned to this CUPS"
@@ -36,6 +42,9 @@
     "navbar": "Community",
     "title": "Consumption and production",
     "texts": {
+      "info": "Information",
+      "communityPrices": "Precios comunitarios",
+      "providerPrices": "Precios del proveedor",
       "liveWaste": "Your live spending",
       "updatedAt": "Updated at ",
       "noDataRegistered": "No data has been registered",
@@ -46,12 +55,18 @@
       "generatedEnergy": "Energy generated",
       "surplus": "Surplus",
       "buyingPrice": "Buying price",
-      "sellingPrice": "selling price",
+      "sellingPrice": "Selling",
+      "llano": "Llano",
+      "valle": "Valle",
+      "punta": "Punta",
       "unavailable": "Unavailable",
-      "tradeTypeLabel": "Share type: {{type}}",
+      "tradeTypeLabel": "Share type:",
+      "preferent": "Preferent",
       "tradeTypePref": "Preferred",
       "tradeTypeEqui": "Equitable",
-      "totalProduction": "Total production"
+      "totalProduction": "Total production",
+      "community": "Community",
+      "provider": "Provider"
     },
     "tooltips": {
       "assignedProd": "The percentage of energy produced that is assigned to this CUPS"

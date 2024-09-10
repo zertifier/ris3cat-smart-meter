@@ -24,7 +24,7 @@ import dayjs from "@shared/utils/dayjs";
 import { KnobModule } from "primeng/knob";
 import { PowerflowGausComponent } from "../../../components/powerflow-gaus/powerflow-gaus.component";
 import { UpdateUserCupsAction } from "@features/user/actions/update-user-cups-action.service";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import {NgbModal, NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
 import { SelectCupsService } from "../../../../actions/select-cups.service";
 import { CupsModalComponent } from "./cups-modal/cups-modal.component";
 import { environment } from "@environments/environment";
@@ -70,7 +70,8 @@ import { ChartStoreService } from '../../../services/chart-store.service';
     TranslocoPipe,
     TranslocoDirective,
     LanguageComponent,
-    CommonModule
+    CommonModule,
+    NgbTooltip
   ],
   templateUrl: './my-cups-page.component.html',
   styleUrl: './my-cups-page.component.scss'

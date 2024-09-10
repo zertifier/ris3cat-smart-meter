@@ -1,7 +1,7 @@
 <div class="btn-group w-100" display="dynamic" ngbDropdown role="group" aria-label="Button group with nested dropdown">
   <button type="button" class="py-3 btn btn-outline-white d-flex align-items-center gap-3" ngbDropdownToggle>
     <i class="fa-solid fa-circle-user text-white" style="font-size: 2rem;"></i>
-    <div class="me-auto">
+    <div class="me-auto d-none d-xxl-block">
       <span class="text-white fw-medium">{{ firstName$ | async }}</span>
       <p class="text-white fw-normal m-0">
         {{ userWallet$ | async }}

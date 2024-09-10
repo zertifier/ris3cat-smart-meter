@@ -63,6 +63,7 @@ export class ShortNavbarComponent implements OnDestroy{
 
   userRole!: string | undefined
   subscriptions: Subscription[] = [];
+  hasCommunity = false
 
   constructor(private readonly ngbModalService: NgbModal, private userStore: UserStoreService, private readonly translocoService: TranslocoService) {
     const user = this.userStore.snapshotOnly(state => state.user);
@@ -71,7 +72,14 @@ export class ShortNavbarComponent implements OnDestroy{
 
     this.subscriptions.push(
       this.translocoService.langChanges$.subscribe((lang) => {
-        this.setButtons()
+        if (lang)
+          this.setButtons()
+      })
+    )
+
+    this.subscriptions.push(
+      this.userStore.selectOnly(this.userStore.$.communityId).subscribe((community) => {
+        this.hasCommunity = !!community;
       })
     )
   }
@@ -84,9 +92,12 @@ export class ShortNavbarComponent implements OnDestroy{
     this.buttons = [
       {route: '/energy-stats/community', label: this.translocoService.translate('MY-COMMUNITY.navbar')},
       {route: '/energy-stats/my-cup', label: this.translocoService.translate('MY-CUPS.navbar')},
-      {route: '/energy-stats/share', label: this.translocoService.translate('SHARE-ENERGY.navbar')},
-      {route: '/energy-stats/stats', label: this.translocoService.translate('STATS.navbar')},
     ]
+
+    if (this.hasCommunity) {
+      this.buttons.push({route: '/energy-stats/share', label: this.translocoService.translate('SHARE-ENERGY.navbar')},)
+      this.buttons.push({route: '/energy-stats/stats', label: this.translocoService.translate('STATS.navbar')})
+    }
   }
 
   ngOnDestroy(): void {

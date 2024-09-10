@@ -1,5 +1,5 @@
 <ng-container *transloco="let t; prefix: 'STATUS'">
-  <div class="container my-3">
+  <div class="container-page mb-5">
     <h2>{{ t('title') }}</h2>
     <p>{{ t('texts.statusInfo') }}</p>
 
@@ -7,16 +7,20 @@
     @for(cups of datadisCups; track cups){
     <div class="card mb-2">
       <div class="card-body">
-        <div class="d-flex justify-content-between">
-          <div class="d-flex align-items-center gap-2">
-            <h3 class="m-0 me-4">Datadis</h3>
-            <h5 class="m-0">{{cups.cups}}</h5>
-            <i class="fa-solid fa-circle fa-fade"
-              [ngClass]="{'text-success': cups.active, 'text-danger': !cups.active}"></i>
-            <h5 class="m-0 text-success fa-fade" *ngIf="cups.active">{{ t('texts.connected') }}</h5>
-            <h5 class="m-0 text-danger fa-fade" *ngIf="!cups.active">{{ t('texts.disconnected') }}</h5>
+        <div class="d-block d-lg-flex justify-content-between">
+          <div class="d-block d-lg-flex align-items-center gap-2">
+            <h3 class="m-0 me-4 my-2">Datadis</h3>
+            <h5 class="m-0 my-2" style="width: 300px">{{cups.cups}}</h5>
+
+            <div class="d-flex align-items-center ms-0 ms-lg-2 my-2">
+              <i class="fa-solid fa-circle fa-fade me-2"
+                 [ngClass]="{'text-success': cups.active, 'text-danger': !cups.active}"></i>
+              <h5 class="m-0 text-success fa-fade" *ngIf="cups.active">{{ t('texts.connected') }}</h5>
+              <h5 class="m-0 text-danger fa-fade" *ngIf="!cups.active">{{ t('texts.disconnected') }}</h5>
+            </div>
+
           </div>
-          <span class="d-flex align-items-center">
+          <span class="d-flex align-items-center px-3">
             @if (lastUpdate$ | async) {
             {{ t('texts.lastUpdate') }} {{ lastUpdate | async }}
             } @else {

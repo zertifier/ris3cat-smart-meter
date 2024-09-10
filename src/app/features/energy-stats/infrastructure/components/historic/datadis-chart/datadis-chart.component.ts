@@ -86,7 +86,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
   protected readonly BreakPoints = BreakPoints;
 
   constructor(
-    private readonly chartStoreService: ChartStoreService,
+    public readonly chartStoreService: ChartStoreService,
     private readonly userStore: UserStoreService,
     private readonly zertipower: ZertipowerService,
     private readonly ngbModal: NgbModal,
@@ -206,7 +206,9 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                       id: "networkActiveConsumption",
                       // label: 'Consum del a xarxa actius',
                       label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.networkActiveConsumption'),
-                      data: mappedData.map(d => d.consumption ? parseFloat(d.consumption + '').toFixed(2) : '0'),
+                      data: mappedData.map(
+                        d => d.consumption ? parseFloat(d.consumption + '').toFixed(2) : '0'
+                      ),
                       tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.community.networkActiveConsumption'),
                       stack: 'Consumption',
                       order: 0,

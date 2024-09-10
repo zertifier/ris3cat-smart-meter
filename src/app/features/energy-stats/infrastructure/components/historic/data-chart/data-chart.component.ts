@@ -162,7 +162,8 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
 
             if (chartEntity.selectedChartEntity === ChartEntity.COMMUNITIES) {
               const stat = this.chartStoreService.snapshot().lastFetchedStats[context.dataIndex];
-              if (context.dataset.label === this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.surplusActive')) {
+              if (context.dataset.label === this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.surplusActive') ||
+              context.dataset.label === this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.surplusActiveShared')) {
                 /*this.subscriptions.push(this.activeMembers$.subscribe((total) => {
                     // console.log(total, "TOTAL")
                     labels.push(this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.totalActiveMembers', {total}));

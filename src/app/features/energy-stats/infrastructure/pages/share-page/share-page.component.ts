@@ -72,6 +72,7 @@ export class SharePageComponent implements OnDestroy {
   totalShared:number=0;
 
 
+
   subscriptions: Subscription[] = [];
   constructor(
     private ngModal: NgbModal,
@@ -85,7 +86,7 @@ export class SharePageComponent implements OnDestroy {
         .selectOnly((state: any) => state).subscribe(async (data: any) => {
           if (data.user) {
             this.customerId = data.user.customer_id!
-            this.getCustomerTradesData()
+            this.getData()
             this.customer = await this.zertipower.customers.getCustomerById(this.customerId)
           }
         })
@@ -93,6 +94,7 @@ export class SharePageComponent implements OnDestroy {
   }
 
   getData() {
+    this.loading = true
     if (this.infoDisplay == 'community') {
       this.getCommunityTradesData();
     } else if (this.infoDisplay == 'customer') {
@@ -108,6 +110,7 @@ export class SharePageComponent implements OnDestroy {
     this.totalShared = 0;
     this.tradesData.map((trade)=>{this.totalShared += Number(trade.tradedKwh)})
     this.totalShared = Number(this.totalShared.toFixed(2))
+    this.loading = false
   }
 
   async getCommunityTradesData() {
@@ -118,6 +121,7 @@ export class SharePageComponent implements OnDestroy {
     this.totalShared = 0;
     this.tradesData.map((trade)=>{if(trade.action=='BUY'){this.totalShared += Number(trade.tradedKwh)}})
     this.totalShared = Number(this.totalShared.toFixed(2))
+    this.loading = false
   }
 
   ngOnDestroy(): void {

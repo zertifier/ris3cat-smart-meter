@@ -21,7 +21,7 @@ export interface ChartStore {
 }
 
 const defaultValues: ChartStore = {
-  dateRange: DateRange.MONTH,
+  dateRange: DateRange.YEAR,
   date: new Date(),
   fetchingData: false,
   origin: ChartOrigins.DATADIS,

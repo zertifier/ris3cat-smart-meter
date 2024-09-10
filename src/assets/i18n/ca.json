@@ -3,6 +3,12 @@
     "navbar": "Comptadors",
     "title": "Consum i producció",
     "texts": {
+      "info": "Informació",
+      "communityPrices": "Preus comunitaris",
+      "providerPrices": "Preus del proveïdor",
+      "llano": "Llano",
+      "valle": "Valle",
+      "punta": "Punta",
       "liveWaste": "La teva despesa en viu",
       "updatedAt": "Actualitzat a les ",
       "noDataRegistered": "No s'ha registrat cap dada",
@@ -11,10 +17,10 @@
       "selfConsumption": "Autoconsum",
       "generatedEnergy": "Energia generada",
       "surplus": "Excedent",
-      "buyingPrice":"Preu de compra",
-      "sellingPrice":"Preu de venda",
-      "unavailable":"No disponible",
-      "allCups":"Tots els CUPS"
+      "buyingPrice": "Preu de compra",
+      "sellingPrice": "Preu de venda",
+      "unavailable": "No disponible",
+      "allCups": "Tots els CUPS"
     },
     "tooltips": {
       "assignedProd": "El percentatge de l'energia produïda que se li assigna a aquest CUPS"
@@ -36,6 +42,9 @@
     "navbar": "Comunitat",
     "title": "Consum i producció",
     "texts": {
+      "info": "Informació",
+      "communityPrices": "Preus comunitaris",
+      "providerPrices": "Preus del proveïdor",
       "liveWaste": "La teva despesa en viu",
       "updatedAt": "Actualitzat a les ",
       "noDataRegistered": "No s'ha registrat cap dada",
@@ -45,13 +54,19 @@
       "selfConsumption": "Autoconsum",
       "generatedEnergy": "Energia generada",
       "surplus": "Excedent",
-      "buyingPrice":"Preu de compra",
-      "sellingPrice":"Preu de venda",
-      "unavailable":"No disponible",
-      "tradeTypeLabel": "Tipus de compartició: {{type}}",
+      "buyingPrice": "Preu de compra",
+      "sellingPrice": "Venda",
+      "llano": "Llano",
+      "valle": "Valle",
+      "punta": "Punta",
+      "unavailable": "No disponible",
+      "tradeTypeLabel": "Tipus de compartició:",
+      "preferent": "Preferent",
       "tradeTypePref": "Preferent",
       "tradeTypeEqui": "Equitatiu",
-      "totalProduction": "Producció total"
+      "totalProduction": "Producció total",
+      "community": "Comunitat",
+      "provider": "Proveïdor"
     },
     "tooltips": {
       "assignedProd": "El percentatge de l'energia produïda que se li assigna a aquest CUPS"
@@ -102,7 +117,7 @@
       "prosumersSelectorTitle":"Excloure prosumidors",
       "prosumersSelectorText":"Selecciona prosumidors",
       "noDisplay": "Res a mostrar",
-      "chartDataInputText":"Tria un mes/any per veure el consum",
+      "chartDataInputText": "Tria un mes/any per veure el consum",
       "chartBottomText": "· Coneix la despesa d'energia al detall fent clic en cada tipus de consum. La gràfica mostrarà la informació de consum individualitzada.",
       "chartBottomCommunityText": "· Aquesta estadística indica les dades dels {{activeMembers}} membres actius d'un total de {{totalMembers}} membres de la comunitat.",
       "chartUpdateWarning": "· Tingues en compte que l'actualització de dades no és diària.",
@@ -119,14 +134,13 @@
         "surplusActive": "Excedent actius",
         "surplusActiveShared": "Excedent actius comprartit",
         "totalProduction": "Total producció",
-        "totalActiveProduction": "Total producció activa",
+        "totalActiveProduction": "Total producció actius",
         "totalConsumption": "Total consum actius",
         "totalSurplus": "Total excedent actius",
         "totalCo2": "Total CO2 compensat",
-        "totalCo2Badge":"El CO2 compensat es calcula a partir de la producció.",
+        "totalCo2Badge": "El CO2 compensat es calcula a partir de la producció.",
         "totalMembers": "Total membres: {{total}}",
         "totalActiveMembers": "Membres actius: {{total}}"
-
       },
       "displayLegend": "Mostrar la llegenda",
       "maximize": "Ampliar",
@@ -135,7 +149,7 @@
     "tooltips": {
       "chartLabels": {
         "community": {
-          "CO2Savings":"Tones de co2 estalviades",
+          "CO2Savings": "Tones de co2 estalviades",
           "production": "Producció total de la comunitat.",
           "activeProduction": "Producció dels participants actius",
           "networkConsumption": "Consum que facturarà la companyia elèctrica.",
@@ -144,14 +158,13 @@
           "sharedSurplusActive": "Quantitat d’energia per compartir que es produeix i no es consumeix dels participans actius."
         },
         "cups": {
-          "CO2Savings":"Tones de co2 estalviades.",
+          "CO2Savings": "Tones de co2 estalviades.",
           "networkConsumption": "Consum que facturarà la companyia elèctrica.",
           "production": "Producció proporcional comunitària.",
           "networkActiveConsumption": "Quantitat d'energia que gastem.",
           "surplusActive": "Quantitat d'energia que es produeix i no es consumeix.",
           "sharedSurplusActive": "Quantitat d’energia per compartir que es produeix i no es consumeix dels participans actius."
         }
-
       },
       "communityModel": {
         "acc": "(Auto Consum Compartit)",
@@ -166,15 +179,15 @@
     },
     "energy": {
       "title": "Predicció d'energia comunitària",
-      "titleConsumption":"Predicció consum d'energia",
-      "titleProduction":"Predicció producció d'energia",
-      "titleSurplus":"Predicció excedent d'energia",
-      "titleActivesConsumption":"Predicció consum d'energia dels membres actius",
-      "titleActivesProduction":"Predicció producció d'energia  dels membres actius",
-      "titleActivesSurplus":"Predicció excedent d'energia dels membres actius",
-      "unavailable":"No disponible",
-      "surplusDescription":"* Com a màxim, només estaran disponibles 2 dies de la predicció de l'excedent.",
-      "productionDescription":"* Com a màxim, només estaran disponibles 2 dies de la predicció de la producció."
+      "titleConsumption": "Predicció consum d'energia",
+      "titleProduction": "Predicció producció d'energia",
+      "titleSurplus": "Predicció excedent d'energia",
+      "titleActivesConsumption": "Predicció consum d'energia dels membres actius",
+      "titleActivesProduction": "Predicció producció d'energia  dels membres actius",
+      "titleActivesSurplus": "Predicció excedent d'energia dels membres actius",
+      "unavailable": "No disponible",
+      "surplusDescription": "* Com a màxim, només estaran disponibles 2 dies de la predicció de l'excedent.",
+      "productionDescription": "* Com a màxim, només estaran disponibles 2 dies de la predicció de la producció."
     }
   },
   "PROFILE": {
@@ -182,10 +195,9 @@
     "title": "El meu perfil",
     "texts": {
       "nameLabel": "Nom (requerit)",
-      "lastnameLabel":"Cognom (requerit)"
+      "lastnameLabel": "Cognom (requerit)"
     }
   },
-
   "MY-WALLET": {
     "navbar": "La meva wallet",
     "title": "La meva wallet",
@@ -199,21 +211,21 @@
       "transferEnergy": "Transferir tokens",
       "transferToken": "Transferir saldo",
       "transferShare": "Transferir betas",
-      "platformSection":"Plataforma",
-      "blockchainSection":"Blockchain",
-      "communityBalance":"Saldo energètic dins de la CCE",
-      "addBalance":"Ingressar tokens",
-      "pullOutBalance":"Retirar tokens",
-      "pkLabel":"Clau privada",
-      "pkWarning":"Per raons de seguretat, no revelis la clau privada a ningú."
+      "platformSection": "Plataforma",
+      "blockchainSection": "Blockchain",
+      "communityBalance": "Saldo energètic dins de la CCE",
+      "addBalance": "Ingressar tokens",
+      "pullOutBalance": "Retirar tokens",
+      "pkLabel": "Clau privada",
+      "pkWarning": "Per raons de seguretat, no revelis la clau privada a ningú."
     },
     "tooltips": {
       "identity": "La identitat permet identificar el teu usuari a dintre de la Cadena de Blocks.",
       "energy": "Aquest saldo es farà servir per a la compra d'energia a la comunitat.",
       "token": "Saldo per les transaccions.",
       "shares": "Són les Participacions que té la comunitat.",
-      "pk":"La clau privada és suficient per accedir als teus tokens. No és recomanable compartir-la amb ningú.",
-      "webSwap":"Pots comprar EKW a través d'una altra criptomoneda."
+      "pk": "La clau privada és suficient per accedir als teus tokens. No és recomanable compartir-la amb ningú.",
+      "webSwap": "Pots comprar EKW a través d'una altra criptomoneda."
     },
     "modals": {
       "transfer": {
@@ -222,14 +234,14 @@
         "pullOutTitle": "Retirar",
         "texts": {
           "balanceLabel": "Saldo energètic dins de la CCE",
-          "EKW_Balance":"EKW disponibles",
+          "EKW_Balance": "EKW disponibles",
           "toLabel": "Destinatari",
           "toPlaceholder": "exemple@correu.com / 0xA...",
           "toBottomText": "Escriu el correu o número d'identitat del destinatari",
           "amountLabel": "Quantitat",
-          "balanceAdded":"Saldo ingressat correctament.",
-          "insuficientFunds":"Saldo insuficient.",
-          "balancewithdrawn":"Saldo retirat correctament."
+          "balanceAdded": "Saldo ingressat correctament.",
+          "insuficientFunds": "Saldo insuficient.",
+          "balancewithdrawn": "Saldo retirat correctament."
         },
         "swal": {
           "blockchainError": "Problemes amb la cadena de blocs.",
@@ -237,7 +249,7 @@
           "checkTryAgainError": "Revisa-ho i torna-ho a intentar.",
           "wrongDestinyError": "Destinatari incorrecte.",
           "success": "Transferència enviada correctament.",
-          "copy":"Text copiat."
+          "copy": "Text copiat."
         }
       },
       "buy": {
@@ -245,8 +257,8 @@
         "texts": {
           "qtyLabel": "Quantitat a comprar",
           "qtyPlaceholder": "Tria la quantitat",
-          "buy":"Comprar",
-          "creditCard":"Targeta de crèdit"
+          "buy": "Comprar",
+          "creditCard": "Targeta de crèdit"
         },
         "swal": {
           "qtyError": "La quantitat ha de ser superior a 0",
@@ -259,7 +271,7 @@
       "stripeMintSuccess": "El pagament s'ha reatlizat correctament",
       "stripeMintError": "Hi ha hagut un problema amb la petició. D'aquí uns minuts ho tornarem a intentar automàticament",
       "stripeMintingWait": "S'esta processant la teva petició",
-      "copy":"Text copiat."
+      "copy": "Text copiat."
     }
   },
   "SHARE-ENERGY": {
@@ -269,7 +281,7 @@
       "chooseData": "Trieu quin tram de data voleu consultar",
       "from": "Des de",
       "to": "Fins a",
-      "totalShared":"Total compartit",
+      "totalShared": "Total compartit",
       "date": "Data",
       "action": "Acció",
       "amount": "Quantitat",
@@ -283,19 +295,19 @@
         "buy": "Rebut",
         "sell": "Enviat"
       },
-      "emitter":"Emissor",
-      "receiver":"Receptor",
-       "buyingPrice":"Preu de compra",
-      "sellingPrice":"Preu de venda",
-      "availableBalance":"Saldo disponible",
+      "emitter": "Emissor",
+      "receiver": "Receptor",
+      "buyingPrice": "Preu de compra",
+      "sellingPrice": "Preu de venda",
+      "availableBalance": "Saldo disponible",
       "results": {
         "before": "Abans",
         "now": "Ara",
         "consumption": "Consum",
         "surplus": "Exedent"
       },
-      "myShares":"La meva compartició",
-      "communitaryShares":"Compartició communitària",
+      "myShares": "La meva compartició",
+      "communitaryShares": "Compartició communitària",
       "anonymous": "Anònim"
     },
     "tooltips": {
@@ -310,7 +322,7 @@
       "lastUpdate": "Ultima actualització",
       "noLastUpdate": "No hi ha actualitzacions",
       "connected": "Conectat",
-      "disconnected": "Sense conexió"
+      "disconnected": "Desconectat"
     }
   },
   "STATS": {
@@ -329,19 +341,17 @@
       "anonymous": "Anònim"
     }
   },
-
   "GOVERNOR": {
     "navbar": "Governança",
     "title": "Governança"
   },
-
   "INTEGRATIONS": {
     "navbar": "Integracions",
     "title": "Integracions",
-    "texts":{
+    "texts": {
       "token": "API token",
-      "refreshPermanentToken":"Actualitzar",
-      "documentation":"Veure documentació"
+      "refreshPermanentToken": "Actualitzar",
+      "documentation": "Veure documentació"
     }
   },
   "NOTIFICATIONS": {
@@ -363,8 +373,8 @@
       "datadis_error": "Errors en el datadis",
       "datadis_active": "Datadis actiu",
       "datadis_inactive": "Datadis inactiu",
-      "insufficient_balance":"Saldo insuficient a dins de la comunitat",
-      "low_balance":"Saldo baix a dins de la comunitat"
+      "insufficient_balance": "Saldo insuficient a dins de la comunitat",
+      "low_balance": "Saldo baix a dins de la comunitat"
     }
   },
   "PROPOSALS": {
@@ -385,7 +395,6 @@
       "denied": "Denegades"
     }
   },
-
   "NEW-PROPOSAL": {
     "title": "Nova proposta",
     "texts": {
@@ -423,7 +432,6 @@
       "successCreate": "Proposta guardada correctament"
     }
   },
-
   "PARTICIPANTS": {
     "navbar": "Participants",
     "title": "Participants",
@@ -450,7 +458,6 @@
         "sharePlaceholder": "p.e.:5000"
       },
       "remove": {
-
       },
       "swal": {
         "activate": {
@@ -482,7 +489,6 @@
       "wait": "Si us plau, esperi."
     }
   },
-
   "LOGOUT": {
     "navbar": "Tancar sessió",
     "modal": {
@@ -490,7 +496,6 @@
       "confirm": "Tancar sessió"
     }
   },
-
   "FOOTER": {
     "texts": {
       "privacy": "Política de privacitat",
@@ -540,7 +545,15 @@
         "Novembre",
         "Decembre"
       ],
-      "daysArray": ["Diumenge", "Dilluns", "Dimarts", "Dimecres", "Dijous", "Divendres", "Dissabte"],
+      "daysArray": [
+        "Diumenge",
+        "Dilluns",
+        "Dimarts",
+        "Dimecres",
+        "Dijous",
+        "Divendres",
+        "Dissabte"
+      ],
       "save": "Guardar",
       "cancel": "Cancel·lar",
       "close": "Tancar",
@@ -549,7 +562,7 @@
       "yes": "Sí",
       "no": "No",
       "okay": "D'acord",
-      "confirm":"Confirmar"
+      "confirm": "Confirmar"
     }
   }
 }

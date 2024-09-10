@@ -4,7 +4,15 @@ import {MonitoringService, PowerStats} from "../../../services/monitoring.servic
 import {map, Subscription} from "rxjs";
 import {AsyncPipe, JsonPipe, NgClass, NgIf, NgStyle} from "@angular/common";
 import {StatsColors} from "../../../../domain/StatsColors";
-import {NgbModal, NgbNav, NgbNavContent, NgbNavItem, NgbNavLinkButton, NgbNavOutlet} from "@ng-bootstrap/ng-bootstrap";
+import {
+  NgbModal,
+  NgbNav,
+  NgbNavContent,
+  NgbNavItem,
+  NgbNavLinkButton,
+  NgbNavOutlet,
+  NgbTooltip
+} from "@ng-bootstrap/ng-bootstrap";
 
 import {CalendarModule} from "primeng/calendar";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -74,7 +82,8 @@ import {ChartResource} from "@features/energy-stats/domain/ChartResource";
     MetereologicPredictionComponent,
     EnergyPredictionComponent,
     TranslocoDirective,
-    NgIf
+    NgIf,
+    NgbTooltip
   ],
   templateUrl: './my-community-page.component.html',
   styleUrl: './my-community-page.component.scss'
