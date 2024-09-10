@@ -14,6 +14,31 @@
       }
     }
   },
+  "DATADIS-REGISTER": {
+    "texts": {
+      "title": "Alta CUPS",
+      "subtitle": "Rellena los siguientes campos para asociar tus CUPS a tu perfil de la plataforma.",
+      "serviceTitle": "Elige el servicio",
+      "invalidDNI": "NIF no válido",
+      "user": "Usuario",
+      "invalidUser": "Usuario no válido",
+      "password": "Contraseña",
+      "invalidPassword": "Contraseña no válida",
+      "invalidCups": "CUPS no válido",
+      "addData": "Añadir datos"
+    },
+    "modals": {
+      "errorText": "Ha ocurrido un error",
+      "successText": "Los datos se han guardado correctamente"
+    }
+  },
+  "MISSING-CUPS": {
+    "texts": {
+      "anyCupsAccess": "No tienes acceso a ningún CUPS.",
+      "cupsAccessDescription": "Para acceder a las gráficas de tu consumo, necesitas darte de alta o unirte a la comunidad.",
+      "registerCups": "Darte de alta"
+    }
+  },
   "MY-CUPS": {
     "navbar": "Contadores",
     "title": "Consumo y producción",
@@ -213,7 +238,11 @@
     "title": "Mi perfil",
     "texts": {
       "nameLabel": "Nombre (requerido)",
-      "lastnameLabel": "Apellido (requerido)"
+      "lastnameLabel": "Apellido (requerido)",
+      "updated": "Perfil actualizado correctamente",
+      "agree": "Aceptar",
+      "error": "Error al actualizar el perfil",
+      "errorMessage": "Inténtalo de nuevo en unos minutos"
     }
   },
   "MY-WALLET": {
