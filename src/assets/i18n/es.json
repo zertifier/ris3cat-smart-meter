@@ -140,7 +140,10 @@
         "totalCo2": "CO2 total compensado",
         "totalCo2Badge": "El CO2 compensado se calcula a partir de la producción.",
         "totalMembers": "Total de miembros: {{total}}",
-        "totalActiveMembers": "Miembros activos: {{total}}"
+        "totalActiveMembers": "Miembros activos: {{total}}",
+        "totalShared": "Total compartido",
+        "shared": "Compartido",
+        "notShared": "No compartido"
       },
       "displayLegend": "Mostrar la leyenda",
       "maximize": "Ampliar",
