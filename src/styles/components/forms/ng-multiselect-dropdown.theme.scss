@@ -16,7 +16,7 @@ $disable-background-color: #eceeef;
     height: 42px;
     display: flex !important;
     align-items: center;
-    // padding: 6px 12px;
+    padding: 6px 30px 6px 6px !important;
     // margin-bottom: 0;
     font-weight: normal;
     // line-height: 1.52857143;
@@ -25,7 +25,20 @@ $disable-background-color: #eceeef;
     cursor: pointer;
     background-image: none;
     border-radius: 4px;
+
+    .selected-item-container {
+      // max-width: 100px;
+      display: flex;
+      flex-wrap: nowrap; // evita que se envuelvan
+      overflow-x: hidden; // oculta lo que no cabe
+      white-space: nowrap; // evita saltos de línea
+      text-overflow: ellipsis; // muestra "..." si no cabe todo
+    }
+  
     .selected-item {
+      max-width: 100px; // límite de ancho para cada item
+      overflow: hidden; // oculta el texto extra
+      text-overflow: ellipsis; // añade "..."
       border: 1px solid $base-color !important;
       margin-right: 4px;
       background: $base-color !important;
@@ -38,6 +51,7 @@ $disable-background-color: #eceeef;
       }
       max-width: none !important;
     }
+
     .selected-item:hover {
       box-shadow: 1px 1px #959595;
     }
