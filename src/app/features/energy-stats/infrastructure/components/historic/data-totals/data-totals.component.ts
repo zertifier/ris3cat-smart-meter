@@ -1,6 +1,6 @@
 import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, ViewChild} from '@angular/core';
 import {ChartDataset} from "@shared/infrastructure/interfaces/ChartDataset";
-import {TranslocoDirective} from "@jsverse/transloco";
+import {TranslocoDirective, TranslocoService} from "@jsverse/transloco";
 import {
   QuestionBadgeComponent
 } from '../../../../../../shared/infrastructure/components/question-badge/question-badge.component';
@@ -9,8 +9,8 @@ import {DatadisEnergyStat} from "@shared/infrastructure/services/zertipower/DTOs
 import {Subject, Subscription} from "rxjs";
 import {DecimalPipe, registerLocaleData} from "@angular/common";
 import localeEs from '@angular/common/locales/es';
-import {Chart} from "chart.js";
-import {StatsColors} from "@features/energy-stats/domain/StatsColors";
+import {Chart, registerables} from "chart.js";
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 registerLocaleData(localeEs, 'es');
 
@@ -52,6 +52,7 @@ export class DataTotalsComponent implements OnDestroy, AfterViewInit {
   constructor(
     private cdr: ChangeDetectorRef,
     private readonly chartStoreService: ChartStoreService,
+    private readonly translocoService: TranslocoService
   ) {
 
     this.subscriptions.push(
@@ -61,7 +62,6 @@ export class DataTotalsComponent implements OnDestroy, AfterViewInit {
             this.chartStoreService
               .selectOnly(this.chartStoreService.$.params).subscribe((params) => {
               this.resetValues();
-              console.log(this.chartStoreService.snapshot().lastFetchedStats, "this.chartStoreService.snapshot().lastFetchedStats")
               this.data = this.chartStoreService.snapshot().lastFetchedStats
               this.chartDataType = params.selectedChartResource;
               if (this.chartDataType == 'energy') {
@@ -71,6 +71,7 @@ export class DataTotalsComponent implements OnDestroy, AfterViewInit {
                 this.chartDataTypeSymbol = '€'
                 this.startPriceCalculate()
               }
+              this.loadChart()
             })
           )
       })
@@ -79,23 +80,21 @@ export class DataTotalsComponent implements OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // let percentage = this.totalSurplus
     this.loadChart()
   }
 
   ngOnDestroy(): void {
+    this.destroyChart()
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
   loadChart() {
-    if (this.chartElement.nativeElement && this.totalSurplus && this.totalConsumption) {
+    if (this.chartElement ) {
       const sharedPercentage = ((this.totalSurplusVirtual + this.totalConsumptionVirtual) * 100) / (this.totalConsumption + this.totalSurplus)
-      console.log((this.totalSurplusVirtual + this.totalConsumptionVirtual) * 100, "VIRTUAL")
-      console.log((this.totalConsumption + this.totalSurplus), "NORMAL")
-      console.log((((this.totalSurplusVirtual + this.totalConsumptionVirtual) * 100) / (this.totalConsumption + this.totalSurplus)).toFixed(2), "RESULT")
       this.setChartData(sharedPercentage)
-      this.chart = new Chart(this.chartElement.nativeElement, this.chartData,
-      );
+      this.destroyChart()
+
+      this.chart = new Chart(this.chartElement.nativeElement, this.chartData,);
     }
   }
 
@@ -106,7 +105,6 @@ export class DataTotalsComponent implements OnDestroy, AfterViewInit {
       })
 
       this.totalCo2 = this.totalProduction * 0.00026
-      this.loadChart()
 
     }
     //this.cdr.detectChanges(); // removes console error
@@ -163,21 +161,29 @@ export class DataTotalsComponent implements OnDestroy, AfterViewInit {
               padding: 15,
             }
           },
-        },
-        tooltips: {
-          callbacks: {
-            label: function (tooltipItem: any, data: any) {
-              const dataset = data.datasets[tooltipItem.datasetIndex];
-              const total = dataset.data.reduce((sum: any, val: any) => sum + val, 0);
-              const currentValue = dataset.data[tooltipItem.index];
-              const percentage = Math.floor(((currentValue / total) * 100) + 0.5);
-              return currentValue + ' (' + percentage + '%)';
+          datalabels: {
+            color: '#fff',
+            font: {
+              size: 14
+            },
+            align: 'center',
+            formatter: (value: string) => {
+              if (value == '0' || value == '0.0' || value == '0.00') return ``
+              return value + '%';
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label:  ((tooltipItem: any)=> `${tooltipItem.raw}%`)
             }
           }
-        }
+        },
+
       },
       data: {
-        labels: ['Compartit', 'No compartit'],
+        labels: [
+          this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.shared'),
+          this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.notShared')],
         datasets: [
           {
             data: [sharedPercentage.toFixed(2), (100 - sharedPercentage).toFixed(2)],
@@ -189,7 +195,8 @@ export class DataTotalsComponent implements OnDestroy, AfterViewInit {
             hoverOffset: 4,
           }
         ]
-      }
+      },
+      plugins: [ChartDataLabels]
     }
   }
 
@@ -206,6 +213,15 @@ export class DataTotalsComponent implements OnDestroy, AfterViewInit {
     this.totalConsumption = 0
     this.totalSurplus = 0
     this.totalCo2 = 0
+    this.totalConsumptionVirtual = 0
+    this.totalSurplusVirtual = 0
+  }
+
+  destroyChart() {
+    if (this.chart) {
+      this.chart.destroy();
+      this.chart = undefined;
+    }
   }
 
 }

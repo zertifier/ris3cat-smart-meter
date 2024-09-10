@@ -65,6 +65,9 @@ dependencies:
   chart.js:
     specifier: ^4.4.2
     version: 4.4.2
+  chartjs-plugin-datalabels:
+    specifier: 2.2.0
+    version: 2.2.0(chart.js@4.4.2)
   chartjs-plugin-zoom:
     specifier: 2.0.1
     version: 2.0.1(chart.js@4.4.2)
@@ -3969,6 +3972,14 @@ packages:
     engines: {pnpm: '>=8'}
     dependencies:
       '@kurkle/color': 0.3.2
+    dev: false
+
+  /chartjs-plugin-datalabels@2.2.0(chart.js@4.4.2):
+    resolution: {integrity: sha512-14ZU30lH7n89oq+A4bWaJPnAG8a7ZTk7dKf48YAzMvJjQtjrgg5Dpk9f+LbjCF6bpx3RAGTeL13IXpKQYyRvlw==}
+    peerDependencies:
+      chart.js: '>=3.0.0'
+    dependencies:
+      chart.js: 4.4.2
     dev: false
 
   /chartjs-plugin-zoom@2.0.1(chart.js@4.4.2):
