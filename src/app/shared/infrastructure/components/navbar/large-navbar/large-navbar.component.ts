@@ -38,7 +38,7 @@ import {TranslocoPipe} from "@jsverse/transloco";
 })
 export class LargeNavbarComponent implements OnDestroy{
   currentBreakpoint$ = this.screenBreakpoints.observeBreakpoints();
-  hideLogo$ = this.currentBreakpoint$.pipe(map(val => val <= BreakPoints.LG));
+  // hideLogo$ = this.currentBreakpoint$.pipe(map(val => val <= BreakPoints.LG));
   logoHeight$ = this.currentBreakpoint$.pipe(map(value => {
     switch (value) {
       case BreakPoints.XL:
