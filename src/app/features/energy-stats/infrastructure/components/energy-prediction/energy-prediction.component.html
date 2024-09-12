@@ -36,7 +36,7 @@
       <h4 class="mb-4 text-center">{{ t('energy.titleActivesSurplus') }}</h4>
       }
       @else{
-        <h4  class="mb-4 text-center pt-5">{{ t('energy.titleSurplus') }}</h4>
+        <h4  class="mb-4 text-center">{{ t('energy.titleSurplus') }}</h4>
       }
       <div class="row">
         @for (prediction of surplusPrediction; track $index) {
@@ -62,7 +62,7 @@
       <h4 class="mb-4 text-center">{{ t('energy.titleActivesConsumption') }}</h4>
       }
       @else{
-        <h4 class="mb-4 text-center pt-5">{{ t('energy.titleConsumption') }}</h4>
+        <h4 class="mb-4 text-center">{{ t('energy.titleConsumption') }}</h4>
       }
       <div class="row">
         @for (prediction of consumptionPrediction; track $index) {
