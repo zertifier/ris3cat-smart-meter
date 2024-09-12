@@ -4,14 +4,14 @@
     <!-- <app-energy-prediction-chart [dataset]="datasets" [labels]="labels"/> -->
 
     <!-- PREDICCIÓ PRODUCCIÓ ENERGIA -->
-    <div *ngIf="productionPrediction.length">
+    <div *ngIf="productionPrediction.length" class="container-page">
       @if(community){
         <h4 class="mb-4 text-center">{{ t('energy.titleActivesProduction') }}</h4>
       }
       @else{
         <h4 class="mb-4 text-center">{{ t('energy.titleProduction') }}</h4>
       }
-      <div class="row mx-0 mb-5">
+      <div class="row">
         @for (prediction of productionPrediction; track $index) {
           <div class="col-6 col-sm-4 col-md-2 d-flex flex-column mb-3">
             @if (prediction.value > -1) {
@@ -31,14 +31,14 @@
     <!--  -->
 
     <!-- PREDICCIÓ EXCEDENT ENERGIA -->
-    <div *ngIf="surplusPrediction.length">
+    <div *ngIf="surplusPrediction.length" class="container-page" style="background: #ebeded">
       @if(community){
-      <h4 class="mb-4 text-center pt-5">{{ t('energy.titleActivesSurplus') }}</h4>
+      <h4 class="mb-4 text-center">{{ t('energy.titleActivesSurplus') }}</h4>
       }
       @else{
         <h4  class="mb-4 text-center pt-5">{{ t('energy.titleSurplus') }}</h4>
       }
-      <div class="row mx-0 mb-5">
+      <div class="row">
         @for (prediction of surplusPrediction; track $index) {
           <div class="col-6 col-sm-4 col-md-2 d-flex flex-column mb-3">
             @if (prediction.value > -1) {
@@ -57,14 +57,14 @@
     </div>
 
     <!-- PREDICCIÓ CONSUM ENERGIA -->
-    <div *ngIf="consumptionPrediction.length">
+    <div *ngIf="consumptionPrediction.length" class="container-page">
       @if(community){
-      <h4 class="mb-4 text-center pt-5">{{ t('energy.titleActivesConsumption') }}</h4>
+      <h4 class="mb-4 text-center">{{ t('energy.titleActivesConsumption') }}</h4>
       }
       @else{
         <h4 class="mb-4 text-center pt-5">{{ t('energy.titleConsumption') }}</h4>
       }
-      <div class="row mx-0 mb-5">
+      <div class="row">
         @for (prediction of consumptionPrediction; track $index) {
           <div class="col-6 col-sm-4 col-md-2 d-flex flex-column mb-3">
             @if (prediction.value > -1) {
@@ -83,7 +83,7 @@
 
   </div>
 
-  <div *ngIf="loading" class="text-center mt-5">
+  <div *ngIf="loading" class="text-center my-5">
     <i class="fa-solid fa-spinner fa-spin fs-2"></i>
   </div>
 </ng-container>

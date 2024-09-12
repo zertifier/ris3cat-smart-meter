@@ -9,17 +9,19 @@
       </div>
       <div class="col-auto">
         <div class="input-group">
-        <select class="form-select bg-white border-2 border-primary d-inline" (change)="selectCups($event)">
-          @for (cup of (cups$ | async); track $index) {
-          <!--            <option [selected]="$index === (selectedCupsIndex$ | async)" [value]="$index">{{ cup.cupsCode
-          }}</option>-->
-            <option [selected]="$index === (selectedCupsIndex$ | async)" [value]="$index">{{ cup.reference ||
-              cup.cupsCode }}
-          </option>
-          }
-          <option value=-1> {{ t('texts.allCups') }} </option>
-        </select>
-      </div>
+          <select class="form-select bg-white border-2 border-primary d-inline" (change)="selectCups($event)">
+            @for (cup of (cups$ | async); track $index) {
+              <!--            <option [selected]="$index === (selectedCupsIndex$ | async)" [value]="$index">{{ cup.cupsCode
+              }}</option>-->
+              <option [selected]="$index === (selectedCupsIndex$ | async)" [value]="$index">{{
+                  cup.reference ||
+                  cup.cupsCode
+                }}
+              </option>
+            }
+            <option value=-1> {{ t('texts.allCups') }}</option>
+          </select>
+        </div>
       </div>
       <div class="col-auto">
         <button class="btn btn-primary bg-primary" (click)="openEditModal()"
@@ -42,19 +44,24 @@
         <p class="mb-0">CUPS: <span class="color-tertiary fw-semibold">{{ getSelectedCupsCode() | async }}</span></p>
 
 
-        @if(surplusDistribution$ | async) {
-        <p class="mb-0">{{ t('texts.assignedProd') }}: <span class="color-tertiary fw-semibold me-1">{{
-        surplusDistribution$ | async }}%</span><app-question-badge>
-        {{ t('tooltips.assignedProd') }}
-        </app-question-badge></p>
+        @if (surplusDistribution$ | async) {
+          <p class="mb-0">{{ t('texts.assignedProd') }}: <span class="color-tertiary fw-semibold me-1">{{
+              surplusDistribution$ | async
+            }}%</span>
+            <app-question-badge>
+              {{ t('tooltips.assignedProd') }}
+            </app-question-badge>
+          </p>
         } @else {
-        <p class="mb-0">{{ t('texts.assignedProd') }}
-        : <span class="color-tertiary fw-semibold">0%</span></p> <app-question-badge>
-        {{ t('tooltips.assignedProd') }}
-        </app-question-badge>
+          <p class="mb-0">{{ t('texts.assignedProd') }}
+            : <span class="color-tertiary fw-semibold">0%</span></p>
+          <app-question-badge>
+            {{ t('tooltips.assignedProd') }}
+          </app-question-badge>
         }
 
-        <p class="mb-0"><i class="fa-solid fa-battery-full me-2"></i> <span class="color-tertiary fw-semibold">0%</span></p>
+        <p class="mb-0"><i class="fa-solid fa-battery-full me-2"></i> <span class="color-tertiary fw-semibold">0%</span>
+        </p>
       </div>
 
 
@@ -64,8 +71,8 @@
         </p>
 
         @if (communityData && communityData.energyPrice) {
-        <div class="mb-0">
-          <span class="price-tables-label">{{ t('texts.sellingPrice') }} :</span>
+          <div class="mb-0">
+            <span class="price-tables-label">{{ t('texts.sellingPrice') }} :</span>
             <b class="color-tertiary fw-semibold"> {{ communityData.energyPrice }}€/kWh </b>
           </div>
           <div class="mb-0">
@@ -89,8 +96,8 @@
         </p>
 
         @if (communityData && communityData.energyPrice) {
-        <div class="mb-0">
-          <span class="price-tables-label">{{ t('texts.sellingPrice') }} :</span>
+          <div class="mb-0">
+            <span class="price-tables-label">{{ t('texts.sellingPrice') }} :</span>
             <b class="color-tertiary fw-semibold"> 0.06 €/kWh </b>
           </div>
           <div class="mb-0">
@@ -121,49 +128,45 @@
 
       <div class="col-6 col-lg my-3">
 
-        @if(isValidNumber(powerFlow().buy) && powerFlow().buy > 0){
-        <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.CONSUMPTION"
-          label="{{ t('texts.consumption') }}" [text]="powerFlow().buy.toFixed(2)" />
-        }
-        @else{
-        <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
-        label="{{ t('texts.consumption') }}" [text]="t('texts.unavailable')" />
-        }
-      </div>
-
-      <div class="col-6 col-lg my-3">
-
-        @if(isValidNumber(powerFlow().inHouse) && powerFlow().inHouse > 0){
-        <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
-        label="{{ t('texts.selfConsumption') }}" [text]="powerFlow().inHouse.toFixed(2)" />
-        }
-        @else{
-        <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
-        label="{{ t('texts.selfConsumption') }}" [text]="t('texts.unavailable')" />
-        }
-
-      </div>
-
-      <div class="col-6 col-lg my-3">
-        @if(isValidNumber(powerFlow().production) && (lastUpdate$ | async)){
-        <app-stat-display width="20%"
-          [color]="StatsColors.COMMUNITY_PRODUCTION" label="{{ t('texts.generatedEnergy') }}"
-          [text]="powerFlow().production.toFixed(2)" />
-        }
-        @else{
-        <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
-        label="{{ t('texts.generatedEnergy') }}" [text]="t('texts.unavailable')" />
+        @if (isValidNumber(powerFlow().buy) && powerFlow().buy > 0) {
+          <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.CONSUMPTION"
+                            label="{{ t('texts.consumption') }}" [text]="powerFlow().buy.toFixed(2)"/>
+        } @else {
+          <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
+                            label="{{ t('texts.consumption') }}" [text]="t('texts.unavailable')"/>
         }
       </div>
 
       <div class="col-6 col-lg my-3">
-        @if(isValidNumber(powerFlow().sell) && powerFlow().sell > 0){
-        <app-stat-display [disabled]="powerFlow().sell === 0" width="20%" [color]="StatsColors.SURPLUS"
-          label="{{ t('texts.surplus') }}" [text]="powerFlow().sell.toFixed(2)" />
+
+        @if (isValidNumber(powerFlow().inHouse) && powerFlow().inHouse > 0) {
+          <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
+                            label="{{ t('texts.selfConsumption') }}" [text]="powerFlow().inHouse.toFixed(2)"/>
+        } @else {
+          <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
+                            label="{{ t('texts.selfConsumption') }}" [text]="t('texts.unavailable')"/>
         }
-        @else{
-        <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
-        label="{{ t('texts.surplus') }}" [text]="t('texts.unavailable')" />
+
+      </div>
+
+      <div class="col-6 col-lg my-3">
+        @if (isValidNumber(powerFlow().production) && (lastUpdate$ | async)) {
+          <app-stat-display width="20%"
+                            [color]="StatsColors.COMMUNITY_PRODUCTION" label="{{ t('texts.generatedEnergy') }}"
+                            [text]="powerFlow().production.toFixed(2)"/>
+        } @else {
+          <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
+                            label="{{ t('texts.generatedEnergy') }}" [text]="t('texts.unavailable')"/>
+        }
+      </div>
+
+      <div class="col-6 col-lg my-3">
+        @if (isValidNumber(powerFlow().sell) && powerFlow().sell > 0) {
+          <app-stat-display [disabled]="powerFlow().sell === 0" width="20%" [color]="StatsColors.SURPLUS"
+                            label="{{ t('texts.surplus') }}" [text]="powerFlow().sell.toFixed(2)"/>
+        } @else {
+          <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
+                            label="{{ t('texts.surplus') }}" [text]="t('texts.unavailable')"/>
         }
       </div>
     </div>
@@ -189,10 +192,8 @@
     </div>
   </div>
 
-  <div class="row container-page">
-    <div class="col-12">
-      <app-energy-prediction [community]="false"/>
-    </div>
-  </div>
+
+  <app-energy-prediction [community]="false"/>
+
 
 </ng-container>
