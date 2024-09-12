@@ -1,29 +1,25 @@
-import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { AsyncPipe, JsonPipe, NgIf } from "@angular/common";
-import { ChartLegendComponent, DataLabel } from "../chart-legend/chart-legend.component";
-import { DataChartComponent } from "../data-chart/data-chart.component";
-import { combineLatest, Subscription } from "rxjs";
-import { StatsColors } from "../../../../domain/StatsColors";
-import { ChartStoreService } from "../../../services/chart-store.service";
-import { UserStoreService } from "@features/user/infrastructure/services/user-store.service";
-import { ChartResource } from "../../../../domain/ChartResource";
-import { ChartEntity } from "../../../../domain/ChartEntity";
-import { DateRange } from "../../../../domain/DateRange";
-import { ChartType } from "../../../../domain/ChartType";
-import { DatadisEnergyStat } from "@shared/infrastructure/services/zertipower/DTOs/EnergyStatDTO";
-import { ZertipowerService } from "@shared/infrastructure/services/zertipower/zertipower.service";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import {
-  BreakPoints,
-  ScreenBreakPointsService
-} from "@shared/infrastructure/services/screen-break-points.service";
-import { ChartDataset } from "@shared/infrastructure/interfaces/ChartDataset";
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AsyncPipe, JsonPipe, NgIf} from "@angular/common";
+import {ChartLegendComponent, DataLabel} from "../chart-legend/chart-legend.component";
+import {DataChartComponent} from "../data-chart/data-chart.component";
+import {combineLatest, Subscription} from "rxjs";
+import {StatsColors} from "../../../../domain/StatsColors";
+import {ChartStoreService} from "../../../services/chart-store.service";
+import {UserStoreService} from "@features/user/infrastructure/services/user-store.service";
+import {ChartResource} from "../../../../domain/ChartResource";
+import {ChartEntity} from "../../../../domain/ChartEntity";
+import {DateRange} from "../../../../domain/DateRange";
+import {ChartType} from "../../../../domain/ChartType";
+import {DatadisEnergyStat} from "@shared/infrastructure/services/zertipower/DTOs/EnergyStatDTO";
+import {ZertipowerService} from "@shared/infrastructure/services/zertipower/zertipower.service";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {BreakPoints, ScreenBreakPointsService} from "@shared/infrastructure/services/screen-break-points.service";
+import {ChartDataset} from "@shared/infrastructure/interfaces/ChartDataset";
 import dayjs from '@shared/utils/dayjs';
-import { TranslocoDirective, TranslocoService } from "@jsverse/transloco";
+import {TranslocoDirective, TranslocoService} from "@jsverse/transloco";
 import {
   DataTotalsComponent
 } from "@features/energy-stats/infrastructure/components/historic/data-totals/data-totals.component";
-import moment from 'moment';
 
 @Component({
   selector: 'app-datadis-chart',
@@ -76,6 +72,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
   labels: string[] = [];
   legendLabels: DataLabel[] = [];
   mobileLabels: DataLabel[] = [];
+  cce: boolean = false;
 
   @ViewChild(DataChartComponent) dataChart!: DataChartComponent;
   @ViewChild('secondChart') secondChart!: DataChartComponent;
@@ -146,6 +143,8 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
 
 
                 const cce = chartType === ChartType.CCE;
+
+
                 const community = selectedChartEntity === ChartEntity.COMMUNITIES;
 
                 // Map data to a more easy to use objects
@@ -351,34 +350,17 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
   }[] {
     const showEnergy = chartResource === ChartResource.ENERGY;
     const cce = chartType === ChartType.CCE;
-
+this.cce = chartType === ChartType.CCE;
     return data.map(d => {
 
       let virtualProduction = d.kwhOutVirtual
       let virtualConsumption = d.kwhInVirtual
 
-      if (cce) {
 
-        if (virtualConsumption) {
-          // console.log("", moment(d.infoDt).format('DD/MM/YYYY'))
-          // console.log("cupsId", d.cupsId)
-          // console.log("communityCups", d.communitiesCups)
-          // console.log("kwIn", d.kwhIn)
-          // console.log("v. In", virtualConsumption)
-          d.kwhIn = virtualConsumption;
-        }
-        if (virtualProduction) {
-          // console.log("", moment(d.infoDt).format('DD/MM/YYYY'))
-          // console.log("cupsId", d.cupsId)
-          // console.log("communityCups", d.communitiesCups)
-          // console.log("kwOut", d.kwhOut)
-          // console.log("v. Out", virtualProduction)
-          d.kwhOut = virtualProduction;
-        }
-      }
-
-      const consumption = showEnergy ? d.kwhIn : + (d.kwhInPrice * d.kwhIn).toFixed(2);
-      const surplus = showEnergy ? d.kwhOut : + (d.kwhOutPrice * d.kwhOut).toFixed(2);
+      let kwhIn = cce ? d.kwhInVirtual : d.kwhIn;
+      let kwhOut = cce ? d.kwhOutVirtual : d.kwhOut;
+      const consumption = showEnergy ? kwhIn : + (d.kwhInPrice * kwhIn).toFixed(2);
+      const surplus = showEnergy ? kwhOut : + (d.kwhOutPrice * kwhOut).toFixed(2);
       let productionActives = showEnergy ? d.productionActives : +(d.kwhInPrice * d.productionActives).toFixed(2);
       const virtualSurplus = showEnergy ? d.kwhOutVirtual : +(d.kwhOutPriceCommunity * d.kwhOutVirtual).toFixed(2);
       let production = showEnergy ? d.production : +(d.kwhInPrice * d.production).toFixed(2);

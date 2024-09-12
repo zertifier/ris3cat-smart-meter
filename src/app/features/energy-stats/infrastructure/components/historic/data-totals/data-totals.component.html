@@ -10,11 +10,11 @@
     </div>
     <div class="col my-3 text-center">
       <h5>{{ t('texts.chartLabels.totalConsumption') }}</h5>
-      <span>{{ totalConsumption | number:'1.0-2': 'es' }} {{ chartDataTypeSymbol }}</span>
+      <span>{{ (cce ? totalConsumptionVirtual : totalConsumption) | number:'1.0-2': 'es' }} {{ chartDataTypeSymbol }}</span>
     </div>
     <div class="col my-3 text-center">
       <h5>{{ t('texts.chartLabels.totalSurplus') }}</h5>
-      <span>{{ totalSurplus | number:'1.0-2': 'es' }} {{ chartDataTypeSymbol }}</span>
+      <span>{{  (cce ? totalSurplusVirtual : totalSurplus) | number:'1.0-2': 'es' }} {{ chartDataTypeSymbol }}</span>
     </div>
     <div class="col my-3 text-center">
       <h5>{{ t('texts.chartLabels.totalCo2') }}
@@ -30,7 +30,7 @@
   </div>
 
 
-  <div *ngIf="displayChart" class="mt-5">
+  <div *ngIf="showCommunity && chartDataType == 'energy'" class="mt-5">
     <div class="mx-auto" style="max-width: 400px">
       <h4 class="text-center">{{ t('texts.chartLabels.totalShared') }}</h4>
       <canvas #chart></canvas>

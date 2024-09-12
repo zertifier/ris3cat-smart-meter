@@ -30,6 +30,8 @@ registerLocaleData(localeEs, 'es');
 
 export class DataTotalsComponent implements OnDestroy, AfterViewInit {
   @Input() datasets!: ChartDataset[]
+  @Input() cce!: boolean | null
+  @Input() showCommunity!: boolean | null
   data!: DatadisEnergyStat[]
 
   totalProduction = 0
@@ -43,7 +45,6 @@ export class DataTotalsComponent implements OnDestroy, AfterViewInit {
   chartDataTypeSymbol: 'kWh' | '€' = 'kWh'
 
   subscriptions: Subscription[] = []
-  displayChart = true
 
   chartData!: any;
 
@@ -56,13 +57,12 @@ export class DataTotalsComponent implements OnDestroy, AfterViewInit {
     private readonly chartStoreService: ChartStoreService,
     private readonly translocoService: TranslocoService
   ) {
-
     this.subscriptions.push(
-      this.chartStoreService.isLoading$.subscribe((loading) => {
+      this.chartStoreService.isLoading$.subscribe((loading: any) => {
         if (!loading)
           this.subscriptions.push(
             this.chartStoreService
-              .selectOnly(this.chartStoreService.$.params).subscribe((params) => {
+              .selectOnly(this.chartStoreService.$.params).subscribe((params: any) => {
               this.resetValues();
               this.data = this.chartStoreService.snapshot().lastFetchedStats
               this.chartDataType = params.selectedChartResource;
@@ -92,16 +92,23 @@ export class DataTotalsComponent implements OnDestroy, AfterViewInit {
 
   loadChart() {
     if (this.chartElement ) {
-      const sharedPercentage = ((this.totalSurplusVirtual + this.totalConsumptionVirtual) * 100) / (this.totalConsumption + this.totalSurplus)
+      console.log({
+        totals: this.totalSurplusVirtual,
+        surplus: this.totalSurplus,
+      })
 
-      if (!(this.totalConsumption + this.totalSurplus) && !sharedPercentage) {
-        this.displayChart = false
-        return
-      }
+      const sharedPercentage = 100 - (this.totalSurplus ? (this.totalSurplusVirtual * 100) / this.totalSurplus : 100)
+      console.log({sharedPercentage})
+      // if (!this.totalSurplus && !sharedPercentage) {
+      //   this.displayChart = false
+      //   return
+      // }
+      console.log({datasets: this.datasets})
+
       this.setChartData(sharedPercentage)
       this.destroyChart()
 
-      this.chart = new Chart(this.chartElement.nativeElement, this.chartData,);
+      this.chart = new Chart(this.chartElement.nativeElement, this.chartData);
     }
   }
 
@@ -118,6 +125,8 @@ export class DataTotalsComponent implements OnDestroy, AfterViewInit {
   }
 
   setEnergyTotals(data: any) {
+    // console.log({data})
+
     if (data.production) this.totalProduction += parseFloat(data.production)
     if (data.productionActives) this.totalActiveProduction += parseFloat(data.productionActives)
     if (data.kwhIn) this.totalConsumption += parseFloat(data.kwhIn)
@@ -143,7 +152,9 @@ export class DataTotalsComponent implements OnDestroy, AfterViewInit {
     if (data.production) this.totalProduction += (Number(data.production) * Number(data.kwhOutPrice))
     if (data.productionActives) this.totalActiveProduction += (Number(data.productionActives) * Number(data.kwhOutPrice))
     if (data.kwhIn) this.totalConsumption += (Number(data.kwhIn) * Number(data.kwhInPrice))
+    if (data.kwhInVirtual) this.totalConsumptionVirtual += (Number(data.kwhInVirtual) * Number(data.kwhInPriceCommunity))
     if (data.kwhOut) this.totalSurplus += (Number(data.kwhOut) * Number(data.kwhOutPrice))
+    if (data.kwhOutVirtual) this.totalSurplusVirtual += (Number(data.kwhOutVirtual) * Number(data.kwhOutPriceCommunity))
   }
 
   setChartData(sharedPercentage: number) {
@@ -154,16 +165,18 @@ export class DataTotalsComponent implements OnDestroy, AfterViewInit {
         rotation: -90,
         circumference: 180,
         responsive: true,
+        aspectRatio: 1.4,
         layout: {
           padding: {
             top: 0,
-            bottom: 50,
+            bottom: 0,
           }
         },
         plugins: {
           legend: {
             display: true,
             position: 'bottom',
+            // maxHeight: 20,
             labels: {
               padding: 15,
             }
