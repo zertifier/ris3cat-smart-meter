@@ -11,13 +11,15 @@ import {
 } from '@angular/core';
 import {ChartModule} from "primeng/chart";
 import {Subscription} from "rxjs";
-import {ChartStoreService} from "../../../services/chart-store.service";
+import {ChartStore, ChartStoreService} from "../../../services/chart-store.service";
 import {ChartResource} from "../../../../domain/ChartResource";
 import {ChartLegendComponent} from "../chart-legend/chart-legend.component";
 import {Chart} from "chart.js";
 import {ChartEntity} from "../../../../domain/ChartEntity";
 import {AsyncPipe, NgIf} from "@angular/common";
 import {ChartDataset} from "@shared/infrastructure/interfaces/ChartDataset";
+import {TranslocoService} from "@jsverse/transloco";
+import {UserStoreService} from "@features/user/infrastructure/services/user-store.service";
 
 @Component({
   selector: 'app-data-chart',
@@ -31,6 +33,7 @@ import {ChartDataset} from "@shared/infrastructure/interfaces/ChartDataset";
   templateUrl: './data-chart.component.html',
   styleUrl: './data-chart.component.scss'
 })
+
 export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
   data!: {
     datasets: any[],
@@ -44,7 +47,11 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
 
   private textColorSecondary = 'rgba(0, 0, 0, 0.54)';
   private surfaceBorder = 'rgba(0, 0, 0, 0.12)';
-
+  private totalMembers$ = this.userStore.selectOnly(state => state.totalMembers);
+  private activeMembers$ = this.userStore.selectOnly(state => {
+    // console.log(state, "STATE")
+    return state.activeMembers
+  });
   private options: any = {
     maintainAspectRatio: false,
     indexAxis: 'x',
@@ -69,7 +76,7 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
         ticks: {
           callback: (value: never) => {
             const state = this.chartStoreService.snapshot();
-            const label = state.selectedChartResource === ChartResource.ENERGY ? 'kWh' : '€'
+            const label = this.getLabelText(ChartResource) // state.selectedChartResource === ChartResource.ENERGY ? 'kWh' : '€'
             return `${value} ${label}`;
           },
           color: this.textColorSecondary
@@ -77,7 +84,25 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
         grid: {
           color: this.surfaceBorder,
         }
-      }
+      },
+      // y1: {
+      //   stacked: true,
+      //   beginAtZero: true,
+      //   position: 'right',
+      //   min: 0,
+      //   ticks: {
+      //     callback: (value: never) => {
+      //       //const state = this.chartStoreService.snapshot();
+      //       //const label = this.getLabelText(ChartResource) // state.selectedChartResource === ChartResource.ENERGY ? 'kWh' : '€'
+      //       return `${value} Tn`;
+      //     },
+      //     color: this.textColorSecondary
+      //   },
+      //   grid: {
+      //     drawOnChartArea: false,
+      //     color: this.surfaceBorder,
+      //   }
+      // }
     },
     interaction: {
       intersect: true,
@@ -104,38 +129,57 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
             // production = production - productionActives.
             //
             // The problem comes when it's necessary to display the tooltip. It has to show the correct values.
-            if (context.dataset.label === "Producció" && chartEntity.selectedChartEntity === ChartEntity.COMMUNITIES) {
+            if (context.dataset.label === this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.productionActive')
+              && chartEntity.selectedChartEntity === ChartEntity.COMMUNITIES) {
               const value = context.raw;
               const register = this.chartStoreService.snapshot().lastFetchedStats[context.dataIndex];
               // Here the correct production es being calculated to show the correct value on tooltip
               // production = production + productionActives
-              const total = parseFloat(register.productionActives + '') + value;
-              formattedValue = total.toLocaleString();
+
+
+              // const total = parseFloat(register.productionActives + '').toFixed(2);
+              const total = parseFloat(register.productionActives + '');
+              // formattedValue = total.toLocaleString();
             }
 
-            if (context.dataset.label === "Consum" && chartEntity.selectedChartEntity === ChartEntity.CUPS) {
+            /*if (context.dataset.stack === "Consumption"
+              && chartEntity.selectedChartEntity === ChartEntity.CUPS) {
               const showEnergy = this.chartStoreService.snapshot().selectedChartResource === ChartResource.ENERGY;
               const register = this.chartStoreService.snapshot().lastFetchedStats[context.dataIndex];
-              const consumption = showEnergy ? register.kwhIn : +(register.kwhInPrice * register.kwhIn).toFixed(2);
-              formattedValue = consumption.toLocaleString();
-            }
+              const consumption = showEnergy ? register.kwhIn.toFixed(2) : +(register.kwhInPrice * register.kwhIn).toFixed(2);
+              if (consumption) consumption.toLocaleString();
+            }*/
 
-            const unit = chartEntity.selectedChartResource === ChartResource.ENERGY ? 'kWh' : '€'
-            const labels: string[] = [`${label}: ${formattedValue} ${unit}`];
+            const unit = this.getLabelText(chartEntity);
+
+            let labels: string[];
+
+            if (label.includes('CO2')) {
+              labels = [`${label}: ${formattedValue} Tn`];
+            } else {
+              labels = [`${label}: ${formattedValue} ${unit}`];
+            }
 
             if (chartEntity.selectedChartEntity === ChartEntity.COMMUNITIES) {
               const stat = this.chartStoreService.snapshot().lastFetchedStats[context.dataIndex];
-              if (context.dataset.label === "Excedent actius") {
-                labels.push(`Membres actius: ${stat.activeMembers}`);
+              if (context.dataset.label === this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.surplusActive') ||
+              context.dataset.label === this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.surplusActiveShared')) {
+                /*this.subscriptions.push(this.activeMembers$.subscribe((total) => {
+                    // console.log(total, "TOTAL")
+                    labels.push(this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.totalActiveMembers', {total}));
+                  }))*/
+                labels.push(this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.totalActiveMembers', {total: stat.activeMembers || 0}));
                 labels.push(`----------------`);
 
-              } else if (context.dataset.label === "Producció") {
+                // } else if (context.dataset.label === this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.production')) {
+              } else if (context.dataset.label === this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.community.production')) {
                 for (const cups of stat.communitiesCups) {
                   if (cups.kwhOut > 0)
                     labels.push(`${cups.reference || cups.cups} : ${cups.kwhOut || 0} KWh`)
                 }
-                // Todo: change 31 to the real number
-                labels.push(`Total membres: 31`);
+                this.subscriptions.push(this.totalMembers$.subscribe((total) => {
+                  labels.push(this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.totalMembers', {total}));
+                }))
               }
             }
             return labels;
@@ -146,7 +190,9 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
   };
 
   constructor(
-    private chartStoreService: ChartStoreService
+    private chartStoreService: ChartStoreService,
+    private translocoService: TranslocoService,
+    private readonly userStore: UserStoreService,
   ) {
   }
 
@@ -230,7 +276,7 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
           }
         },
         y: {
-          stacked: true,
+          stacked: false,
           beginAtZero: true,
           min: 0,
           ticks: {
@@ -239,11 +285,29 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
               return `${value} ${label}`;
             },
             color: this.textColorSecondary
+            // color: '#a2739'
           },
           grid: {
             color: this.surfaceBorder,
           }
-        }
+        },
+        // y1: {
+        //   stacked: true,
+        //   beginAtZero: true,
+        //   position: 'right',
+        //   min: 0,
+        //   ticks: {
+        //     callback: function (value: never) {
+        //       //const label = state.selectedChartResource === ChartResource.ENERGY ? 'kWh' : '€'
+        //       return `${value} Tn`;
+        //     },
+        //     color: this.textColorSecondary
+        //   },
+        //   grid: {
+        //     drawOnChartArea: false,
+        //     color: this.surfaceBorder,
+        //   }
+        // }
       }
     }
 
@@ -273,8 +337,25 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
             drawBorder: false
           }
         },
+        // y1: {
+        //   beginAtZero: true,
+        //   stacked: true,
+        //   position: 'top',
+        //   min: 0,
+        //   ticks: {
+        //     color: this.textColorSecondary,
+        //     font: {
+        //       weight: 500
+        //     },
+        //   },
+        //   grid: {
+        //    // drawOnChartArea: false,
+        //     color: this.surfaceBorder,
+        //     drawBorder: false
+        //   }
+        // },
         x: {
-          stacked: true,
+          stacked: false,
           ticks: {
             callback: function (value: never) {
               const label = state.selectedChartResource === ChartResource.ENERGY ? 'kWh' : '€'
@@ -305,6 +386,7 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
         stack: entry.stack,
         grouped: true,
         order: entry.order,
+        yAxisID: entry.yAxisID
       });
     }
 
@@ -323,4 +405,24 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
       })
     );
   }
+
+  getLabelText(chartEntity: any) {
+    let unit: string;
+    switch (chartEntity.selectedChartResource) {
+      case ChartResource.ENERGY:
+        unit = 'kWh'
+        break;
+      case ChartResource.PRICE:
+        unit = '€'
+        break;
+      case ChartResource.WEIGHT:
+        unit = 'Tn'
+        break;
+      default:
+        unit = 'Tn'
+        break;
+    }
+    return unit;
+  }
+
 }

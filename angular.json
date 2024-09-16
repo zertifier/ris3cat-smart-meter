@@ -39,10 +39,16 @@
                 "glob": "**/*",
                 "input": "node_modules/tinymce",
                 "output": "/tinymce/"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/ngx-scanner-qrcode/wasm/",
+                "output": "./assets/wasm/"
               }
             ],
             "styles": [
-              "src/styles/styles.scss"
+              "src/styles/styles.scss",
+              "src/styles/components/forms/ng-multiselect-dropdown.theme.scss"
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.min.js"
@@ -111,7 +117,7 @@
               "buildTarget": "smart-meter-frontend:build:production"
             },
             "preproduction": {
-              "buildTarget": "smart-meter-frontend:build:preproduction",
+              "buildTarget": "smart-meter-frontend:build:preproduction"
             },
             "development": {
               "buildTarget": "smart-meter-frontend:build:development"

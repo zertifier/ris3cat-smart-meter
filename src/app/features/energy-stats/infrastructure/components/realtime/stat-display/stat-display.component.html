@@ -1,13 +1,16 @@
 <!--<div class="d-flex flex-column align-items-center gap-2 w-100">-->
 <div class="w-100 text-center">
-  <label class="mb-4">{{ label }}</label>
+  <label class="mb-4 fw-semibold">{{ label }}</label>
   @if (!disabled) {
     <div class="stat-display w-100 mx-auto" [ngStyle]="{'background-color': color}">
-      {{ text }}
+     <div>
+      <p class="value w-100 mb-0 fs-1 mb-2">{{ text }}</p>
+      <p class="label mb-0">kWh</p>
+</div>
     </div>
   } @else {
     <div class="stat-display w-100 mx-auto" style="background-color: gray">
-      _ _
+      {{ text }}
     </div>
   }
 </div>

@@ -1,3 +1,89 @@
-<div class="mx-auto" style="max-width: 250px">
-  <app-energy-prediction-chart [dataset]="datasets" [labels]="labels"/>
-</div>
+<ng-container *transloco="let t; prefix: 'PREDICTIONS'">
+  <!-- <h5 style="margin: 2rem 0 2rem 0;" class="fw-bold">{{ t('energy.title') }}</h5> -->
+  <div *ngIf="!loading">
+    <!-- <app-energy-prediction-chart [dataset]="datasets" [labels]="labels"/> -->
+
+    <!-- PREDICCIÓ PRODUCCIÓ ENERGIA -->
+    <div *ngIf="productionPrediction.length" class="container-page">
+      @if(community){
+        <h4 class="mb-4 text-center">{{ t('energy.titleActivesProduction') }}</h4>
+      }
+      @else{
+        <h4 class="mb-4 text-center">{{ t('energy.titleProduction') }}</h4>
+      }
+      <div class="row">
+        @for (prediction of productionPrediction; track $index) {
+          <div class="col-6 col-sm-4 col-md-2 d-flex flex-column mb-3">
+            @if (prediction.value > -1) {
+              <div class="circle production">{{ prediction.value }} kWh</div>
+            } @else {
+              <div class="circle unavailable text-center">{{ t('energy.unavailable') }}</div>
+            }
+            <div class="text-center text-capitalize mt-2">{{ prediction.date }}</div>
+          </div>
+        }
+        <div class="text-center">
+          {{ t('energy.productionDescription') }}
+        </div>
+
+      </div>
+    </div>
+    <!--  -->
+
+    <!-- PREDICCIÓ EXCEDENT ENERGIA -->
+    <div *ngIf="surplusPrediction.length" class="container-page" style="background: #ebeded">
+      @if(community){
+      <h4 class="mb-4 text-center">{{ t('energy.titleActivesSurplus') }}</h4>
+      }
+      @else{
+        <h4  class="mb-4 text-center">{{ t('energy.titleSurplus') }}</h4>
+      }
+      <div class="row">
+        @for (prediction of surplusPrediction; track $index) {
+          <div class="col-6 col-sm-4 col-md-2 d-flex flex-column mb-3">
+            @if (prediction.value > -1) {
+              <div class="circle surplus">{{ prediction.value }} kWh</div>
+            } @else {
+              <div class="circle unavailable text-center">{{ t('energy.unavailable') }}</div>
+            }
+            <div class="text-center text-capitalize mt-2">{{ prediction.date }}</div>
+          </div>
+        }
+        <div class="text-center">
+          {{ t('energy.surplusDescription') }}
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PREDICCIÓ CONSUM ENERGIA -->
+    <div *ngIf="consumptionPrediction.length" class="container-page">
+      @if(community){
+      <h4 class="mb-4 text-center">{{ t('energy.titleActivesConsumption') }}</h4>
+      }
+      @else{
+        <h4 class="mb-4 text-center">{{ t('energy.titleConsumption') }}</h4>
+      }
+      <div class="row">
+        @for (prediction of consumptionPrediction; track $index) {
+          <div class="col-6 col-sm-4 col-md-2 d-flex flex-column mb-3">
+            @if (prediction.value > -1) {
+            <div class="circle consumption">{{ prediction.value }} kWh</div>
+            }
+            @else {
+              <div class="circle unavailable text-center">{{ t('energy.unavailable') }}</div>
+            }
+            <div class="text-center text-capitalize mt-2">{{ prediction.date }}</div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!--  -->
+
+  </div>
+
+  <div *ngIf="loading" class="text-center my-5">
+    <i class="fa-solid fa-spinner fa-spin fs-2"></i>
+  </div>
+</ng-container>

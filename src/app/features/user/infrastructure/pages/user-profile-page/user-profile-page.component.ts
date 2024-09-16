@@ -11,15 +11,17 @@ import {ZertipowerService} from "../../../../../shared/infrastructure/services/z
 import Swal from "sweetalert2";
 import {EventBus} from "../../../../../shared/domain/EventBus";
 import {UserProfileChangedEvent} from "../../../../auth/domain/UserProfileChangedEvent";
+import {TranslocoDirective, TranslocoService} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-user-profile-page',
   standalone: true,
-  imports: [
-    NgClass,
-    AsyncPipe,
-    ReactiveFormsModule
-  ],
+    imports: [
+        NgClass,
+        AsyncPipe,
+        ReactiveFormsModule,
+        TranslocoDirective
+    ],
   templateUrl: './user-profile-page.component.html',
   styleUrl: './user-profile-page.component.scss'
 })
@@ -39,6 +41,8 @@ export class UserProfilePageComponent implements OnInit {
     private readonly formBuilder: FormBuilder,
     private readonly zertipower: ZertipowerService,
     private readonly eventBus: EventBus,
+    private readonly translocoService:TranslocoService
+
   ) {
   }
 
@@ -73,16 +77,16 @@ export class UserProfilePageComponent implements OnInit {
       await this.eventBus.publishEvents(new UserProfileChangedEvent());
       await Swal.fire({
         icon: 'success',
-        title: "Perfil actualitzat correctament",
-        confirmButtonText: "D'acord"
+        title: this.translocoService.translate('PROFILE.texts.updated'),
+        confirmButtonText: this.translocoService.translate('PROFILE.texts.agree')
       });
     }catch (error){
 
       await Swal.fire({
         icon: 'error',
-        title: "Error al actualitzar el perfil",
-        text: "Torna-ho a intentar en uns minuts",
-        confirmButtonText: "D'acord"
+        title: this.translocoService.translate('PROFILE.texts.error'),
+        text: this.translocoService.translate('PROFILE.texts.errorMessage'),
+        confirmButtonText: this.translocoService.translate('PROFILE.texts.agree')
       });
       console.log(error)
     }

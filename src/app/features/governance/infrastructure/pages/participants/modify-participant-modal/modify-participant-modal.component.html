@@ -1,23 +1,26 @@
-<div class="modal-header border-0">
-  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
-</div>
-<div class="modal-body pt-0">
+<ng-container *transloco="let t; prefix: 'PARTICIPANTS'">
+  <div class="modal-header border-0">
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body pt-0">
 
-  <div class="mb-3">
-    <label class="form-label">Nom complet</label>
-    <input class="form-control bg-white border-secondary" placeholder="nom" [(ngModel)]="participant.name">
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Correu electrònic</label>
-    <input class="form-control bg-white border-secondary" placeholder="correu@gmail.com" [(ngModel)]="participant.email">
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Beta</label>
-    <input class="form-control bg-white border-secondary" placeholder="p.e.: 5000" [(ngModel)]="participant.shares">
-  </div>
+    <div class="mb-3">
+      <label class="form-label">{{ t('modals.modify.nameLabel') }}</label>
+      <input class="form-control bg-white border-secondary" placeholder="{{ t('modals.modify.namePlaceholder') }}" [(ngModel)]="participant.name">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">{{ t('modals.modify.emailLabel') }}</label>
+      <input class="form-control bg-white border-secondary" placeholder="{{ t('modals.modify.emailPlaceholder') }}" [(ngModel)]="participant.email">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">{{ t('modals.modify.sharesLabel') }}</label>
+      <input class="form-control bg-white border-secondary" placeholder="{{ t('modals.modify.sharesPlaceholder') }}" [(ngModel)]="participant.shares">
+    </div>
 
-</div>
-<div class="modal-footer border-0 justify-content-center">
-  <button type="button" class="btn btn-outline-dark" (click)="saveParticipant()">Guardar</button>
-  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Tancar</button>
-</div>
+  </div>
+  <div class="modal-footer border-0 justify-content-center">
+    <button type="button" class="btn btn-outline-dark" (click)="saveParticipant()">{{'GENERIC.texts.save' | transloco}}</button>
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">{{'GENERIC.texts.close' | transloco}}</button>
+  </div>
+</ng-container>
+

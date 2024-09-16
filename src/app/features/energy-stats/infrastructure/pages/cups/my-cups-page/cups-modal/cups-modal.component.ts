@@ -5,22 +5,31 @@ import {UserCups} from "../../../../../../user/infrastructure/services/user-stor
 import {FormsModule} from "@angular/forms";
 import {ZertipowerService} from "../../../../../../../shared/infrastructure/services/zertipower/zertipower.service";
 import Swal from "sweetalert2";
+import {TranslocoDirective, TranslocoPipe} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-cups-modal',
   standalone: true,
   imports: [
     NgIf,
-    FormsModule
+    FormsModule,
+    TranslocoDirective,
+    TranslocoPipe
   ],
   templateUrl: './cups-modal.component.html',
   styleUrl: './cups-modal.component.scss'
 })
 export class CupsModalComponent implements AfterViewInit{
 
-  @Input() cups?: UserCups | undefined
-  reference: string = ''
-  loading: boolean = false
+  @Input() cups?: UserCups | undefined;
+  reference: string = '';
+  loading: boolean = false;
+  energyBlocks:any = {
+    provider:0,
+    valle:0,
+    llano:0,
+    punta:0
+  };
 
   constructor(
     public readonly activeModal: NgbActiveModal,

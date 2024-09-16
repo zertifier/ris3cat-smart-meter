@@ -10,18 +10,20 @@ import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {TextShorterPipe} from "@shared/infrastructure/pipes/wallet-address-shortener.pipe";
 import {CalendarModule} from "primeng/calendar";
 import {FormsModule} from "@angular/forms";
+import {TranslocoDirective} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-stats',
   standalone: true,
-  imports: [
-    NgIf,
-    NgForOf,
-    NgClass,
-    TextShorterPipe,
-    CalendarModule,
-    FormsModule
-  ],
+    imports: [
+        NgIf,
+        NgForOf,
+        NgClass,
+        TextShorterPipe,
+        CalendarModule,
+        FormsModule,
+        TranslocoDirective
+    ],
   templateUrl: './stats.component.html',
   styleUrl: './stats.component.scss'
 })

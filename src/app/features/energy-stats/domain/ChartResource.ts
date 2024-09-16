@@ -4,5 +4,6 @@
  */
 export enum ChartResource {
   ENERGY = 'energy',
-  PRICE = 'price'
+  PRICE = 'price',
+  WEIGHT = 'weight'
 }

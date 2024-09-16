@@ -1,0 +1,36 @@
+.circle {
+    width: 100px; 
+    height: 100px;
+    color: white; /* Color del texto dentro del círculo */
+    border-radius: 50%; /* Esto hace que el div sea un círculo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto; /* Centra el círculo dentro de su contenedor */
+    font-size: 16px; /* Ajusta el tamaño del texto según lo necesario */
+  }
+
+  @media (max-width: 768px) {
+    .circle {
+      width: 65px; 
+      height: 65px;
+      font-size: 10px;
+    }
+  }
+
+  .consumption{
+    background-color: #D35400;
+  }
+
+  .unavailable{
+    background-color: #BFBFBF;
+    color:#5F7187;
+  }
+
+  .surplus{
+    background-color: #3498DB;
+  }
+
+  .production{
+    background-color: #229954;
+  }

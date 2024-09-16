@@ -5,7 +5,15 @@
   align-items: center;
   justify-content: center;
   color: white;
-  max-width: 175px;
+  max-width: 205px;
   font-weight: bold;
   font-size: 1.2rem;
+}
+
+.stat-display .value{
+  line-height: 2rem;
+}
+
+.stat-display .label{
+  line-height: 1rem;
 }

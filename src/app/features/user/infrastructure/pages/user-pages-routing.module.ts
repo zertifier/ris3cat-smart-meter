@@ -2,7 +2,8 @@ import {Routes} from "@angular/router";
 
 export enum USER_ROUTE_NAMES {
   PROFILE = 'profile',
-  WALLET = 'wallet'
+  WALLET = 'wallet',
+  INTEGRATIONS = 'integrations'
 }
 
 export const routes: Routes = [
@@ -22,6 +23,20 @@ export const routes: Routes = [
         loadComponent: () => import('./user-wallet-page/user-wallet-page.component').then(c => c.UserWalletPageComponent),
         data: {
           name: USER_ROUTE_NAMES.WALLET
+        }
+      },
+      {
+        path: 'integrations',
+        loadComponent: () => import('./integrations-page/integrations-page.component').then(c => c.IntegrationsPageComponent),
+        data: {
+          name: USER_ROUTE_NAMES.INTEGRATIONS
+        }
+      },
+      {
+        path: 'notifications',
+        loadComponent: () => import('./notifications-page/notifications-page.component').then(c => c.NotificationsPageComponent),
+        data: {
+          name: USER_ROUTE_NAMES.INTEGRATIONS
         }
       },
       {

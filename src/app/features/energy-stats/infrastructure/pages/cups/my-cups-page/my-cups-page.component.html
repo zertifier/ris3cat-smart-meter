@@ -1,0 +1,199 @@
+<ng-container *transloco="let t; prefix: 'MY-CUPS'">
+
+  <div class="container-page">
+
+
+    <div class="row justify-content-center justify-content-md-start g-2 mb-3">
+      <div class="col-12 col-md text-center text-md-start">
+        <h4 style="font-weight: 600;">{{ t('title') }}</h4>
+      </div>
+      <div class="col-auto">
+        <div class="input-group">
+          <select class="form-select bg-white border-2 border-primary d-inline" (change)="selectCups($event)">
+            @for (cup of (cups$ | async); track $index) {
+              <!--            <option [selected]="$index === (selectedCupsIndex$ | async)" [value]="$index">{{ cup.cupsCode
+              }}</option>-->
+              <option [selected]="$index === (selectedCupsIndex$ | async)" [value]="$index">{{
+                  cup.reference ||
+                  cup.cupsCode
+                }}
+              </option>
+            }
+            <option value=-1> {{ t('texts.allCups') }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-auto">
+        <button class="btn btn-primary bg-primary" (click)="openEditModal()"
+                style="min-width: 65px; min-height: 40px">
+          <i class="fa-solid fa-pencil"></i>
+        </button>
+        <button class="btn btn-secondary bg-secondary d-none" style="min-width: 65px; min-height: 40px">
+          <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-4 text-center text-md-start">
+        <p class="mb-0 fw-semibold" *ngIf="communityData">
+          {{ t('texts.info') }}
+        </p>
+
+        <p class="mb-0">CUPS: <span class="color-tertiary fw-semibold">{{ getSelectedCupsCode() | async }}</span></p>
+
+
+        @if (surplusDistribution$ | async) {
+          <p class="mb-0">{{ t('texts.assignedProd') }}: <span class="color-tertiary fw-semibold me-1">{{
+              surplusDistribution$ | async
+            }}%</span>
+            <app-question-badge>
+              {{ t('tooltips.assignedProd') }}
+            </app-question-badge>
+          </p>
+        } @else {
+          <p class="mb-0">{{ t('texts.assignedProd') }}
+            : <span class="color-tertiary fw-semibold">0%</span></p>
+          <app-question-badge>
+            {{ t('tooltips.assignedProd') }}
+          </app-question-badge>
+        }
+
+        <p class="mb-0"><i class="fa-solid fa-battery-full me-2"></i> <span class="color-tertiary fw-semibold">0%</span>
+        </p>
+      </div>
+
+
+      <div class="col-md-4 text-center text-md-end mt-3 my-md-0">
+        <p class="mb-0 fw-semibold" *ngIf="communityData">
+          {{ t('texts.communityPrices') }}
+        </p>
+
+        @if (communityData && communityData.energyPrice) {
+          <div class="mb-0">
+            <span class="price-tables-label">{{ t('texts.sellingPrice') }} :</span>
+            <b class="color-tertiary fw-semibold"> {{ communityData.energyPrice }}€/kWh </b>
+          </div>
+          <div class="mb-0">
+            <span class="price-tables-label">{{ t('texts.punta') }} :</span>
+            <b class="color-tertiary fw-semibold"> {{ communityData.energyPrice }}€/kWh </b>
+          </div>
+          <div class="mb-0">
+            <span class="price-tables-label">{{ t('texts.llano') }} :</span>
+            <b class="color-tertiary fw-semibold"> {{ communityData.energyPrice }}€/kWh </b>
+          </div>
+          <div class="mb-0">
+            <span class="price-tables-label">{{ t('texts.valle') }} :</span>
+            <b class="color-tertiary fw-semibold"> {{ communityData.energyPrice }}€/kWh </b>
+          </div>
+        }
+
+      </div>
+      <div class="col-md-4 text-center text-md-end mt-3 my-md-0">
+        <p class="mb-0 fw-semibold" *ngIf="communityData">
+          {{ t('texts.providerPrices') }}
+        </p>
+
+        @if (communityData && communityData.energyPrice) {
+          <div class="mb-0">
+            <span class="price-tables-label">{{ t('texts.sellingPrice') }} :</span>
+            <b class="color-tertiary fw-semibold"> 0.06 €/kWh </b>
+          </div>
+          <div class="mb-0">
+            <span class="price-tables-label">{{ t('texts.punta') }} :</span>
+            <b class="color-tertiary fw-semibold"> 0.19 €/kWh </b>
+          </div>
+          <div class="mb-0">
+            <span class=" price-tables-label">{{ t('texts.llano') }} :</span>
+            <b class="color-tertiary fw-semibold"> 0.13 €/kWh </b>
+          </div>
+          <div class="mb-0">
+            <span class="price-tables-label">{{ t('texts.valle') }} :</span>
+            <b class="color-tertiary fw-semibold"> 0.10 €/kWh </b>
+          </div>
+        }
+      </div>
+
+    </div>
+
+  </div>
+  <div class="container-page bg-white">
+
+    <h4 [ngbTooltip]=" (lastUpdate$ | async) ? t('texts.updatedAt') + ' ' + (lastUpdate$ | async) : '' "
+        class="text-center">{{ t('texts.liveWaste') }} <i
+      class="ms-1 fa-solid fa-rss fa-fade text-success"></i></h4>
+
+    <div class="row justify-content-around w-100">
+
+      <div class="col-6 col-lg my-3">
+
+        @if (isValidNumber(powerFlow().buy) && powerFlow().buy > 0) {
+          <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.CONSUMPTION"
+                            label="{{ t('texts.consumption') }}" [text]="powerFlow().buy.toFixed(2)"/>
+        } @else {
+          <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
+                            label="{{ t('texts.consumption') }}" [text]="t('texts.unavailable')"/>
+        }
+      </div>
+
+      <div class="col-6 col-lg my-3">
+
+        @if (isValidNumber(powerFlow().inHouse) && powerFlow().inHouse > 0) {
+          <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
+                            label="{{ t('texts.selfConsumption') }}" [text]="powerFlow().inHouse.toFixed(2)"/>
+        } @else {
+          <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
+                            label="{{ t('texts.selfConsumption') }}" [text]="t('texts.unavailable')"/>
+        }
+
+      </div>
+
+      <div class="col-6 col-lg my-3">
+        @if (isValidNumber(powerFlow().production) && (lastUpdate$ | async)) {
+          <app-stat-display width="20%"
+                            [color]="StatsColors.COMMUNITY_PRODUCTION" label="{{ t('texts.generatedEnergy') }}"
+                            [text]="powerFlow().production.toFixed(2)"/>
+        } @else {
+          <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
+                            label="{{ t('texts.generatedEnergy') }}" [text]="t('texts.unavailable')"/>
+        }
+      </div>
+
+      <div class="col-6 col-lg my-3">
+        @if (isValidNumber(powerFlow().sell) && powerFlow().sell > 0) {
+          <app-stat-display [disabled]="powerFlow().sell === 0" width="20%" [color]="StatsColors.SURPLUS"
+                            label="{{ t('texts.surplus') }}" [text]="powerFlow().sell.toFixed(2)"/>
+        } @else {
+          <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
+                            label="{{ t('texts.surplus') }}" [text]="t('texts.unavailable')"/>
+        }
+      </div>
+    </div>
+
+    <div class="w-100" style="margin-bottom: 2rem;">
+      <app-consumption-items [items]="consumptionItems"/>
+    </div>
+  </div>
+  <div class="container-page">
+
+
+    <div style="margin-bottom: 2rem;">
+      <app-historic-chart [chartType]="'cups'"/>
+    </div>
+
+  </div>
+
+  <div class="row container-page" style="background-color: white;">
+    <div class="col-12">
+      <!-- <div class="d-flex justify-content-center prediction-container"> -->
+      <app-metereologic-prediction/>
+      <!-- </div> -->
+    </div>
+  </div>
+
+
+  <app-energy-prediction [community]="false"/>
+
+
+</ng-container>

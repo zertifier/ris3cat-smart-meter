@@ -1,0 +1,41 @@
+<ng-container *transloco="let t; prefix: 'HISTORIC-CHART'">
+  <div class="row mx-0 justify-content-center">
+    <div class="col my-3 text-center">
+      <h5>{{ t('texts.chartLabels.totalProduction') }}</h5>
+      <span>{{ totalProduction | number:'1.0-2': 'es' }} {{ chartDataTypeSymbol }}</span>
+    </div>
+    <div class="col my-3 text-center">
+      <h5>{{ t('texts.chartLabels.totalActiveProduction') }}</h5>
+      <span>{{ totalActiveProduction | number:'1.0-2': 'es' }} {{ chartDataTypeSymbol }}</span>
+    </div>
+    <div class="col my-3 text-center">
+      <h5>{{ t('texts.chartLabels.totalConsumption') }}</h5>
+      <span>{{ (cce ? totalConsumptionVirtual : totalConsumption) | number:'1.0-2': 'es' }} {{ chartDataTypeSymbol }}</span>
+    </div>
+    <div class="col my-3 text-center">
+      <h5>{{ t('texts.chartLabels.totalSurplus') }}</h5>
+      <span>{{  (cce ? totalSurplusVirtual : totalSurplus) | number:'1.0-2': 'es' }} {{ chartDataTypeSymbol }}</span>
+    </div>
+    <div class="col my-3 text-center">
+      <h5>{{ t('texts.chartLabels.totalCo2') }}
+        <app-question-badge>
+          <div class="my-3">
+            {{ t('texts.chartLabels.totalCo2Badge') }}
+          </div>
+        </app-question-badge>
+      </h5>
+      <span>{{ totalCo2 | number:'1.0-2': 'es' }} tn CO2</span>
+
+    </div>
+  </div>
+
+
+  <div *ngIf="showCommunity && chartDataType == 'energy'" class="mt-5">
+    <div class="mx-auto" style="max-width: 400px">
+      <h4 class="text-center">{{ t('texts.chartLabels.totalShared') }}</h4>
+      <canvas #chart></canvas>
+    </div>
+
+  </div>
+
+</ng-container>

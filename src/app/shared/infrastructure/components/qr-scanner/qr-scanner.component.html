@@ -1,0 +1,11 @@
+
+
+<div class="input-group">
+  <ng-content/>
+  <button class="d-flex justify-content-center align-items-center" [ngClass]="btnClasses ? btnClasses : defaultClasses" (click)="openQrModal()"
+          [style]="{'width': btnPxWidth || '50px'}">
+    <i class="fa-solid fa-camera"></i>
+  </button>
+</div>
+
+

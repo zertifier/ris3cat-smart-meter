@@ -16,6 +16,7 @@ import {
   ValidationHintComponent
 } from "@shared/infrastructure/components/validation-hint/validation-hint.component";
 import {nifValidator} from "@shared/infrastructure/form-validators/nif-validator";
+import { TranslocoService, TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-datadis-register-form',
@@ -24,7 +25,8 @@ import {nifValidator} from "@shared/infrastructure/form-validators/nif-validator
     QuestionBadgeComponent,
     ReactiveFormsModule,
     JsonPipe,
-    ValidationHintComponent
+    ValidationHintComponent,
+    TranslocoDirective
   ],
   templateUrl: './datadis-register-form.component.html',
   styleUrl: './datadis-register-form.component.scss'
@@ -46,6 +48,7 @@ export class DatadisRegisterFormComponent {
     private userStore: UserStoreService,
     private eventBus: EventBus,
     private router: Router,
+    private readonly translocoService:TranslocoService
   ) {
   }
 
@@ -66,9 +69,15 @@ export class DatadisRegisterFormComponent {
     const customerId = this.userStore.snapshotOnly(state => state.user!.customer_id);
     try {
       await this.zertipower.cups.registerDatadis(customerId!, cups!, dni!, username!, password!);
+      Swal.fire({
+        title: this.translocoService.translate('DATADIS-REGISTER.modals.successText'),
+        timer: 2000,
+        icon: "success",
+      });
     } catch (err) {
       Swal.fire({
-        title: 'Hi ha hagut un error',
+        title: this.translocoService.translate('DATADIS-REGISTER.modals.errorText'),
+        timer: 2000,
         icon: "error",
       });
       return;

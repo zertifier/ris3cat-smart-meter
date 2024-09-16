@@ -1,48 +1,59 @@
 <ul
   class="navbar-container bg-primary navbar-nav justify-content-between w-100 d-flex flex-column flex-lg-row align-items-center">
-  @if ((hideLogo$ | async) === false) {
+
     <li class="nav-item me-auto">
-      <app-logo [width]="(logoWidth$ | async) || ''"/>
-    </li>
-  }
-  <div class="d-flex flex-wrap gap-4 p-4 align-items-center">
-    <li class="nav-item">
-      <a class="nav-link" [routerLink]="'/energy-stats/community'" [routerLinkActive]="'active'">La
-        meva comunitat</a>
+      <app-logo [height]="(logoHeight$ | async) || ''"/>
     </li>
 
+  <div class="d-flex flex-wrap gap-3 gap-xl-4 p-4 align-items-center">
     <li class="nav-item">
-      <a class="nav-link" [routerLink]="'/energy-stats/my-cup'" [routerLinkActive]="'active'">El meu comptador</a>
+      <a class="nav-link" [routerLink]="'/energy-stats/community'" [routerLinkActive]="'active'">
+        {{'MY-COMMUNITY.navbar' | transloco}}
+      </a>
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" [routerLink]="'/energy-stats/share'" [routerLinkActive]="'active'">Compartir
-        energia</a>
+      <a class="nav-link" [routerLink]="'/energy-stats/my-cups'" [routerLinkActive]="'active'">
+        {{'MY-CUPS.navbar' | transloco}}
+      </a>
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" [routerLink]="'/energy-stats/stats'" [routerLinkActive]="'active'">Estadístiques</a>
+      <a class="nav-link" *ngIf="hasCommunity" [routerLink]="'/energy-stats/share'" [routerLinkActive]="'active'">
+        {{'SHARE-ENERGY.navbar' | transloco}}
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" *ngIf="hasCommunity" [routerLink]="'/energy-stats/stats'" [routerLinkActive]="'active'">{{'STATS.navbar' | transloco}}</a>
     </li>
 
     <li class="nav-item">
 
-      <div ngbDropdown class="d-inline-block">
-        <button type="button" class="nav-link" id="governDropdown" ngbDropdownToggle>
-          Governança
-        </button>
+      <!-- [routerLink]="'/governance'" -->
+      <div ngbDropdown class="d-inline-block" *ngIf="hasCommunity">
+        <a
+        class="nav-link"
+        id="governDropdown"
+        ngbDropdownToggle
+        [routerLinkActive]="'active'"
+        [routerLinkActiveOptions]="{ exact: false }" style="cursor: pointer">
+        {{'GOVERNOR.navbar' | transloco}}
+      </a>
+        <!-- <button type="button" class="nav-link" id="governDropdown" ngbDropdownToggle  [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: false }" [routerLink]="'/governance'">
+          {{'GOVERNOR.navbar' | transloco}}
+        </button> -->
         <div class="bg-primary dropdown-menu px-0 custom-dropdown" ngbDropdownMenu aria-labelledby="governDropdown">
           <a ngbDropdownItem class="nav-link px-2" [routerLink]="'/governance/proposals'"
-             [routerLinkActive]="'active'">Propostes</a>
+             [routerLinkActive]="'active'">{{'PROPOSALS.navbar' | transloco}}</a>
           <a [ngClass]="{'d-none': userRole?.toLowerCase() == 'user'}" ngbDropdownItem class="nav-link px-2" [routerLink]="'/governance/participants'"
-             [routerLinkActive]="'active'">Participants</a>
+             [routerLinkActive]="'active'">{{'PARTICIPANTS.navbar' | transloco}}</a>
         </div>
 
 
       </div>
     </li>
-    <li>
-      <a class="nav-link text-white" [routerLink]="'/energy-stats/data-source-health'" [routerLinkActive]="'active'">Status</a>
-    </li>
+
   </div>
 
   <div>
