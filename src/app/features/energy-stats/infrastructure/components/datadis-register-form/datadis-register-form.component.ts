@@ -1,21 +1,21 @@
 import {Component} from '@angular/core';
 import {
   QuestionBadgeComponent
-} from "../../../../../shared/infrastructure/components/question-badge/question-badge.component";
+} from "@shared/infrastructure/components/question-badge/question-badge.component";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
 import {JsonPipe} from "@angular/common";
 import Swal from "sweetalert2";
-import {ZertipowerService} from "../../../../../shared/infrastructure/services/zertipower/zertipower.service";
-import {UserStoreService} from "../../../../user/infrastructure/services/user-store.service";
-import {EventBus} from "../../../../../shared/domain/EventBus";
+import {ZertipowerService} from "@shared/infrastructure/services/zertipower/zertipower.service";
+import {UserStoreService} from "@features/user/infrastructure/services/user-store.service";
+import {EventBus} from "@shared/domain/EventBus";
 import {filter, first} from "rxjs";
 import {Router} from "@angular/router";
-import {UserCupsChangedEvent} from "../../../../user/domain/UserCupsChangedEvent";
+import {UserCupsChangedEvent} from "@features/user/domain/UserCupsChangedEvent";
 import {
   ValidationHintComponent
-} from "../../../../../shared/infrastructure/components/validation-hint/validation-hint.component";
-import {nifValidator} from "../../../../../shared/infrastructure/form-validators/nif-validator";
+} from "@shared/infrastructure/components/validation-hint/validation-hint.component";
+import {nifValidator} from "@shared/infrastructure/form-validators/nif-validator";
 
 @Component({
   selector: 'app-datadis-register-form',
@@ -30,7 +30,6 @@ import {nifValidator} from "../../../../../shared/infrastructure/form-validators
   styleUrl: './datadis-register-form.component.scss'
 })
 export class DatadisRegisterFormComponent {
-
   hidePassword = true;
 
   protected formData = this.formBuilder.group({

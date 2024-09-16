@@ -1,18 +1,91 @@
-<div class="container mt-5">
-  <h4>La meva wallet</h4>
-
-  <form>
+<h4 class="mt-5 mx-5">La meva cartera</h4>
+<div class="container mt-5 my-5">
+  <div>
     <div class="mb-3">
-      <label for="wallet">Wallet</label>
-      <input readonly id="wallet" type="text" class="form-control form-control-lg" [value]="wallet$ | async">
+      <label class="form-label" for="wallet">
+        Identitat
+        <app-question-badge>
+          <div class="my-3">
+            La identitat permet identificar el teu usuari a dintre de la BlockChain.
+          </div>
+        </app-question-badge>
+      </label>
+      <input readonly id="wallet" type="text" class="form-control form-control-lg bg-white border-secondary border-2 shadow-none" [value]="wallet$ | async">
     </div>
 
-    <div>
-      <label for="balance">Saldo</label>
-      <div class="input-group">
-        <input type="text" class="form-control form-control-lg" id="balance" placeholder="">
-        <button class="btn btn-primary" type="button">Token EKW</button>
+    <hr class="my-4 border-tertiary border-2" style="max-width: 1040px;">
+    <p class="mb-5">Per a relatizar una transferència, tria que vols traspassar</p>
+
+    <div class="my-3">
+      <label class="form-label">
+        Saldo energètic
+
+        <app-question-badge>
+          <div class="my-3">
+            Aquest saldo es farà servir per a la compra d'energia a la comunitat.
+          </div>
+        </app-question-badge>
+      </label>
+      <div class="d-block d-lg-flex">
+        <div class="input-group form-div-width">
+          <input readonly type="text" class="form-control form-control-lg bg-white border-secondary border-2 shadow-none" placeholder=""
+                 [ngModel]="ekwBalance | noRoundDecimal: 4">
+          <button class="btn btn-tertiary rounded-end-3 form-button" type="button">EKW</button>
+
+        </div>
+        <button class="btn btn-secondary bg-primary ms-0 ms-lg-3 mt-2 mt-lg-0 rounded-3" type="button" (click)="openTransferModal('EKW', ekwBalance)">
+          Transferir saldo
+        </button>
       </div>
+
     </div>
-  </form>
+
+    <div class="my-3">
+      <label class="form-label">
+        Saldo
+
+        <app-question-badge>
+          <div class="my-3">
+            Saldo per les transaccions.
+          </div>
+        </app-question-badge>
+      </label>
+      <div class="d-block d-lg-flex">
+        <div class="input-group form-div-width">
+          <input readonly type="text" class="form-control form-control-lg bg-white border-secondary border-2 shadow-none" placeholder=""
+                 [ngModel]="chainBalance | noRoundDecimal: 4">
+          <button class="btn btn-tertiary rounded-end-3 form-button" type="button">XDAI</button>
+
+        </div>
+        <button class="btn btn-secondary bg-primary ms-0 ms-lg-3 mt-2 mt-lg-0 rounded-3" type="button" (click)="openTransferModal('XDAI', chainBalance)">
+          Transferir XDAI
+        </button>
+
+      </div>
+
+    </div>
+
+    <div *ngIf="communityId" class="my-3">
+      <label class="form-label">
+        Participacions de la comunitat
+
+        <app-question-badge>
+          <div class="my-3">
+            Són les Participacions que té la comunitat.
+          </div>
+        </app-question-badge>
+      </label>
+      <div class="d-block d-lg-flex">
+        <div class="input-group form-div-width">
+          <input readonly type="text" class="form-control form-control-lg bg-white border-secondary border-2 shadow-none" placeholder="" [ngModel]="voteWeight">
+          <button class="btn btn-tertiary rounded-end-3 form-button" type="button">DAO</button>
+        </div>
+        <button class="btn btn-secondary bg-primary ms-0 ms-lg-3 mt-2 mt-lg-0 rounded-3" type="button" (click)="openTransferModal('DAO', voteWeight)">
+          Transferir participacions
+        </button>
+      </div>
+
+    </div>
+
+  </div>
 </div>

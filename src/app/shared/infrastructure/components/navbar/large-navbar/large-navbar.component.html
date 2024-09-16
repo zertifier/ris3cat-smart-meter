@@ -12,9 +12,7 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" [routerLink]="'/energy-stats/my-cup'" [routerLinkActive]="'active'">El
-        meu
-        CUPS</a>
+      <a class="nav-link" [routerLink]="'/energy-stats/my-cup'" [routerLinkActive]="'active'">El meu comptador</a>
     </li>
 
     <li class="nav-item">
@@ -22,18 +20,23 @@
         energia</a>
     </li>
 
-    <li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="'/energy-stats/stats'" [routerLinkActive]="'active'">Estadístiques</a>
+    </li>
+
+    <li class="nav-item">
 
       <div ngbDropdown class="d-inline-block">
-        <button type="button" class="nav-item" id="governDropdown" ngbDropdownToggle>
+        <button type="button" class="nav-link" id="governDropdown" ngbDropdownToggle>
           Governança
         </button>
-        <div class="bg-primary px-2" ngbDropdownMenu aria-labelledby="governDropdown">
-          <a ngbDropdownItem class="nav-link bg-transparent" [routerLink]="'/governance/proposals'"
+        <div class="bg-primary dropdown-menu px-0 custom-dropdown" ngbDropdownMenu aria-labelledby="governDropdown">
+          <a ngbDropdownItem class="nav-link px-2" [routerLink]="'/governance/proposals'"
              [routerLinkActive]="'active'">Propostes</a>
-          <a ngbDropdownItem class="nav-link bg-transparent" [routerLink]="'/governance/participants'"
+          <a [ngClass]="{'d-none': userRole?.toLowerCase() == 'user'}" ngbDropdownItem class="nav-link px-2" [routerLink]="'/governance/participants'"
              [routerLinkActive]="'active'">Participants</a>
         </div>
+
 
       </div>
     </li>

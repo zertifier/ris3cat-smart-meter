@@ -18,7 +18,7 @@ export class LogoutActionService {
   }
 
   /**
-   * Logout and reset **auth store** and **user store**
+   * Logout and reset {@link AuthStoreService} and {@link UserStoreService}
    */
   public async run() {
     const refreshToken = this.authStore.snapshotOnly(state => state.refreshToken);

@@ -17,19 +17,7 @@ import {ChartLegendComponent} from "../chart-legend/chart-legend.component";
 import {Chart} from "chart.js";
 import {ChartEntity} from "../../../../domain/ChartEntity";
 import {AsyncPipe, NgIf} from "@angular/common";
-
-import zoomPlugin, {resetZoom} from 'chartjs-plugin-zoom';
-
-Chart.register(zoomPlugin);
-
-export interface ChartDataset {
-  label: string,
-  color: string,
-  order?: number,
-  stack?: string,
-  data: unknown[],
-  tooltipText?: string,
-}
+import {ChartDataset} from "@shared/infrastructure/interfaces/ChartDataset";
 
 @Component({
   selector: 'app-data-chart',
@@ -52,7 +40,6 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
   @Input({required: true}) labels: string[] = [];
   @ViewChild('chart') chartElement!: ElementRef;
   private chart!: Chart;
-  // legendLabels: DataLabel[] = [];
   private subscriptions: Subscription[] = [];
 
   private textColorSecondary = 'rgba(0, 0, 0, 0.54)';
@@ -97,18 +84,6 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
       mode: 'index',
     },
     plugins: {
-      zoom: {
-        zoom: {
-          enabled: false,
-          // wheel: {
-          //   enabled: false,
-          // },
-          // pinch: {
-          //   enabled: true,
-          // },
-          // mode: 'xy',
-        }
-      },
       legend: {
         display: false
       },
@@ -119,9 +94,21 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
             let {formattedValue} = context;
             const chartEntity = this.chartStoreService.snapshotOnly(state => state);
 
+            // To show the bars on the same stack and overlying them (like a z-index) some adjustments need to be made
+            // chartjs don't allow to make something similar to z-index. When two bars are on the same stack there
+            // are one above the other. The values are "summed" the top bar don't start at 0 start at the end of the
+            // previous bar this can confuse the user. To solve this the end bar value is calculated by this way:
+            // take the original value and rest the previous bar value. When the bars are displayed they seem to be one
+            // after the another. ej.
+            //
+            // production = production - productionActives.
+            //
+            // The problem comes when it's necessary to display the tooltip. It has to show the correct values.
             if (context.dataset.label === "Producció" && chartEntity.selectedChartEntity === ChartEntity.COMMUNITIES) {
               const value = context.raw;
               const register = this.chartStoreService.snapshot().lastFetchedStats[context.dataIndex];
+              // Here the correct production es being calculated to show the correct value on tooltip
+              // production = production + productionActives
               const total = parseFloat(register.productionActives + '') + value;
               formattedValue = total.toLocaleString();
             }
@@ -138,14 +125,17 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
 
             if (chartEntity.selectedChartEntity === ChartEntity.COMMUNITIES) {
               const stat = this.chartStoreService.snapshot().lastFetchedStats[context.dataIndex];
-
               if (context.dataset.label === "Excedent actius") {
                 labels.push(`Membres actius: ${stat.activeMembers}`);
                 labels.push(`----------------`);
+
               } else if (context.dataset.label === "Producció") {
+                for (const cups of stat.communitiesCups) {
+                  if (cups.kwhOut > 0)
+                    labels.push(`${cups.reference || cups.cups} : ${cups.kwhOut || 0} KWh`)
+                }
                 // Todo: change 31 to the real number
                 labels.push(`Total membres: 31`);
-                // labels.push(`----------------`);
               }
             }
             return labels;
@@ -183,13 +173,6 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
     } else {
       this.changeToDesktop();
     }
-  }
-
-  public resetChartZoom() {
-    if (!this.chart) {
-      return;
-    }
-    resetZoom(this.chart);
   }
 
   public toggleDataset(index: number) {
@@ -330,12 +313,14 @@ export class DataChartComponent implements AfterViewInit, OnChanges, OnDestroy {
       datasets,
     }
 
-    this.chartStoreService.selectOnly(this.chartStoreService.$.params).subscribe(() => {
-      if (window.innerWidth <= 990) {
-        this.changeToMobile();
-      } else {
-        this.changeToDesktop();
-      }
-    });
+    this.subscriptions.push(
+      this.chartStoreService.selectOnly(this.chartStoreService.$.params).subscribe(() => {
+        if (window.innerWidth <= 990) {
+          this.changeToMobile();
+        } else {
+          this.changeToDesktop();
+        }
+      })
+    );
   }
 }

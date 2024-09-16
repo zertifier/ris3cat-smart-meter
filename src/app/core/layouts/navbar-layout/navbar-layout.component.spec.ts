@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { NavbarLayoutComponent } from './navbar-layout.component';
+import {NavbarLayoutComponent} from './navbar-layout.component';
 
 describe('NavbarLayoutComponent', () => {
   let component: NavbarLayoutComponent;
@@ -11,7 +11,7 @@ describe('NavbarLayoutComponent', () => {
       imports: [NavbarLayoutComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(NavbarLayoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

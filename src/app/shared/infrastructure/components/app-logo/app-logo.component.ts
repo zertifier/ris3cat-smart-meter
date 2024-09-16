@@ -1,9 +1,12 @@
 import {Component, Input, NgZone, OnInit} from '@angular/core';
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-logo',
   standalone: true,
-  imports: [],
+  imports: [
+    RouterLink
+  ],
   templateUrl: './app-logo.component.html',
   styleUrl: './app-logo.component.scss'
 })

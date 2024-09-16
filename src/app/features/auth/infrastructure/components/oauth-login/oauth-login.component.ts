@@ -13,16 +13,16 @@ import {NgOptimizedImage} from "@angular/common";
 export class OauthLoginComponent {
   @Output() webWalletLoginRequest: EventEmitter<void> = new EventEmitter<void>()
   constructor(
-    public zertiAuthServ: ZertiauthApiService,
+    public zertiauth: ZertiauthApiService,
   ) {
   }
 
   loginWithGoogle() {
-    window.location.href = this.zertiAuthServ.getAuthUrl('google');
+    window.location.href = this.zertiauth.getAuthUrl('google');
   }
 
   loginWithTwitter() {
-    window.location.href = this.zertiAuthServ.getAuthUrl('twitter');
+    window.location.href = this.zertiauth.getAuthUrl('twitter');
   }
 
   connectWithWebWallet() {

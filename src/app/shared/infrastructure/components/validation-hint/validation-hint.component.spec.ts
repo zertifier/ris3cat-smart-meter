@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ValidationHintComponent } from './validation-hint.component';
+import {ValidationHintComponent} from './validation-hint.component';
 
 describe('ValidationHintComponent', () => {
   let component: ValidationHintComponent;
@@ -11,7 +11,7 @@ describe('ValidationHintComponent', () => {
       imports: [ValidationHintComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(ValidationHintComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -33,7 +33,7 @@
               <a class="nav-link bg-transparent py-3" [routerLink]="'/governance/proposals'"
                  [routerLinkActive]="'active'" (click)="modal.close('')">Propostes</a>
 
-              <a class="nav-link bg-transparent py-3" [routerLink]="'/governance/participants'"
+              <a [ngClass]="{'d-none': userRole?.toLowerCase() == 'user'}" class="nav-link bg-transparent py-3"  [routerLink]="'/governance/participants'"
                  [routerLinkActive]="'active'" (click)="modal.close('')">Participants</a>
             </div>
           </div>

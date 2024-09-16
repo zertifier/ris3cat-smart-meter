@@ -1,0 +1,52 @@
+<div class="container-page">
+  <h4>Estadístiques</h4>
+
+  <h5>Rànquing</h5>
+
+  <div class="row mb-4">
+    <div class="col-12 col-md-6">
+      <label class="form-label">
+        Trïa el mes que vols veure
+      </label>
+      <p-calendar [(ngModel)]="date"  iconDisplay="input" [showIcon]="true" view="month" (onClose)="getData(dataType)"
+                  [maxDate]="maxDate" [dateFormat]="'mm-yy'" styleClass="w-100"/>
+    </div>
+    <div class="col-12 col-md-6">
+      <label class="form-label">
+        Quines dades vols veure?
+      </label>
+      <select class="form-select bg-white shadow-none border-secondary" [(ngModel)]="dataType" (change)="getData(dataType)">
+        <option selected [value]="'surplus'">Usuaris que tenen més excedent</option>
+        <option [value]="'consumption'">Usuaris que tenen menys consum</option>
+      </select>
+    </div>
+  </div>
+  <div *ngIf="!loading && rankingData.length != 0" class="overflow-y-scroll" style="max-height: 440px">
+    <div >
+      <table class="table table-striped align-middle">
+        <thead>
+        <tr class="border-2 border-end-0 border-start-0 border-tertiary">
+          <th style="max-width: 18%; width: 100%" scope="col">#</th>
+          <th scope="col">Cartera</th>
+          <th style="max-width: 20%; width: 100%" scope="col">Quantitat</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let dataObject of rankingData; index as i" [ngClass]="dataObject.customerId == customerId ? 'fw-bold': ''" >
+          <td >{{ i + 1 }}</td>
+          <td>
+            {{ (dataObject.walletAddress || '' | TextShorter:6:4) || 'Anònim' }}
+            <span *ngIf="dataObject.customerId == customerId && userName">({{ userName || 'Tú' }})</span>
+          </td>
+          <td>{{ dataObject.consumption ? dataObject.consumption : dataObject.surplus }} KWH</td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+  </div>
+  <div class="mt-5" *ngIf="!loading && rankingData.length == 0">
+    <h3 class="text-center"> No hi ha cap registre</h3>
+  </div>
+</div>

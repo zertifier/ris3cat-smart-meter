@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {FooterComponent} from "../../../shared/infrastructure/components/footer/footer.component";
 import {NavbarComponent} from "../../../shared/infrastructure/components/navbar/navbar.component";
 import {RouterOutlet} from "@angular/router";

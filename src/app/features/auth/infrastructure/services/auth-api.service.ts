@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {environment} from "../../../../../environments/environment";
+import {environment} from "@environments/environment";
 import {firstValueFrom, map} from "rxjs";
 import {SKIP_AUTH_INTERCEPTOR} from "../interceptors/auth-token.interceptor";
-import {HttpResponse} from "../../../../shared/infrastructure/services/HttpResponse";
+import {HttpResponse} from "@shared/infrastructure/services/HttpResponse";
 
 @Injectable({
   providedIn: 'root'

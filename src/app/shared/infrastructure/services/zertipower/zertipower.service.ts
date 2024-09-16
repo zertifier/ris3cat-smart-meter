@@ -9,7 +9,8 @@ import {ZertipowerAuthService} from "./auth/ZertipowerAuthService";
 import {ZertipowerCommunitiesService} from "./communities/ZertipowerCommunitiesService";
 import {ZertipowerCustomersService} from "./customers/ZertipowerCustomersService";
 import {ZertipowerCupsService} from "./cups/ZertipowerCupsService";
-import {Router} from "@angular/router";
+import {ZertipowerLocationService} from "./location/ZertipowerLocationService";
+import {ZertipowerEnergyHourlyService} from "@shared/infrastructure/services/zertipower/energy-hourly/ZertipowerEnergyHourlyService";
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,8 @@ export class ZertipowerService {
   public readonly communities: ZertipowerCommunitiesService;
   public readonly customers: ZertipowerCustomersService;
   public readonly cups: ZertipowerCupsService;
+  public readonly locations: ZertipowerLocationService;
+  public readonly energyHourly: ZertipowerEnergyHourlyService;
 
   // Note, the usage of axios is because it can parse the criteria object and send it correctly.
   // Angular http client cannot do that.
@@ -50,5 +53,7 @@ export class ZertipowerService {
     this.communities = new ZertipowerCommunitiesService(this.axiosClient);
     this.customers = new ZertipowerCustomersService(this.axiosClient);
     this.cups = new ZertipowerCupsService(this.axiosClient);
+    this.locations = new ZertipowerLocationService(this.axiosClient);
+    this.energyHourly = new ZertipowerEnergyHourlyService(this.axiosClient);
   }
 }

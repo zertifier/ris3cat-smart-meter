@@ -3,7 +3,7 @@
     <h4 style="font-weight: 600;">Consum i producció</h4>
 
     <div class="d-flex flex-column">
-      <p class="fst-italic">La teva despesa en viu <span><i class="fa-solid fa-rss fa-fade text-danger"></i></span></p>
+      <p class="fst-italic">La teva despesa en viu <span><i class="fa-solid fa-rss fa-fade text-success"></i></span></p>
       @if (lastUpdate$ | async) {
         <p>Actualitzat a les {{ lastUpdate$ | async }} <span class="ms-3 text-success" style="font-size: 0.8rem;"><i
           class="fa-solid fa-circle"></i></span></p>
@@ -17,7 +17,6 @@
     <span>Membres d'aquesta
       comunitat: {{ totalMembers$ | async }}
     </span>
-    <!--    TODO update active members-->
     <span>Membres actius: {{ (activeMembers$ | async) }}</span>
     <span><i class="fa-solid fa-battery-full"></i> 0%</span>
   </div>
@@ -61,30 +60,19 @@
     </div>
   </div>
 
-<!--  <div style="margin-bottom: 5rem;">-->
-<!--    <p class="fw-bold">Despesa genèrica:</p>-->
-<!--    <p>Aquesta és una estimació mitjana a Kwh de despesa que tenen els electrodomèstics a casa.</p>-->
-<!--  </div>-->
-
-<!--  <div class="w-100" style="margin-bottom: 7rem;">-->
-<!--    <app-consumption-items [items]="consumptionItems"/>-->
-<!--  </div>-->
-
-
-<!--  <p class="mt-5">-->
-<!--    Aquest gràfic mostra la teva despesa actual segons els electrodomèstics endollats. Per a optimitzar el consum, el-->
-<!--    percentatge indica si pots afegir més electrodomèstics o treure.-->
-<!--    <span style="color: #5F7187;">-->
-<!--    Per exemple, si es mes alt vol dir que pots afegir més aparells perquè has acumulat energia per a consumir.-->
-<!--  </span>-->
-<!--  </p>-->
-
-
-<!--  <app-powerflow-gaus [production]="powerFlow().production" [sell]="powerFlow().sell"/>-->
-
   <hr>
 
   <h5 style="margin: 7rem 0 5rem 0;" class="fw-bold">Històric consum/excedent</h5>
   <app-historic-chart/>
 
+    <div class="row">
+      <div class="col-md-6">
+        <h5 style="margin: 7rem 0 5rem 0;" class="fw-bold text-center">Predicció d'energia comunitària</h5>
+        <app-energy-prediction/>
+      </div>
+      <div class="col-md-6">
+        <h5 style="margin: 7rem 0 5rem 0;" class="fw-bold text-center">Predicció metereologica</h5>
+        <app-metereologic-prediction/>
+      </div>
+    </div>
 </div>

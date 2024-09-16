@@ -1,18 +1,16 @@
-import {AfterViewInit, Component, ElementRef, OnDestroy, Renderer2, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, Renderer2, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {Proposal, ProposalsService} from "../../../services/proposals.service";
 import Swal from "sweetalert2";
 import {CalendarModule} from "primeng/calendar";
 import {DatePipe, DecimalPipe, NgClass, NgForOf, NgIf} from "@angular/common";
-import {
-  QuestionBadgeComponent
-} from "../../../../../../shared/infrastructure/components/question-badge/question-badge.component";
+import {QuestionBadgeComponent} from "@shared/infrastructure/components/question-badge/question-badge.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {ProposalStatus} from "../../../../domain/ProposalStatus";
 import {ProposalTypes} from "../../../../domain/ProposalTypes";
 import {UserVote, VotesService, VotesWithQty} from "../../../services/votes.service";
 import {NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
-import {UserStoreService} from "../../../../../user/infrastructure/services/user-store.service";
+import {UserStoreService} from "@features/user/infrastructure/services/user-store.service";
 import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 import {Subscription} from "rxjs";
 

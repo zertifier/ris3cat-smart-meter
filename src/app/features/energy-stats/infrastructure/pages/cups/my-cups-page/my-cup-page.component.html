@@ -3,7 +3,7 @@
     <h4 style="font-weight: 600;">Consum i producció</h4>
 
     <div class="d-flex flex-column">
-      <p class="fst-italic">La teva despesa en viu <span><i class="fa-solid fa-rss fa-fade text-danger"></i></span></p>
+      <p class="fst-italic">La teva despesa en viu <span><i class="fa-solid fa-rss fa-fade text-success"></i></span></p>
       <div class="d-flex justify-content-between">
         @if (lastUpdate$ | async) {
           <p>Actualitzat a les {{ lastUpdate$ | async }} <span class="text-success" style="font-size: 0.8rem;"><i
@@ -17,15 +17,28 @@
 
 
   <div class="w-100 mb-3 d-flex flex-column">
-    <div>
+    <div class="d-block d-md-flex mb-2">
       <div class="w-100 d-flex" style="max-width: 20rem">
-        <select class="form-select" (change)="selectCups($event)">
+        <select class="form-select bg-white border-2 border-primary" (change)="selectCups($event)">
           @for (cup of (cups$ | async); track $index) {
-            <option [selected]="$index === (selectedCupsIndex$ | async)" [value]="$index">{{ cup.reference }}</option>
+<!--            <option [selected]="$index === (selectedCupsIndex$ | async)" [value]="$index">{{ cup.cupsCode }}</option>-->
+            <option [selected]="$index === (selectedCupsIndex$ | async)" [value]="$index">{{ cup.reference || cup.cupsCode }}</option>
           }
         </select>
       </div>
+
+      <div class="my-3 my-md-0">
+        <button class="btn btn-primary bg-primary me-3 ms-0 ms-md-3" (click)="openEditModal()" style="min-width: 65px; min-height: 40px">
+          <i class="fa-solid fa-pencil"></i>
+        </button>
+
+        <button class="btn btn-secondary bg-secondary d-none" style="min-width: 65px; min-height: 40px">
+          <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
+
     </div>
+    <span>CUPS: {{getSelectedCupsCode() | async}}</span>
     <span>Produccio assignada: {{ surplusDistribution$ | async }}%
       <app-question-badge>
         El percentatge de l'energia produida que se li assigna a aquest CUPS
@@ -46,7 +59,7 @@
 
     <div class="col-6 col-lg my-3">
       <app-stat-display
-        [disabled]="powerFlow().inHouse === 0"
+        [disabled]="true"
         width="20%"
         [color]="StatsColors.IN_HOUSE_CONSUMPTION"
         label="Autoconsum"
@@ -76,18 +89,20 @@
     <app-consumption-items [items]="consumptionItems"/>
   </div>
 
-<!--  <p class="mt-5">-->
-<!--    Aquest gràfic mostra la teva despesa actual segons els electrodomèstics endollats. Per a optimitzar el consum, el-->
-<!--    percentatge indica si pots afegir més electrodomèstics o treure.-->
-<!--    <span style="color: #5F7187;">-->
-<!--    Per exemple, si es mes alt vol dir que pots afegir més aparells perquè has acumulat energia per a consumir.-->
-<!--  </span>-->
-<!--  </p>-->
-
-<!--  <app-powerflow-gaus [production]="powerFlow().production" [sell]="powerFlow().sell"/>-->
-
   <hr>
 
   <h5 style="margin: 10rem 0 5rem 0;" class="fw-bold">Històric consum/excedent</h5>
   <app-historic-chart/>
+
+    <div class="row">
+      <div class="col-md-6">
+        <h5 style="margin: 7rem 0 5rem 0;" class="fw-bold text-center">Predicció metereologica</h5>
+        <app-metereologic-prediction/>
+      </div>
+
+      <div class="col-md-6">
+        <h5 style="margin: 7rem 0 5rem 0;" class="fw-bold text-center">Predicció d'energia comunitària</h5>
+        <app-energy-prediction [community]="false"/>
+      </div>
+    </div>
 </div>

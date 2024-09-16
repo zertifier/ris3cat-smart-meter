@@ -14,4 +14,5 @@ export interface CupsResponseDTO {
   sensor_active: number;
   created_at: string;
   updated_at: string;
+  reference: string | null;
 }

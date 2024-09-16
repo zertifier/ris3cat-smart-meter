@@ -5,7 +5,7 @@ import {MonitoringService, PowerStats} from "../../../services/monitoring.servic
 import {StatsColors} from "../../../../domain/StatsColors";
 import {CalendarModule} from "primeng/calendar";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {UserStoreService} from "../../../../../user/infrastructure/services/user-store.service";
+import {UserStoreService} from "@features/user/infrastructure/services/user-store.service";
 import {ChartLegendComponent} from "../../../components/historic/chart-legend/chart-legend.component";
 import {DataChartComponent} from "../../../components/historic/data-chart/data-chart.component";
 import {StatDisplayComponent} from "../../../components/realtime/stat-display/stat-display.component";
@@ -15,16 +15,23 @@ import {
 } from "../../../components/realtime/consumption-items/consumption-items.component";
 import {HistoricChartComponent} from "../../../components/historic/historic-chart/historic-chart.component";
 import {map, Subscription} from "rxjs";
-import {NavbarComponent} from "../../../../../../shared/infrastructure/components/navbar/navbar.component";
-import {FooterComponent} from "../../../../../../shared/infrastructure/components/footer/footer.component";
-import {
-  QuestionBadgeComponent
-} from "../../../../../../shared/infrastructure/components/question-badge/question-badge.component";
+import {NavbarComponent} from "@shared/infrastructure/components/navbar/navbar.component";
+import {FooterComponent} from "@shared/infrastructure/components/footer/footer.component";
+import {QuestionBadgeComponent} from "@shared/infrastructure/components/question-badge/question-badge.component";
 import {MonitoringStoreService} from "../../../services/monitoring-store.service";
-import {getMonth} from "../../../../../../shared/utils/DatesUtils";
-import dayjs from "dayjs";
+import {getMonth} from "@shared/utils/DatesUtils";
+import dayjs from "@shared/utils/dayjs";
 import {KnobModule} from "primeng/knob";
 import {PowerflowGausComponent} from "../../../components/powerflow-gaus/powerflow-gaus.component";
+import {UpdateUserCupsAction} from "@features/user/actions/update-user-cups-action.service";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {SelectCupsService} from "../../../../actions/select-cups.service";
+import {CupsModalComponent} from "./cups-modal/cups-modal.component";
+import {environment} from "@environments/environment";
+import {EnergyPredictionComponent} from "../../../components/energy-prediction/energy-prediction.component";
+import {
+  MetereologicPredictionComponent
+} from "../../../components/metereologic-prediction/metereologic-prediction.component";
 
 
 @Component({
@@ -47,7 +54,9 @@ import {PowerflowGausComponent} from "../../../components/powerflow-gaus/powerfl
     KnobModule,
     NgStyle,
     FormsModule,
-    PowerflowGausComponent
+    PowerflowGausComponent,
+    EnergyPredictionComponent,
+    MetereologicPredictionComponent
   ],
   templateUrl: './my-cup-page.component.html',
   styleUrl: './my-cup-page.component.scss'
@@ -112,7 +121,10 @@ export class MyCupPageComponent implements OnInit {
   constructor(
     private readonly monitoringService: MonitoringService,
     private readonly userStore: UserStoreService,
-    private readonly monitoringStore: MonitoringStoreService
+    private readonly monitoringStore: MonitoringStoreService,
+    private readonly ngbModal: NgbModal,
+    private updateCups: UpdateUserCupsAction,
+    private readonly selectCupsAction: SelectCupsService
   ) {
   }
 
@@ -120,6 +132,9 @@ export class MyCupPageComponent implements OnInit {
     await this.monitoringService.start();
 
     this.subscriptions.push(
+      this.selectedCupsIndex$.subscribe(index => {
+        this.selectCupsAction.run(index);
+      }),
       this.monitoringService
         .getPowerFlow()
         .subscribe(value => {
@@ -140,4 +155,30 @@ export class MyCupPageComponent implements OnInit {
     this.userStore.patchState({selectedCupsIndex: value});
   }
 
+
+  openEditModal(){
+    const modalRef = this.ngbModal.open(CupsModalComponent, {size: 'lg'})
+
+    const selectedCupsIndex = this.userStore.snapshotOnly((state) => state.selectedCupsIndex)
+    this.cups$.subscribe((cups) => {
+      modalRef.componentInstance.cups = cups[selectedCupsIndex]
+
+      modalRef.closed.subscribe(async () => {
+        const user = this.userStore.snapshotOnly(state => state.user);
+        await this.updateCups.run(user?.id!);
+      })
+    })
+
+  }
+
+  getSelectedCupsCode(){
+    return this.cups$.pipe(
+      map(cups => {
+        const selectedCupsIndex = this.userStore.snapshotOnly(state => state.selectedCupsIndex);
+        return cups[selectedCupsIndex]?.cupsCode || '-';
+      })
+    );
+  }
+
+    protected readonly environment = environment;
 }

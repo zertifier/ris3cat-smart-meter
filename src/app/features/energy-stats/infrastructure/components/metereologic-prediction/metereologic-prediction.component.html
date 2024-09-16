@@ -1,0 +1,8 @@
+<div class="w-100 row justify-content-around" style="padding-left: 1.5%">
+  @for (element of elements; track $index) {
+    <div class="col-4 d-flex flex-column mb-3" >
+      <img [src]="element.image" [alt]="element.label" style="max-width: 80px; filter: contrast(90%)" class="m-auto w-100">
+      <span class="text-center text-capitalize">{{element.label | date: 'EEEE dd/MM'}}</span>
+    </div>
+  }
+</div>

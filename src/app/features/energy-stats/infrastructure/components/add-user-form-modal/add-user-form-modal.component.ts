@@ -23,7 +23,6 @@ export class AddUserFormModalComponent {
   setSelectedUser(event: any) {
   }
   addUser(id: string) {
-    console.log(id);
     const user = this.sharingUsersService.users.find(u => u.id === id);
     if (!user) {
       return;

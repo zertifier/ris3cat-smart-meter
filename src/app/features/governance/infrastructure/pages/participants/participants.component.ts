@@ -1,6 +1,5 @@
 import {Component, OnDestroy} from '@angular/core';
 import {PaginatorModule} from "primeng/paginator";
-import {ProposalStatus} from "../../../domain/ProposalStatus";
 import {Subscription} from "rxjs";
 import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {Participant, ParticipantsService, ParticipantStatus} from "../../services/participants.service";
@@ -8,6 +7,7 @@ import {UserStoreService} from "../../../../user/infrastructure/services/user-st
 import Swal from "sweetalert2";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ModifyParticipantModalComponent} from "./modify-participant-modal/modify-participant-modal.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-participants',
@@ -37,17 +37,28 @@ export class ParticipantsComponent implements OnDestroy{
   constructor(
     private participantsService: ParticipantsService,
     private userStore: UserStoreService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private router: Router
   ) {
 
-    this.subscriptions.push(
-      this.userStore.selectOnly(this.userStore.$.communityId).subscribe((community) => {
-        this.communityId = community
-        this.getParticipantsByStatus(this.participantStatus)
-        this.getPendingQty(this.communityId!)
+    const user = this.userStore.snapshotOnly(state => state.user);
+    if (!user) {
+      return
+    }
 
-      })
-    )
+    if (user.role.toLowerCase() == 'user') {
+      this.router.navigate(['']);
+      return
+    }else{
+      this.subscriptions.push(
+        this.userStore.selectOnly(this.userStore.$.communityId).subscribe((community) => {
+          this.communityId = community
+          this.getParticipantsByStatus(this.participantStatus)
+          this.getPendingQty(this.communityId!)
+
+        })
+      )
+    }
   }
 
 
@@ -102,7 +113,7 @@ export class ParticipantsComponent implements OnDestroy{
       title: "Acceptar aquest participant?",
       icon: "question",
       input: "number",
-      inputLabel: "Poder de vot",
+      inputLabel: "Beta",
       inputPlaceholder: "p.e.: 5000",
       showCancelButton: true,
       confirmButtonText: "Acceptar",

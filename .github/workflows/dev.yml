@@ -1,0 +1,46 @@
+name: Deploy preproduction
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  detect-changes:
+    runs-on: self-hosted
+    outputs:
+      smart-meter-dev_changed: ${{ steps.check_smart-meter-dev.outputs.changed }}
+    steps:
+      - name: Pull changes
+        run: |
+          cd /home/megatro/apps/dockers/Ris3Cat/dev-ris3cat-smart-meter
+          echo "Pulling and rebasing changes from github"
+          git pull --rebase
+
+      - name: Detect changes in smart-meter-dev-ris3cat
+        id: check_smart-meter-dev
+        run: |
+          cd /home/megatro/apps/dockers/Ris3Cat/dev-ris3cat-smart-meter
+          echo "Getting smart-meter-dev-ris3cat diff"
+          CHANGED_FILES=$(git diff --name-only HEAD HEAD~1 | grep '[[:print:]]' || true)
+          echo "Checking smart-meter-dev-ris3cat diff"
+          if [ -n "$CHANGED_FILES" ]; then
+            echo "Changes detected in smart-meter-dev-ris3cat"
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "No changes in smart-meter-dev-ris3cat"
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
+  deploy-frontend:
+    needs: detect-changes
+    runs-on: self-hosted
+    steps:
+      - name: Deploy smart-meter-dev-ris3cat if changed
+        if: needs.detect-changes.outputs.smart-meter-dev_changed == 'true'
+        run: |
+          echo "Deploying smart-meter-dev-ris3cat"
+          cd /home/megatro/apps/dockers/Ris3Cat/dev-ris3cat-smart-meter
+          npm i
+          npm run build:preproduction --configuration=preproduction
+          docker compose up -d smart-meter-dev-ris3cat
+          echo "smart-meter-dev-ris3cat deployed"

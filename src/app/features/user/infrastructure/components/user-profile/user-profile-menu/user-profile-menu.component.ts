@@ -43,7 +43,7 @@ export class UserProfileMenuComponent {
     this.ngbModal.open(content, {backdrop: false, modalDialogClass: 'h-100 expand-modal-content my-0'});
   }
 
-  @Confirmable("Estas segur?", {confirmButton: 'Tancar sessió', cancelButton: 'Mantenir sessió'})
+  @Confirmable("Segur que vols tancar sessió?", {confirmButton: 'Tancar sessió', cancelButton: 'Cancel·lar'})
   async logout() {
     await this.logoutAction.run();
   }

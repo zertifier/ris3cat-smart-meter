@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 import {NgClass, NgStyle} from "@angular/common";
 import {
   QuestionBadgeComponent
-} from "../../../../../../shared/infrastructure/components/question-badge/question-badge.component";
+} from "@shared/infrastructure/components/question-badge/question-badge.component";
 
 export interface DataLabel {
   label: string;

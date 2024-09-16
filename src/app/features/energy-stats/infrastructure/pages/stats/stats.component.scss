@@ -1,0 +1,43 @@
+@import 'styles/colors';
+
+
+:host {
+  flex-grow: 1;
+}
+
+
+td{
+  height: 52px ;
+}
+
+
+::ng-deep .p-datepicker table td> span{
+  border-radius: 20px;
+
+}
+::ng-deep .p-datepicker table td > span.p-highlight{
+  background: $tertiary !important;
+}
+
+::ng-deep .p-calendar:not(.p-calendar-disabled).p-focus > .p-inputtext{
+  border-color: $tertiary !important;
+}
+
+::ng-deep .p-datepicker-year, ::ng-deep .p-datepicker-month, ::ng-deep .p-datepicker-next, ::ng-deep .p-datepicker-prev {
+  color: $tertiary !important;
+}
+::ng-deep .p-datepicker table td > span,::ng-deep .p-inputtext{
+  box-shadow: none;
+}
+
+::ng-deep .p-inputtext{
+  border: solid 1px $secondary;
+  border-radius: 6px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+::ng-deep .p-datepicker .p-monthpicker .p-monthpicker-month.p-highlight{
+  background-color: $tertiary;
+  box-shadow: none;
+}

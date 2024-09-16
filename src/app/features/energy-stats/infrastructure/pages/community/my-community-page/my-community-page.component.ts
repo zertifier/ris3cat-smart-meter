@@ -1,4 +1,4 @@
-import {Component, computed, OnDestroy, OnInit, signal} from '@angular/core';
+import {Component, computed, isDevMode, OnDestroy, OnInit, signal} from '@angular/core';
 import {ChartModule} from "primeng/chart";
 import {MonitoringService, PowerStats} from "../../../services/monitoring.service";
 import {map, Subscription} from "rxjs";
@@ -8,8 +8,7 @@ import {NgbNav, NgbNavContent, NgbNavItem, NgbNavLinkButton, NgbNavOutlet} from 
 
 import {CalendarModule} from "primeng/calendar";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import dayjs from "dayjs";
-import utc from 'dayjs/plugin/utc';
+import dayjs from "@shared/utils/dayjs";
 import {AuthStoreService} from "../../../../../auth/infrastructure/services/auth-store.service";
 import {StatDisplayComponent} from "../../../components/realtime/stat-display/stat-display.component";
 import {ChartLegendComponent} from "../../../components/historic/chart-legend/chart-legend.component";
@@ -20,14 +19,20 @@ import {
 } from "../../../components/realtime/consumption-items/consumption-items.component";
 import {HistoricChartComponent} from "../../../components/historic/historic-chart/historic-chart.component";
 import {UserStoreService} from "../../../../../user/infrastructure/services/user-store.service";
-import {NavbarComponent} from "../../../../../../shared/infrastructure/components/navbar/navbar.component";
-import {FooterComponent} from "../../../../../../shared/infrastructure/components/footer/footer.component";
+import {NavbarComponent} from "@shared/infrastructure/components/navbar/navbar.component";
+import {FooterComponent} from "@shared/infrastructure/components/footer/footer.component";
 import {MonitoringStoreService} from "../../../services/monitoring-store.service";
-import {getMonth} from "../../../../../../shared/utils/DatesUtils";
+import {getMonth} from "@shared/utils/DatesUtils";
 import {KnobModule} from "primeng/knob";
 import {PowerflowGausComponent} from "../../../components/powerflow-gaus/powerflow-gaus.component";
-
-dayjs.extend(utc);
+import {
+  EnergyPredictionChartComponent
+} from "../../../components/metereologic-prediction/metereologic-chart/energy-prediction-chart.component";
+import {
+  MetereologicPredictionComponent
+} from "../../../components/metereologic-prediction/metereologic-prediction.component";
+import {environment} from "@environments/environment";
+import {EnergyPredictionComponent} from "../../../components/energy-prediction/energy-prediction.component";
 
 @Component({
   selector: 'app-my-community-page',
@@ -54,7 +59,10 @@ dayjs.extend(utc);
     AsyncPipe,
     KnobModule,
     FormsModule,
-    PowerflowGausComponent
+    PowerflowGausComponent,
+    EnergyPredictionChartComponent,
+    MetereologicPredictionComponent,
+    EnergyPredictionComponent
   ],
   templateUrl: './my-community-page.component.html',
   styleUrl: './my-community-page.component.scss'
@@ -149,4 +157,7 @@ export class MyCommunityPageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscriptions.forEach(s => s.unsubscribe())
   }
+
+  isDevMode = isDevMode;
+  protected readonly environment = environment;
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {
   NoLoggedNavbarComponent
 } from "../../../../shared/infrastructure/components/no-logged-navbar/no-logged-navbar.component";

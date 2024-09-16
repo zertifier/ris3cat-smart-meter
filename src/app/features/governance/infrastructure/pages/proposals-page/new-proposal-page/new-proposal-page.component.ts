@@ -1,19 +1,17 @@
-import {AfterViewInit, Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {ProposalOption, ProposalsService, SaveProposal} from "../../../services/proposals.service";
 import {FormsModule} from "@angular/forms";
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import Swal from "sweetalert2";
 import {Router, RouterLink, RouterLinkActive} from "@angular/router";
-import {UserStoreService} from "../../../../../user/infrastructure/services/user-store.service";
+import {UserStoreService} from "@features/user/infrastructure/services/user-store.service";
 import {CalendarModule} from "primeng/calendar";
-import dayjs from "dayjs";
+import dayjs from "@shared/utils/dayjs";
 import {ProposalStatus} from "../../../../domain/ProposalStatus";
 import {ProposalTypes} from "../../../../domain/ProposalTypes";
 import {NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
-import {
-  QuestionBadgeComponent
-} from "../../../../../../shared/infrastructure/components/question-badge/question-badge.component";
-import {EditorComponent, EditorModule, TINYMCE_SCRIPT_SRC} from "@tinymce/tinymce-angular";
+import {QuestionBadgeComponent} from "@shared/infrastructure/components/question-badge/question-badge.component";
+import {EditorComponent, TINYMCE_SCRIPT_SRC} from "@tinymce/tinymce-angular";
 import {Editor} from "tinymce";
 import {Subscription} from "rxjs";
 

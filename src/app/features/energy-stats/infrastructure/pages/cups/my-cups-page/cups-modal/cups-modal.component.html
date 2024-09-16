@@ -1,0 +1,30 @@
+<div class="modal-header border-0">
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body pt-0 px-3 mb-5">
+  <div class="text-center">
+    <h4 *ngIf="cups" class="modal-title">Canvia el nom del CUPS</h4>
+    <h4 *ngIf="!cups" class="modal-title">Afageix un nou CUPS</h4>
+
+    <p *ngIf="cups" class="mt-4 fw-medium">CUPS: {{ cups.cupsCode }}</p>
+  </div>
+
+  <div class="mt-4">
+    <label class="form-label">Nom del CUPS</label>
+    <input class="form-control bg-white border-2 border-primary shadow-none" [(ngModel)]="reference" placeholder="Per exemple: Garatge">
+  </div>
+
+</div>
+
+<div class="modal-footer border-0 justify-content-center mb-3">
+  <button type="button" class="btn btn-primary w-100"
+          (click)="save()" [disabled]="loading"
+          style="max-width: 255px">
+    Desa <i *ngIf="loading" class="fa-solid fa-spinner fa-spin"></i>
+  </button>
+  <button type="button" class="btn btn-outline-secondary w-100"
+          (click)="activeModal.close('Close click')" [disabled]="loading"
+          style="max-width: 255px">
+    Tancar
+  </button>
+</div>

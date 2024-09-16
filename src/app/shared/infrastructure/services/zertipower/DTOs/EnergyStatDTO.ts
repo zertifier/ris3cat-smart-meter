@@ -17,6 +17,7 @@ export interface EnergyStatDTO {
   productionActives: number,
   communityId?: number
   production: number,
+  communitiesCups: CommunitiesCups[] | [];
 }
 
 export interface DatadisEnergyStat {
@@ -37,5 +38,15 @@ export interface DatadisEnergyStat {
   productionActives: number;
   updatedAt: Date;
   communityId?: number;
-  production: number
+  production: number;
+  communitiesCups: CommunitiesCups[] | [];
+}
+
+
+export interface CommunitiesCups{
+  kwhOut: number;
+  infoDt: string;
+  cupsId: number;
+  cups: string;
+  reference: string | null;
 }

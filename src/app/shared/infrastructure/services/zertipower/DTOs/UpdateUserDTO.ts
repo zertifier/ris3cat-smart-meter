@@ -6,4 +6,5 @@ export interface UpdateUserDTO {
   password: string;
   role: string;
   wallet_address: string;
+  customer_id?: number;
 }

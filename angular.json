@@ -69,6 +69,27 @@
               ],
               "outputHashing": "all"
             },
+            "preproduction": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "10mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "10mb"
+                }
+              ],
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.preproduction.ts"
+                }
+              ]
+            },
             "development": {
               "optimization": false,
               "extractLicenses": false,
@@ -88,6 +109,9 @@
           "configurations": {
             "production": {
               "buildTarget": "smart-meter-frontend:build:production"
+            },
+            "preproduction": {
+              "buildTarget": "smart-meter-frontend:build:preproduction",
             },
             "development": {
               "buildTarget": "smart-meter-frontend:build:development"

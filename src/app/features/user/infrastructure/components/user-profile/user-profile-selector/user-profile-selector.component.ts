@@ -70,7 +70,7 @@ export class UserProfileSelectorComponent {
   ) {
   }
 
-  @Confirmable("Estas segur?", {confirmButton: 'Tancar sessió', cancelButton: 'Mantenir sessió'})
+  @Confirmable("Segur que vols tancar sessió?", {confirmButton: 'Tancar sessió', cancelButton: 'Cancel·lar'})
   async logout() {
     await this.logoutAction.run();
   }

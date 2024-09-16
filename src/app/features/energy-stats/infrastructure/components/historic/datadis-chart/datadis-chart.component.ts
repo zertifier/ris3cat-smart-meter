@@ -1,23 +1,21 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {AsyncPipe, JsonPipe, NgIf} from "@angular/common";
 import {ChartLegendComponent, DataLabel} from "../chart-legend/chart-legend.component";
-import {ChartDataset, DataChartComponent} from "../data-chart/data-chart.component";
-import dayjs from "dayjs";
+import {DataChartComponent} from "../data-chart/data-chart.component";
 import {combineLatest, Subscription} from "rxjs";
 import {StatsColors} from "../../../../domain/StatsColors";
 import {ChartStoreService} from "../../../services/chart-store.service";
-import {UserStoreService} from "../../../../../user/infrastructure/services/user-store.service";
+import {UserStoreService} from "@features/user/infrastructure/services/user-store.service";
 import {ChartResource} from "../../../../domain/ChartResource";
 import {ChartEntity} from "../../../../domain/ChartEntity";
 import {DateRange} from "../../../../domain/DateRange";
 import {ChartType} from "../../../../domain/ChartType";
-import {DatadisEnergyStat} from "../../../../../../shared/infrastructure/services/zertipower/DTOs/EnergyStatDTO";
-import {ZertipowerService} from "../../../../../../shared/infrastructure/services/zertipower/zertipower.service";
+import {DatadisEnergyStat} from "@shared/infrastructure/services/zertipower/DTOs/EnergyStatDTO";
+import {ZertipowerService} from "@shared/infrastructure/services/zertipower/zertipower.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {
-  BreakPoints,
-  ScreenBreakPointsService
-} from "../../../../../../shared/infrastructure/services/screen-break-points.service";
+import {BreakPoints, ScreenBreakPointsService} from "@shared/infrastructure/services/screen-break-points.service";
+import {ChartDataset} from "@shared/infrastructure/interfaces/ChartDataset";
+import dayjs from '@shared/utils/dayjs';
 
 @Component({
   selector: 'app-datadis-chart',
@@ -32,6 +30,29 @@ import {
   templateUrl: './datadis-chart.component.html',
   styleUrl: './datadis-chart.component.scss'
 })
+/**
+ * Me hacen cambiar esto cada semana paso de documentarlo al detalle porque
+ * no saben ni ellos lo que quieren poner en el gráfico. En vez de hablar con
+ * los usuarios y hacer mejoras incrementales, hacen los cambios que les
+ * apetece por motivos que se alejan de entregar valor al usuario.
+ *
+ * **Para la persona que tenga que tocar esto en un futuro**, lo siento es horrible
+ * pero tuve que improvisar despues de ver como me pedian cambios tanto en la UI
+ * como en la logica de la aplicación.
+ *
+ * Para que te hagas a una idea los parametros del grafico estan en un ChartStoreService
+ * luego los datos se extraen de una api. Estos datos llegaban en un formato llamemoslo ApiResponse.
+ * Luego esos datos tienen que transformarse a una interfaz customizada llamada {@link ChartDataset}.
+ * Pero como los datos de la api cambiaban constantemente use una interfaz {@link DatadisEnergyStat}.
+ * Para luego hacer el mapping de {@link DatadisEnergyStat} a {@link ChartDataset}. Debido a que ese mapping
+ * esta repartido en varias partes del codigo me interesaba no tener que cambiar todas las partes del codigo
+ * cada vez que la api cambiaba. Por eso el mapping de la respuesta de la api a {@link DatadisEnergyStat} se hace en
+ * un unico lugar. Asi cuando la api cambiaba solo tenia que modificar una funcion y no todos los elementos
+ * del componente
+ *
+ * La cosa esta en que como las cosas cambiaron tanto. Las unicas interfaces que realmente important son
+ * {@link ChartDataset} y lo que devuelva la api.
+ */
 export class DatadisChartComponent implements OnInit, OnDestroy {
   fetchingData$ = this.chartStoreService.selectOnly(state => state.fetchingData);
   subscriptions: Subscription[] = [];
@@ -69,19 +90,20 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
     const chartParametrs$ = this.chartStoreService
       .selectOnly(this.chartStoreService.$.params);
     const selectedCups$ = this.userStore.selectOnly(state => ({selectedCupsIndex: state.selectedCupsIndex}))
+
     this.subscriptions.push(
       combineLatest([chartParametrs$, selectedCups$])
         .subscribe(
           async ([{
-                   date,
-                   dateRange,
-                   selectedChartResource,
-                   selectedChartEntity,
-                   chartType,
-                 }]) => {
+            date,
+            dateRange,
+            selectedChartResource,
+            selectedChartEntity,
+            chartType,
+          }]) => {
             // Every time that params change, fetch data and update chart
             // Fetching data
-            const cupId = this.userStore.snapshotOnly(this.userStore.$.cupId);
+            const cupId = this.userStore.snapshotOnly(this.userStore.$.cupsId);
             const communityId = this.userStore.snapshotOnly(this.userStore.$.communityId);
             const data = await this.fetchEnergyStats(date, dateRange, cupId, communityId);
             this.chartStoreService.patchState({lastFetchedStats: data});
@@ -90,11 +112,11 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
             let labels: string[] = ["Gener", "Febrer", "Març", "Abril", "Maig", "Juny", "Juliol", "Agost", "Setembre", "Octubre", "Novembre", "Desembre"];
             if (dateRange === DateRange.MONTH) {
               labels = data.map(d => {
-                return dayjs(d.infoDt).format('DD');
+                return dayjs.utc(d.infoDt).format('DD');
               });
             } else if (dateRange === DateRange.DAY) {
               labels = data.map(d => {
-                return dayjs(d.infoDt).format('HH');
+                return dayjs.utc(d.infoDt).format('HH');
               })
             }
 
@@ -105,22 +127,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
             const mappedData = this.mapData(data, chartType, selectedChartResource);
 
             // Create data sets
-            const datasets: ChartDataset[] = [
-              {
-                label: community ? 'Consum actius' : 'Consum',
-                data: mappedData.map(d => {
-                  if (community) {
-                    return d.consumption;
-                  }
-
-                  return d.consumption - d.gridConsumption
-                }),
-                tooltipText: community ? 'Consum dels participants actius' : 'Quantitat d\'energia que gastem',
-                stack: 'Consumption',
-                order: 0,
-                color: StatsColors.CONSUMPTION
-              }
-            ];
+            const datasets: ChartDataset[] = [];
 
             if (cce) {
               datasets.push({
@@ -164,6 +171,16 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                   }),
                   stack: 'Excedent',
                 },
+                {
+                  label: 'Consum del a xarxa actius',
+                  data: mappedData.map(d => {
+                    return d.consumption;
+                  }),
+                  tooltipText: community ? 'Consum dels participants actius' : 'Quantitat d\'energia que gastem',
+                  stack: 'Consumption',
+                  order: 0,
+                  color: StatsColors.SELF_CONSUMPTION
+                },
               )
             } else {
               datasets.unshift({
@@ -177,7 +194,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
               })
               datasets.unshift({
                 label: 'Producció',
-                tooltipText: 'Producció proporcional comunitaria',
+                tooltipText: 'Producció proporcional comunitària',
                 color: StatsColors.COMMUNITY_PRODUCTION,
                 data: mappedData.map(d => d.production),
                 stack: 'Production',
@@ -232,6 +249,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
         this.userStore.patchState({activeMembers: response.totalActiveMembers || 0});
         this.userStore.patchState({totalMembers: response.totalMembers || 0});
         data = response.stats;
+
       }
       // this.latestFetchedStats = data;
       return data;
@@ -240,9 +258,16 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
     }
   }
 
-  mapData(data: DatadisEnergyStat[], chartType: ChartType, chartResource: ChartResource) {
+  mapData(data: DatadisEnergyStat[], chartType: ChartType, chartResource: ChartResource): {
+    consumption: number,
+    surplus: number,
+    virtualSurplus: number,
+    production: number,
+    productionActives: number,
+    gridConsumption: number,
+  }[] {
     const showEnergy = chartResource === ChartResource.ENERGY;
-    const cce = chartType === ChartType.CCE;
+    // const cce = chartType === ChartType.CCE;
     return data.map(d => {
       const consumption = showEnergy ? d.kwhIn : +(d.kwhInPrice * d.kwhIn).toFixed(2);
       const surplus = showEnergy ? d.kwhOut : +(d.kwhOutPrice * d.kwhOut).toFixed(2);

@@ -1,10 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Duration} from "../../../../../shared/utils/Duration";
-import {ZertipowerService} from "../../../../../shared/infrastructure/services/zertipower/zertipower.service";
+import {Duration} from "@shared/utils/Duration";
+import {ZertipowerService} from "@shared/infrastructure/services/zertipower/zertipower.service";
 import {UserStoreService} from "../../../../user/infrastructure/services/user-store.service";
 import {AsyncPipe, NgClass} from "@angular/common";
 import {BehaviorSubject, map} from "rxjs";
-import dayjs from "dayjs";
+import dayjs from "@shared/utils/dayjs";
 
 @Component({
   selector: 'app-data-source-health',

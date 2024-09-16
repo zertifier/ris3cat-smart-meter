@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { NoLoggedNavbarComponent } from './no-logged-navbar.component';
+import {NoLoggedNavbarComponent} from './no-logged-navbar.component';
 
 describe('NoLoggedNavbarComponent', () => {
   let component: NoLoggedNavbarComponent;
@@ -11,7 +11,7 @@ describe('NoLoggedNavbarComponent', () => {
       imports: [NoLoggedNavbarComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(NoLoggedNavbarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

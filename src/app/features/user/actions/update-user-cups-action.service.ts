@@ -28,13 +28,14 @@ export class UpdateUserCupsAction {
           return {
             id: c.id,
             communityId: c.community_id,
-            reference: c.cups,
+            cupsCode: c.cups,
             surplusDistribution: parseFloat(c.surplus_distribution),
+            reference: c.reference || ''
           }
         })
       })
     }catch (err){
-      this.authStoreService.removeTokens()
+      this.authStoreService.resetDefaults()
       const urlTree = this.router.createUrlTree(['/auth']);
       await this.router.navigateByUrl(urlTree);
     }

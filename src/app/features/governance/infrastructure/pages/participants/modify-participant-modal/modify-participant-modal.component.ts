@@ -43,7 +43,7 @@ export class ModifyParticipantModalComponent implements OnDestroy{
     Swal.fire({
       icon: 'success',
       title: 'Participant modificat correctament',
-      confirmButtonText: 'Dacrod'
+      confirmButtonText: "D'acord"
     })
   }
 

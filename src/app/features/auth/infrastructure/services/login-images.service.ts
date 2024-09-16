@@ -4,7 +4,7 @@ import {Injectable} from '@angular/core';
   providedIn: 'root'
 })
 export class LoginImagesService {
-  bgImages = [
+  backgroundImages = [
     'assets/img/login/bg1.jpg',
     'assets/img/login/bg2.jpg',
     'assets/img/login/bg3.jpg',
@@ -15,8 +15,8 @@ export class LoginImagesService {
   constructor() { }
 
   public getRandomImage(): string {
-    const index = this.randomNumber(0, this.bgImages.length - 1);
-    return this.bgImages[index];
+    const index = this.randomNumber(0, this.backgroundImages.length - 1);
+    return this.backgroundImages[index];
   }
 
   /**

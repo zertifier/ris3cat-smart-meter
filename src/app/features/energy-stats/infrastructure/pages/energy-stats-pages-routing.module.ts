@@ -61,6 +61,10 @@ export const routes: Routes = [
         loadComponent: () => import('./data-source-health/data-source-health.component').then(c => c.DataSourceHealthComponent)
       },
       {
+        path: 'stats',
+        loadComponent: () => import('./stats/stats.component').then(c => c.StatsComponent)
+      },
+      {
         path: '',
         pathMatch: 'full',
         redirectTo: 'my-cup'

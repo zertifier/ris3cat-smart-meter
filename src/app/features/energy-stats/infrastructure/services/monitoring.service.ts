@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, firstValueFrom, map, tap} from "rxjs";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {environment} from "../../../../../environments/environment";
-import {HttpResponse} from "../../../../shared/infrastructure/services/HttpResponse";
+import {HttpResponse} from "@shared/infrastructure/services/HttpResponse";
 import {MonitoringStoreService} from "./monitoring-store.service";
 
 export interface EnergyStat {
@@ -44,8 +44,7 @@ export class MonitoringService {
   }
 
   getPowerFlow() {
-    return this.powerFlow.asObservable().pipe(tap(() => {
-    }));
+    return this.powerFlow.asObservable().pipe(tap(() => {}));
   }
 
   async getEnergyStats(date: string, dateRange: number) {
@@ -66,10 +65,10 @@ export class MonitoringService {
       const stats: PowerStats = {buy: 0, sell: 0, inHouse: 0, production: 0}
       stats.production = data.production
       if (data.consumption > data.production) {
-        stats.inHouse = data.production;
+        // stats.inHouse = data.production;
         stats.buy = data.consumption - data.production
       } else {
-        stats.inHouse = data.consumption;
+        // stats.inHouse = data.consumption;
         stats.sell = data.production - data.consumption
       }
       this.powerFlow.next(stats);
@@ -78,7 +77,7 @@ export class MonitoringService {
     }
   }
 
-  private async fetchPowerFlow() {
+  private async fetchPowerFlow(): Promise<{production: number, consumption: number, grid: number}> {
     const response = await firstValueFrom(this.httpClient.get<HttpResponse<{
       production: number,
       consumption: number,

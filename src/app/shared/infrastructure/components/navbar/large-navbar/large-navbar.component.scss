@@ -14,11 +14,11 @@
 
 .nav-link {
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 500;
   color: white !important;
 }
 
-.active {
+.active, .nav-link:hover {
   //text-decoration: $active-hover underline !important;
   color: $active-hover !important;
 }
@@ -45,3 +45,18 @@ button.nav-item {
   font-weight: bold;
 }
 
+
+.custom-dropdown {
+  background-color: $primary;
+}
+
+
+
+.custom-dropdown .dropdown-item:hover {
+  color: $primary !important;
+  background: $white;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

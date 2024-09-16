@@ -66,12 +66,26 @@ export class UserProfilePageComponent implements OnInit {
     }
     const {id, email, wallet_address, username, role} = user;
     const {firstname, lastname} = this.formGroup.value;
-    await this.zertipower.users.update(id, {
-      email, wallet_address, username, role, firstname: firstname!, lastname: lastname!, password: '',
-    });
-    await this.eventBus.publishEvents(new UserProfileChangedEvent());
-    await Swal.fire({
-      title: "User updated successfully"
-    });
+    try {
+      await this.zertipower.users.update(id, {
+        email, wallet_address, username, role, firstname: firstname!, lastname: lastname!, password: '', customer_id: user.customer_id
+      });
+      await this.eventBus.publishEvents(new UserProfileChangedEvent());
+      await Swal.fire({
+        icon: 'success',
+        title: "Perfil actualitzat correctament",
+        confirmButtonText: "D'acord"
+      });
+    }catch (error){
+
+      await Swal.fire({
+        icon: 'error',
+        title: "Error al actualitzar el perfil",
+        text: "Torna-ho a intentar en uns minuts",
+        confirmButtonText: "D'acord"
+      });
+      console.log(error)
+    }
+
   }
 }

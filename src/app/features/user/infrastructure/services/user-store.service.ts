@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {RxStore} from "@zertifier/rx-store";
+import {Wallet} from "ethers";
 
 export interface UserProfile {
   id: number,
@@ -10,20 +11,24 @@ export interface UserProfile {
   lastname: string,
   wallet_address: string,
   customer_id?: number,
+  wallet?: Wallet
 }
 
 export interface UserStore {
-  cups: {
-    id: number;
-    reference: string;
-    communityId: number;
-    surplusDistribution: number;
-  }[],
+  cups: UserCups[],
   selectedCupsIndex: number;
   activeMembers: number;
   totalMembers: number;
   surplusDistribution: number;
   user?: UserProfile;
+}
+
+export interface UserCups{
+  id: number;
+  cupsCode: string;
+  communityId: number;
+  surplusDistribution: number;
+  reference?: string;
 }
 
 const defaultValues: UserStore = {
@@ -37,11 +42,14 @@ const defaultValues: UserStore = {
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * Saves the user data like user profile, their cups, the active members and total members of their community, etc.
+ */
 export class UserStoreService extends RxStore<UserStore> {
   $ = {
-    cupId: (state: UserStore) => state.cups[state.selectedCupsIndex]?.id,
+    cupsId: (state: UserStore) => state.cups[state.selectedCupsIndex]?.id,
     communityId: (state: UserStore) => state.cups[state.selectedCupsIndex]?.communityId,
-    cupsReference: (state: UserStore) => state.cups[state.selectedCupsIndex]?.reference,
+    cupsReference: (state: UserStore) => state.cups[state.selectedCupsIndex]?.cupsCode,
     profileLoaded: (state: UserStore) => state.selectedCupsIndex !== -1,
   }
 

@@ -1,15 +1,25 @@
 <div class="d-flex w-100" style="height: 100vh">
   <div [ngClass]="{'w-100': hideImage, 'w-50': !hideImage}" class="w-50">
     <div class="d-flex py-4 align-items-center flex-column w-100 h-100 justify-content-around">
+<<<<<<< HEAD
       <div>
         <!-- <h1 class="text-center mb-3">EL MEU COMPTADOR</h1> -->
+=======
+      <div class="d-none">
+        <h1 class="text-center mb-3">EL MEU COMPTADOR</h1>
+>>>>>>> fef6bba52309162c72f826b913e6ea0e702efeea
         <div class="d-flex justify-content-center w-100">
           <img src="assets/img/smart_meter_logo.png" alt="meter" class="text-center" style="width: 55%">
         </div>
       </div>
 
+      <div class="text-center px-4 px-md-0">
+        <img src="assets/img/login-header.png" alt="meter" class="w-100" style="max-width: 450px">
+      </div>
+
+
       <div
-           class="d-flex flex-column align-items-center">
+        class="d-flex flex-column align-items-center">
         <h2 class="text-center">Iniciar Sessió</h2>
         <button (click)="googleLogin()" [ngClass]="{'w-75': !hideImage, 'w-100': hideImage}"
                 class="w-75 d-flex justify-content-around btn btn-dark rounded-pill my-3"
@@ -27,7 +37,12 @@
         <div class="container">
 
           <p>No guardem cap dada relacionada amb les teves credencials</p>
+
+          <div class="text-center mt-5">
+            <a routerLink="/help">Necessites ajuda?</a>
+          </div>
         </div>
+<<<<<<< HEAD
         <h2 class="text-center mt-4">Web wallet</h2>
         <button (click)="webWalletLogin()" [ngClass]="{'w-75': !hideImage, 'w-100': hideImage}" class="btn btn-dark rounded-pill my-3">Iniciar sessió amb web wallet
         </button>
@@ -40,6 +55,27 @@
         <img style="height: 2rem" src="assets/img/europe_black.png" alt="zertifier">
         <img style="height: 2rem" src="assets/img/logo_generalitat_cat_black.png" alt="zertifier">
         <img style="height: 2rem" src="assets/img/zertifier_logo_horizontal_negro.png" alt="zertifier">
+=======
+        <div class="d-none">
+          <h2 class="text-center">Web wallet</h2>
+          <button (click)="webWalletLogin()" [ngClass]="{'w-75': !hideImage, 'w-100': hideImage}" class="btn btn-dark rounded-pill my-3">Iniciar sessió amb web wallet
+          </button>
+        </div>
+
+      </div>
+
+
+      <div>
+        <div class="mx-auto mb-5" style="width: 680px">
+          <hr class="border-dark opacity-100">
+        </div>
+        <div class="d-flex w-100 align-items-center justify-content-between gap-5">
+          <img style="height: 2.5rem" src="assets/img/europe_black.png" alt="europe">
+          <img style="height: 2.5rem" src="assets/img/login/generalitat.png" alt="generalitat">
+          <img style="height: 2rem" src="assets/img/login/zertifier_logo_horizontal.png" alt="zertifier">
+        </div>
+
+>>>>>>> fef6bba52309162c72f826b913e6ea0e702efeea
       </div>
 
 
