@@ -1,7 +1,10 @@
-<div class="navbar-container bg-primary d-flex justify-content-between">
-  <div style="width: 20%">
-    <app-user-profile-button/>
-  </div>
+<div class="navbar-container bg-primary d-flex align-items-center justify-content-between">
+  <li class="nav-item me-auto">
+    <app-logo height="40px"/>
+  </li>
+
+  <app-user-profile-button/>
+
 
   <button type="button" class="btn btn-link text-white" style="font-size: 1.5rem" (click)="showMenu(menu)">
     <i class="fa-solid fa-bars"></i>
@@ -11,30 +14,32 @@
 <ng-template #menu let-modal>
   <div class="h-100" style="background-color: rgba(255, 255, 255, 0.9)">
     <div class="w-100 d-flex justify-content-end">
-      <button type="button" class="btn btn-white" style="font-size: 1.5rem" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <button type="button" class="btn btn-white" style="font-size: 1.5rem" aria-label="Close"
+              (click)="modal.dismiss('Cross click')">
         <i class="fa-solid fa-close"></i>
       </button>
     </div>
 
 
-    <div class="d-flex flex-column gap-4 p-4 align-items-center" >
+    <div class="d-flex flex-column gap-4 p-4 align-items-center">
       @for (button of buttons; track $index) {
-        <a [routerLink]="button.route" [routerLinkActive]="'active'" (click)="modal.close('')">{{ button.label }}</a>
+      <a [routerLink]="button.route" [routerLinkActive]="'active'" (click)="modal.close('')">{{ button.label }}</a>
       }
 
-      <div ngbAccordion class="d-inline-block">
+      <div ngbAccordion class="d-inline-block" *ngIf="hasCommunity">
         <div ngbAccordionItem style="min-width: 130px">
           <h2 ngbAccordionHeader>
-            <button ngbAccordionButton class="me-2">Governança</button>
+            <button ngbAccordionButton class="me-2">{{'GOVERNOR.navbar' | transloco}}</button>
           </h2>
 
           <div ngbAccordionCollapse>
             <div ngbAccordionBody>
               <a class="nav-link bg-transparent py-3" [routerLink]="'/governance/proposals'"
-                 [routerLinkActive]="'active'" (click)="modal.close('')">Propostes</a>
+                 [routerLinkActive]="'active'" (click)="modal.close('')">{{'PROPOSALS.navbar' | transloco}}</a>
 
-              <a [ngClass]="{'d-none': userRole?.toLowerCase() == 'user'}" class="nav-link bg-transparent py-3"  [routerLink]="'/governance/participants'"
-                 [routerLinkActive]="'active'" (click)="modal.close('')">Participants</a>
+              <a [ngClass]="{'d-none': userRole?.toLowerCase() == 'user'}" class="nav-link bg-transparent py-3"
+                 [routerLink]="'/governance/participants'"
+                 [routerLinkActive]="'active'" (click)="modal.close('')">{{'PARTICIPANTS.navbar' | transloco}}</a>
             </div>
           </div>
         </div>

@@ -3,9 +3,35 @@
 }
 
 .form-div-width,.form-control{
-  max-width: 870px !important;
+  // max-width: 764px !important;
+}
+
+.input-group{
+  max-width: 764px !important;
 }
 
 .form-button{
   width: 130px;
+}
+
+.btn{
+  height: 50px;
+}
+
+.btn-default-length{
+  width: 250px;
+}
+
+.section-btn{
+  width: 300px;
+  max-width: 100%;
+}
+
+@media (max-width: 992px) {
+  .input-group{
+    width: 100%;
+  }
+  // .btn-default-length{
+  //   width: 50%;
+  // }
 }

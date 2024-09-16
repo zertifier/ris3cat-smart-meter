@@ -12,6 +12,7 @@ export function switchChartEntityGuard(resource: ChartEntity): CanActivateFn {
   return () => {
     const chartStoreService = inject(ChartStoreService);
     chartStoreService.patchState({selectedChartEntity: resource});
+    
     return true;
   }
 }

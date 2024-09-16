@@ -148,8 +148,10 @@ export class EthersService {
       return
     }
   }
+
   async transferFromCurrentWallet(to: string, amount: number, type: 'DAO' | 'XDAI' | 'EKW', contractAddress = environment.erc20_contract){
     try {
+      
       const user = this.userStore.snapshotOnly(state => state.user);
       if (!user) {
         return
@@ -163,7 +165,7 @@ export class EthersService {
           to: to,
           value: ethers.parseUnits(amount.toString(), "ether"),
         };
-        tx = await user.wallet?.sendTransaction(tx)
+        tx = await user.wallet?.sendTransaction(tx);
       }else{
         const contract = new Contract(contractAddress, abi, user.wallet)
         tx = await contract['transfer'](to, parseUnits(amount.toString(), "ether"))
@@ -176,4 +178,9 @@ export class EthersService {
       return
     }
   }
+
+  // getZertipowerWallet():string{
+  //   return environment.zertipower_address;
+  // }
+
 }

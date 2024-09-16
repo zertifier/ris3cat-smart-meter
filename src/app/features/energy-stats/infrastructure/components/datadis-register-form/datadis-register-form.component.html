@@ -1,69 +1,70 @@
-<div class="container-fluid my-3">
-  <div class="d-flex justify-content-end">
-    <button type="button" class="btn-close btn-sm" aria-label="Close" (click)="closeModal()"></button>
-  </div>
-
-  <h3 class="text-center m-auto">Alta cups</h3>
-
-  <hr>
-
-  <p>Emplena els següents camps per a associar els teus C.U.P.S. al teu perfil de la plataforma</p>
-
-  <form class="d-flex flex-column gap-5" [formGroup]="formData">
-    <div>
-      <label for="service">Tria servei</label>
-      <select id="service" class="form-select">
-        <option value="datadis">Datadis</option>
-      </select>
+<ng-container *transloco="let t; prefix: 'DATADIS-REGISTER'">
+  <div class="container-fluid my-3">
+    <div class="d-flex justify-content-end">
+      <button type="button" class="btn-close btn-sm" aria-label="Close" (click)="closeModal()"></button>
     </div>
 
-    <div>
-      <label for="dni">DNI/NIE</label>
-      <input type="text" id="dni" class="form-control" formControlName="dni"/>
-      <app-validation-hint [condition]="formData.controls.dni.invalid && !!formData.value.dni?.trim()">
-        NIF no vàlid
-      </app-validation-hint>
-    </div>
+    <h3 class="text-center m-auto">{{ t('texts.title') }}</h3>
 
-    <div>
-      <label for="user">Usuari <span class="text-danger">*</span></label>
-      <input type="text" id="user" class="form-control" formControlName="username"/>
-      <app-validation-hint [condition]="formData.controls.username.invalid">
-        Usuari no vàlid
-      </app-validation-hint>
-    </div>
+    <hr>
 
-    <div>
-      <label for="password">Contrasenya <span class="text-danger">*</span></label>
-      <div class="input-group">
-        <input [type]="hidePassword ? 'password' : 'text'" id="password" class="form-control"
-               formControlName="password"/>
-        <button (click)="togglePasswordVisibility()" type="button" class="btn btn-dark">
-          @if (hidePassword) {
+    <p>{{ t('texts.subtitle') }}</p>
+
+    <form class="d-flex flex-column gap-5" [formGroup]="formData">
+      <div>
+        <label for="service">{{ t('texts.serviceTitle') }}</label>
+        <select id="service" class="form-select">
+          <option value="datadis">Datadis</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="dni">DNI/NIE</label>
+        <input type="text" id="dni" class="form-control" formControlName="dni" />
+        <app-validation-hint [condition]="formData.controls.dni.invalid && !!formData.value.dni?.trim()">
+          {{ t('texts.invalidDNI') }}
+        </app-validation-hint>
+      </div>
+
+      <div>
+        <label for="user">{{ t('texts.user') }} <span class="text-danger">*</span></label>
+        <input type="text" id="user" class="form-control" formControlName="username" />
+        <app-validation-hint [condition]="formData.controls.username.invalid">
+          {{ t('texts.invalidUser') }}
+        </app-validation-hint>
+      </div>
+
+      <div>
+        <label for="password">{{ t('texts.password') }} <span class="text-danger">*</span></label>
+        <div class="input-group">
+          <input [type]="hidePassword ? 'password' : 'text'" id="password" class="form-control"
+            formControlName="password" />
+          <button (click)="togglePasswordVisibility()" type="button" class="btn btn-dark">
+            @if (hidePassword) {
             <i class="fa-solid fa-eye-slash"></i>
-          } @else {
+            } @else {
             <i class="fa-solid fa-eye"></i>
-          }
+            }
+          </button>
+        </div>
+        <app-validation-hint [condition]="formData.controls.password.invalid">
+          {{ t('texts.invalidPassword') }}
+        </app-validation-hint>
+      </div>
+
+      <div>
+        <label for="cups">CUPS <span class="text-danger">*</span></label>
+        <input type="text" id="cups" class="form-control" formControlName="cups" />
+        <app-validation-hint [condition]="formData.controls.cups.invalid">
+          {{ t('texts.invalidCups') }}
+        </app-validation-hint>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <button type="button" class="btn btn-primary" style="background-color: #0E5496; border-color: #0E5496;"
+          (click)="registerCups()" [disabled]="formData.invalid">{{ t('texts.addData') }}
         </button>
       </div>
-      <app-validation-hint [condition]="formData.controls.password.invalid">
-        Contrassenya no vàlida
-      </app-validation-hint>
-    </div>
-
-    <div>
-      <label for="cups">C.U.P.S. <span class="text-danger">*</span></label>
-      <input type="text" id="cups" class="form-control" formControlName="cups"/>
-      <app-validation-hint [condition]="formData.controls.cups.invalid">
-        C.U.P.S. no vàlid
-      </app-validation-hint>
-    </div>
-
-    <div class="d-flex justify-content-center">
-      <button type="button" class="btn btn-primary" style="background-color: #0E5496; border-color: #0E5496;"
-              (click)="registerCups()" [disabled]="formData.invalid">Afegir dades
-      </button>
-    </div>
-  </form>
-
-</div>
+    </form>
+  </div>
+</ng-container>

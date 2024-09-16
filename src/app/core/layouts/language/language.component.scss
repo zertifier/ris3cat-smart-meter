@@ -1,0 +1,34 @@
+@import 'styles/colors';
+.custom-dropdown-menu{
+  min-width: 30px; /* Minimum width */
+  max-width: 55px; /* Maximum width to control overflow */
+  width: auto; /* Adapt width based on content */
+}
+
+.dropdown-item{
+  font-weight: 600;
+}
+.dropdown-item:hover, .dropdown-item.active{
+  color: $secondary !important;
+  background-color: #dfdfdf;
+}
+
+.dropdown-item.active{
+  background-color: transparent;
+  font-weight: bolder !important;
+  text-decoration: underline
+}
+
+.login-dropdown{
+  border: 2px solid $secondary;
+}
+
+.login-button{
+  color: $primary;
+  font-size: 16px;
+}
+
+.footer-button{
+  color: white;
+  font-size: 12px;
+}

@@ -1,56 +1,81 @@
-<div class="modal-header border-0 pe-4 pt-4">
-  <button type="button" class="btn-close shadow-none" aria-label="Close"
-          (click)="activeModal.dismiss('Cross click')"></button>
-</div>
-  <h4 class="modal-title text-center">Transferència</h4>
+<ng-container *transloco="let t; prefix: 'MY-WALLET'">
+  <div class="modal-header border-0 pe-4 pt-4">
+    <button type="button" class="btn-close shadow-none" aria-label="Close"
+      (click)="activeModal.dismiss('Cross click')"></button>
+  </div>
+  <h4 *ngIf="userAction=='transfer'" class="modal-title text-center">{{ t('modals.transfer.transferTitle') }}</h4>
+  <h4 *ngIf="userAction=='add'" class="modal-title text-center">{{ t('modals.transfer.addTitle') }}</h4>
+  <h4 *ngIf="userAction=='pullOut'" class="modal-title text-center">{{ t('modals.transfer.pullOutTitle') }}</h4>
 
-<div class="modal-body px-lg-5">
-  <div>
+  <div class="modal-body px-lg-5">
+
+    @if(userActionType=='tokens' || ( userActionType=='balance' && userAction == 'add' ) && currentAmount){
     <label class="form-label">
-      Saldo
+      {{ t('modals.transfer.texts.EKW_Balance') }}
     </label>
     <div class="d-block d-lg-flex">
       <div class="input-group form-div-width">
-        <input readonly type="text" class="form-control form-control-lg bg-white border-secondary border-2 shadow-none"
-               [ngModel]="currentAmount | noRoundDecimal: 4" >
+        <input readonly type="number"
+          class="form-control form-control-lg bg-white border-secondary border-2 shadow-none"
+          [ngModel]="currentAmount | noRoundDecimal: 4">
+        <button class="btn btn-tertiary rounded-end-3 form-button" type="button">EKW</button>
+      </div>
+    </div>
+    }
+
+    @if(userActionType=='balance' && customer && customer.balance >= 0 && this.userAction == 'pullOut'){
+    <label class="form-label">
+      {{ t('modals.transfer.texts.balanceLabel') }}
+    </label>
+    <div class="d-block d-lg-flex">
+      <div class="input-group form-div-width">
+        <input type="number" class="form-control form-control-lg border-secondary border-2 shadow-none"
+          placeholder="000" [(ngModel)]="customer.balance" readonly>
         <button class="btn btn-tertiary rounded-end-3 form-button" type="button">{{ type }}</button>
       </div>
     </div>
-  </div>
+    }
 
-  <div class="my-3">
-    <label class="form-label">
-      Destinatari
-    </label>
-    <div class="d-block">
-      <input type="text" class="form-control form-control-lg bg-white border-secondary border-2 shadow-none"
-             placeholder="exemple@correu.com / 0xA..." [(ngModel)]="toDirection">
+    <div *ngIf="userAction=='transfer'" class="my-3">
+      <label class="form-label">
+        {{ t('modals.transfer.texts.toLabel') }}
+      </label>
+      <div class="d-block">
+        <app-qr-scanner (scanResult)="toDirection = $event">
+          <input type="text" class="form-control form-control-lg bg-white border-secondary border-2 shadow-none"
+            placeholder="{{ t('modals.transfer.texts.toPlaceholder') }}" [(ngModel)]="toDirection">
+        </app-qr-scanner>
+
+      </div>
+      <small>{{ t('modals.transfer.texts.toBottomText') }}</small>
     </div>
-    <small>Escriu el correu o número d'identitat del destinatari</small>
-  </div>
 
-  <div>
-    <label class="form-label">
-      Quantitat
-    </label>
-    <div class="d-block d-lg-flex">
-      <div class="input-group form-div-width">
-        <input type="number" class="form-control form-control-lg bg-white border-secondary border-2 shadow-none rounded-3" placeholder="000"
-               [(ngModel)]="amountToTransfer ">
-        <button class="btn btn-primary rounded-3 form-button ms-2" type="button" (click)="setMaxAmount()">MAX</button>
+    <div class="my-3">
+      <label class="form-label">
+        {{ t('modals.transfer.texts.amountLabel') }}
+      </label>
+      <div class="d-block d-lg-flex">
+        <div class="input-group form-div-width">
+          <input type="number"
+            class="form-control form-control-lg bg-white border-secondary border-2 shadow-none rounded-3"
+            placeholder="000" [(ngModel)]="amountToTransfer">
+          <button class="btn btn-primary rounded-3 form-button ms-2" type="button" (click)="setMaxAmount()">MAX</button>
+        </div>
       </div>
     </div>
-  </div>
 
-</div>
-<div class="modal-footer border-0 mb-5">
-  <div class="mx-auto">
-    <button type="button" class="btn btn-primary mx-3 footer-btn" [disabled]="loading" (click)="send()">
-      <span *ngIf="!loading">Enviar</span>
-      <span *ngIf="loading">Enviant... <i class="fa-solid fa-spinner fa-spin ms-2"></i></span>
-    </button>
-    <button type="button" class="btn btn-outline-dark mx-3 footer-btn" (click)="activeModal.close('Close click')" [disabled]="loading">
-      Cancel·lar
-    </button>
   </div>
-</div>
+  <div class="modal-footer border-0 mb-5">
+    <div class="mx-auto">
+      <button type="button" class="btn btn-quaternary mx-3 footer-btn" [disabled]="loading" (click)="send()">
+        <span *ngIf="!loading">{{'GENERIC.texts.confirm' | transloco}}</span>
+        <span *ngIf="loading">{{'GENERIC.texts.sending' | transloco}} <i
+            class="fa-solid fa-spinner fa-spin ms-2"></i></span>
+      </button>
+      <button type="button" class="btn btn-outline-dark mx-3 footer-btn" (click)="activeModal.close('Close click')"
+        [disabled]="loading">
+        {{'GENERIC.texts.cancel' | transloco}}
+      </button>
+    </div>
+  </div>
+</ng-container>

@@ -10,6 +10,7 @@ import {Subscription} from "rxjs";
 import {DaoService} from "../../services/dao.service";
 import Swal from "sweetalert2";
 import {EthersService} from "@shared/infrastructure/services/ethers.service";
+import {TranslocoDirective} from "@jsverse/transloco";
 
 type ProposalType = 'active' | 'pending' | 'expired' | 'executed' | 'denied' | 'all';
 
@@ -23,7 +24,8 @@ type ProposalType = 'active' | 'pending' | 'expired' | 'executed' | 'denied' | '
     NgIf,
     RouterLinkActive,
     RouterLink,
-    FormsModule
+    FormsModule,
+    TranslocoDirective
   ],
   templateUrl: './proposals-page.component.html',
   styleUrl: './proposals-page.component.scss'
@@ -47,7 +49,8 @@ export class ProposalsPageComponent implements OnDestroy {
     this.subscriptions.push(
       this.userStore.selectOnly(this.userStore.$.communityId).subscribe((community) => {
         this.communityId = community
-        this.getAllProposals()
+        if (community)
+          this.getAllProposals()
       }),
       this.userStore
         .selectOnly(state => state).subscribe((data) => {

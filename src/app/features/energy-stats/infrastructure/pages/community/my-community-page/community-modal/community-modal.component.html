@@ -1,0 +1,39 @@
+<ng-container *transloco="let t; prefix: 'MY-COMMUNITY'">
+  <div class="modal-header border-0">
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+  </div>
+
+
+  <div class="modal-body pt-0 px-3 mb-5">
+    <div class="text-center">
+      <h4 class="modal-title">
+        {{ t('modals.modifyCommunity.title') }}
+      </h4>
+    </div>
+
+    <div *ngIf="modifyCommunity" class="mt-4">
+      <label class="form-label">{{ t('modals.modifyCommunity.texts.nameLabel') }}</label>
+      <input class="form-control bg-white border-2 border-primary shadow-none" [(ngModel)]="modifyCommunity.name"
+             placeholder="{{ t('modals.modifyCommunity.texts.namePlaceholder') }}">
+    </div>
+
+
+   <div class="mt-4" *ngIf="modifyCommunity">
+     <label class="form-label">{{ t('modals.modifyCommunity.texts.tradeTypeLabel') }}</label>
+     <select class="form-select bg-white border-2 border-primary shadow-none" [(ngModel)]="modifyCommunity.tradeType">
+       <option [value]="'EQUITABLE'"> {{ t('texts.tradeTypeEqui') }} </option>
+       <option [value]="'PREFERRED'"> {{ t('texts.tradeTypePref') }} </option>
+     </select>
+   </div>
+  </div>
+
+  <div class="modal-footer border-0 justify-content-center mb-3">
+    <button type="button" class="btn btn-primary w-100" (click)="save()" [disabled]="loading" style="max-width: 255px">
+      {{'GENERIC.texts.save' | transloco}} <i *ngIf="loading" class="fa-solid fa-spinner fa-spin"></i>
+    </button>
+    <button type="button" class="btn btn-outline-secondary w-100" (click)="activeModal.close('Close click')"
+            [disabled]="loading" style="max-width: 255px">
+      {{'GENERIC.texts.close' | transloco}}
+    </button>
+  </div>
+</ng-container>

@@ -2,11 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {LoginActionService} from "../../../actions/login-action.service";
 import Swal from "sweetalert2";
+import {TranslocoDirective} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-login-callback',
   standalone: true,
-  imports: [],
+  imports: [
+    TranslocoDirective
+  ],
   templateUrl: './login-callback.component.html',
   styleUrl: './login-callback.component.scss'
 })

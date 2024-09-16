@@ -1,29 +1,36 @@
-<div class="container my-3">
-  <div class="card">
-    <div class="card-header">
-      <h2>Registre</h2>
-    </div>
-    <div class="card-body">
-      <form class="w-100 mb-4" [formGroup]="formData" id="register-form" (ngSubmit)="register()">
-        <div class="row">
-          <div class="col-12 col-md">
-            <label for="nom">Nom <span class="text-danger">*</span></label>
-            <input formControlName="name" class="form-control" type="text" id="nom">
+<div class="page-wrapper">
+  <div class="content">
+    <ng-container *transloco="let t; prefix: 'AUTH'">
+      <div class="container my-3">
+        <div class="card">
+          <div class="card-header">
+            <h2>{{ t('texts.register') }}</h2>
           </div>
-          <div class="col-12 col-md">
-            <label for="cognom">Cognom <span class="text-danger">*</span></label>
-            <input formControlName="lastname" class="form-control" type="text" id="cognom">
+          <div class="card-body">
+            <form class="w-100 mb-4" [formGroup]="formData" id="register-form" (ngSubmit)="register()">
+              <div class="row">
+                <div class="col-12 col-md">
+                  <label for="nom">{{ t('texts.name') }} <span class="text-danger">*</span></label>
+                  <input formControlName="name" class="form-control" type="text" id="nom">
+                </div>
+                <div class="col-12 col-md">
+                  <label for="cognom">{{ t('texts.surname') }} <span class="text-danger">*</span></label>
+                  <input formControlName="lastname" class="form-control" type="text" id="cognom">
+                </div>
+                <div class="col-12 col-lg">
+                  <label for="dni">{{ t('texts.DNI') }}</label>
+                  <input formControlName="dni" class="form-control" type="text" id="dni">
+                </div>
+              </div>
+            </form>
           </div>
-          <div class="col-12 col-lg">
-            <label for="dni">DNI</label>
-            <input formControlName="dni" class="form-control" type="text" id="dni">
+          <div class="card-footer d-flex gap-2">
+            <button form="register-form" type="submit" class="btn btn-primary">{{ t('texts.toRegister') }}</button>
+            <button class="btn btn-secondary" (click)="goBack()" type="button">{{ t('texts.back') }}</button>
           </div>
         </div>
-      </form>
-    </div>
-    <div class="card-footer d-flex gap-2">
-      <button form="register-form" type="submit" class="btn btn-primary">Registra't!</button>
-      <button class="btn btn-secondary" (click)="goBack()" type="button">Torna</button>
-    </div>
+      </div>
+    </ng-container>
   </div>
+  <app-footer />
 </div>

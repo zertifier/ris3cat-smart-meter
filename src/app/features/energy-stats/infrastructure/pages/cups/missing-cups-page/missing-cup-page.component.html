@@ -1,23 +1,26 @@
+<ng-container *transloco="let t; prefix: 'MISSING-CUPS'">
 <div class="container d-flex flex-column justify-content-center h-100">
   <div class="row justify-content-center">
     <div class="col-12 d-flex justify-content-center mb-5">
       <img src="../../../../../../../assets/img/phantom.svg" alt="cute phantom image" style="">
     </div>
     <div class="mb-5 text-center">
-      <h5>No tens accés a cap CUPS.
-        <app-question-badge>
+      <h5> {{ t('texts.anyCupsAccess') }}
+        <!-- <app-question-badge>
           Necessites mínim un C.U.P.S. per poder accedir
-        </app-question-badge>
+        </app-question-badge> -->
       </h5>
       <h5>
-        Per a accedir a les gràfiques del teu consum, necessites donar-te d'alta o unir-te a la comunitat.
+        {{ t('texts.cupsAccessDescription') }}
       </h5>
     </div>
 
     <div class="col-12 d-flex justify-content-center">
-      <button type="button" class="btn btn-primary fw-medium" (click)="registerCups()">Dona't d'alta</button>
+      <button type="button" class="btn btn-primary fw-medium" (click)="registerCups()">
+        {{ t('texts.registerCups') }}
+      </button>
     </div>
   </div>
 </div>
-
+</ng-container>
 

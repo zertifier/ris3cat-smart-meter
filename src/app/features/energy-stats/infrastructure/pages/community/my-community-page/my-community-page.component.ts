@@ -1,10 +1,18 @@
-import {Component, computed, isDevMode, OnDestroy, OnInit, signal} from '@angular/core';
+import {Component, computed, isDevMode, OnDestroy, OnInit, signal, ViewChild} from '@angular/core';
 import {ChartModule} from "primeng/chart";
 import {MonitoringService, PowerStats} from "../../../services/monitoring.service";
 import {map, Subscription} from "rxjs";
-import {AsyncPipe, JsonPipe, NgClass, NgStyle} from "@angular/common";
+import {AsyncPipe, JsonPipe, NgClass, NgIf, NgStyle} from "@angular/common";
 import {StatsColors} from "../../../../domain/StatsColors";
-import {NgbNav, NgbNavContent, NgbNavItem, NgbNavLinkButton, NgbNavOutlet} from "@ng-bootstrap/ng-bootstrap";
+import {
+  NgbModal,
+  NgbNav,
+  NgbNavContent,
+  NgbNavItem,
+  NgbNavLinkButton,
+  NgbNavOutlet,
+  NgbTooltip
+} from "@ng-bootstrap/ng-bootstrap";
 
 import {CalendarModule} from "primeng/calendar";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -22,7 +30,7 @@ import {UserStoreService} from "../../../../../user/infrastructure/services/user
 import {NavbarComponent} from "@shared/infrastructure/components/navbar/navbar.component";
 import {FooterComponent} from "@shared/infrastructure/components/footer/footer.component";
 import {MonitoringStoreService} from "../../../services/monitoring-store.service";
-import {getMonth} from "@shared/utils/DatesUtils";
+import {getMonth, getMonthTranslated} from "@shared/utils/DatesUtils";
 import {KnobModule} from "primeng/knob";
 import {PowerflowGausComponent} from "../../../components/powerflow-gaus/powerflow-gaus.component";
 import {
@@ -33,6 +41,16 @@ import {
 } from "../../../components/metereologic-prediction/metereologic-prediction.component";
 import {environment} from "@environments/environment";
 import {EnergyPredictionComponent} from "../../../components/energy-prediction/energy-prediction.component";
+import {TranslocoDirective, TranslocoService} from "@jsverse/transloco";
+import {
+  CommunityResponse,
+  TradeTypes
+} from '../../../../../../shared/infrastructure/services/zertipower/communities/ZertipowerCommunitiesService';
+import { ZertipowerService } from '../../../../../../shared/infrastructure/services/zertipower/zertipower.service';
+import {
+  CommunityModalComponent
+} from "@features/energy-stats/infrastructure/pages/community/my-community-page/community-modal/community-modal.component";
+import {ChartResource} from "@features/energy-stats/domain/ChartResource";
 
 @Component({
   selector: 'app-my-community-page',
@@ -62,12 +80,16 @@ import {EnergyPredictionComponent} from "../../../components/energy-prediction/e
     PowerflowGausComponent,
     EnergyPredictionChartComponent,
     MetereologicPredictionComponent,
-    EnergyPredictionComponent
+    EnergyPredictionComponent,
+    TranslocoDirective,
+    NgIf,
+    NgbTooltip
   ],
   templateUrl: './my-community-page.component.html',
   styleUrl: './my-community-page.component.scss'
 })
 export class MyCommunityPageComponent implements OnInit, OnDestroy {
+  //@ViewChild(HistoricChartComponent) historicChart!: HistoricChartComponent;
   consumptionItems: ConsumptionItem[] = [
     {
       consumption: 0.015,
@@ -117,16 +139,27 @@ export class MyCommunityPageComponent implements OnInit, OnDestroy {
       if (!value) {
         return '';
       }
-      const month = getMonth(value.getMonth());
+      const month = getMonthTranslated(this.translocoService,value.getMonth());
       return dayjs(value).format(`HH:mm:ss - DD [${month}] YYYY`);
     }));
   protected readonly StatsColors = StatsColors;
+
+  communityData!:CommunityResponse | any;
+  communityId$ = this.userStore.selectOnly(this.userStore.$.communityId).subscribe(async (communityId:any)=>{
+    this.communityData = await this.zertipowerService.communities.getCommunityById(communityId);
+    //console.log("ep", this.communityData)
+   // await this.historicChart.setCommunityData(this.communityData).then((res)=>console.log(res))
+
+  });
 
   constructor(
     private readonly monitoringService: MonitoringService,
     private readonly authStore: AuthStoreService,
     private readonly userStore: UserStoreService,
-    private readonly monitoringStore: MonitoringStoreService
+    private readonly monitoringStore: MonitoringStoreService,
+    private readonly translocoService: TranslocoService,
+    private readonly zertipowerService:ZertipowerService,
+    private readonly ngbModal: NgbModal,
   ) {
   }
 
@@ -158,6 +191,29 @@ export class MyCommunityPageComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(s => s.unsubscribe())
   }
 
+  openEditModal(){
+    const modalRef = this.ngbModal.open(CommunityModalComponent, { size: 'lg' })
+    modalRef.componentInstance.community = this.communityData
+
+    this.subscriptions.push(
+      modalRef.closed.subscribe(async () => {
+        this.communityData = await this.zertipowerService.communities.getCommunityById(this.communityData.id)
+      })
+    )
+  }
+
+  getTradeTypeTranslation(type: TradeTypes){
+    switch (type){
+      case 'PREFERRED': return this.translocoService.translate('MY-COMMUNITY.texts.tradeTypePref')
+      case 'EQUITABLE': return this.translocoService.translate('MY-COMMUNITY.texts.tradeTypeEqui')
+    }
+  }
+
+  isValidNumber(value: any): boolean {
+    return typeof value === 'number' && !isNaN(value);
+  }
+
   isDevMode = isDevMode;
   protected readonly environment = environment;
+    protected readonly ChartResource = ChartResource;
 }

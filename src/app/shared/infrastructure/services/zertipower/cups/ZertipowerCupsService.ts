@@ -8,10 +8,8 @@ export class ZertipowerCupsService {
   public async datadisActive(cupsId: number) {
     const response = await this.axios.get<HttpResponse<{ active: boolean }>>(`/cups/datadis-active/${cupsId}`);
     const body = response.data;
-
-    const { active } = body.data;
-
-    return active;
+    console.log(body);
+    return body.data;
   }
 
   public async registerDatadis(customerId: number, cups: string, dni: string, datadisUser: string, datadisPassword: string) {

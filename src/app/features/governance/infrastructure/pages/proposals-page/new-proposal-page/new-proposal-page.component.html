@@ -1,139 +1,127 @@
-<div class="container-page">
-  <div class="mb-3">
+<ng-container *transloco="let t; prefix: 'NEW-PROPOSAL'">
+  <div class="container-page">
+    <div class="mb-3">
       <a [routerLink]="'../'" [routerLinkActive]="'active'" class="text-decoration-none">
-        <i class="fa-solid fa-arrow-left me-1"></i> Tornar a propostes
+        <i class="fa-solid fa-arrow-left me-1"></i> {{ t('texts.goBack') }}
       </a>
-    <h3 class="fw-bold mt-3">Nova proposta</h3>
-  </div>
-
-  <div>
-    <h5 class="form-label">
-      Afegeix un títol descriptiu
-    </h5>
-
-    <input [(ngModel)]="proposal" class="form-control bg-white shadow-none border-secondary" placeholder="Títol de la proposta">
-  </div>
-  <div class="my-4">
-    <h5 class="form-label">
-      Descriu els aspectes principals de la teva proposta
-    </h5>
-
-    <!--<textarea [(ngModel)]="proposalDescription" class="form-control bg-white border-secondary shadow-none"
-              placeholder="Hola, m'agradaria proposar..." id="description"
-              style="height: 100px"></textarea>-->
-
-    <editor
-      [init]="tinymceConfig"
-    ></editor>
-    <label class="mt-2" style="font-size: 0.9rem">Recorda usar un llenguatge respectuós, un text breu, clar i descriptiu de la teva proposta</label>
-  </div>
-
-  <div class="row">
-    <div class="col-12 col-md-2 mt-3 mt-md-0">
-      <label class="form-label">Data de finalització</label>
-      <p-calendar [(ngModel)]="date"  iconDisplay="input" [showIcon]="true"
-                  [minDate]="minDate" [dateFormat]="'dd-mm-yy'" styleClass="w-100"/>
+      <h3 class="fw-bold mt-3">{{ t('title') }}</h3>
     </div>
-    <div class="col-12 col-md-2 mt-3 mt-md-0">
-      <label class="form-label">
-        Cens de vots minim
-        <app-question-badge>
-          <div class="my-3">
-            Elegeix el percentatge de vots necessaris per a l'aprovació de la votació. Per exemple: 50%.
-          </div>
-        </app-question-badge>
-      </label>
-      <div class="input-group">
-        <input type="number" class="form-control bg-white shadow-none border-secondary" [(ngModel)]="minVotes" max="100" min="0">
-        <span class="input-group-text bg-primary text-white">%</span>
+
+    <div>
+      <h5 class="form-label">
+        {{ t('texts.titleLabel') }}
+      </h5>
+
+      <input [(ngModel)]="proposal" class="form-control bg-white shadow-none border-secondary" placeholder="{{ t('texts.titlePlaceholder') }}">
+    </div>
+    <div class="my-4">
+      <h5 class="form-label">
+        {{ t('texts.descriptionLabel') }}
+      </h5>
+
+      <editor
+        [init]="tinymceConfig"
+      ></editor>
+      <label class="mt-2" style="font-size: 0.9rem">{{ t('texts.descriptionWarning') }}</label>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-md-2 mt-3 mt-md-0">
+        <label class="form-label">{{ t('texts.endDateLabel') }}</label>
+        <p-calendar [(ngModel)]="date"  iconDisplay="input" [showIcon]="true"
+                    [minDate]="minDate" [dateFormat]="'dd-mm-yy'" styleClass="w-100"/>
       </div>
-    </div>
-    <div *ngIf="userRole != 'USER'"  class="col-12 col-md-2 mt-3 mt-md-0">
-      <label class="form-label">Estat</label>
-      <select class="form-select bg-white shadow-none border-secondary" [(ngModel)]="status">
-        <option selected [value]="'active'">Activa</option>
-        <option [value]="'pending'">Pendent</option>
-      </select>
-    </div>
-    <div class="col-12 col-md-2 mt-3 mt-md-0">
-      <label class="form-label">
-        Tipus
-        <app-question-badge>
-          <div class="my-3">
-            Sistemes de votacions.
-            <br>
-            <strong>Ponderada:</strong> Cada vot es basa en un factor predefinit, com la quantitat d'aportacions
-            realitzades o l'antiguitat en la comunitat. És a dir, es pondera per la quantitat d'accions.
-            <br>
-            <strong>Igualitaria:</strong> Cada vot té el mateix pes, independentment de qualsevol altre factor.
-          </div>
+      <div class="col-12 col-md-2 mt-3 mt-md-0">
+        <label class="form-label">
+          {{ t('texts.minQuorumLabel') }}
+          <app-question-badge>
+            <div class="my-3">
+              {{ t('tooltips.quorum') }}
+            </div>
+          </app-question-badge>
+        </label>
+        <div class="input-group">
+          <input type="number" class="form-control bg-white shadow-none border-secondary" [(ngModel)]="minVotes" max="100" min="0">
+          <span class="input-group-text bg-primary text-white">%</span>
+        </div>
+      </div>
+      <div *ngIf="userRole != 'USER'"  class="col-12 col-md-2 mt-3 mt-md-0">
+        <label class="form-label">{{ t('texts.statusLabel') }}</label>
+        <select class="form-select bg-white shadow-none border-secondary" [(ngModel)]="status">
+          <option selected [value]="'active'">{{ t('status.active') }}</option>
+          <option [value]="'pending'">{{ t('status.pending') }}</option>
+        </select>
+      </div>
+      <div class="col-12 col-md-2 mt-3 mt-md-0">
+        <label class="form-label">
+          {{ t('texts.typeLabel') }}
+          <app-question-badge>
+            <div [innerHTML]="t('tooltips.type')" class="my-3"></div>
+          </app-question-badge>
+        </label>
+        <select class="form-select bg-white shadow-none border-secondary" [(ngModel)]="type">
+          <option selected [value]="'weighted'">{{ t('types.weighted') }}</option>
+          <option [value]="'equal'">{{ t('types.equal') }}</option>
+        </select>
+      </div>
+      <div class="col-12 col-md-2 mt-3 mt-md-0">
+        <label class="form-label">
+          {{ t('texts.transparencyLabel') }}
+          <app-question-badge>
+            <div [innerHTML]="t('tooltips.transparency')" class="my-3"></div>
+          </app-question-badge>
+        </label>
+        <div class="form-check form-switch">
+          <input class="form-check-input shadow-none border-secondary" type="checkbox" role="switch"
+                 (click)="setTransparentStatus()" [(ngModel)]="transparentStatus">
+          <div class="pt-1">
+            <span class="ms-2">{{transparentStatus ? ('GENERIC.texts.yes' | transloco) : ('GENERIC.texts.no' | transloco)}}</span>
 
-        </app-question-badge>
-      </label>
-      <select class="form-select bg-white shadow-none border-secondary" [(ngModel)]="type">
-        <option selected [value]="'weighted'">Ponderada</option>
-        <option [value]="'equal'">Igualitari</option>
-      </select>
-    </div>
-    <div class="col-12 col-md-2 mt-3 mt-md-0">
-      <label class="form-label">
-        Transparència
-        <app-question-badge>
-          <div class="my-3">
-            Elegeix <strong>SI</strong>, per a veure la votació a temps real, o <strong>NO</strong>,
-            per a veure el resultat finalitzada la data d'expiració.
           </div>
-        </app-question-badge>
-      </label>
-      <div class="form-check form-switch">
-        <input class="form-check-input shadow-none border-secondary" type="checkbox" role="switch"
-               (click)="setTransparentStatus()" [(ngModel)]="transparentStatus">
-        <div class="pt-1">
-          <span class="ms-2">{{transparentStatus ? 'Sí' : 'No'}}</span>
-
         </div>
       </div>
     </div>
-  </div>
 
-  <hr class="mx-5 my-5">
+    <hr class="mx-5 my-5">
 
-  <div class="row" >
-    <div class="d-flex mb-3">
-      <label class="form-label d-flex w-100 mb-0">Opcions</label>
+    <div class="row" >
+      <div class="d-flex mb-3">
+        <label class="form-label d-flex w-100 mb-0">{{ t('texts.optionsLabel') }}</label>
 
-      <div class="btn btn-sm btn-complementary ms-auto d-none d-md-block" (click)="addOption()" style="width: 180px">
-        Afegir opció
+        <div class="btn btn-sm btn-complementary ms-auto d-none d-md-block" (click)="addOption()" style="width: 180px">
+          {{ t('texts.addOption') }}
+        </div>
       </div>
-    </div>
 
-    <div class="d-block d-md-none mb-3" >
-      <button class="btn btn-sm btn-complementary w-100" (click)="addOption()">
-        Afegir opció
+      <div class="d-block d-md-none mb-3" >
+        <button class="btn btn-sm btn-complementary w-100" (click)="addOption()">
+          {{ t('texts.addOption') }}
 
-      </button>
-    </div>
-
-
-    <div *ngFor="let option of options, let i = index" class="col-12 col-md-3">
-      <div class="input-group mb-3">
-        <input type="text" class="form-control bg-white shadow-none border-secondary" [(ngModel)]="option.option" placeholder="Opció {{options.length - i}}">
-        <button [disabled]="options.length <= 2"
-                [ngbTooltip]="'La proposta és vàlida a partir de 2 opcions.'"
-                class="btn btn-danger text-white border-0 rounded-end-2 border-secondary" type="button" (click)="removeOption(i)" style="min-width: 37px">
-          x
         </button>
       </div>
+
+
+      <div *ngFor="let option of options, let i = index" class="col-12 col-md-3">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control bg-white shadow-none border-secondary" [(ngModel)]="option.option" placeholder="{{t('texts.optionPlaceholder')}} {{options.length - i}}">
+          <button [disabled]="options.length <= 2"
+                  [ngbTooltip]="t('texts.proposalValidation')"
+                  class="btn btn-danger text-white border-0 rounded-end-2 border-secondary" type="button" (click)="removeOption(i)" style="min-width: 37px">
+            x
+          </button>
+        </div>
+      </div>
+
     </div>
 
-  </div>
-
-  <div class="my-5">
-    <button class="btn btn-secondary" style="min-width: 100px" (click)="saveProposal()" [disabled]="loading">
+    <div class="my-5">
+      <button class="btn btn-secondary" style="min-width: 100px" (click)="saveProposal()" [disabled]="loading">
       <span *ngIf="!loading">
-        Desa
+        {{ 'GENERIC.texts.save' | transloco }}
       </span>
-      <i *ngIf="loading" class="fa-solid fa-spinner fa-spin"></i>
-    </button>
+        <i *ngIf="loading" class="fa-solid fa-spinner fa-spin"></i>
+      </button>
+    </div>
   </div>
-</div>
+</ng-container>
+

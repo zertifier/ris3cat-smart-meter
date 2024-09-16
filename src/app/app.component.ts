@@ -5,6 +5,8 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {ProfileUpdaterService} from "./features/user/infrastructure/services/profile-updater.service";
 import {AuthPersistenceProxyService} from "./features/auth/infrastructure/services/auth-persistence-proxy.service";
 import {UserCupsUpdaterService} from "./features/user/infrastructure/services/user-cups-updater.service";
+import {TranslocoHttpLoader} from "./transloco-loader";
+import {TranslocoService} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-root',
@@ -19,11 +21,12 @@ export class AppComponent implements OnInit {
   constructor(
     private profileUpdater: ProfileUpdaterService,
     private cupsUpdater: UserCupsUpdaterService,
-    private authProxy: AuthPersistenceProxyService
-  ) {
+    private authProxy: AuthPersistenceProxyService,
+) {
   }
 
   ngOnInit(): void {
     this.authProxy.init();
+
   }
 }

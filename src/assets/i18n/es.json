@@ -1,0 +1,620 @@
+{
+  "AUTH": {
+    "texts": {
+      "register": "Registro",
+      "toRegister": "Regístrate",
+      "name": "Nombre",
+      "surname": "Apellido",
+      "DNI": "DNI",
+      "back": "Volver"
+    },
+    "modals": {
+      "register": {
+        "correct": "Usuario creado correctamente"
+      }
+    }
+  },
+  "DATADIS-REGISTER": {
+    "texts": {
+      "title": "Alta CUPS",
+      "subtitle": "Rellena los siguientes campos para asociar tus CUPS a tu perfil de la plataforma.",
+      "serviceTitle": "Elige el servicio",
+      "invalidDNI": "NIF no válido",
+      "user": "Usuario",
+      "invalidUser": "Usuario no válido",
+      "password": "Contraseña",
+      "invalidPassword": "Contraseña no válida",
+      "invalidCups": "CUPS no válido",
+      "addData": "Añadir datos"
+    },
+    "modals": {
+      "errorText": "Ha ocurrido un error",
+      "successText": "Los datos se han guardado correctamente"
+    }
+  },
+  "MISSING-CUPS": {
+    "texts": {
+      "anyCupsAccess": "No tienes acceso a ningún CUPS.",
+      "cupsAccessDescription": "Para acceder a las gráficas de tu consumo, necesitas darte de alta o unirte a la comunidad.",
+      "registerCups": "Darte de alta"
+    }
+  },
+  "MY-CUPS": {
+    "navbar": "Contadores",
+    "title": "Consumo y producción",
+    "texts": {
+      "info": "Información",
+      "communityPrices": "Community prices",
+      "providerPrices": "Provider prices",
+      "llano": "Llano",
+      "valle": "Valle",
+      "punta": "Punta",
+      "liveWaste": "Tu gasto en vivo",
+      "updatedAt": "Actualizado a las ",
+      "noDataRegistered": "No se ha registrado ningún dato",
+      "assignedProd": "Producción asignada",
+      "consumption": "Consumo",
+      "selfConsumption": "Autoconsumo",
+      "generatedEnergy": "Energía generada",
+      "surplus": "Excedente",
+      "buyingPrice": "Precio de compra",
+      "sellingPrice": "Precio de venta",
+      "unavailable": "No disponible",
+      "allCups": "Todos los CUPS"
+    },
+    "tooltips": {
+      "assignedProd": "El porcentaje de la energía producida que se le asigna a este CUPS"
+    },
+    "modals": {
+      "modifyCups": {
+        "title": "Cambiar el nombre del CUPS",
+        "texts": {
+          "nameLabel": "Nombre del CUPS",
+          "namePlaceholder": "Por ejemplo: Garaje"
+        }
+      },
+      "addCups": {
+        "title": "Añadir un nuevo CUPS"
+      }
+    }
+  },
+  "MISSING-COMMUNITY": {
+    "texts": {
+      "anyAccess": "No tienes acceso a ninguna comunidad.",
+      "accessDescription": "Para acceder a la información comunitaria, necesitas darte de alta o unirte a la comunidad.",
+      "register": "Darte de alta",
+      "join": "Únete"
+    }
+  },
+  "MY-COMMUNITY": {
+    "navbar": "Comunidad",
+    "title": "Consumo y producción",
+    "texts": {
+      "info": "Información",
+      "communityPrices": "Community prices",
+      "providerPrices": "Provider prices",
+      "liveWaste": "Tu gasto en vivo",
+      "updatedAt": "Actualizado a las ",
+      "noDataRegistered": "No se ha registrado ningún dato",
+      "communityMembers": "Miembros de esta comunidad:",
+      "activeMembers": "Miembros activos:",
+      "consumption": "Consumo",
+      "selfConsumption": "Autoconsumo",
+      "generatedEnergy": "Energía generada",
+      "surplus": "Excedente",
+      "buyingPrice": "Precio de compra",
+      "sellingPrice": "Venta",
+      "llano": "Llano",
+      "valle": "Valle",
+      "punta": "Punta",
+      "unavailable": "No disponible",
+      "tradeTypeLabel": "Tipos de compartición:",
+      "preferent": "Preferente",
+      "tradeTypePref": "Preferente",
+      "tradeTypeEqui": "Equitativo",
+      "totalProduction": "Producción total",
+      "community": "Comunidad",
+      "provider": "Proveedor"
+    },
+    "tooltips": {
+      "assignedProd": "El porcentaje de la energía producida que se le asigna a este CUPS"
+    },
+    "modals": {
+      "modifyCommunity": {
+        "title": "Modificar la comunidad",
+        "texts": {
+          "nameLabel": "Nombre de la comunidad",
+          "namePlaceholder": "Por ejemplo: Olot",
+          "tradeTypeLabel": "Tipo de compartición de energía"
+        },
+        "swal": {
+          "success": "Comunidad modificada correctamente",
+          "error": "Hubo un error al guardar la comunidad. Inténtalo de nuevo más tarde"
+        }
+      }
+    }
+  },
+  "HISTORIC-CHART": {
+    "title": "Histórico consumo/excedente",
+    "texts": {
+      "dataType": {
+        "title": "Tipo de datos",
+        "types": {
+          "energy": "Energía (kWh)",
+          "energyPrice": "Precio energético"
+        }
+      },
+      "communityModel": {
+        "title": "Modelo comunitario",
+        "types": {
+          "acc": "ACC",
+          "cce": "CCE"
+        }
+      },
+      "dataSource": {
+        "title": "Fuente de datos",
+        "types": {
+          "datadis": "Datadis"
+        }
+      },
+      "dates": {
+        "daily": "Diario",
+        "monthly": "Mensual",
+        "yearly": "Anual"
+      },
+      "prosumersSelectorTitle": "Excluir prosumidores",
+      "prosumersSelectorText": "Selecciona prosumidores",
+      "noDisplay": "Nada que mostrar",
+      "chartDataInputText": "Elige un mes/año para ver el consumo.",
+      "chartBottomText": "· Conoce el gasto de energía en detalle haciendo clic en cada tipo de consumo. La gráfica mostrará la información de consumo individualizada.",
+      "chartBottomCommunityText": "· Esta estadística indica los datos de los {{activeMembers}} miembros activos de un total de {{totalMembers}} miembros de la comunidad.",
+      "chartUpdateWarning": "· Ten en cuenta que la actualización de datos no es diaria.",
+      "chartLabels": {
+        "CO2Savings": "Ahorro en CO2",
+        "production": "Producción",
+        "community": {
+          "production": "Producción total"
+        },
+        "productionActive": "Producción activos",
+        "networkConsumption": "Consumo de la red",
+        "networkActiveConsumption": "Consumo de la red activos",
+        "surplus": "Excedente",
+        "surplusActive": "Excedente activos",
+        "surplusActiveShared": "Excedente activos compartido",
+        "totalProduction": "Producción total",
+        "totalActiveProduction": "Producción activos total",
+        "totalConsumption": "Consumo total",
+        "totalSurplus": "Excedente total",
+        "totalCo2": "CO2 total compensado",
+        "totalCo2Badge": "El CO2 compensado se calcula a partir de la producción.",
+        "totalMembers": "Total de miembros: {{total}}",
+        "totalActiveMembers": "Miembros activos: {{total}}",
+        "totalShared": "Total compartido",
+        "shared": "Compartido",
+        "notShared": "No compartido"
+      },
+      "displayLegend": "Mostrar la leyenda",
+      "maximize": "Ampliar",
+      "loadingData": "Cargando datos"
+    },
+    "tooltips": {
+      "chartLabels": {
+        "community": {
+          "CO2Savings": "",
+          "production": "Producción total de la comunidad.",
+          "activeProduction": "Producción de los participantes activos",
+          "networkConsumption": "Consumo que facturará la compañía eléctrica.",
+          "networkActiveConsumption": "Consumo de los participantes activos",
+          "surplusActive": "Cantidad de energía que se produce y no se consume de los participantes activos.",
+          "sharedSurplusActive": "Cantidad de energía para compartir que se produce y no se consume de los participantes activos."
+        },
+        "cups": {
+          "CO2Savings": "",
+          "networkConsumption": "Consumo que facturará la compañía eléctrica.",
+          "production": "Producción proporcional comunitaria.",
+          "networkActiveConsumption": "Cantidad de energía que gastamos.",
+          "surplusActive": "Cantidad de energía que se produce y no se consume.",
+          "sharedSurplusActive": "Cantidad de energía para compartir que se produce y no se consume de los participantes activos."
+        }
+      },
+      "communityModel": {
+        "acc": "(Auto Consumo Compartido)",
+        "cce": "(Comunidad Ciudadana Energética)"
+      },
+      "dataSource": "Selecciona la plataforma desde donde prefieres extraer y analizar\n los datos relativos al consumo, producción y excedente energético."
+    }
+  },
+  "PREDICTIONS": {
+    "meteorologic": {
+      "title": "Predicción meteorológica"
+    },
+    "energy": {
+      "title": "Predicción de energía comunitaria",
+      "titleConsumption": "Predicción de consumo energético",
+      "titleProduction": "Predicción de producción energético",
+      "titleSurplus": "Predicción de excedente energético",
+      "titleActivesConsumption": "Predicción de consumo energético de los miembros activos",
+      "titleActivesProduction": "Predicción de producción energético de los miembros activos",
+      "titleActivesSurplus": "Predicción de excedente energético de los miembros activos",
+      "unavailable": "No disponible",
+      "surplusDescription": "* Como máximo, solo estarán disponibles 2 días de la predicción del excedente.",
+      "productionDescription": "* Como máximo, solo estarán disponibles 2 días de la predicción de la producción."
+    }
+  },
+  "PROFILE": {
+    "navbar": "Perfil",
+    "title": "Mi perfil",
+    "texts": {
+      "nameLabel": "Nombre (requerido)",
+      "lastnameLabel": "Apellido (requerido)",
+      "updated": "Perfil actualizado correctamente",
+      "agree": "Aceptar",
+      "error": "Error al actualizar el perfil",
+      "errorMessage": "Inténtalo de nuevo en unos minutos"
+    }
+  },
+  "MY-WALLET": {
+    "navbar": "Mi wallet",
+    "title": "Mi wallet",
+    "texts": {
+      "identityLabel": "Identidad",
+      "transferInfo": "Para relacionar una transferencia, elige qué quieres traspasar",
+      "energyAmount": "Saldo energético",
+      "tokenAmount": "Saldo",
+      "communityShare": "Participaciones de la comunidad",
+      "addEnergy": "Comprar tokens",
+      "transferEnergy": "Transferir saldo",
+      "transferToken": "Transferir XDAI",
+      "transferShare": "Transferir betas",
+      "platformSection": "Plataforma",
+      "blockchainSection": "Blockchain",
+      "communityBalance": "Saldo energético dentro de la CCE",
+      "addBalance": "Ingresar tokens",
+      "pullOutBalance": "Retirar tokens",
+      "pkLabel": "Clave privada",
+      "pkWarning": "Por razones de seguridad, no reveles la clave privada a nadie."
+    },
+    "tooltips": {
+      "identity": "La identidad permite identificar tu usuario dentro de la Cadena de Bloques.",
+      "energy": "Este saldo se usará para la compra de energía a la comunidad.",
+      "token": "Saldo para las transacciones.",
+      "shares": "Son las Participaciones que tiene la comunidad.",
+      "pk": "La clave privada es suficiente para acceder a tus tokens. No es recomendable compartirla.",
+      "webSwap": "Puedes comprar EKW a través de otra criptomoneda."
+    },
+    "modals": {
+      "transfer": {
+        "transferTitle": "Transferencia",
+        "addTitle": "Añadir",
+        "pullOutTitle": "Retirar",
+        "texts": {
+          "balanceLabel": "Saldo",
+          "toLabel": "Destinatario",
+          "toPlaceholder": "ejemplo@correo.com / 0xA...",
+          "toBottomText": "Escribe el correo o número de identidad del destinatario",
+          "amountLabel": "Cantidad",
+          "balanceAdded": "Saldo ingresado correctamente.",
+          "insuficientFunds": "Saldo insuficiente.",
+          "balancewithdrawn": "Saldo retirado correctamente."
+        },
+        "swal": {
+          "blockchainError": "Problemas con la cadena de bloques.",
+          "tryAgainError": "Inténtalo de nuevo en unos minutos.",
+          "checkTryAgainError": "Revísalo e inténtalo de nuevo.",
+          "wrongDestinyError": "Destinatario incorrecto.",
+          "success": "Transferencia enviada correctamente."
+        }
+      },
+      "buy": {
+        "title": "Método de pago",
+        "texts": {
+          "qtyLabel": "Cantidad a comprar",
+          "qtyPlaceholder": "Escoge una cantidad",
+          "buy": "Comprar",
+          "creditCard": "Targeta de crédito"
+        },
+        "swal": {
+          "qtyError": "La cantidad debe ser superior a 0",
+          "userError": "Primero debes iniciar sesión"
+        }
+      }
+    },
+    "swal": {
+      "stripeCheckoutError": "Hubo un error al procesar tu solicitud. Por favor, inténtalo de nuevo en unos minutos.",
+      "stripeMintSuccess": "El pago se completó con éxito.",
+      "stripeMintError": "Hubo un problema con la solicitud. Lo intentaremos de nuevo automáticamente en unos minutos.",
+      "stripeMintingWait": "Tu solicitud está siendo procesada.",
+      "copyPk": "Texto copiado."
+    }
+  },
+  "SHARE-ENERGY": {
+    "navbar": "Compartir energía",
+    "title": "Compartir energía",
+    "texts": {
+      "chooseData": "Elige el tramo de fechas que deseas consultar",
+      "from": "Desde",
+      "to": "Hasta",
+      "totalShared": "Total compartido",
+      "date": "Fecha",
+      "action": "Acción",
+      "amount": "Cantidad",
+      "total": "Total",
+      "result": "Resultado",
+      "mobileEnergyLeft": "Te queda",
+      "mobileEnergyCurrent": "Tienes",
+      "bottomTable": "Ten en cuenta que la actualización de datos no es diaria.",
+      "noData": "No hay datos. Prueba otro rango de fechas.",
+      "actions": {
+        "buy": "Recibido",
+        "sell": "Enviado"
+      },
+      "emitter": "Emisor",
+      "receiver": "Receptor",
+      "buyingPrice": "Precio de compra",
+      "sellingPrice": "Precio de venta",
+      "availableBalance": "Saldo disponible",
+      "results": {
+        "before": "Antes",
+        "now": "Ahora",
+        "consumption": "Consumo",
+        "surplus": "Excedente"
+      },
+      "myShares": "Mi compartición",
+      "communitaryShares": "Compartición comunitaria",
+      "anonymous": "Anónimo"
+    },
+    "tooltips": {
+      "ekw": "EKW: Moneda para la compra y venta de energía en esta plataforma."
+    }
+  },
+  "STATUS": {
+    "navbar": "Estado",
+    "title": "Estado",
+    "texts": {
+      "statusInfo": "· Aquí podrás ver el estado de las fuentes de datos",
+      "lastUpdate": "Última actualización",
+      "noLastUpdate": "No hay actualizaciones",
+      "connected": "Conectado",
+      "disconnected": "Desconectado"
+    }
+  },
+  "STATS": {
+    "navbar": "Estadísticas",
+    "title": "Estadísticas",
+    "subTitle": "Ranking de los miembros activos",
+    "texts": {
+      "monthLabel": "Elige el mes que quieres ver",
+      "typeLabel": "¿Qué datos quieres ver?",
+      "types": {
+        "lessConsumption": "Usuarios que tienen menos consumo",
+        "moreSurplus": "Usuarios que tienen más excedente"
+      },
+      "wallet": "Identidad",
+      "amount": "Cantidad",
+      "anonymous": "Anónimo"
+    }
+  },
+  "GOVERNOR": {
+    "navbar": "Gobernanza",
+    "title": "Gobernanza"
+  },
+  "INTEGRATIONS": {
+    "navbar": "Integraciones",
+    "title": "Integraciones",
+    "texts": {
+      "token": "API token",
+      "refreshPermanentToken": "Actualizar",
+      "documentation": "Ver documentación"
+    }
+  },
+  "NOTIFICATIONS": {
+    "navbar": "Notificaciones",
+    "title": "Notificaciones",
+    "texts": {
+      "governance": "Propuestas de la comunidad",
+      "sharing": "Compartición de energía",
+      "datadis": "Alertas del datadis",
+      "create_proposal": "Creación de propuesta",
+      "delete_proposal": "Propuesta borrada",
+      "proposal_accepted": "Propuesta aceptada",
+      "proposal_denied": "Propuesta denegada",
+      "proposal_executed": "Propusta ejecutada",
+      "proposal_expired": "Propuesta expirada",
+      "sharing_received": "Energía recibida",
+      "sharing_sent": "Energía enviada",
+      "updated_datadis": "Datadis actualitzat",
+      "datadis_error": "Errores en el datadis",
+      "datadis_active": "Datadis actiu",
+      "datadis_inactive": "Datadis inactiu",
+      "insufficient_balance": "Saldo insuficiente dentro de la comunidad",
+      "low_balance": "Saldo bajo dentro de la comunidad"
+    }
+  },
+  "PROPOSALS": {
+    "navbar": "Propuestas",
+    "title": "Propuestas",
+    "texts": {
+      "searchPlaceholder": "Buscar propuesta",
+      "newProposal": "Nueva propuesta",
+      "createdBy": "Creada por:",
+      "expiration": "Expiración:"
+    },
+    "status": {
+      "all": "Todas",
+      "actives": "Activas",
+      "pending": "Pendientes",
+      "expired": "Finalizadas",
+      "executed": "Ejecutadas",
+      "denied": "Denegadas"
+    }
+  },
+  "NEW-PROPOSAL": {
+    "title": "Nueva propuesta",
+    "texts": {
+      "goBack": "Volver a propuestas",
+      "titleLabel": "Añade un título descriptivo",
+      "titlePlaceholder": "Título de la propuesta",
+      "descriptionLabel": "Describe los aspectos principales de tu propuesta",
+      "descriptionWarning": "Recuerda usar un lenguaje respetuoso, un texto breve, claro y descriptivo de tu propuesta",
+      "endDateLabel": "Fecha de finalización",
+      "minQuorumLabel": "Censo de votos mínimo",
+      "statusLabel": "Estado",
+      "typeLabel": "Tipo",
+      "transparencyLabel": "Transparencia",
+      "optionsLabel": "Opciones",
+      "addOption": "Añadir opción",
+      "optionPlaceholder": "Opción",
+      "proposalValidation": "La propuesta es válida a partir de 2 opciones.",
+      "abstainPlaceholder": "Abstenerse"
+    },
+    "status": {
+      "active": "Activa",
+      "pending": "Pendiente"
+    },
+    "types": {
+      "weighted": "Ponderada",
+      "equal": "Igualitaria"
+    },
+    "tooltips": {
+      "quorum": "Elige el porcentaje de votos necesarios para la aprobación de la votación. Por ejemplo: 50%.",
+      "type": "Sistemas de votación.<br><strong>Ponderada:</strong> Cada voto se basa en un factor predefinido, como la cantidad de aportaciones realizadas o la antigüedad en la comunidad. Es decir, se pondera por la cantidad de acciones.<br><strong>Igualitaria:</strong> Cada voto tiene el mismo peso, independientemente de cualquier otro factor.",
+      "transparency": "Elige <strong>SÍ</strong>, para ver la votación en tiempo real, o <strong>NO</strong>, para ver el resultado finalizada la fecha de expiración."
+    },
+    "modals": {
+      "errorCreate": "Ha habido un error creando la propuesta, revisa que todos los campos estén completos",
+      "successCreate": "Propuesta guardada correctamente"
+    }
+  },
+  "PARTICIPANTS": {
+    "navbar": "Participantes",
+    "title": "Participantes",
+    "texts": {
+      "searchPlaceholder": "Buscar participante",
+      "name": "Nombre",
+      "mobileName": "Nombre completo y correo",
+      "email": "Correo",
+      "shares": "Participación",
+      "actions": "Acciones",
+      "noParticipants": "No hay ningún participante"
+    },
+    "status": {
+      "actives": "Activos",
+      "pending": "Pendientes"
+    },
+    "modals": {
+      "modify": {
+        "nameLabel": "Nombre completo",
+        "namePlaceholder": "nombre",
+        "emailLabel": "Correo electrónico",
+        "emailPlaceholder": "correo@gmail.com",
+        "sharesLabel": "Participación",
+        "sharePlaceholder": "ej:5000"
+      },
+      "remove": {},
+      "swal": {
+        "activate": {
+          "title": "¿Aceptar este participante?",
+          "inputLabel": "Beta",
+          "inputPlaceholder": "ej.: 5000",
+          "success": {
+            "title": "El participante se ha activado correctamente"
+          }
+        },
+        "remove": {
+          "title": "El participante se eliminará permanentemente",
+          "success": {
+            "title": "El participante se ha eliminado correctamente"
+          }
+        },
+        "errorMessage": "Ha habido un error con la propuesta. Espera unos minutos e inténtalo de nuevo."
+      }
+    }
+  },
+  "LOGIN": {
+    "title": "Iniciar sesión",
+    "texts": {
+      "loginGoogle": "Iniciar sesión con Google",
+      "loginWebwallet": "Iniciar sesión con web wallet",
+      "noDataSaved": "No guardamos ningún dato relacionado con tus credenciales",
+      "help": "Centro de ayuda",
+      "logingIn": "Iniciando sesión.",
+      "wait": "Por favor, espera."
+    }
+  },
+  "LOGOUT": {
+    "navbar": "Cerrar sesión",
+    "modal": {
+      "message": "Seguro que quieres cerrar sesión",
+      "confirm": "Cerrar sesión"
+    }
+  },
+  "FOOTER": {
+    "texts": {
+      "privacy": "Política de Privacidad",
+      "help": "Centro de ayuda",
+      "language": "Idioma"
+    }
+  },
+  "QR": {
+    "import": {
+      "title": "Escanea el QR",
+      "swal": {
+        "success": "QR importado correctamente",
+        "error": "QR inválido, solo aceptamos wallets"
+      }
+    },
+    "export": {
+      "title": "Tu wallet"
+    }
+  },
+  "GENERIC": {
+    "texts": {
+      "months": {
+        "1": "Enero",
+        "2": "Febrero",
+        "3": "Marzo",
+        "4": "Abril",
+        "5": "Mayo",
+        "6": "Junio",
+        "7": "Julio",
+        "8": "Agosto",
+        "9": "Septiembre",
+        "10": "Octubre",
+        "11": "Noviembre",
+        "12": "Diciembre"
+      },
+      "monthsArray": [
+        "Enero",
+        "Febrero",
+        "Marzo",
+        "Abril",
+        "Mayo",
+        "Junio",
+        "Julio",
+        "Agosto",
+        "Septiembre",
+        "Octubre",
+        "Noviembre",
+        "Diciembre"
+      ],
+      "daysArray": [
+        "Domingo",
+        "Lunes",
+        "Martes",
+        "Miércoles",
+        "Jueves",
+        "Viernes",
+        "Sábado"
+      ],
+      "save": "Guardar",
+      "cancel": "Cancelar",
+      "close": "Cerrar",
+      "send": "Enviar",
+      "sending": "Enviando...",
+      "yes": "Sí",
+      "no": "No",
+      "okay": "Entendido",
+      "confirm": "Confirmar"
+    }
+  }
+}

@@ -10,22 +10,26 @@ import {
   BreakPoints,
   ScreenBreakPointsService
 } from "../../../../../shared/infrastructure/services/screen-break-points.service";
+import {TranslocoDirective} from "@jsverse/transloco";
+import {LanguageComponent} from "@core/layouts/language/language.component";
 
 @Component({
   selector: 'app-login-page',
   standalone: true,
-  imports: [
-    OauthLoginComponent,
-    NgbNav,
-    NgbNavItem,
-    NgbNavLinkButton,
-    WebWalletLoginComponent,
-    NgbNavContent,
-    NgbNavOutlet,
-    NgOptimizedImage,
-    NgClass,
-    RouterLink
-  ],
+    imports: [
+        OauthLoginComponent,
+        NgbNav,
+        NgbNavItem,
+        NgbNavLinkButton,
+        WebWalletLoginComponent,
+        NgbNavContent,
+        NgbNavOutlet,
+        NgOptimizedImage,
+        NgClass,
+        RouterLink,
+        TranslocoDirective,
+        LanguageComponent
+    ],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss'
 })
@@ -47,7 +51,7 @@ export class LoginPageComponent {
   @HostListener('window:resize')
   onResize() {
     const breakpoint = this.screenService.getCurrentBreakPoint()
-    this.hideImage = breakpoint <= BreakPoints.SM;
+    this.hideImage = breakpoint <= BreakPoints.LG;
   }
 
   public googleLogin() {

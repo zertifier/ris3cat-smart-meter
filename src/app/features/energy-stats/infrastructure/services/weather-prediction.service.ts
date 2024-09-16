@@ -53,7 +53,6 @@ export class WeatherPredictionService {
       hourlyWeather.set(dailyDate, weatherList);
     }
 
-    console.log({hourlyWeather});
 
     const dailyWeather: Map<string, Weather> = new Map<string, Weather>();
     // Sort predictions

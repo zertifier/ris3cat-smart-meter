@@ -5,56 +5,57 @@
   <button class="btn btn-primary" (click)="mintTokens()">Mint</button>
 </div>
 
-<div class="container-page">
-  <div class="my-4">
-    <h3 class="fw-bold"> Propostes</h3>
+<ng-container *transloco="let t; prefix: 'PROPOSALS'">
+  <div class="container-page">
+    <div class="my-4">
+      <h3 class="fw-bold"> {{ t('title') }} </h3>
 
-    <div class="input-group mb-3" style="max-width: 675px">
-      <input [(ngModel)]="filterText" (keyup)="proposalType == 'all' ? getAllProposals() : getProposalsByStatus(proposalType)" type="text"
-             class="form-control bg-white border-secondary border-1 border-end-0 shadow-none" placeholder="Buscar proposta">
-      <span class="input-group-text bg-white border-secondary border-1 border-start-0"><i class="fa-solid fa-magnifying-glass"></i></span>
-    </div>
-
-  </div>
-
-  <div class="d-flex mb-3 overflow-x-scroll py-2 py-md-0">
-    <div class="me-3">
-      <button class="btn" [ngClass]="proposalType == 'all' ? 'btn-complementary' : 'btn-outline-complementary'"
-              (click)="getAllProposals()"> Totes </button>
-    </div>
-    <div class="me-3">
-      <button class="btn" [ngClass]="proposalType == 'active' ? 'btn-complementary' : 'btn-outline-complementary'"
-              (click)="getProposalsByStatus('active')"> Actives </button>
-    </div>
-    <div class="me-3">
-      <button class="btn" [ngClass]="proposalType == 'pending' ? 'btn-complementary' : 'btn-outline-complementary'"
-              (click)="getProposalsByStatus('pending')"> Pendents </button>
-    </div>
-    <div class="me-3">
-      <button class="btn" [ngClass]="proposalType == 'expired' ? 'btn-complementary' : 'btn-outline-complementary'"
-              (click)="getProposalsByStatus('expired')"> Finalitzades </button>
+      <div class="input-group mb-3" style="max-width: 675px">
+        <input [(ngModel)]="filterText" (keyup)="proposalType == 'all' ? getAllProposals() : getProposalsByStatus(proposalType)" type="text"
+               class="form-control bg-white border-secondary border-1 border-end-0 shadow-none" placeholder="{{ t('texts.searchPlaceholder') }}">
+        <span class="input-group-text bg-white border-secondary border-1 border-start-0"><i class="fa-solid fa-magnifying-glass"></i></span>
+      </div>
 
     </div>
-    <div class="me-3">
-      <button class="btn" [ngClass]="proposalType == 'executed' ? 'btn-complementary' : 'btn-outline-complementary'"
-              (click)="getProposalsByStatus('executed')"> Executades </button>
+
+    <div class="d-flex mb-3 overflow-x-scroll py-2 py-md-0">
+      <div class="me-3">
+        <button class="btn" [ngClass]="proposalType == 'all' ? 'btn-complementary' : 'btn-outline-complementary'"
+                (click)="getAllProposals()"> {{ t('status.all') }} </button>
+      </div>
+      <div class="me-3">
+        <button class="btn" [ngClass]="proposalType == 'active' ? 'btn-complementary' : 'btn-outline-complementary'"
+                (click)="getProposalsByStatus('active')"> {{ t('status.actives') }} </button>
+      </div>
+      <div class="me-3">
+        <button class="btn" [ngClass]="proposalType == 'pending' ? 'btn-complementary' : 'btn-outline-complementary'"
+                (click)="getProposalsByStatus('pending')"> {{ t('status.pending') }} </button>
+      </div>
+      <div class="me-3">
+        <button class="btn" [ngClass]="proposalType == 'expired' ? 'btn-complementary' : 'btn-outline-complementary'"
+                (click)="getProposalsByStatus('expired')"> {{ t('status.expired') }} </button>
+
+      </div>
+      <div class="me-3">
+        <button class="btn" [ngClass]="proposalType == 'executed' ? 'btn-complementary' : 'btn-outline-complementary'"
+                (click)="getProposalsByStatus('executed')"> {{ t('status.executed') }} </button>
+      </div>
+      <div class="me-3">
+        <button class="btn" [ngClass]="proposalType == 'denied' ? 'btn-complementary' : 'btn-outline-complementary'"
+                (click)="getProposalsByStatus('denied')"> {{ t('status.denied') }} </button>
+      </div>
+
+
+      <div class="ms-auto">
+        <a class="btn btn-secondary" style="min-width: 150px" [routerLink]="'./new-proposal'" [routerLinkActive]="'active'"> {{ t('texts.newProposal') }} </a>
+      </div>
     </div>
-    <div class="me-3">
-      <button class="btn" [ngClass]="proposalType == 'denied' ? 'btn-complementary' : 'btn-outline-complementary'"
-              (click)="getProposalsByStatus('denied')"> Denegades </button>
-    </div>
 
 
-    <div class="ms-auto">
-      <a class="btn btn-secondary" style="min-width: 150px" [routerLink]="'./new-proposal'" [routerLinkActive]="'active'">Nova proposta </a>
-    </div>
-  </div>
-
-
-  <div class="row ms-0 overflow-y-scroll" style="max-height: 46.2vh">
-    <div *ngFor="let proposal of proposals" class="col-12 card mb-3 w-100 bg-white border-secondary border-1"
-         [routerLink]="'./'+proposal.id" [routerLinkActive]="'active'" style="cursor: pointer">
-      <div class="row g-0 px-2 px-md-5">
+    <div class="row ms-0 overflow-y-scroll" style="max-height: 46.2vh">
+      <div *ngFor="let proposal of proposals" class="col-12 card mb-3 w-100 bg-white border-secondary border-1"
+           [routerLink]="'./'+proposal.id" [routerLinkActive]="'active'" style="cursor: pointer">
+        <div class="row g-0 px-2 px-md-5">
           <div class="card-body py-4">
             <div class="mb-3" *ngIf="proposalType == 'all'">
               <button class="badge text-tertiary" disabled>{{statusTranslation(proposal.status)}}</button>
@@ -62,11 +63,12 @@
             <h5 class="card-title fw-bold" [ngClass]="proposalType != 'all' ? 'text-complementary' : 'text-primary'">{{proposal.proposal}}</h5>
             <p class="card-text text-primary text-truncate">{{getDescriptionText(proposal.description)}}</p>
             <div class="d-flex w-100">
-                <span class="card-text"><small class="text-body-secondary">Feta per: {{proposal.firstname}}</small></span>
-                <span class="card-text ms-auto"><small class="text-body-secondary">Expiració: {{proposal.expirationDt | date: 'yyyy-MM-dd hh:mm' : 'es'}}</small></span>
+              <span class="card-text"><small class="text-body-secondary">{{ t('texts.createdBy') }} {{proposal.firstname}}</small></span>
+              <span class="card-text ms-auto"><small class="text-body-secondary">{{ t('texts.expiration') }} {{proposal.expirationDt | date: 'yyyy-MM-dd hh:mm' : 'es'}}</small></span>
             </div>
           </div>
         </div>
+      </div>
     </div>
   </div>
-</div>
+</ng-container>

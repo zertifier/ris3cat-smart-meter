@@ -4,5 +4,6 @@
  */
 export enum ChartEntity {
   CUPS = 'cups',
-  COMMUNITIES = 'communities'
+  COMMUNITIES = 'communities',
+  CUSTOMERS = 'customers'
 }

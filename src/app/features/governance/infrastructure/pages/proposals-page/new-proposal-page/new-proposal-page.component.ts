@@ -14,6 +14,7 @@ import {QuestionBadgeComponent} from "@shared/infrastructure/components/question
 import {EditorComponent, TINYMCE_SCRIPT_SRC} from "@tinymce/tinymce-angular";
 import {Editor} from "tinymce";
 import {Subscription} from "rxjs";
+import {TranslocoDirective, TranslocoPipe, TranslocoService} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-new-proposal-page',
@@ -29,6 +30,8 @@ import {Subscription} from "rxjs";
     RouterLinkActive,
     QuestionBadgeComponent,
     EditorComponent,
+    TranslocoDirective,
+    TranslocoPipe,
 
   ],
   providers: [
@@ -90,6 +93,7 @@ export class NewProposalPageComponent implements OnDestroy{
     private proposalsService: ProposalsService,
     private router: Router,
     private readonly userStore: UserStoreService,
+    private readonly translocoService: TranslocoService
   ) {
     this.subscriptions.push(
       this.userStore
@@ -163,14 +167,12 @@ export class NewProposalPageComponent implements OnDestroy{
             (savedProposalOption) => {
               Swal.fire({
                 icon: 'success',
-                title: 'Proposta guardada correctament',
-                confirmButtonText: 'Entès',
+                title: this.translocoService.translate('NEW-PROPOSAL.modals.successCreate'),
+                confirmButtonText: this.translocoService.translate('GENERIC.texts.okay'),
                 customClass: {
                   confirmButton: 'btn btn-secondary-force'
                 }
               }).then(() => {
-                console.log(savedProposalOption)
-                console.log(proposal, "proposal")
                 this.loading = false
                 this.router.navigate(['/governance/proposals']);
               });
@@ -179,8 +181,8 @@ export class NewProposalPageComponent implements OnDestroy{
               Swal.fire({
                 icon: 'error',
                 title: 'ERROR',
-                text: 'Hi ha hagut un error creant la proposta, revisa que tots els camps estiguin complets',
-                confirmButtonText: 'Entès',
+                text: this.translocoService.translate('NEW-PROPOSAL.modals.errorCreate'),
+                confirmButtonText: this.translocoService.translate('GENERIC.texts.okay'),
                 customClass: {
                   confirmButton: 'btn btn-secondary-force'
                 }
@@ -194,8 +196,8 @@ export class NewProposalPageComponent implements OnDestroy{
           Swal.fire({
             icon: 'error',
             title: 'ERROR',
-            text: 'Hi ha hagut un error creant la proposta, revisa que tots els camps estiguin complets',
-            confirmButtonText: 'Entès',
+            text: this.translocoService.translate('NEW-PROPOSAL.modals.errorCreate'),
+            confirmButtonText: this.translocoService.translate('GENERIC.texts.okay'),
             customClass: {
               confirmButton: 'btn btn-secondary-force'
             }

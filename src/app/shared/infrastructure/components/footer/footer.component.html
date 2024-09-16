@@ -1,16 +1,25 @@
-<div class="bg-primary footer-div">
-  <div class="d-flex justify-content-center align-items-center text-white flex-column flex-lg-row py-4">
-    <img class="mx-5 my-3 my-lg-0 order-0 order-lg-1" src="assets/img/generalitat.png" alt="Generalitat logo" style="height: 38px">
-    <img class="mx-5 my-3 my-lg-0 order-1 order-lg-0" src="assets/img/europe.png" alt="UE logo" style="height: 42px">
-    <a href="https://zertifier.com">
-      <img class="mx-5 my-3 my-md-0 order-2" src="assets/img/zertifierlogo_blanc.png" alt="Zertifier logo" style="height: 32px">
-    </a>
+<ng-container *transloco="let t; prefix: 'FOOTER'">
+  <div class="bg-primary footer-div">
+    <div class="d-flex justify-content-center align-items-center text-white flex-column flex-lg-row py-4">
+      <img class="mx-5 my-3 my-lg-0 order-0 order-lg-1" src="assets/img/generalitat.png" alt="Generalitat logo"
+           style="height: 38px">
+      <img class="mx-5 my-3 my-lg-0 order-1 order-lg-0" src="assets/img/europe.png" alt="UE logo" style="height: 42px">
+      <a href="https://zertifier.com">
+        <img class="mx-5 my-3 my-md-0 order-2" src="assets/img/zertifierlogo_blanc.png" alt="Zertifier logo"
+             style="height: 32px">
+      </a>
+    </div>
+
+    <div class="d-flex justify-content-center gap-3 align-items-center bg-primary text-white pb-3">
+      <p class="text-decoration-underline m-0" style="font-size: 12px">{{ t('texts.privacy') }}</p>
+      <a class="text-white" routerLink="/help" style="font-size: 12px">{{ t('texts.help') }}</a>
+
+      <app-language></app-language>
+
+    </div>
+
+
   </div>
 
-  <div class="d-flex justify-content-center gap-3 align-items-center bg-primary text-white pb-3">
-    <p class="text-decoration-underline m-0" style="font-size: 12px">Política de privacitat</p>
-    <a class="text-white" routerLink="/help" style="font-size: 12px">Ajuda</a>
-  </div>
-</div>
 
-
+</ng-container>

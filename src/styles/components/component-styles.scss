@@ -26,8 +26,13 @@
   border-color: $tertiary !important;
   color: white !important;
 }
+
 .btn-complementary:hover {
   color: #efefef !important;
+}
+
+.color-tertiary{
+  color: $tertiary !important;
 }
 
 .border-tertiary{
@@ -38,6 +43,12 @@
   background-color: $tertiary !important;
   color: white !important;
 }
+
+.btn-quaternary {
+  background-color: $quaternary !important;
+  color: white !important;
+}
+
 .tertiary-badge {
   background-color: $tertiary !important;
   color: white !important;
