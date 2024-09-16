@@ -241,7 +241,7 @@ export class TransferModalComponent implements OnDestroy {
   displaySuccessTransfer() {
     return Swal.fire({
       icon: 'success',
-      title: this.translocoService.translate('MY-WALLET.modals.swal.success'),
+      title: this.translocoService.translate('MY-WALLET.modals.transfer.swal.success'),
     })
   }
 
@@ -249,7 +249,7 @@ export class TransferModalComponent implements OnDestroy {
     return Swal.fire({
       icon: 'error',
       title: this.translocoService.translate('MY-WALLET.swal.blockchainError'),
-      text: this.translocoService.translate('MY-WALLET.modals.swal.tryAgainError')
+      text: this.translocoService.translate('MY-WALLET.modals.transfer.swal.tryAgainError')
     })
   }
 
@@ -257,7 +257,7 @@ export class TransferModalComponent implements OnDestroy {
     return Swal.fire({
       icon: 'error',
       title: this.translocoService.translate('MY-WALLET.swal.wrongDestinyError'),
-      text: this.translocoService.translate('MY-WALLET.modals.swal.checkTryAgainError')
+      text: this.translocoService.translate('MY-WALLET.modals.transfer.swal.checkTryAgainError')
     })
   }
 
