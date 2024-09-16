@@ -16,18 +16,18 @@ jobs:
           echo "Pulling and rebasing changes from github"
           git pull --rebase
 
-      - name: Detect changes in smart-meter-dev-ris3cat
+      - name: Detect changes in smart-meter-ris3cat
         id: check_smart-meter
         run: |
           cd /home/megatro/apps/dockers/Ris3Cat/ris3cat-smart-meter
-          echo "Getting smart-meter-dev-ris3cat diff"
+          echo "Getting smart-meter-ris3cat diff"
           CHANGED_FILES=$(git diff --name-only HEAD HEAD~1 | grep '[[:print:]]' || true)
-          echo "Checking smart-meter-dev-ris3cat diff"
+          echo "Checking smart-meter-ris3cat diff"
           if [ -n "$CHANGED_FILES" ]; then
-            echo "Changes detected in smart-meter-dev-ris3cat"
+            echo "Changes detected in smart-meter-ris3cat"
             echo "changed=true" >> $GITHUB_OUTPUT
           else
-            echo "No changes in smart-meter-dev-ris3cat"
+            echo "No changes in smart-meter-ris3cat"
             echo "changed=false" >> $GITHUB_OUTPUT
           fi
 
@@ -35,12 +35,12 @@ jobs:
     needs: detect-changes
     runs-on: self-hosted
     steps:
-      - name: Deploy smart-meter-dev-ris3cat if changed
+      - name: Deploy smart-meter-ris3cat if changed
         if: needs.detect-changes.outputs.smart-meter_changed == 'true'
         run: |
           echo "Deploying smart-meter"
           cd /home/megatro/apps/dockers/Ris3Cat/ris3cat-smart-meter
           npm i
           npm run build
-          docker compose up -d smart-meter-dev-ris3cat
+          docker compose up -d smart-meter-ris3cat
           echo "smart-meter deployed"
