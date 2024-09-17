@@ -6,10 +6,10 @@
     <!-- PREDICCIÓ PRODUCCIÓ ENERGIA -->
     <div *ngIf="productionPrediction.length" class="container-page">
       @if(community){
-        <h4 class="mb-4 text-center">{{ t('energy.titleActivesProduction') }}</h4>
+        <h4 class="mb-4 text-center">{{ t('energy.titleCommunityProduction') }}</h4>
       }
       @else{
-        <h4 class="mb-4 text-center">{{ t('energy.titleProduction') }}</h4>
+      <h4 class="mb-4 text-center">{{ t('energy.titleProduction') }}</h4>
       }
       <div class="row">
         @for (prediction of productionPrediction; track $index) {
@@ -31,7 +31,7 @@
     <!--  -->
 
     <!-- PREDICCIÓ EXCEDENT ENERGIA -->
-    <div *ngIf="surplusPrediction.length" class="container-page" style="background: #ebeded">
+    <div *ngIf="surplusPrediction.length" class="container-page d-none" style="background: #ebeded">
       @if(community){
       <h4 class="mb-4 text-center">{{ t('energy.titleActivesSurplus') }}</h4>
       }
