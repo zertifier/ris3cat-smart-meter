@@ -1,6 +1,6 @@
 .circle {
-    width: 100px; 
-    height: 100px;
+    width: 130px;
+    height: 130px;
     color: white; /* Color del texto dentro del círculo */
     border-radius: 50%; /* Esto hace que el div sea un círculo */
     display: flex;
@@ -12,7 +12,7 @@
 
   @media (max-width: 768px) {
     .circle {
-      width: 65px; 
+      width: 65px;
       height: 65px;
       font-size: 10px;
     }
