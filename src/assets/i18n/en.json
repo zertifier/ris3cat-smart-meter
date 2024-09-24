@@ -180,7 +180,7 @@
         "networkActiveConsumption": "Active network consumption",
         "surplus": "Surplus",
         "surplusActive": "Active surplus",
-        "surplusActiveShared": "Active shared surplus",
+        "surplusActiveShared": "Active surplus to share",
         "totalProduction": "Total production",
         "totalActiveProduction": "Total active production",
         "totalConsumption": "Total consumption",
