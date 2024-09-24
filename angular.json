@@ -48,6 +48,7 @@
             ],
             "styles": [
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+              "node_modules/animate.css/animate.min.css",
               "src/styles/components/forms/ng-multiselect-dropdown.theme.scss",
               "src/styles/styles.scss"
             ],

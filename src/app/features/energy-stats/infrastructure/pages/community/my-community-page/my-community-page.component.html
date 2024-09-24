@@ -1,5 +1,5 @@
 <ng-container *transloco="let t; prefix: 'MY-COMMUNITY'" class="w-100">
-  <div class="container-page">
+  <div class="container-page animate__animated animate__fadeIn">
     <div class="row g-2 mb-5 justify-content-center justify-content-md-center">
       <div *ngIf="communityData" class="col-auto">
         <h4 style="font-weight: 600;">{{ t('navbar') }} {{ communityData.name }}</h4>
@@ -118,7 +118,7 @@
       </div>
     </div>
   </div>
-  <div class="container-page bg-white">
+  <div class="container-page animate__animated animate__fadeIn bg-white">
     <h4 [ngbTooltip]=" (lastUpdate$ | async) ? t('texts.updatedAt') + ' ' + (lastUpdate$ | async) : '' "
         class="text-center mb-5">{{ t('texts.liveWaste') }} <i
       class="ms-1 fa-solid fa-rss fa-fade text-success"></i></h4>
@@ -167,7 +167,7 @@
       </div>
     </div>
   </div>
-  <div class="container-page">
+  <div class="container-page animate__animated animate__fadeIn">
 
 
     <app-historic-chart [chartType]="'community'" [data]="communityData"/>
@@ -175,7 +175,7 @@
 
   </div>
 
-  <div class="row mx-0 container-page" style="background-color: white;">
+  <div class="row mx-0 container-page animate__animated animate__fadeIn" style="background-color: white;">
     <div class="col-12">
       <!-- <div class="d-flex justify-content-center prediction-container"> -->
       <app-metereologic-prediction/>

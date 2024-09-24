@@ -1,6 +1,6 @@
 <ng-container *transloco="let t; prefix: 'MY-CUPS'">
 
-  <div class="container-page">
+  <div class="container-page animate__animated animate__fadeIn">
 
     <h4 class="text-center" style="font-weight: 600;">{{ t('title') }}</h4>
     <div class="row justify-content-center g-2 mb-5">
@@ -130,7 +130,7 @@
     </div>
 
   </div>
-  <div class="container-page bg-white">
+  <div class="container-page animate__animated animate__fadeIn bg-white">
 
     <h4 [ngbTooltip]=" (lastUpdate$ | async) ? t('texts.updatedAt') + ' ' + (lastUpdate$ | async) : '' "
         class="text-center mb-5">{{ t('texts.liveWaste') }} <i
@@ -187,7 +187,7 @@
       <app-consumption-items [items]="consumptionItems"/>
     </div>
   </div>
-  <div class="container-page">
+  <div class="container-page animate__animated animate__fadeIn">
 
 
     <div style="margin-bottom: 2rem;">
@@ -196,7 +196,7 @@
 
   </div>
 
-  <div class="row container-page" style="background-color: white;">
+  <div class="row container-page animate__animated animate__fadeIn" style="background-color: white;">
     <div class="col-12">
       <!-- <div class="d-flex justify-content-center prediction-container"> -->
       <app-metereologic-prediction/>
