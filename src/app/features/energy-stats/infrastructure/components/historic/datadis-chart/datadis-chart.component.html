@@ -47,6 +47,9 @@
     @if ((currentBreakpoint$ | async)! >= BreakPoints.MD) {
 
       <div class="mt-4">
+        <app-chart-legend [labels]="legendLabels"/>
+      </div>
+      <div class="mt-5 small">
 
       <p class="" *ngIf="showCommunity$ | async">
         {{ t('texts.chartBottomCommunityText', {activeMembers: activeMembers$ | async, totalMembers: totalMembers$ | async}) }}
@@ -60,9 +63,6 @@
 
       </div>
 
-      <div class="mt-4">
-        <app-chart-legend [labels]="legendLabels"/>
-      </div>
         }
     <div *ngIf="chartStoreService.snapshot().lastFetchedStats.length">
       <hr class="my-5">

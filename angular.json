@@ -47,8 +47,9 @@
               }
             ],
             "styles": [
-              "src/styles/styles.scss",
-              "src/styles/components/forms/ng-multiselect-dropdown.theme.scss"
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+              "src/styles/components/forms/ng-multiselect-dropdown.theme.scss",
+              "src/styles/styles.scss"
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.min.js"
