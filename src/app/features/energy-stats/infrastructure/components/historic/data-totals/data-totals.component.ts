@@ -152,12 +152,12 @@ export class DataTotalsComponent implements OnDestroy, AfterViewInit {
 
   setPriceTotals(data: any) {
     if (data.production) this.totalProductionKw += Number(data.production)
-    if (data.production) this.totalProduction += (Number(data.production) * Number(data.kwhInPrice))
-    if (data.productionActives) this.totalActiveProduction += (Number(data.productionActives) * Number(data.kwhInPrice))
-    if (data.kwhIn) this.totalConsumption += (Number(data.kwhIn) * Number(data.kwhInPrice))
-    if (data.kwhInVirtual) this.totalConsumptionVirtual += (Number(data.kwhInVirtual) * Number(data.kwhInPrice))
-    if (data.kwhOut) this.totalSurplus += (Number(data.kwhOut) * Number(data.kwhOutPrice))
-    if (data.kwhOutVirtual) this.totalSurplusVirtual += (Number(data.kwhOutVirtual) * Number(data.kwhOutPriceCommunity))
+    if (data.production) this.totalProduction += Number(data.totalProductionPrice)
+    if (data.productionActives) this.totalActiveProduction += Number(data.totalProductionActivePrice)
+    if (data.kwhIn) this.totalConsumption += Number(data.totalKwhInPrice)
+    if (data.kwhInVirtual) this.totalConsumptionVirtual += Number(data.totalKwhInVirtualPrice)
+    if (data.kwhOut) this.totalSurplus += Number(data.totalKwhOutPrice)
+    if (data.kwhOutVirtual) this.totalSurplusVirtual += Number(data.totalKwhOutVirtualPrice)
   }
 
   setChartData(sharedPercentage: number) {

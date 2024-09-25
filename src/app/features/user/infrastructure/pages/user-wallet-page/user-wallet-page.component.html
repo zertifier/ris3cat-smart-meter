@@ -42,7 +42,7 @@
               <div class="d-block d-lg-flex" *ngIf="customer">
 
                 <div class="input-group form-div-width">
-                  <input readonly type="text"
+                  <input readonly type="number"
                          class="form-control form-control-lg bg-white border-secondary border-2 shadow-none" placeholder=""
                          [ngModel]="customer.balance | noRoundDecimal: 4">
                   <button class="btn btn-tertiary rounded-end-3 form-button" type="button">EKW</button>
@@ -208,7 +208,7 @@
               </label>
               <div class="d-block d-lg-flex">
                 <div class="input-group form-div-width">
-                  <input readonly type="text"
+                  <input readonly type="number"
                          class="form-control form-control-lg bg-white border-secondary border-2 shadow-none"
                          [ngModel]="ekwBalance | noRoundDecimal: 4">
                   <button class="btn btn-tertiary rounded-end-3 form-button" type="button">EKW</button>
@@ -238,7 +238,7 @@
               </label>
               <div class="d-block d-lg-flex">
                 <div class="input-group form-div-width">
-                  <input readonly type="text"
+                  <input readonly type="number"
                          class="form-control form-control-lg bg-white border-secondary border-2 shadow-none" placeholder=""
                          [ngModel]="chainBalance | noRoundDecimal: 4">
                   <button class="btn btn-tertiary rounded-end-3 form-button" type="button">XDAI</button>
@@ -267,7 +267,7 @@
               </label>
               <div class="d-block d-lg-flex">
                 <div class="input-group form-div-width">
-                  <input readonly type="text"
+                  <input readonly type="number"
                          class="form-control form-control-lg bg-white border-secondary border-2 shadow-none" placeholder=""
                          [ngModel]="voteWeight">
                   <button class="btn btn-tertiary rounded-end-3 form-button" type="button">DAO</button>

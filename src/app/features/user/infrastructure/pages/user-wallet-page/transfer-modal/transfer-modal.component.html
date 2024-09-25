@@ -30,7 +30,7 @@
     <div class="d-block d-lg-flex">
       <div class="input-group form-div-width">
         <input type="number" class="form-control form-control-lg border-secondary border-2 shadow-none"
-          placeholder="000" [(ngModel)]="customer.balance" readonly>
+          placeholder="0" [(ngModel)]="customer.balance" readonly>
         <button class="btn btn-tertiary rounded-end-3 form-button" type="button">{{ type }}</button>
       </div>
     </div>
@@ -58,7 +58,7 @@
         <div class="input-group form-div-width">
           <input type="number"
             class="form-control form-control-lg bg-white border-secondary border-2 shadow-none rounded-3"
-            placeholder="000" [(ngModel)]="amountToTransfer">
+            placeholder="0" [(ngModel)]="amountToTransfer">
           <button class="btn btn-primary rounded-3 form-button ms-2" type="button" (click)="setMaxAmount()">MAX</button>
         </div>
       </div>
