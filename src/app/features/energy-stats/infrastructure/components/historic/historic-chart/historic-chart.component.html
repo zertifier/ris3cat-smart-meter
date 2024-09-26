@@ -1,9 +1,9 @@
 <ng-container *transloco="let t; prefix: 'HISTORIC-CHART'">
-  <h4 class="text-center mb-4">{{ t('title') }}</h4>
+  <h4 class="text-center mb-5">{{ t('title') }}</h4>
 
   <div class="row justify-content-evenly mb-3">
     <div class="col-12 col-lg-4">
-      <h5 class="subtitle">{{ t('texts.dataType.title') }}</h5>
+      <p class="subtitle">{{ t('texts.dataType.title') }}</p>
       <select class="form-select w-100 bg-white" readonly (change)="setChartResource($event)"
         [disabled]="chartStoreService.isLoading$ | async">
         <option [value]="ChartResource.ENERGY" [selected]="(chartResource$ | async) === ChartResource.ENERGY">
@@ -18,13 +18,13 @@
     </div>
 
     <div class="col-12 col-lg-4">
-      <h5 class="subtitle">{{ t('texts.communityModel.title') }}
+      <p class="subtitle">{{ t('texts.communityModel.title') }}
         <app-question-badge>
           <strong>{{ t('texts.communityModel.types.acc') }}</strong> {{ t('tooltips.communityModel.acc') }}
           <br>
           <strong>{{ t('texts.communityModel.types.cce') }}</strong> {{ t('tooltips.communityModel.cce') }}
         </app-question-badge>
-      </h5>
+      </p>
       <select class="form-select w-100 bg-white" (change)="setChartType($event)"
         [disabled]="chartStoreService.isLoading$ | async">
         <option [selected]="(chartType$ | async) === ChartType.ACC">{{ t('texts.communityModel.types.acc') }}</option>
@@ -33,11 +33,11 @@
     </div>
 
     <div class="col-12 col-lg-4">
-      <h5 class="subtitle">{{ t('texts.dataSource.title') }}
+      <p class="subtitle">{{ t('texts.dataSource.title') }}
         <app-question-badge>
           {{ t('tooltips.dataSource') }}
         </app-question-badge>
-      </h5>
+      </p>
       <select class="form-select w-100 bg-white" [disabled]="chartStoreService.isLoading$ | async">
         <option selected>{{ t('texts.dataSource.types.datadis') }}</option>
       </select>
@@ -71,7 +71,7 @@
   <div class="row">
 
     <div class="col-md-4 mb-4" *ngIf="chartType=='community'">
-      <p class="text-center d-flex align-items-center" style="min-height: 50px;">
+      <p class="subtitle">
         {{ t('texts.prosumersSelectorTitle') }}
       </p>
       <ng-multiselect-dropdown [placeholder]="t('texts.prosumersSelectorText')" [settings]="dropdownSettings" [data]="dropdownList"
@@ -82,7 +82,7 @@
     <div class="col-md-4" *ngIf="chartType!='community'"></div>
 
     <div class="col-md-4 mb-4">
-      <p class="text-center  d-flex align-items-center" style="min-height: 50px;">
+      <p class="subtitle">
         {{ t('texts.chartDataInputText') }}
       </p>
       <p-calendar (ngModelChange)="setInputDate($event)" (onSelect)="setDate($event)"
