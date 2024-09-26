@@ -35,6 +35,7 @@ export class DataTotalsComponent implements OnDestroy, AfterViewInit {
   data!: DatadisEnergyStat[]
 
   totalProduction = 0
+  totalProductionKw = 0
   totalActiveProduction = 0
   totalConsumption = 0
   totalSurplus = 0
@@ -118,7 +119,7 @@ export class DataTotalsComponent implements OnDestroy, AfterViewInit {
         this.setEnergyTotals(data)
       })
 
-      this.totalCo2 = this.totalProduction * 0.00026
+      this.totalCo2 = this.totalProductionKw * 0.00026
 
     }
     //this.cdr.detectChanges(); // removes console error
@@ -127,6 +128,7 @@ export class DataTotalsComponent implements OnDestroy, AfterViewInit {
   setEnergyTotals(data: any) {
     // console.log({data})
 
+    if (data.production) this.totalProductionKw += parseFloat(data.production)
     if (data.production) this.totalProduction += parseFloat(data.production)
     if (data.productionActives) this.totalActiveProduction += parseFloat(data.productionActives)
     if (data.kwhIn) this.totalConsumption += parseFloat(data.kwhIn)
@@ -144,17 +146,18 @@ export class DataTotalsComponent implements OnDestroy, AfterViewInit {
       this.setPriceTotals(data)
     }*/
     this.roundPriceTotals();
-    this.totalCo2 = this.totalProduction * 0.00026
+    this.totalCo2 = this.totalProductionKw * 0.00026
     //this.cdr.detectChanges(); // removes console error
   }
 
   setPriceTotals(data: any) {
-    if (data.production) this.totalProduction += (Number(data.production) * Number(data.kwhOutPrice))
-    if (data.productionActives) this.totalActiveProduction += (Number(data.productionActives) * Number(data.kwhOutPrice))
-    if (data.kwhIn) this.totalConsumption += (Number(data.kwhIn) * Number(data.kwhInPrice))
-    if (data.kwhInVirtual) this.totalConsumptionVirtual += (Number(data.kwhInVirtual) * Number(data.kwhInPriceCommunity))
-    if (data.kwhOut) this.totalSurplus += (Number(data.kwhOut) * Number(data.kwhOutPrice))
-    if (data.kwhOutVirtual) this.totalSurplusVirtual += (Number(data.kwhOutVirtual) * Number(data.kwhOutPriceCommunity))
+    if (data.production) this.totalProductionKw += Number(data.production)
+    if (data.production) this.totalProduction += Number(data.totalProductionPrice)
+    if (data.productionActives) this.totalActiveProduction += Number(data.totalProductionActivePrice)
+    if (data.kwhIn) this.totalConsumption += Number(data.totalKwhInPrice)
+    if (data.kwhInVirtual) this.totalConsumptionVirtual += Number(data.totalKwhInVirtualPrice)
+    if (data.kwhOut) this.totalSurplus += Number(data.totalKwhOutPrice)
+    if (data.kwhOutVirtual) this.totalSurplusVirtual += Number(data.totalKwhOutVirtualPrice)
   }
 
   setChartData(sharedPercentage: number) {
@@ -228,6 +231,7 @@ export class DataTotalsComponent implements OnDestroy, AfterViewInit {
   }
 
   resetValues() {
+    this.totalProductionKw = 0
     this.totalProduction = 0
     this.totalActiveProduction = 0
     this.totalConsumption = 0

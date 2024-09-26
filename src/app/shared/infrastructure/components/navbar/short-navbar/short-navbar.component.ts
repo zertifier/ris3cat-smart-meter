@@ -103,7 +103,7 @@ export class ShortNavbarComponent implements OnDestroy{
   setButtons(){
     this.buttons = [
       {route: '/energy-stats/community', label: this.translocoService.translate('MY-COMMUNITY.navbar')},
-      {route: '/energy-stats/my-cup', label: this.translocoService.translate('MY-CUPS.navbar')},
+      {route: '/energy-stats/my-cups', label: this.translocoService.translate('MY-CUPS.navbar')},
     ]
 
     if (this.hasCommunity) {

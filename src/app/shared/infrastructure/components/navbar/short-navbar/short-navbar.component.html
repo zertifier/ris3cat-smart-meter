@@ -20,30 +20,36 @@
       </button>
     </div>
 
+    <nav class="navbar navbar-expand-md text-center">
+      <div class="container-fluid">
+        <div class="navbar-collapse collapse show">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            @for (button of buttons; track $index) {
+              <li class="nav-item">
+                <a [routerLink]="button.route" [routerLinkActive]="'active'" (click)="modal.close('')"
+                   class="nav-link">{{ button.label }}</a>
+              </li>
+            }
 
-    <div class="d-flex flex-column gap-4 p-4 align-items-center">
-      @for (button of buttons; track $index) {
-      <a [routerLink]="button.route" [routerLinkActive]="'active'" (click)="modal.close('')">{{ button.label }}</a>
-      }
+            <li *ngIf="hasCommunity" class="nav-item" ngbDropdown>
+              <a class="nav-link" tabindex="0" ngbDropdownToggle id="governor-link"
+                 role="button"> {{ 'GOVERNOR.navbar' | transloco }} </a>
+              <div ngbDropdownMenu aria-labelledby="governor-link" class="dropdown-menu text-center">
+                <a ngbDropdownItem
+                   [routerLink]="'/governance/proposals'"
+                   [routerLinkActive]="'active'"
+                   (click)="modal.close('')">{{ 'PROPOSALS.navbar' | transloco }}</a>
+                <a ngbDropdownItem
+                   [ngClass]="{'d-none': userRole?.toLowerCase() == 'user'}"
+                   [routerLink]="'/governance/participants'"
+                   [routerLinkActive]="'active'"
+                   (click)="modal.close('')">{{ 'PARTICIPANTS.navbar' | transloco }}</a>
+              </div>
+            </li>
 
-      <div ngbAccordion class="d-inline-block" *ngIf="hasCommunity">
-        <div ngbAccordionItem style="min-width: 130px">
-          <h2 ngbAccordionHeader>
-            <button ngbAccordionButton class="me-2">{{'GOVERNOR.navbar' | transloco}}</button>
-          </h2>
-
-          <div ngbAccordionCollapse>
-            <div ngbAccordionBody>
-              <a class="nav-link bg-transparent py-3" [routerLink]="'/governance/proposals'"
-                 [routerLinkActive]="'active'" (click)="modal.close('')">{{'PROPOSALS.navbar' | transloco}}</a>
-
-              <a [ngClass]="{'d-none': userRole?.toLowerCase() == 'user'}" class="nav-link bg-transparent py-3"
-                 [routerLink]="'/governance/participants'"
-                 [routerLinkActive]="'active'" (click)="modal.close('')">{{'PARTICIPANTS.navbar' | transloco}}</a>
-            </div>
-          </div>
+          </ul>
         </div>
       </div>
-    </div>
+    </nav>
   </div>
 </ng-template>

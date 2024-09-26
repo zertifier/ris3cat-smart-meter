@@ -1,7 +1,11 @@
 <ng-container *transloco="let t; prefix: 'STATUS'">
-  <div class="container-page mb-5">
+  <div class="container-page animate__animated animate__fadeIn mb-5">
     <h2>{{ t('title') }}</h2>
     <p>{{ t('texts.statusInfo') }}</p>
+
+       <div *ngIf="loading" class="text-center mt-5">
+        <i class="fa-solid fa-spinner fa-spin fs-2"></i>
+      </div>
 
     @if(datadisCups){
     @for(cups of datadisCups; track cups){

@@ -1,28 +1,32 @@
 <ng-container *transloco="let t;">
-    <div class="container-page mb-5">
-        <h4>{{ t('INTEGRATIONS.title') }}</h4>
+  <div class="container-page mb-5 animate__animated animate__fadeIn">
+    <h4>{{ t('INTEGRATIONS.title') }}</h4>
 
-        <div class="my-3">
-            <label class="form-label" for="permanent-token">
-                {{ t('INTEGRATIONS.texts.token') }}
-            </label>
-            <div class="input-group mb-3">
-                <input readonly id="permanent-token" type="text"
-                    class="form-control form-control-lg bg-white border-secondary border-2 shadow-none"
-                    [value]="permanentToken">
-                <button class="btn btn-secondary" type="button" (click)="refreshPermanentToken()">
-                    {{ t('INTEGRATIONS.texts.refreshPermanentToken') }}
-                </button>
-            </div>
-        </div>
-
-        <div class="my-3">
-            <a href={{apiRealtimeDocsUrl}} target="_blank">
-                <button class="btn btn-secondary bg-primary" type="button" (click)="refreshPermanentToken()">
-                    {{ t('INTEGRATIONS.texts.documentation') }}
-                </button>
-            </a>
-        </div>
-
+    <div *ngIf="permanentToken" class="my-3">
+      <label class="form-label" for="permanent-token">
+        {{ t('INTEGRATIONS.texts.token') }}
+      </label>
+      <div class="input-group mb-3">
+        <input readonly id="permanent-token" type="text"
+               class="form-control form-control-lg bg-white border-secondary border-2 shadow-none"
+               [value]="permanentToken">
+        <button class="btn btn-secondary" type="button" (click)="refreshPermanentToken()">
+          {{ t('INTEGRATIONS.texts.refreshPermanentToken') }}
+        </button>
+      </div>
     </div>
+    <div *ngIf="!permanentToken" class="text-center mt-5">
+      <i class="fa-solid fa-spinner fa-spin fs-2"></i>
+    </div>
+
+    <div class="my-3">
+      <a href={{apiRealtimeDocsUrl}} target="_blank">
+        <button class="btn btn-secondary bg-primary" type="button" (click)="refreshPermanentToken()">
+          {{ t('INTEGRATIONS.texts.documentation') }}
+        </button>
+      </a>
+    </div>
+
+
+  </div>
 </ng-container>

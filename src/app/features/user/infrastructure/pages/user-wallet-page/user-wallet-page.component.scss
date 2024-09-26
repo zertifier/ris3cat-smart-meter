@@ -1,34 +1,28 @@
+.container-page {
+  max-width: 1300px;
+  margin: auto;
+}
+
 :host {
   flex-grow: 1;
 }
 
-.form-div-width,.form-control{
+.form-div-width, .form-control {
   // max-width: 764px !important;
 }
 
-.input-group{
-  max-width: 764px !important;
-}
-
-.form-button{
-  width: 130px;
-}
-
-.btn{
+.btn {
   height: 50px;
 }
 
-.btn-default-length{
-  width: 250px;
-}
 
-.section-btn{
+.section-btn {
   width: 300px;
   max-width: 100%;
 }
 
 @media (max-width: 992px) {
-  .input-group{
+  .input-group {
     width: 100%;
   }
   // .btn-default-length{
