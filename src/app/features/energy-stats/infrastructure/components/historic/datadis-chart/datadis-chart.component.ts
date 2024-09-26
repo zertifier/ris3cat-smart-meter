@@ -121,6 +121,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                 const communityId = this.userStore.snapshotOnly(this.userStore.$.communityId);
                 const customerId = this.userStore.snapshotOnly((state:any) => state.user!.customer_id);
                 const data = await this.fetchEnergyStats(date, dateRange, cupId, communityId, customerId, cupsIdsToExclude);
+                // console.log({data})
                 //this.chartStoreService.chartData$.next(data)
                 this.data = data
                 this.chartStoreService.patchState({ lastFetchedStats: data });
@@ -232,7 +233,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                     label: this.translocoService.translate('HISTORIC-CHART.texts.chartLabels.networkConsumption'),
                     color: StatsColors.SELF_CONSUMPTION,
                     data: mappedData.map(d => {
-                      return d.gridConsumption ? parseFloat(d.gridConsumption + '').toFixed(2) : '0'
+                      return d.consumption ? parseFloat(d.consumption + '').toFixed(2) : '0'
                     }),
                     // tooltipText: 'Consum que facturarà la companyia elèctrica',
                     tooltipText: this.translocoService.translate('HISTORIC-CHART.tooltips.chartLabels.cups.networkConsumption'),
@@ -344,7 +345,6 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
     virtualSurplus: number,
     production: number,
     productionActives: number,
-    gridConsumption: number,
     virtualProduction: number,
     virtualConsumption: number
   }[] {
@@ -364,11 +364,7 @@ this.cce = chartType === ChartType.CCE;
       let productionActives = showEnergy ? d.productionActives : +(d.kwhInPrice * d.productionActives).toFixed(2);
       const virtualSurplus = showEnergy ? d.kwhOutVirtual : +(d.kwhOutPriceCommunity * d.kwhOutVirtual).toFixed(2);
       let production = showEnergy ? d.production : +(d.kwhInPrice * d.production).toFixed(2);
-      let gridConsumption = consumption - production;
 
-      if (gridConsumption < 0 || isNaN(gridConsumption)) {
-        gridConsumption = 0;
-      }
 
       if (production === undefined) {
         production = 0;
@@ -386,7 +382,6 @@ this.cce = chartType === ChartType.CCE;
         virtualSurplus,
         production,
         productionActives,
-        gridConsumption,
         virtualProduction,
         virtualConsumption
       }

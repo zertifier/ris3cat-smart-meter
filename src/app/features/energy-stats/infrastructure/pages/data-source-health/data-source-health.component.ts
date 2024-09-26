@@ -47,6 +47,7 @@ export class DataSourceHealthComponent implements OnInit, OnDestroy {
   active: boolean = false;
 
   datadisCups:any[]=[];
+  loading: boolean = false;
 
   constructor(
     private readonly zertipower: ZertipowerService,
@@ -56,8 +57,10 @@ export class DataSourceHealthComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit(): Promise<void> {
+    this.loading = true;
     await this.updateStatus();
     this.timeoutIdentifier = window.setTimeout(async () => {
+      this.loading = true;
       await this.updateStatus();
     }, Duration.MINUTE * 5)
   }
@@ -76,6 +79,7 @@ export class DataSourceHealthComponent implements OnInit, OnDestroy {
         //   console.log(res)
         // })
         this.lastUpdate$.next(new Date());
+        this.loading = false;
       }
     })
   }

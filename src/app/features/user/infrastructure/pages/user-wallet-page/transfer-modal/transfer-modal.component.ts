@@ -102,7 +102,7 @@ export class TransferModalComponent implements OnDestroy {
         if ((this.amountToTransfer || 0) > maxAmount) {
           //TODO: swal error: insuficient funds
 
-          Swal.fire('', this.translocoService.translate('MY-WALLET.modals.texts.insuficientFunds'), 'warning')
+          Swal.fire('', this.translocoService.translate('MY-WALLET.modals.transfer.texts.insuficientFunds'), 'warning')
 
           this.loading = false;
           this.activeModal.close();
@@ -112,7 +112,7 @@ export class TransferModalComponent implements OnDestroy {
         this.zertipowerService.communities.deposit(this.amountToTransfer!)
           .then(
             (res: any) => {
-              Swal.fire('', this.translocoService.translate('MY-WALLET.modals.texts.balanceAdded'), 'success')
+              Swal.fire('', this.translocoService.translate('MY-WALLET.modals.transfer.texts.balanceAdded'), 'success')
               this.updateData.emit(true);
             }
           ).catch((error: any) => {
@@ -139,7 +139,7 @@ export class TransferModalComponent implements OnDestroy {
         this.zertipowerService.communities.witdraw(this.amountToTransfer!)
           .then(
             (res: any) => {
-              Swal.fire('', this.translocoService.translate('MY-WALLET.modals.texts.balancewithdrawn'), 'success')
+              Swal.fire('', this.translocoService.translate('MY-WALLET.modals.transfer.texts.balancewithdrawn'), 'success')
               this.updateData.emit(true);
             }
           ).catch((error: any) => { }).finally(() => {
@@ -241,7 +241,7 @@ export class TransferModalComponent implements OnDestroy {
   displaySuccessTransfer() {
     return Swal.fire({
       icon: 'success',
-      title: this.translocoService.translate('MY-WALLET.modals.swal.success'),
+      title: this.translocoService.translate('MY-WALLET.modals.transfer.swal.success'),
     })
   }
 
@@ -249,7 +249,7 @@ export class TransferModalComponent implements OnDestroy {
     return Swal.fire({
       icon: 'error',
       title: this.translocoService.translate('MY-WALLET.swal.blockchainError'),
-      text: this.translocoService.translate('MY-WALLET.modals.swal.tryAgainError')
+      text: this.translocoService.translate('MY-WALLET.modals.transfer.swal.tryAgainError')
     })
   }
 
@@ -257,7 +257,7 @@ export class TransferModalComponent implements OnDestroy {
     return Swal.fire({
       icon: 'error',
       title: this.translocoService.translate('MY-WALLET.swal.wrongDestinyError'),
-      text: this.translocoService.translate('MY-WALLET.modals.swal.checkTryAgainError')
+      text: this.translocoService.translate('MY-WALLET.modals.transfer.swal.checkTryAgainError')
     })
   }
 

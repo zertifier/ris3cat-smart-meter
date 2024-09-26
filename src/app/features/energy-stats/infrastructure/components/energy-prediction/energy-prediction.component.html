@@ -5,24 +5,28 @@
 
     <!-- PREDICCIÓ PRODUCCIÓ ENERGIA -->
     <div *ngIf="productionPrediction.length" class="container-page">
-      @if(community){
-        <h4 class="mb-4 text-center">{{ t('energy.titleActivesProduction') }}</h4>
-      }
-      @else{
-        <h4 class="mb-4 text-center">{{ t('energy.titleProduction') }}</h4>
+      @if (community) {
+        <h4 class="mb-5 text-center">{{ t('energy.titleCommunityProduction') }}</h4>
+      } @else {
+        <h4 class="mb-5 text-center">{{ t('energy.titleProduction') }}</h4>
       }
       <div class="row">
         @for (prediction of productionPrediction; track $index) {
           <div class="col-6 col-sm-4 col-md-2 d-flex flex-column mb-3">
             @if (prediction.value > -1) {
-              <div class="circle production">{{ prediction.value }} kWh</div>
+              <div class="circle production">
+                <div class="text-center">
+                  <p class="value w-100 mb-0 fs-5 mb-2">{{ prediction.value }}</p>
+                  <p class="label mb-0 fs-5">kWh</p>
+                </div>
+              </div>
             } @else {
               <div class="circle unavailable text-center">{{ t('energy.unavailable') }}</div>
             }
-            <div class="text-center text-capitalize mt-2">{{ prediction.date }}</div>
+            <div class="text-center text-capitalize mt-3 text-primary">{{ prediction.date }}</div>
           </div>
         }
-        <div class="text-center">
+        <div class="text-center text-secondary mt-3">
           {{ t('energy.productionDescription') }}
         </div>
 
@@ -31,22 +35,26 @@
     <!--  -->
 
     <!-- PREDICCIÓ EXCEDENT ENERGIA -->
-    <div *ngIf="surplusPrediction.length" class="container-page" style="background: #ebeded">
-      @if(community){
-      <h4 class="mb-4 text-center">{{ t('energy.titleActivesSurplus') }}</h4>
-      }
-      @else{
-        <h4  class="mb-4 text-center">{{ t('energy.titleSurplus') }}</h4>
+    <div *ngIf="surplusPrediction.length" class="container-page d-none" style="background: #ebeded">
+      @if (community) {
+        <h4 class="mb-5 text-center">{{ t('energy.titleActivesSurplus') }}</h4>
+      } @else {
+        <h4 class="mb-5 text-center">{{ t('energy.titleSurplus') }}</h4>
       }
       <div class="row">
         @for (prediction of surplusPrediction; track $index) {
           <div class="col-6 col-sm-4 col-md-2 d-flex flex-column mb-3">
             @if (prediction.value > -1) {
-              <div class="circle surplus">{{ prediction.value }} kWh</div>
+              <div class="circle surplus">
+               <div class="text-center">
+                  <p class="value w-100 mb-0 fs-5 mb-2">{{ prediction.value }}</p>
+                  <p class="label mb-0 fs-5">kWh</p>
+                </div>
+              </div>
             } @else {
               <div class="circle unavailable text-center">{{ t('energy.unavailable') }}</div>
             }
-            <div class="text-center text-capitalize mt-2">{{ prediction.date }}</div>
+            <div class="text-center text-capitalize mt-3 text-primary">{{ prediction.date }}</div>
           </div>
         }
         <div class="text-center">
@@ -55,25 +63,28 @@
 
       </div>
     </div>
-
+    <hr *ngIf="consumptionPrediction.length" class="container" style="max-width: 500px">
     <!-- PREDICCIÓ CONSUM ENERGIA -->
     <div *ngIf="consumptionPrediction.length" class="container-page">
-      @if(community){
-      <h4 class="mb-4 text-center">{{ t('energy.titleActivesConsumption') }}</h4>
-      }
-      @else{
-        <h4 class="mb-4 text-center">{{ t('energy.titleConsumption') }}</h4>
+      @if (community) {
+        <h4 class="mb-5 text-center">{{ t('energy.titleActivesConsumption') }}</h4>
+      } @else {
+        <h4 class="mb-5 text-center">{{ t('energy.titleConsumption') }}</h4>
       }
       <div class="row">
         @for (prediction of consumptionPrediction; track $index) {
           <div class="col-6 col-sm-4 col-md-2 d-flex flex-column mb-3">
             @if (prediction.value > -1) {
-            <div class="circle consumption">{{ prediction.value }} kWh</div>
-            }
-            @else {
+              <div class="circle consumption">
+               <div class="text-center">
+                  <p class="value w-100 mb-0 fs-5 mb-2">{{ prediction.value }}</p>
+                  <p class="label mb-0 fs-5">kWh</p>
+                </div>
+              </div>
+            } @else {
               <div class="circle unavailable text-center">{{ t('energy.unavailable') }}</div>
             }
-            <div class="text-center text-capitalize mt-2">{{ prediction.date }}</div>
+            <div class="text-center text-capitalize mt-3 text-primary">{{ prediction.date }}</div>
           </div>
         }
       </div>

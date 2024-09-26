@@ -1,11 +1,11 @@
 <ng-container *transloco="let t; prefix: 'PREDICTIONS'" class="w-100">
-  <h4 class="mb-4 text-center">{{ t('meteorologic.title') }}</h4>
+  <h4 class="mb-5 text-center">{{ t('meteorologic.title') }}</h4>
   <div class="w-100 row justify-content-around" style="margin: 0 0 2rem 0">
     @for (element of elements; track $index) {
-      <div class="col-6 col-sm-4 col-md-2 d-flex flex-column mb-3" >
+      <div class="col-6 col-sm-4 col-md-2 d-flex flex-column mb-4 mb-md-0" >
         <img [src]="element.image" [alt]="element.label" style="max-width: 80px; filter: contrast(90%)" class="m-auto w-100">
         <!--        <span class="text-center text-capitalize">{{element.label | date: 'EEEE dd/MM'}}</span>-->
-        <span class="text-center text-capitalize">{{element.formattedDate}}</span>
+        <span class="text-center text-capitalize text-primary">{{element.formattedDate}}</span>
       </div>
     }
   </div>
