@@ -24,7 +24,7 @@
     </div>
     <div class="row justify-content-center">
       <div class="col" style="max-width: 1050px">
-        <div class="row text-md-start align-items-center gx-0">
+        <div class="row align-items-start text-md-start gx-0">
           <div class="col-12 col-md text-center text-md-start pb-4 pb-md-0">
             <p class="mb-0 fw-semibold" *ngIf="communityData">
               {{ t('texts.info') }}
@@ -39,7 +39,7 @@
               {{ t('texts.communityMembers') }} <span
               class="color-tertiary fw-semibold">{{ totalMembers$ | async }}</span>
             </p>
-            <p class="mb-0">{{ t('texts.activeMembers') }} <span
+            <p class="mb-0 d-none">{{ t('texts.activeMembers') }} <span
               class="color-tertiary fw-semibold">{{ (activeMembers$ | async) }}</span></p>
             <!--@if (communityData && communityData.energyPrice) {
               <p class="mb-0">{{ t('texts.buyingPrice') }} : <b class="color-tertiary"> {{ communityData.energyPrice }}

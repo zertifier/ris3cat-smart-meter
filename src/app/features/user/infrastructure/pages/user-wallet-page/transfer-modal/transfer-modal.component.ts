@@ -64,28 +64,34 @@ export class TransferModalComponent implements OnDestroy {
   }
 
   async setMaxAmount() {
+    console.log(this.currentAmount, 'this.currentAmount')
     if (this.type == 'DAO') {
       this.amountToTransfer = parseFloat(this.noRoundDecimal.transform(this.currentAmount, 4))
-    } else if (this.type == 'XDAI' || (this.type == 'EKW' && this.userAction == 'add')) {
+    } else if (this.type == 'XDAI') {
       const gasPrice = await this.ethersService.getCurrentGasPrice()
       this.amountToTransfer = parseFloat(this.noRoundDecimal.transform((this.currentAmount - gasPrice), 4))
+    } else if (this.type == 'EKW' && this.userAction == 'add') {
+      this.amountToTransfer = parseFloat(this.noRoundDecimal.transform((this.currentAmount), 4))
+
     } else if (this.type == 'EKW' && this.userAction == 'pullOut') {
       this.amountToTransfer = this.customer?.balance;
     }
   }
 
   async getMaxAmount() {
-    if (this.type != 'DAO') {
+    if (this.type == 'DAO' || this.type == 'EKW') {
+      return parseFloat(this.noRoundDecimal.transform(this.currentAmount, 4))
+      } else {
       const gasPrice = await this.ethersService.getCurrentGasPrice()
       return parseFloat(this.noRoundDecimal.transform((this.currentAmount - gasPrice), 4))
-    } else {
-      return parseFloat(this.noRoundDecimal.transform(this.currentAmount, 4))
+
     }
   }
 
   async send() {
 
     this.loading = true;
+
 
     //add or pull out balance
     if (this.userActionType == 'balance') {
