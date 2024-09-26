@@ -47,7 +47,7 @@ export class DataSourceHealthComponent implements OnInit, OnDestroy {
   active: boolean = false;
 
   datadisCups:any[]=[];
-  loading: boolean;
+  loading: boolean = false;
 
   constructor(
     private readonly zertipower: ZertipowerService,
