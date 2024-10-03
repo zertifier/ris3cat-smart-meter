@@ -97,7 +97,7 @@
       "updatedAt": "Actualitzat a les ",
       "noDataRegistered": "No s'ha registrat cap dada",
       "communityMembers": "Membres d'aquesta comunitat:",
-      "activeMembers": "Membres actius:",
+      "activeMembers": "Membres donats d'alta:",
       "consumption": "Consum",
       "selfConsumption": "Autoconsum",
       "generatedEnergy": "Generació",
@@ -167,7 +167,7 @@
       "noDisplay": "Res a mostrar",
       "chartDataInputText": "Tria un mes/any per veure el consum",
       "chartBottomText": "· Coneix la despesa d'energia al detall fent clic en cada tipus de consum. La gràfica mostrarà la informació de consum individualitzada.",
-      "chartBottomCommunityText": "· Aquesta estadística indica les dades dels {{activeMembers}} membres actius d'un total de {{totalMembers}} membres de la comunitat.",
+      "chartBottomCommunityText": "· Aquesta estadística indica les dades dels {{activeMembers}} membres donats d'alta d'un total de {{totalMembers}} membres de la comunitat.",
       "chartUpdateWarning": "· Tingues en compte que l'actualització de dades no és diària.",
       "chartLabels": {
         "CO2Savings": "Estalvi en CO2",
@@ -175,22 +175,22 @@
         "community": {
           "production": "Producció total"
         },
-        "productionActive": "Producció actius",
+        "productionActive": "Producció membres donats d'alta",
         "networkConsumption": "Consum de la xarxa",
-        "networkActiveConsumption": "Consum de la xarxa actius",
+        "networkActiveConsumption": "Consum de la xarxa membres donats d'alta",
         "surplus": "Excedent",
-        "surplusActive": "Excedent actius",
-        "surplusActiveShared": "Excedent actius per compartir",
+        "surplusActive": "Excedent membres donats d'alta",
+        "surplusActiveShared": "Excedent membres donats d'alta per compartir",
         "totalProduction": "Total producció",
-        "totalActiveProduction": "Total producció actius",
+        "totalActiveProduction": "Total producció membres donats d'alta",
         "totalConsumption": "Total consum",
-        "totalActiveConsumption": "Total consum actius",
+        "totalActiveConsumption": "Total consum membres donats d'alta",
         "totalSurplus": "Total excedent",
-        "totalActiveSurplus": "Total excedent actius",
-        "totalCo2": "Total CO2 compensat",
+        "totalActiveSurplus": "Total excedent membres donats d'alta",
+        "totalCo2": "Reducció de la petjada de carboni",
         "totalCo2Badge": "El CO2 compensat es calcula a partir de la producció.",
         "totalMembers": "Total membres: {{total}}",
-        "totalActiveMembers": "Membres actius: {{total}}",
+        "totalActiveMembers": "Membres membres donats d'alta: {{total}}",
         "totalShared": "Total compartit",
         "shared": "Compartit",
         "notShared": "No compartit"
@@ -204,11 +204,11 @@
         "community": {
           "CO2Savings": "Tones de co2 estalviades",
           "production": "Producció total de la comunitat.",
-          "activeProduction": "Producció dels participants actius",
+          "activeProduction": "Producció dels participants donats d'alta",
           "networkConsumption": "Consum que facturarà la companyia elèctrica.",
-          "networkActiveConsumption": "Consum dels participants actius",
-          "surplusActive": "Quantitat d’energia que es produeix i no es consumeix dels participans actius.",
-          "sharedSurplusActive": "Quantitat d’energia per compartir que es produeix i no es consumeix dels participans actius."
+          "networkActiveConsumption": "Consum dels participants donats d'alta",
+          "surplusActive": "Quantitat d’energia que es produeix i no es consumeix dels participans donats d'alta.",
+          "sharedSurplusActive": "Quantitat d’energia per compartir que es produeix i no es consumeix dels participans donats d'alta."
         },
         "cups": {
           "CO2Savings": "Tones de co2 estalviades.",
@@ -216,7 +216,7 @@
           "production": "Producció proporcional comunitària.",
           "networkActiveConsumption": "Quantitat d'energia que gastem.",
           "surplusActive": "Quantitat d'energia que es produeix i no es consumeix.",
-          "sharedSurplusActive": "Quantitat d’energia per compartir que es produeix i no es consumeix dels participans actius."
+          "sharedSurplusActive": "Quantitat d’energia per compartir que es produeix i no es consumeix dels participans donats d'alta."
         }
       },
       "communityModel": {
@@ -235,9 +235,9 @@
       "titleConsumption": "Predicció consum d'energia",
       "titleProduction": "Predicció producció d'energia",
       "titleSurplus": "Predicció excedent d'energia",
-      "titleActivesConsumption": "Predicció consum d'energia dels membres actius",
+      "titleActivesConsumption": "Predicció consum d'energia dels membres donats d'alta",
       "titleCommunityProduction": "Predicció producció d'energia total comunitaria",
-      "titleActivesSurplus": "Predicció excedent d'energia dels membres actius",
+      "titleActivesSurplus": "Predicció excedent d'energia dels membres donats d'alta",
       "unavailable": "No disponible",
       "surplusDescription": "* Com a màxim, només estaran disponibles 2 dies de la predicció de l'excedent.",
       "productionDescription": "* Com a màxim, només estaran disponibles 2 dies de la predicció de la producció."
@@ -385,7 +385,7 @@
   "STATS": {
     "navbar": "Estadístiques",
     "title": "Estadístiques",
-    "subTitle": "Rànquing dels members actius",
+    "subTitle": "Rànquing dels members donats d'alta",
     "texts": {
       "monthLabel": "Trïa el mes que vols veure",
       "typeLabel": "Quines dades vols veure?",

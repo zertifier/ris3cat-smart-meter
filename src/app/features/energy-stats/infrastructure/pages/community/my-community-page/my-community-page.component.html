@@ -25,7 +25,7 @@
     <div class="row justify-content-center">
       <div class="col" style="max-width: 1050px">
         <div class="row align-items-start text-md-start gx-0">
-          <div class="col-12 col-md text-center text-md-start pb-4 pb-md-0">
+          <div class="col-12 col-md text-center text-md-center pb-4 pb-md-0">
             <p class="mb-0 fw-semibold" *ngIf="communityData">
               {{ t('texts.info') }}
             </p>
@@ -51,68 +51,7 @@
               class="color-tertiary fw-semibold">0%</span>
             </p>
           </div>
-          <div class="col-auto d-none d-md-block" style="padding-left:40px">
-            <div class="vertical-separator" style="height: 88px;"></div>
-          </div>
 
-          <div class="col-12 col-md text-center text-md-start pb-4 pb-md-0">
-            <div class="row justify-content-center">
-
-              <div class="col-auto">
-                <p class="mb-0 fw-semibold" *ngIf="communityData">
-                  {{ t('texts.communityPrices') }}
-                </p>
-
-                @if (communityData && communityData.energyPrice) {
-                  <div class="mb-0">
-                    <span class="price-tables-label">{{ t('texts.sellingPrice') }} :</span>
-                    <b class="color-tertiary fw-semibold"> {{ communityData.energyPrice }} €/kWh </b>
-                  </div>
-                  <div class="mb-0">
-                    <span class="price-tables-label">{{ t('texts.punta') }} :</span>
-                    <b class="color-tertiary fw-semibold"> {{ communityData.energyPrice }} €/kWh </b>
-                  </div>
-                  <div class="mb-0">
-                    <span class="price-tables-label">{{ t('texts.llano') }} :</span>
-                    <b class="color-tertiary fw-semibold"> {{ communityData.energyPrice }} €/kWh </b>
-                  </div>
-                  <div class="mb-0">
-                    <span class="price-tables-label">{{ t('texts.valle') }} :</span>
-                    <b class="color-tertiary fw-semibold"> {{ communityData.energyPrice }} €/kWh </b>
-                  </div>
-                }
-
-
-              </div>
-            </div>
-          </div>
-          <div class="col-auto d-none d-md-block" style="padding-right:40px">
-            <div class="vertical-separator" style="height: 88px;"></div>
-          </div>
-          <div class="col-12 col-md ps-md-4 text-center text-md-start">
-            <p class="mb-0 fw-semibold" *ngIf="communityData">
-              {{ t('texts.providerPrices') }}
-            </p>
-
-            @if (communityData && communityData.energyPrice) {
-              <div class="mb-0">
-                <span class="price-tables-label">{{ t('texts.sellingPrice') }} :</span>
-                <b class="color-tertiary fw-semibold"> 0.06 €/kWh </b>
-              </div>
-              <div class="mb-0">
-                <span class="price-tables-label">{{ t('texts.punta') }} :</span>
-                <b class="color-tertiary fw-semibold"> 0.19 €/kWh </b>
-              </div>
-              <div class="mb-0">
-                <span class=" price-tables-label">{{ t('texts.llano') }} :</span>
-                <b class="color-tertiary fw-semibold"> 0.13 €/kWh </b>
-              </div>
-              <div class="mb-0">
-                <span class="price-tables-label">{{ t('texts.valle') }} :</span>
-                <b class="color-tertiary fw-semibold"> 0.10 €/kWh </b>
-              </div>
-            }
-          </div>
 
         </div>
       </div>
