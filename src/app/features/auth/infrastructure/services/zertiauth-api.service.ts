@@ -28,6 +28,9 @@ export class ZertiauthApiService {
     if (!baseCode) {
       throw new Error('Base code not saved on local storage')
     }
+
+    console.log({code})
+    console.log({baseCode})
     return this.app.getCredentials(code, baseCode);
   }
 }

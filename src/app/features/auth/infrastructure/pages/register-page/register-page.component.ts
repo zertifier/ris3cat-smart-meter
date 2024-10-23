@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {JsonPipe, NgIf} from "@angular/common";
 import Swal from "sweetalert2";
-import { Router } from "@angular/router";
-import { AuthStoreService } from "../../services/auth-store.service";
-import { ZertipowerService } from "../../../../../shared/infrastructure/services/zertipower/zertipower.service";
-import { Wallet } from "ethers";
-import { UserLoggedInEvent } from "../../../domain/UserLoggedInEvent";
-import { EventBus } from "../../../../../shared/domain/EventBus";
-import { TranslocoService, TranslocoDirective } from '@jsverse/transloco';
-import { FooterComponent } from '../../../../../shared/infrastructure/components/footer/footer.component';
+import {Router} from "@angular/router";
+import {AuthStoreService} from "../../services/auth-store.service";
+import {ZertipowerService} from "../../../../../shared/infrastructure/services/zertipower/zertipower.service";
+import {Wallet} from "ethers";
+import {UserLoggedInEvent} from "../../../domain/UserLoggedInEvent";
+import {EventBus} from "../../../../../shared/domain/EventBus";
+import {TranslocoService, TranslocoDirective} from '@jsverse/transloco';
+import {FooterComponent} from '../../../../../shared/infrastructure/components/footer/footer.component';
 import {NgbNav, NgbNavContent, NgbNavItem, NgbNavLinkButton, NgbNavOutlet} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -46,7 +46,7 @@ export class RegisterPageComponent implements OnInit {
     private readonly authStore: AuthStoreService,
     private readonly zertipower: ZertipowerService,
     private readonly eventBus: EventBus,
-    private readonly translocoService:TranslocoService
+    private readonly translocoService: TranslocoService
   ) {
   }
 
@@ -70,8 +70,8 @@ export class RegisterPageComponent implements OnInit {
       return;
     }
 
-    const { privateKey, email } = this.authStore.snapshotOnly(store => store.loginData!);
-    const { dni, name, lastname } = this.formData.value;
+    const {privateKey, email} = this.authStore.snapshotOnly(store => store.loginData!);
+    const {dni, name, lastname} = this.formData.value;
     const wallet = new Wallet(privateKey);
     this.zertipower.auth.register({
       dni: dni || undefined,
@@ -80,28 +80,29 @@ export class RegisterPageComponent implements OnInit {
       lastname: lastname!,
       wallet_address: wallet.address,
       private_key: privateKey,
-    }).then(({accessToken,refreshToken})=>{
+    }).then(({accessToken, refreshToken}) => {
       Swal.fire({
         icon: 'success',
         title: this.translocoService.translate('AUTH.modals.register.correct'),
         timer: 2000,
-        showConfirmButton:false,
+        showConfirmButton: false,
         willClose: () => {
-          this.changeAuthState(refreshToken,accessToken)
+          this.changeAuthState(refreshToken, accessToken)
         }
       })
     });
 
   }
 
-  async changeAuthState(refreshToken:string,accessToken:string) {
-    this.authStore.setTokens({ refreshToken: refreshToken, accessToken: accessToken });
-    // await this.eventBus.publishEvents(new UserLoggedInEvent());
-    this.authStore.patchState({ loginTry: false });
+  async changeAuthState(refreshToken: string, accessToken: string) {
+    this.authStore.setTokens({refreshToken: refreshToken, accessToken: accessToken});
+    await this.eventBus.publishEvents(new UserLoggedInEvent());
+    this.authStore.patchState({loginTry: false});
+    this.router.navigate(['/energy-stats']);
   }
 
   goBack() {
-    this.authStore.patchState({ loginTry: false });
+    this.authStore.patchState({loginTry: false});
     this.router.navigate(['/auth/login']);
   }
 }
