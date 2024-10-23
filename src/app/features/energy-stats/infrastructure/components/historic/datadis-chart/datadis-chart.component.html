@@ -20,9 +20,6 @@
 
       <hr>
 
-      <p class="mt-4" *ngIf="showCommunity$ | async">
-        {{ t('texts.chartBottomCommunityText', {activeMembers: activeMembers$ | async, totalmembers: totalMembers$ | async}) }}
-      </p>
       <p>
         {{ t('texts.chartUpdateWarning') }}
       </p>
@@ -51,9 +48,6 @@
       </div>
       <div class="mt-5 small">
 
-      <p class="" *ngIf="showCommunity$ | async">
-        {{ t('texts.chartBottomCommunityText', {activeMembers: activeMembers$ | async, totalMembers: totalMembers$ | async}) }}
-      </p>
       <p>
         {{ t('texts.chartUpdateWarning') }}
       </p>

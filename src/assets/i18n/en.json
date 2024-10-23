@@ -6,7 +6,13 @@
       "name": "Name",
       "surname": "Surname",
       "DNI": "ID",
-      "back": "Go back"
+      "back": "Go back",
+      "email":"Email",
+      "community":"Select your community",
+      "deviceType": "Data source",
+      "device": "Device",
+      "user": "User",
+      "password": "Password"
     },
     "modals": {
       "register": {

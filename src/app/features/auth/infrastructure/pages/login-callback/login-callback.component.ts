@@ -24,7 +24,6 @@ export class LoginCallbackComponent implements OnInit {
   async ngOnInit() {
     const params = this.route.snapshot.queryParams;
     const code: string = params['code'];
-
     if (!code) {
       throw new Error('Code not received from oauth');
     }

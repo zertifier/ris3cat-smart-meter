@@ -6,7 +6,13 @@
       "name": "Nombre",
       "surname": "Apellido",
       "DNI": "DNI",
-      "back": "Volver"
+      "back": "Volver",
+      "email":"Email",
+      "community":"Selecciona tu comunidad",
+      "deviceType": "Fuente de los datos",
+      "device": "Dispositivo",
+      "user": "Usuario",
+      "password": "Contraseña"
     },
     "modals": {
       "register": {
@@ -168,7 +174,7 @@
       "chartDataInputText": "Elige un mes/año para ver el consumo.",
       "chartBottomText": "· Conoce el gasto de energía en detalle haciendo clic en cada tipo de consumo. La gráfica mostrará la información de consumo individualizada.",
       "chartBottomCommunityText": "· Esta estadística indica los datos de los {{activeMembers}} miembros activos de un total de {{totalMembers}} miembros de la comunidad.",
-      "chartUpdateWarning": "· Ten en cuenta que la actualización de datos no es diaria.",
+      "chartUpdateWarning": "· Ten en cuenta que la actualización de datos no es  diaria.",
       "chartLabels": {
         "CO2Savings": "Ahorro en CO2",
         "production": "Producción",
