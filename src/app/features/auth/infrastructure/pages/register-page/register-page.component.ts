@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from "@angular/forms";
-import { JsonPipe } from "@angular/common";
+import {FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {JsonPipe, NgIf} from "@angular/common";
 import Swal from "sweetalert2";
 import { Router } from "@angular/router";
 import { AuthStoreService } from "../../services/auth-store.service";
@@ -10,6 +10,7 @@ import { UserLoggedInEvent } from "../../../domain/UserLoggedInEvent";
 import { EventBus } from "../../../../../shared/domain/EventBus";
 import { TranslocoService, TranslocoDirective } from '@jsverse/transloco';
 import { FooterComponent } from '../../../../../shared/infrastructure/components/footer/footer.component';
+import {NgbNav, NgbNavContent, NgbNavItem, NgbNavLinkButton, NgbNavOutlet} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-register-page',
@@ -18,7 +19,14 @@ import { FooterComponent } from '../../../../../shared/infrastructure/components
     ReactiveFormsModule,
     JsonPipe,
     TranslocoDirective,
-    FooterComponent
+    FooterComponent,
+    NgbNavItem,
+    NgbNavOutlet,
+    NgbNav,
+    NgbNavContent,
+    NgbNavLinkButton,
+    FormsModule,
+    NgIf
   ],
   templateUrl: './register-page.component.html',
   styleUrl: './register-page.component.scss'
@@ -29,6 +37,8 @@ export class RegisterPageComponent implements OnInit {
     name: new FormControl<string>('', [Validators.required]),
     lastname: new FormControl<string>('', [Validators.required]),
   });
+  email: string = "";
+  deviceType: string = "";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -41,9 +51,12 @@ export class RegisterPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (!this.authStore.snapshotOnly(store => store.loginData)) {
+    let authStore = this.authStore.snapshotOnly(store => store.loginData)
+    if (!authStore) {
       console.log('No auth data');
       this.router.navigate(['/auth/login']);
+    } else {
+      this.email = authStore?.email
     }
   }
 
@@ -78,12 +91,12 @@ export class RegisterPageComponent implements OnInit {
         }
       })
     });
-    
+
   }
 
   async changeAuthState(refreshToken:string,accessToken:string) {
     this.authStore.setTokens({ refreshToken: refreshToken, accessToken: accessToken });
-    await this.eventBus.publishEvents(new UserLoggedInEvent());
+    // await this.eventBus.publishEvents(new UserLoggedInEvent());
     this.authStore.patchState({ loginTry: false });
   }
 

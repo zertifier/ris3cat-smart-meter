@@ -6,7 +6,13 @@
       "name": "Nombre",
       "surname": "Apellido",
       "DNI": "DNI",
-      "back": "Volver"
+      "back": "Volver",
+      "email":"Email",
+      "community":"Selecciona tu comunidad",
+      "deviceType": "Fuente de los datos",
+      "device": "Dispositivo",
+      "user": "Usuario",
+      "password": "Contraseña"
     },
     "modals": {
       "register": {

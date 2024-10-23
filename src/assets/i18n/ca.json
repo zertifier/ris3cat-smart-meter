@@ -6,7 +6,13 @@
       "name":"Nom",
       "surname":"Cognom",
       "DNI":"DNI",
-      "back":"Torna"
+      "back":"Torna",
+      "email":"Email",
+      "community":"Selecciona la teva comunitat",
+      "deviceType": "Font de les dades",
+      "device": "Dispositiu",
+      "user": "Usuari",
+      "password": "Contrasenya"
     },
     "modals": {
       "register":{

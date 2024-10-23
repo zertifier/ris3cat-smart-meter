@@ -9,17 +9,72 @@
           <div class="card-body">
             <form class="w-100 mb-4" [formGroup]="formData" id="register-form" (ngSubmit)="register()">
               <div class="row">
-                <div class="col-12 col-md">
-                  <label for="nom">{{ t('texts.name') }} <span class="text-danger">*</span></label>
-                  <input formControlName="name" class="form-control" type="text" id="nom">
+                <div class="col-md-7">
+                  <h4 class="mt-3">Dades del usuari</h4>
+                  <div class="row mb-3 g-3">
+                    <div class="col-12">
+                      <label for="community">{{ t('texts.community') }} <span class="text-danger">*</span></label>
+                      <select name="type" class="form-select" id="community">
+                        <option>No definida</option>
+                        <option value="2">Comunitat Monteolivete</option>
+                      </select>
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label for="nom">{{ t('texts.name') }} <span class="text-danger">*</span></label>
+                      <input formControlName="name" class="form-control" type="text" id="nom">
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label for="cognom">{{ t('texts.surname') }} <span class="text-danger">*</span></label>
+                      <input formControlName="lastname" class="form-control" type="text" id="cognom">
+                    </div>
+                    <div class="col-12 col-lg">
+                      <label for="dni">{{ t('texts.DNI') }}</label>
+                      <input formControlName="dni" class="form-control" type="text" id="dni">
+                    </div>
+                    <div class="col-12 col-lg">
+                      <label for="email">{{ t('texts.email') }}</label>
+                      <input [value]="email" class="form-control" type="text" id="email" disabled>
+                    </div>
+                  </div>
                 </div>
-                <div class="col-12 col-md">
-                  <label for="cognom">{{ t('texts.surname') }} <span class="text-danger">*</span></label>
-                  <input formControlName="lastname" class="form-control" type="text" id="cognom">
-                </div>
-                <div class="col-12 col-lg">
-                  <label for="dni">{{ t('texts.DNI') }}</label>
-                  <input formControlName="dni" class="form-control" type="text" id="dni">
+                <div class="col-md-5">
+                  <div class="card">
+                    <div class="card-body">
+                      <h4>Dades del dispositiu</h4>
+                      <div class="mb-3">
+                        <label for="device-type">{{ t('texts.deviceType') }} <span class="text-danger">*</span></label>
+                        <select [(ngModel)]="deviceType" [ngModelOptions]="{standalone: true}" name="type" class="form-select" id="device-type">
+                          <option value="">Datadis</option>
+                          <option value="1">Smart Meter</option>
+                        </select>
+                      </div>
+                      <div *ngIf="deviceType == '1'" class="mb-3">
+                        <label for="device">{{ t('texts.device') }} <span class="text-danger">*</span></label>
+                        <select name="type" class="form-select" id="device">
+                          <option value="1">Webdyn EasyRouter</option>
+                          <option value="2">Sonoff POWCT</option>
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <label for="cups">CUPS <span class="text-danger">*</span></label>
+                        <input class="form-control" type="text" id="cups">
+                      </div>
+                      <div class="row">
+                        <div class="col-md">
+                          <div class="mb-3">
+                            <label for="user">{{ t('texts.user') }} <span class="text-danger">*</span></label>
+                            <input class="form-control" type="text" id="user">
+                          </div>
+                        </div>
+                        <div class="col-md">
+                          <div class="mb-3">
+                            <label for="password">{{ t('texts.password') }} <span class="text-danger">*</span></label>
+                            <input class="form-control" type="text" id="password">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </form>
@@ -32,5 +87,5 @@
       </div>
     </ng-container>
   </div>
-  <app-footer />
+  <app-footer/>
 </div>
