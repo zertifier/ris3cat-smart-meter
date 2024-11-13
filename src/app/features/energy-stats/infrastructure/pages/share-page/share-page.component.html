@@ -48,7 +48,7 @@
           </label>
           <p-calendar [(ngModel)]="fromDate" iconDisplay="input" [showIcon]="true" view="date"
                       [defaultDate]="defaultDate" (onClose)="getData('from')"
-                      [minDate]="minToDate" [dateFormat]="'dd/mm/yy'" styleClass="w-100"/>
+                      [minDate]="minToDate!" [dateFormat]="'dd/mm/yy'" styleClass="w-100"/>
         </div>
         <div class="col-12 col-md-4 my-2">
           <label class="form-label">
@@ -56,7 +56,7 @@
           </label>
           <p-calendar [(ngModel)]="toDate" iconDisplay="input" [showIcon]="true" view="date" [defaultDate]="defaultDate"
                       (onClose)="getData('to')"
-                      [minDate]="minToDate" [maxDate]="maxDate" [dateFormat]="'dd/mm/yy'" styleClass="w-100"/>
+                      [minDate]="minToDate!" [maxDate]="maxDate!" [dateFormat]="'dd/mm/yy'" styleClass="w-100"/>
         </div>
         <div class="col-12 col-md-4 my-2">
           <label class="form-label">
