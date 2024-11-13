@@ -21,7 +21,6 @@ export const hasCommunityGuard: CanActivateFn = (route) => {
       // page is user trying to access:
       const {cups} = state;
       const routeName = route.data['name'];
-      console.log(cups, "CUPSS")
 
       const tryStatsAccess = ENERGY_STATS_ROUTE_NAMES.STATS_COMMUNITY === routeName;
       // const hasCommunity = cups.length > 0;
