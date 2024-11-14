@@ -87,7 +87,7 @@
   "MISSING-COMMUNITY": {
     "texts": {
       "anyAccess": "No tens accés a cap comunitat.",
-      "accessDescription": "Per a accedir a a la informació comunitària, necessites donar-te d'alta o unir-te a la comunitat.",
+      "accessDescription": "Per a accedir a la informació comunitària, necessites donar-te d'alta o unir-te a la comunitat.",
       "register":"Dona't d'alta",
       "join":"Uneix-te"
     }
@@ -136,6 +136,16 @@
         "swal": {
           "success": "Comunitat modificada correctament",
           "error": "Hi ha hagut un error guardant la comunitat. Torna-ho a intentar d'aqui una estona"
+        }
+      },
+      "addCommunity": {
+        "title": "Afageix una comunitat",
+        "texts": {
+          "location": "Localitat",
+          "undefined": "No definida",
+          "communityName": "Nom de la comunitat",
+          "successCreating": "Comunitat creada correctament",
+          "errorCreating": "Hi ha hagut un error creant la comunitat"
         }
       }
     }

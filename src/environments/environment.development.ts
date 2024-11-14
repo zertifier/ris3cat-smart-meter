@@ -1,6 +1,6 @@
 export const environment = {
-  // api_url: "http://localhost:3000",
-  api_url: "https://api-smart-meter-dev-ris3cat.zertifier.com",
+  api_url: "http://localhost:3001",
+  // api_url: "https://api-smart-meter-dev-ris3cat.zertifier.com",
   //zertipower_url: "https://api-dev-ris3cat.zertifier.com",
   zertipower_url: "http://localhost:3000",
   real_time_energy_url: "https://dev-api-public-ris3cat.zertifier.com",

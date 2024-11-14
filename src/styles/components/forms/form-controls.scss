@@ -1,0 +1,7 @@
+.ng-valid[required], .ng-valid.required {
+  @extend .is-valid;
+}
+
+.ng-invalid.ng-touched:not(form), .ng-invalid.ng-dirty:not(form)  {
+  @extend .is-invalid;
+}
