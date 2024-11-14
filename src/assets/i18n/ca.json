@@ -88,6 +88,7 @@
     "texts": {
       "anyAccess": "No tens accés a cap comunitat.",
       "accessDescription": "Per a accedir a la informació comunitària, necessites donar-te d'alta o unir-te a la comunitat.",
+      "pendingCommunity": "La teva sol·licitud de la comunitat {{community}} està pendent de confirmació",
       "register":"Dona't d'alta",
       "join":"Uneix-te"
     }
