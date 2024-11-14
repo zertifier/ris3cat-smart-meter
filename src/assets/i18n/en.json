@@ -137,6 +137,26 @@
           "success": "Community successfully modified",
           "error": "There was an error saving the community. Please try again later"
         }
+      },
+      "joinCommunity": {
+        "title": "Join a Community",
+        "texts": {
+          "municipally": "Municipality",
+          "community": "Community",
+          "noCommunity": "Oops! No community available in this municipality",
+          "successJoining": "A request to join a community has been sent successfully",
+          "errorJoining": "There was an error sending the request"
+        }
+      },
+      "addCommunity": {
+        "title": "Add a Community",
+        "texts": {
+          "location": "Location",
+          "undefined": "Not defined",
+          "communityName": "Community Name",
+          "successCreating": "Community created successfully",
+          "errorCreating": "There was an error creating the community"
+        }
       }
     }
   },

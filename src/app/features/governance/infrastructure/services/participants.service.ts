@@ -45,6 +45,10 @@ export class ParticipantsService {
     return this.httpClient.put<HttpResponse<Participant>>(`${this.baseUrl}/shares/participants/${participant.id}`, participant)
   }
 
+  create(data: {customerId: number, communityId: number}){
+    return this.httpClient.post<HttpResponse<Participant>>(`${this.baseUrl}/shares`, data)
+  }
+
   removeParticipant(id: number){
     return this.httpClient.delete<HttpResponse<Participant>>(`${this.baseUrl}/shares/participants/${id}`)
   }

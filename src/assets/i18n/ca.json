@@ -138,6 +138,16 @@
           "error": "Hi ha hagut un error guardant la comunitat. Torna-ho a intentar d'aqui una estona"
         }
       },
+      "joinCommunity": {
+        "title": "Uneix-te a una comunitat",
+        "texts": {
+          "municipally": "Municipi",
+          "community": "Comunitat",
+          "noCommunity": "Ep! No hi ha cap comunitat disponible a aquest municipi",
+          "successJoining": "S'ha enviat una petició per unir-se a una comunitat correctament",
+          "errorJoining": "Hi ha hagut un error enviat la petició"
+        }
+      },
       "addCommunity": {
         "title": "Afageix una comunitat",
         "texts": {
