@@ -14,6 +14,7 @@ import {
   UserStore,
   UserStoreService
 } from "../../../../../../user/infrastructure/services/user-store.service";
+import {Router} from "@angular/router";
 @Component({
   selector: 'app-add-community-form',
   standalone: true,
@@ -41,7 +42,8 @@ export class AddCommunityFormComponent {
     private formBuilder: FormBuilder,
     private apiService: ZertipowerService,
     private transloco: TranslocoService,
-    private userStore: UserStoreService
+    private userStore: UserStoreService,
+    private router: Router
   ) {
     this.apiService.locations.getLocations().then((locations) => {
       this.locations = locations
@@ -73,7 +75,7 @@ export class AddCommunityFormComponent {
         confirmButtonText: this.transloco.translate('GENERIC.texts.okay')
       }).then(() => {
         this.loading = false
-        this.activeModal.close()
+        window.location.href = '/community';
       })
     }catch (e) {
       this.swalErrorCreating()
