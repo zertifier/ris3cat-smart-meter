@@ -23,7 +23,8 @@ export const hasCommunityGuard: CanActivateFn = (route) => {
       const routeName = route.data['name'];
 
       const tryStatsAccess = ENERGY_STATS_ROUTE_NAMES.STATS_COMMUNITY === routeName;
-      const hasCommunity = cups.length > 0;
+      // const hasCommunity = cups.length > 0;
+      const hasCommunity = cups?.some(item => item.communityId !== null) || false;
 
       if (tryStatsAccess) {
         return hasCommunity || router.createUrlTree(['energy-stats/community/missing']);

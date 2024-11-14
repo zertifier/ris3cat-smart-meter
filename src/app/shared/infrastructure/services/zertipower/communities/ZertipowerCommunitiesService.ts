@@ -48,9 +48,14 @@ export class ZertipowerCommunitiesService {
     return response.data.data;
   }
 
+  async create(data: {locationId: number, name: string, customerId: number | undefined}) {
+    const response = await this.axios.post<HttpResponse<any>>(`${ChartEntity.COMMUNITIES}`, data);
+    return response.data.data;
+  }
+
   async updateNameAndTradetype(id: number, community: {name: string, tradeType: TradeTypes}){
     const response = await this.axios.put<HttpResponse<CommunityResponse[]>>(`${ChartEntity.COMMUNITIES}/${id}/trade-types`, community);
-    return response.data.data;
+    return response;
   }
 
   deposit(balance: number) {

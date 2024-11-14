@@ -57,9 +57,11 @@ export class ParticipantsComponent implements OnDestroy{
           // this.user = data.user
           this.subscriptions.push(
             this.userStore.selectOnly(this.userStore.$.communityId).subscribe((community) => {
-              this.communityId = community
-              this.getParticipantsByStatus(this.participantStatus)
-              this.getPendingQty(this.communityId!)
+              if (community) {
+                this.communityId = community
+                this.getParticipantsByStatus(this.participantStatus)
+                this.getPendingQty(this.communityId!)
+              }
 
             })
           )

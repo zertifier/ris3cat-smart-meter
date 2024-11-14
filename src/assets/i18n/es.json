@@ -137,6 +137,26 @@
           "success": "Comunidad modificada correctamente",
           "error": "Hubo un error al guardar la comunidad. Inténtalo de nuevo más tarde"
         }
+      },
+      "joinCommunity": {
+        "title": "Únete a una comunidad",
+        "texts": {
+          "municipally": "Municipio",
+          "community": "Comunidad",
+          "noCommunity": "¡Ups! No hay ninguna comunidad disponible en este municipio",
+          "successJoining": "Se ha enviado una solicitud para unirse a una comunidad correctamente",
+          "errorJoining": "Hubo un error al enviar la solicitud"
+        }
+      },
+      "addCommunity": {
+        "title": "Añadir una comunidad",
+        "texts": {
+          "location": "Localidad",
+          "undefined": "No definida",
+          "communityName": "Nombre de la comunidad",
+          "successCreating": "Comunidad creada correctamente",
+          "errorCreating": "Hubo un error al crear la comunidad"
+        }
       }
     }
   },

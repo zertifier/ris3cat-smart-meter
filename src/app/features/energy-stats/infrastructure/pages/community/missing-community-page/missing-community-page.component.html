@@ -16,7 +16,7 @@
       </h5>
     </div>
     <div class="col-12 d-flex justify-content-center">
-      <button type="button" class="btn btn-primary bg-primary fw-medium">{{ t('texts.register') }}</button>
+      <button (click)="openAddModal()" type="button" class="btn btn-primary bg-primary fw-medium">{{ t('texts.register') }}</button>
       <button (click)="openJoinModal()" type="button" class="btn btn-secondary bg-secondary fw-medium ms-4">{{ t('texts.join') }}</button>
     </div>
   </div>

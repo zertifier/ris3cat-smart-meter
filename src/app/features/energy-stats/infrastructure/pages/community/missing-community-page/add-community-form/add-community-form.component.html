@@ -1,0 +1,39 @@
+<ng-container *transloco="let t; prefix: 'MY-COMMUNITY.modals.addCommunity'">
+  <div class="modal-header border-0">
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body pt-0">
+    <h3 class="text-center m-auto mb-4">{{ t('title') }}</h3>
+    <form [formGroup]="formData" (submit)="save()" id="form">
+
+      <div class="mb-3">
+        <label class="form-label" for="name">{{t('texts.communityName')}}</label>
+        <input class="form-control bg-white shadow-none border-secondary" name="name" id="name" formControlName="name">
+      </div>
+      <div>
+        <label for="locationId" class="form-label">{{t('texts.location')}}</label>
+        <select
+          name="locationId"
+          class="form-select bg-white shadow-none border-secondary"
+          id="locationId"
+          formControlName="locationId"
+        >
+          <option value="">{{t('texts.undefined')}}</option>
+          <option *ngFor="let location of locations" [value]="location.id">
+            {{ location.municipality }} <span *ngIf="location.province">({{location.province}})</span>
+          </option>
+        </select>
+      </div>
+    </form>
+  </div>
+
+  <div class="modal-footer border-0 justify-content-center mb-3">
+    <button class="btn btn-outline-secondary" form="form" type="submit" [disabled]="loading">
+      {{ 'GENERIC.texts.save' | transloco }}
+    </button>
+    <button type="button" class="btn btn-outline-secondary" (click)="activeModal.close('Close click')" [disabled]="loading">
+      {{ 'GENERIC.texts.close' | transloco }}
+    </button>
+  </div>
+</ng-container>
+
