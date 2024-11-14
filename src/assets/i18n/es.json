@@ -88,8 +88,9 @@
     "texts": {
       "anyAccess": "No tienes acceso a ninguna comunidad.",
       "accessDescription": "Para acceder a la información comunitaria, necesitas darte de alta o unirte a la comunidad.",
+      "pendingCommunity": "Tu solicitud para unirte a la comunidad {{community}} está pendiente de confirmación",
       "register": "Darte de alta",
-      "join": "Únete"
+      "join": "Unirte"
     }
   },
   "MY-COMMUNITY": {
