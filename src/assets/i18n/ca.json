@@ -66,7 +66,10 @@
       "buyingPrice": "Preu de compra",
       "sellingPrice": "Preu de venda",
       "unavailable": "No disponible",
-      "allCups": "Tots els CUPS"
+      "allCups": "Tots els CUPS",
+      "availableSurplus": "Excedent disponible particular",
+      "communitySurplus": "Excedent disponible comunitari",
+      "unavailableSurplus": "Excedent no disponible"
     },
     "tooltips": {
       "assignedProd": "El percentatge de l'energia produïda que se li assigna a aquest CUPS"

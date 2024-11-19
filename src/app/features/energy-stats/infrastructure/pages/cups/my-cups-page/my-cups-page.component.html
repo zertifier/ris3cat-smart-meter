@@ -125,7 +125,8 @@
     </div>
 
     <div *ngIf="consumptionItems.length" class="w-100 mt-4" style="margin-bottom: 2rem;">
-      <app-consumption-items [items]="consumptionItems" [totalSurplus]="powerFlow().sell || 0"/>
+      <app-consumption-items [items]="consumptionItems" [totalSurplus]="powerFlow().sell || 0"
+                             [assignedProduction]="(surplusDistribution$ | async) || 0"/>
     </div>
   </div>
   <div class="container-page animate__animated animate__fadeIn">

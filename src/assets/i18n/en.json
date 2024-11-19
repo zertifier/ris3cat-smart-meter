@@ -66,7 +66,10 @@
       "buyingPrice": "Buying price",
       "sellingPrice": "selling price",
       "unavailable": "Unavailable",
-      "allCups": "All CUPS"
+      "allCups": "All CUPS",
+      "availableSurplus": "Excedente particular disponible",
+      "communitySurplus": "Excedente comunitario disponible",
+      "unavailableSurplus": "Excedente no disponible"
     },
     "tooltips": {
       "assignedProd": "The percentage of energy produced that is assigned to this CUPS"

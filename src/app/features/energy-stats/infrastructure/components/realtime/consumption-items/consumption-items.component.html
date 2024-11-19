@@ -1,10 +1,24 @@
 <div class="row w-100 justify-content-evenly text-primary" style="font-size: 1.3rem">
   @for (item of items; track $index) {
 <!--    <div class="d-flex align-items-center gap-2">-->
-    <div class="col-auto my-2 gap-2 rounded-5 px-4 py-3" [ngClass]="totalSurplus >= item.consumption ? 'supplied' : ''">
+    <div class="col-auto my-2 gap-2 rounded-5 px-4 py-3 " [ngClass]="getClass(item.consumption)">
       <i [class]="item.icon"></i>
       <label><span class="ms-2 fw-medium" style="font-size: 18px;">{{ item.label }}:</span> {{ item.consumption }} KW</label>
     </div>
   }
 </div>
+<ng-container *transloco="let t; prefix: 'MY-CUPS'">
 
+  <div class="row justify-content-center text-primary mt-4">
+    <div class="col-auto mx-3">
+      <i class="fa-solid fa-circle me-2" style="color: #3498DB"></i>{{t('texts.availableSurplus')}}
+    </div>
+    <div class="col-auto mx-3">
+      <i class="fa-solid fa-circle me-2" style="color: #80BFE9"></i>{{t('texts.communitySurplus')}}
+    </div>
+    <div class="col-auto mx-3">
+      <i class="fa-solid fa-circle me-2" style="color: #dfdfdf"></i>{{t('texts.unavailableSurplus')}}
+    </div>
+  </div>
+
+</ng-container>

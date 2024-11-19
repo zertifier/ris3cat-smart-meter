@@ -169,8 +169,8 @@ export class MyCupsPageComponent implements OnInit, OnDestroy {
             production: production * surplusDistribution / 1000,
             inHouse: inHouse * surplusDistribution / 1000,
             buy: buy * surplusDistribution / 1000,
-            sell: sell * surplusDistribution / 1000,
-            // sell: 0.5,
+            // sell: sell * surplusDistribution / 1000,
+            sell: 0.5,
           })
         })
     )
