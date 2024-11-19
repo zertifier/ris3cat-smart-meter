@@ -92,19 +92,20 @@ export class MyCupsPageComponent implements OnInit, OnDestroy {
       icon: 'fa-solid fa-lightbulb',
     },
     {
-      consumption: 0.6,
-      label: 'Nevera',
-      icon: 'fa-solid fa-temperature-low',
-    },
-    {
       consumption: 0.25,
       label: 'TV',
       icon: 'fa-solid fa-tv',
     },
+
     {
       consumption: 0.5,
       label: 'Rentadora',
       icon: 'fa-solid fa-shirt',
+    },
+    {
+      consumption: 0.6,
+      label: 'Nevera',
+      icon: 'fa-solid fa-temperature-low',
     },
     {
       consumption: 2,
@@ -169,6 +170,7 @@ export class MyCupsPageComponent implements OnInit, OnDestroy {
             inHouse: inHouse * surplusDistribution / 1000,
             buy: buy * surplusDistribution / 1000,
             sell: sell * surplusDistribution / 1000,
+            // sell: 0.5,
           })
         })
     )
