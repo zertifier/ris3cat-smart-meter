@@ -13,12 +13,13 @@
     <form class="row g-3" [formGroup]="formData">
       <div class="col-12 col-md-6">
         <label class="form-label" for="service">{{ t('texts.serviceTitle') }}</label>
-        <select id="service" class="form-select">
+        <select id="service" class="form-select" [(ngModel)]="service" [ngModelOptions]="{standalone: true}">
           <option value="datadis">Datadis</option>
+          <option value="shelly">Shelly</option>
         </select>
       </div>
 
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-md-6" *ngIf="service == 'datadis'">
         <label class="form-label" for="dni">DNI/NIE</label>
         <input type="text" id="dni" class="form-control" formControlName="dni" />
         <app-validation-hint [condition]="formData.controls.dni.invalid && !!formData.value.dni?.trim()">
@@ -26,7 +27,7 @@
         </app-validation-hint>
       </div>
 
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-md-6" *ngIf="service == 'datadis'">
         <label class="form-label" for="user">{{ t('texts.user') }} <span class="text-danger">*</span></label>
         <input type="text" id="user" class="form-control" formControlName="username" />
         <app-validation-hint [condition]="formData.controls.username.invalid">
@@ -34,7 +35,7 @@
         </app-validation-hint>
       </div>
 
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-md-6" *ngIf="service == 'datadis'">
         <label class="form-label" for="password">{{ t('texts.password') }} <span class="text-danger">*</span></label>
         <div class="input-group">
           <input [type]="hidePassword ? 'password' : 'text'" id="password" class="form-control"
@@ -60,7 +61,7 @@
         </app-validation-hint>
       </div>
 
-      <div class="col-12 col-md-6">
+      <div class="col">
         <label class="form-label" for="type">{{ t('texts.type') }} <span class="text-danger">*</span></label>
         <select class="form-select " formControlName="type" id="type">
           <option [value]="'consumer'">

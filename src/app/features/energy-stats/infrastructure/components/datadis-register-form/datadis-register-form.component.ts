@@ -3,8 +3,8 @@ import {
   QuestionBadgeComponent
 } from "@shared/infrastructure/components/question-badge/question-badge.component";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
-import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
-import {JsonPipe} from "@angular/common";
+import {FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {JsonPipe, NgIf} from "@angular/common";
 import Swal from "sweetalert2";
 import {ZertipowerService} from "@shared/infrastructure/services/zertipower/zertipower.service";
 import {UserStoreService} from "@features/user/infrastructure/services/user-store.service";
@@ -26,13 +26,16 @@ import { TranslocoService, TranslocoDirective } from '@jsverse/transloco';
     ReactiveFormsModule,
     JsonPipe,
     ValidationHintComponent,
-    TranslocoDirective
+    TranslocoDirective,
+    FormsModule,
+    NgIf
   ],
   templateUrl: './datadis-register-form.component.html',
   styleUrl: './datadis-register-form.component.scss'
 })
 export class DatadisRegisterFormComponent {
   hidePassword = true;
+  service: string = 'datadis';
 
   protected formData = this.formBuilder.group({
     dni: new FormControl<string>('', [nifValidator]),
