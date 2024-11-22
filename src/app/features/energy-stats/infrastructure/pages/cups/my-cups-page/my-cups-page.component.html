@@ -78,11 +78,10 @@
       class="ms-1 fa-solid fa-rss fa-fade text-success"></i></h4>
 
     <div class="row justify-content-around w-100">
-
       <div class="col-6 col-lg my-3">
 
-        @if (isValidNumber(powerFlow().buy) && powerFlow().buy > 0) {
-          <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.CONSUMPTION"
+        @if (isValidNumber(powerFlow().buy)  && powerFlow().buy > 0) {
+          <app-stat-display width="20%" [color]="StatsColors.CONSUMPTION"
                             label="{{ t('texts.consumption') }}" [text]="powerFlow().buy.toFixed(2)"/>
         } @else {
           <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
@@ -92,8 +91,8 @@
 
       <div class="col-6 col-lg my-3">
 
-        @if (isValidNumber(powerFlow().inHouse) && powerFlow().inHouse > 0) {
-          <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
+        @if (isValidNumber(powerFlow().inHouse)  && powerFlow().inHouse > 0) {
+          <app-stat-display  width="20%" [color]="StatsColors.SELF_CONSUMPTION"
                             label="{{ t('texts.selfConsumption') }}" [text]="powerFlow().inHouse.toFixed(2)"/>
         } @else {
           <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
@@ -103,7 +102,7 @@
       </div>
 
       <div class="col-6 col-lg my-3">
-        @if (isValidNumber(powerFlow().production) && (lastUpdate$ | async)) {
+        @if (isValidNumber(powerFlow().production)  && powerFlow().production > 0) {
           <app-stat-display width="20%"
                             [color]="StatsColors.COMMUNITY_PRODUCTION" label="{{ t('texts.generatedEnergy') }}"
                             [text]="powerFlow().production.toFixed(2)"/>
@@ -114,9 +113,11 @@
       </div>
 
       <div class="col-6 col-lg my-3">
-        @if (isValidNumber(powerFlow().sell) && powerFlow().sell > 0) {
-          <app-stat-display [disabled]="powerFlow().sell === 0" width="20%" [color]="StatsColors.SURPLUS"
-                            label="{{ t('texts.surplus') }}" [text]="powerFlow().sell.toFixed(2)"/>
+        @if (isValidNumber(powerFlow().sell)  && powerFlow().sell > 0) {
+          <app-stat-display  width="20%"
+                             [color]="StatsColors.SURPLUS"
+                             [text]="powerFlow().sell.toFixed(2)"
+                            label="{{ t('texts.surplus') }}" />
         } @else {
           <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
                             label="{{ t('texts.surplus') }}" [text]="t('texts.unavailable')"/>
@@ -125,7 +126,7 @@
     </div>
 
     <div *ngIf="consumptionItems.length" class="w-100 mt-4" style="margin-bottom: 2rem;">
-      <app-consumption-items [items]="consumptionItems" [totalSurplus]="powerFlow().sell || 0"
+      <app-consumption-items [items]="consumptionItems" [totalSurplus]="powerFlow().sell || 0" [totalProduction]="powerFlow().production || 0"
                              [assignedProduction]="(surplusDistribution$ | async) || 0"/>
     </div>
   </div>

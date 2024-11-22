@@ -21,12 +21,12 @@ export interface ConsumptionItem {
 export class ConsumptionItemsComponent implements AfterViewInit{
   @Input() items: ConsumptionItem[] = []
   @Input() totalSurplus: number = 0;
+  @Input() totalProduction: number = 0;
   @Input() assignedProduction: number = 0;
 
   availableCommunitySurplus = 0
   ngAfterViewInit() {
-    // this.availableCommunitySurplus = (100 - this.assignedProduction) * this.totalSurplus
-    this.availableCommunitySurplus = 6
+     this.availableCommunitySurplus = (100 - this.assignedProduction) * this.totalProduction / this.assignedProduction
   }
 
   getClass(value: number){

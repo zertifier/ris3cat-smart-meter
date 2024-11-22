@@ -1,9 +1,10 @@
 {
   "name": "smart-meter-frontend",
-  "version": "1.0.30",
+  "version": "1.0.34",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:production": "ng serve --configuration production",
     "start:preproduction": "ng serve --configuration preproduction",
     "build": "ng build",
     "build:preproduction": "ng build --configuration preproduction",
