@@ -31,7 +31,14 @@
       "password": "Password",
       "invalidPassword": "Invalid password",
       "invalidCups": "Invalid CUPS",
-      "addData": "Add data"
+      "addData": "Add data",
+      "type": "Type",
+      "types": {
+        "consumer": "Consumer",
+        "producer": "Producer",
+        "prosumer": "Prosumer",
+        "community": "Community"
+      }
     },
     "modals": {
       "errorText": "An error has occurred",

@@ -31,7 +31,14 @@
       "password": "Contraseña",
       "invalidPassword": "Contraseña no válida",
       "invalidCups": "CUPS no válido",
-      "addData": "Añadir datos"
+      "addData": "Añadir datos",
+      "type": "Tipo",
+      "types": {
+        "consumer": "Consumidor",
+        "producer": "Productor",
+        "prosumer": "Prosumidor",
+        "community": "Comunitario"
+      }
     },
     "modals": {
       "errorText": "Ha ocurrido un error",

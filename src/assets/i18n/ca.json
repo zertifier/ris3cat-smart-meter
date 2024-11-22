@@ -31,7 +31,14 @@
       "password":"Contrasenya",
       "invalidPassword":"Contrassenya no vàlida",
       "invalidCups":"CUPS no vàlid",
-      "addData":"Afegir dades"
+      "addData":"Afegir dades",
+      "type": "Tipus",
+      "types": {
+        "consumer": "Consumidor",
+        "producer": "Productor",
+        "prosumer": "Prosumidor",
+        "community": "Comunitari"
+      }
     },
     "modals":{
       "errorText":"Hi ha hagut un error",

@@ -39,6 +39,7 @@ export class DatadisRegisterFormComponent {
     username: new FormControl<string>('', [Validators.required]),
     password: new FormControl<string>('', [Validators.required]),
     cups: new FormControl<string>('', [Validators.required]),
+    type: new FormControl<string>('consumer', [Validators.required])
   });
 
   constructor(
@@ -65,10 +66,10 @@ export class DatadisRegisterFormComponent {
       return;
     }
 
-    const {dni, password, cups, username} = this.formData.value;
+    const {dni, password, cups, username, type} = this.formData.value;
     const customerId = this.userStore.snapshotOnly(state => state.user!.customer_id);
     try {
-      await this.zertipower.cups.registerDatadis(customerId!, cups!, dni!, username!, password!);
+      await this.zertipower.cups.registerDatadis(customerId!, cups!, dni!, username!, password!, type!);
       Swal.fire({
         title: this.translocoService.translate('DATADIS-REGISTER.modals.successText'),
         timer: 2000,
