@@ -31,7 +31,14 @@
       "password": "Password",
       "invalidPassword": "Invalid password",
       "invalidCups": "Invalid CUPS",
-      "addData": "Add data"
+      "addData": "Add data",
+      "type": "Type",
+      "types": {
+        "consumer": "Consumer",
+        "producer": "Producer",
+        "prosumer": "Prosumer",
+        "community": "Community"
+      }
     },
     "modals": {
       "errorText": "An error has occurred",
@@ -282,7 +289,11 @@
       "updated": "Profile updated successfully",
       "agree": "Agree",
       "error": "Error updating profile",
-      "errorMessage": "Please try again in a few minutes"
+      "errorMessage": "Please try again in a few minutes",
+      "deleteUser": "Delete user",
+      "deleteUserTitle": "Are you sure?",
+      "deleteUserText": "If you unsubscribe, you will no longer be able to share energy, but you will still have access to the platform, and we will keep your information history for one year. After this period, your information will be deleted. It is necessary to have no BETA to delete a user.",
+      "deleteSuccess": "The unsubscribe request has been created"
     }
   },
   "MY-WALLET": {

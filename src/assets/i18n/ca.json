@@ -31,7 +31,14 @@
       "password":"Contrasenya",
       "invalidPassword":"Contrassenya no vàlida",
       "invalidCups":"CUPS no vàlid",
-      "addData":"Afegir dades"
+      "addData":"Afegir dades",
+      "type": "Tipus",
+      "types": {
+        "consumer": "Consumidor",
+        "producer": "Productor",
+        "prosumer": "Prosumidor",
+        "community": "Comunitari"
+      }
     },
     "modals":{
       "errorText":"Hi ha hagut un error",
@@ -282,7 +289,11 @@
       "updated":"Perfil actualitzat correctament",
       "agree":"D'acord",
       "error":"Error al actualitzar el perfil",
-      "errorMessage":"Torna-ho a intentar en uns minuts"
+      "errorMessage":"Torna-ho a intentar en uns minuts",
+      "deleteUser": "Donar de baixa",
+      "deleteUserTitle": "Estàs segur?",
+      "deleteUserText": "Si et dones de baixa ja no podràs compartir energia, però podràs seguir accedint a la plataforma i guardarem el teu històric d'informació durant un any. Després d'aquest període es borrarà la teva informació. És necessari no tenir BETA per poder esborrar un usuari.",
+      "deleteSuccess": "S'ha creat la petició de baixa"
     }
   },
   "MY-WALLET": {

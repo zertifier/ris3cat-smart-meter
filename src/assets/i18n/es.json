@@ -31,7 +31,14 @@
       "password": "Contraseña",
       "invalidPassword": "Contraseña no válida",
       "invalidCups": "CUPS no válido",
-      "addData": "Añadir datos"
+      "addData": "Añadir datos",
+      "type": "Tipo",
+      "types": {
+        "consumer": "Consumidor",
+        "producer": "Productor",
+        "prosumer": "Prosumidor",
+        "community": "Comunitario"
+      }
     },
     "modals": {
       "errorText": "Ha ocurrido un error",
@@ -282,7 +289,11 @@
       "updated": "Perfil actualizado correctamente",
       "agree": "Aceptar",
       "error": "Error al actualizar el perfil",
-      "errorMessage": "Inténtalo de nuevo en unos minutos"
+      "errorMessage": "Inténtalo de nuevo en unos minutos",
+      "deleteUser": "Dar de baja",
+      "deleteUserTitle": "¿Estás seguro?",
+      "deleteUserText": "Si te das de baja, ya no podrás compartir energía, pero podrás seguir accediendo a la plataforma y guardaremos tu historial de información durante un año. Después de este período, se borrará tu información. Es necesario no tener BETA para poder borrar un usuario.",
+      "deleteSuccess": "Se ha creado la solicitud de baja"
     }
   },
   "MY-WALLET": {

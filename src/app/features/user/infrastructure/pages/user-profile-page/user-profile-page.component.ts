@@ -90,6 +90,24 @@ export class UserProfilePageComponent implements OnInit {
       });
       console.log(error)
     }
+  }
 
+  deleteUser(){
+    Swal.fire({
+      icon: 'warning',
+      title: this.translocoService.translate('PROFILE.texts.deleteUserTitle'),
+      text: this.translocoService.translate('PROFILE.texts.deleteUserText'),
+      confirmButtonText: this.translocoService.translate('PROFILE.texts.agree'),
+      showCancelButton: true,
+      cancelButtonText: this.translocoService.translate('GENERIC.texts.close')
+    }).then((response) => {
+      if (response.isConfirmed){
+        Swal.fire({
+          icon: 'success',
+          title: this.translocoService.translate('PROFILE.texts.deleteSuccess'),
+          confirmButtonText: this.translocoService.translate('GENERIC.texts.okay')
+        })
+      }
+    });
   }
 }

@@ -10,13 +10,14 @@
 
       <div>
         <h5 class="fw-bold">{{ proposal.proposal }}</h5>
-        <div *ngIf="sanitizedHtml"  [innerHTML]="sanitizedHtml" class="my-4"></div>
+        <div *ngIf="sanitizedHtml" [innerHTML]="sanitizedHtml" class="my-4"></div>
 
         <small class="text-body-secondary">Feta per: {{ proposal.firstname }}</small>
 
         <br>
         <div class="mt-5">
-          <button class="badge me-4 fw-normal border-0" [ngClass]="getStatusButtonClass(proposal.status)" style="cursor: default">
+          <button class="badge me-4 fw-normal border-0" [ngClass]="getStatusButtonClass(proposal.status)"
+                  style="cursor: default">
             {{ statusTranslation(proposal.status) }}
           </button>
           <button class="badge fw-normal border-0 tertiary-badge" style="cursor: default">
@@ -35,12 +36,20 @@
 
           <div *ngIf="proposal.status.toLowerCase() == ('pending' || 'expired') " class="row">
             <div class="col-12 col-md-3 my-3">
-              <button *ngIf="proposal.status.toLowerCase() == 'pending'" class="btn btn-secondary rounded-5 w-100" (click)="updateProposalStatus('active')">Activar</button>
-              <button *ngIf="proposal.status.toLowerCase() == 'expired'" class="btn btn-secondary rounded-5 w-100" (click)="updateProposalStatus('executed')">Executar</button>
+              <button *ngIf="proposal.status.toLowerCase() == 'pending'" class="btn btn-secondary rounded-5 w-100"
+                      (click)="updateProposalStatus('active')">Activar
+              </button>
+              <button *ngIf="proposal.status.toLowerCase() == 'expired'" class="btn btn-secondary rounded-5 w-100"
+                      (click)="updateProposalStatus('executed')">Executar
+              </button>
             </div>
             <div class="col-12 col-md-3 my-3">
-              <button *ngIf="proposal.status.toLowerCase() == 'pending'" class="btn btn-secondary rounded-5 w-100" (click)="deleteProposal()">Descartar</button>
-              <button *ngIf="proposal.status.toLowerCase() == 'expired'" class="btn btn-secondary rounded-5 w-100" (click)="updateProposalStatus('denied')">Denegar</button>
+              <button *ngIf="proposal.status.toLowerCase() == 'pending'" class="btn btn-secondary rounded-5 w-100"
+                      (click)="deleteProposal()">Descartar
+              </button>
+              <button *ngIf="proposal.status.toLowerCase() == 'expired'" class="btn btn-secondary rounded-5 w-100"
+                      (click)="updateProposalStatus('denied')">Denegar
+              </button>
 
             </div>
           </div>
@@ -66,13 +75,14 @@
         <div *ngFor="let option of proposal.options!; let i = index" class="d-flex my-2">
           <button class="btn btn-outline-secondary px-3 py-1 rounded-5 w-100 text-start"
                   [ngClass]="activeOptionIndex == i ? 'active-tertiary' : ''"
-                  (click)="selectOption(option.id!, i)" [disabled]="alreadyVoted || proposal.status.toLowerCase() != 'active'">
+                  (click)="selectOption(option.id!, i)"
+                  [disabled]="alreadyVoted || proposal.status.toLowerCase() != 'active'">
             {{ option.option }}
           </button>
         </div>
 
         <div *ngIf="proposal.type == 'weighted'" class="my-3">
-          <p>Nota: El pes de la teva votació és de {{voteWeight}}</p>
+          <p>Nota: El pes de la teva votació és de {{ voteWeight }}</p>
         </div>
 
         <div class="mt-3">
