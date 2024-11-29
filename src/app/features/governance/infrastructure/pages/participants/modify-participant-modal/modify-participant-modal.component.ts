@@ -4,7 +4,7 @@ import {FormsModule} from "@angular/forms";
 import {Participant, ParticipantsService} from "../../../services/participants.service";
 import {Subscription} from "rxjs";
 import Swal from "sweetalert2";
-import {TranslocoDirective, TranslocoPipe} from "@jsverse/transloco";
+import {TranslocoDirective, TranslocoPipe, TranslocoService} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-modify-participant-modal',
@@ -24,6 +24,7 @@ export class ModifyParticipantModalComponent implements OnDestroy{
   constructor(
     public activeModal: NgbActiveModal,
     private participantsService: ParticipantsService,
+    private transloco: TranslocoService
   ) {
   }
 
@@ -45,17 +46,16 @@ export class ModifyParticipantModalComponent implements OnDestroy{
   successSwal(){
     Swal.fire({
       icon: 'success',
-      title: 'Participant modificat correctament',
-      confirmButtonText: "D'acord"
+      title: this.transloco.translate('PARTICIPANTS.modals.modify.success'),
+      confirmButtonText: this.transloco.translate('GENERIC.texts.okay')
     })
   }
 
   swalErrorDisplay() {
     return Swal.fire({
       icon: 'error',
-      title: 'ERROR',
-      text: 'Hi ha hagut un error amb la proposta. Espera uns minuts i torna-ho a intentar.',
-      confirmButtonText: 'Entès',
+      title: this.transloco.translate('PARTICIPANTS.modals.modify.error'),
+      confirmButtonText: this.transloco.translate('GENERIC.texts.okay'),
       customClass: {
         confirmButton: 'btn btn-secondary-force'
       }

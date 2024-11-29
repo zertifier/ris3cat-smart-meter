@@ -86,7 +86,10 @@
         "title": "Change the CUPS name",
         "texts": {
           "nameLabel": "CUPS name",
-          "namePlaceholder": "For example: Garage"
+          "namePlaceholder": "For example: Garage",
+          "success": "The data has been saved successfully",
+          "error": "The data could not be saved"
+
         }
       },
       "addCups": {
@@ -491,6 +494,32 @@
       "denied": "Denied"
     }
   },
+  "PROPOSAL": {
+    "title": "Proposal",
+    "texts": {
+      "back": "Back to proposals",
+      "createdBy": "Created by: {{name}}",
+      "pending": "Click Activate if you accept the proposal or Discard if you want to remove it.",
+      "expired": "Click Execute if the proposal is being carried out or Deny if it cannot be executed.",
+      "activate": "Activate",
+      "execute": "Execute",
+      "discard": "Discard",
+      "deny": "Deny",
+      "info": "Information",
+      "votes": "Votes: ",
+      "votesMade": "{{totalVotes}} members out of {{totalMembers}} have voted",
+      "endDate": "End date: ",
+      "voteHere": "Vote here",
+      "voteWeight": "Note: Your voting weight is {{voteWeight}}",
+      "vote": "Vote",
+      "endedVote": "The voting has ended",
+      "voteResult": "Voting results so far",
+      "deleteWarning": "Are you sure you want to discard the proposal?",
+      "success": "The proposal has been deleted successfully",
+      "error": "There was an error with the vote. Please wait a few minutes and try again."
+    }
+
+  },
   "NEW-PROPOSAL": {
     "title": "New proposal",
     "texts": {
@@ -551,7 +580,10 @@
         "emailLabel": "Email address",
         "emailPlaceholder": "email@gmail.com",
         "sharesLabel": "Participation",
-        "sharePlaceholder": "e.g.:5000"
+        "sharePlaceholder": "e.g.:5000",
+        "success": "Participant updated successfully",
+        "error": "There was an error with the request. Please wait a few minutes and try again."
+
       },
       "remove": {},
       "swal": {
@@ -581,7 +613,9 @@
       "noDataSaved": "We do not save any data related to your credentials",
       "help": "Help Center",
       "logingIn": "Logging in.",
-      "wait": "Please wait."
+      "wait": "Please wait.",
+      "loginError": "Login failed"
+
     }
   },
   "LOGOUT": {

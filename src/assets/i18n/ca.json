@@ -86,7 +86,9 @@
         "title": "Canviar el nom del CUPS",
         "texts": {
           "nameLabel": "Nom del CUPS",
-          "namePlaceholder": "Per exemple: Garatge"
+          "namePlaceholder": "Per exemple: Garatge",
+          "success": "Les dades s'han guardat amb èxit",
+          "error": "Les dades no s'han pogut guardar."
         }
       },
       "addCups": {
@@ -493,6 +495,31 @@
       "denied": "Denegades"
     }
   },
+  "PROPOSAL": {
+    "title": "Proposta",
+    "texts": {
+      "back": "Tornar a propostes",
+      "createdBy": "Feta per: {{name}}",
+      "pending": "Fes clic a Activar si acceptes la proposta o Descartar si vols eliminar-la",
+      "expired": "Fes clic a Executar si la proposta s'està duent a terme o Denegar si no es pot realitzar",
+      "activate": "Activar",
+      "execute": "Executar",
+      "discard": "Descartar",
+      "deny": "Denegar",
+      "info": "Informació",
+      "votes": "Vots: ",
+      "votesMade": "Han votat {{totalVotes}} membres de {{totalMembers}}",
+      "endDate": "Data de finalització: ",
+      "voteHere": "Vota aquí",
+      "voteWeight": "Nota: El pes de la teva votació és de {{voteWeight}}",
+      "vote": "Vota",
+      "endedVote": "La votació ja ha finalitzat",
+      "voteResult": "Resultat votacions fins ara",
+      "deleteWarning": "Segur que vols descartar la proposta?",
+      "success": "La proposta s'ha borrat correctament",
+      "error": "Hi ha hagut votant. Espera uns minuts i torna-ho a intentar"
+    }
+  },
   "NEW-PROPOSAL": {
     "title": "Nova proposta",
     "texts": {
@@ -553,7 +580,9 @@
         "emailLabel": "Correu electrònic",
         "emailPlaceholder": "correu@gmail.com",
         "sharesLabel": "Beta",
-        "sharePlaceholder": "p.e.:5000"
+        "sharePlaceholder": "p.e.:5000",
+        "success": "Participant modificat correctament",
+        "error": "Hi ha hagut un error amb la proposta. Espera uns minuts i torna-ho a intentar."
       },
       "remove": {
       },
@@ -584,7 +613,8 @@
       "noDataSaved": "No guardem cap dada relacionada amb les teves credencials",
       "help": "Centre d'ajuda",
       "logingIn": "Iniciant sessió.",
-      "wait": "Si us plau, esperi."
+      "wait": "Si us plau, esperi.",
+      "loginError": "No s'ha pogut iniciar sessió"
     }
   },
   "LOGOUT": {

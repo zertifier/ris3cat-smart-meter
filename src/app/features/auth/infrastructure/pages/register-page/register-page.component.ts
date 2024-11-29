@@ -63,10 +63,8 @@ export class RegisterPageComponent implements OnInit {
 
   async register() {
     if (this.formData.invalid) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Formulari no valid'
-      });
+      this.formData.markAllAsTouched()
+      this.loading = false
       return;
     }
 

@@ -86,7 +86,10 @@
         "title": "Cambiar el nombre del CUPS",
         "texts": {
           "nameLabel": "Nombre del CUPS",
-          "namePlaceholder": "Por ejemplo: Garaje"
+          "namePlaceholder": "Por ejemplo: Garaje",
+          "success": "Los datos se han guardado con éxito",
+          "error": "No se pudieron guardar los datos"
+
         }
       },
       "addCups": {
@@ -491,6 +494,32 @@
       "denied": "Denegadas"
     }
   },
+  "PROPOSAL": {
+    "title": "Propuesta",
+    "texts": {
+      "back": "Volver a propuestas",
+      "createdBy": "Hecha por: {{name}}",
+      "pending": "Haz clic en Activar si aceptas la propuesta o en Descartar si quieres eliminarla.",
+      "expired": "Haz clic en Ejecutar si la propuesta se está llevando a cabo o en Denegar si no se puede realizar.",
+      "activate": "Activar",
+      "execute": "Ejecutar",
+      "discard": "Descartar",
+      "deny": "Denegar",
+      "info": "Información",
+      "votes": "Votos: ",
+      "votesMade": "Han votado {{totalVotes}} miembros de {{totalMembers}}",
+      "endDate": "Fecha de finalización: ",
+      "voteHere": "Vota aquí",
+      "voteWeight": "Nota: El peso de tu votación es de {{voteWeight}}",
+      "vote": "Votar",
+      "endedVote": "La votación ya ha finalizado",
+      "voteResult": "Resultados de la votación hasta ahora",
+      "deleteWarning": "¿Estás seguro de que quieres descartar la propuesta?",
+      "success": "La propuesta se ha eliminado correctamente",
+      "error": "Hubo un error al votar. Por favor, espera unos minutos y vuelve a intentarlo."
+    }
+
+  },
   "NEW-PROPOSAL": {
     "title": "Nueva propuesta",
     "texts": {
@@ -551,7 +580,10 @@
         "emailLabel": "Correo electrónico",
         "emailPlaceholder": "correo@gmail.com",
         "sharesLabel": "Participación",
-        "sharePlaceholder": "ej:5000"
+        "sharePlaceholder": "ej:5000",
+        "success": "Participante modificado correctamente",
+        "error": "Hubo un error con la propuesta. Por favor, espera unos minutos y vuelve a intentarlo."
+
       },
       "remove": {},
       "swal": {
@@ -581,7 +613,8 @@
       "noDataSaved": "No guardamos ningún dato relacionado con tus credenciales",
       "help": "Centro de ayuda",
       "logingIn": "Iniciando sesión.",
-      "wait": "Por favor, espera."
+      "wait": "Por favor, espera.",
+      "loginError": "No se pudo iniciar sesión"
     }
   },
   "LOGOUT": {
