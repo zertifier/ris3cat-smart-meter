@@ -37,7 +37,7 @@
         "consumer": "Consumidor",
         "producer": "Productor",
         "prosumer": "Prosumidor",
-        "community": "Comunitari"
+        "community": "Productor comunitari"
       }
     },
     "modals":{
@@ -48,7 +48,7 @@
   "MISSING-CUPS": {
     "texts": {
       "anyCupsAccess": "No tens accés a cap CUPS.",
-      "cupsAccessDescription": "Per a accedir a les gràfiques del teu consum, necessites donar-te d'alta o unir-te a la comunitat.",
+      "cupsAccessDescription": "Per accedir a les gràfiques del teu consum i producció, necessites donar d'alta un comptador o smartmeter i esperar a ser acceptat per entrar a la comunitat.",
       "registerCups":"Dona't d'alta"
     }
   },
@@ -101,8 +101,8 @@
       "anyAccess": "No tens accés a cap comunitat.",
       "accessDescription": "Per a accedir a la informació comunitària, necessites donar-te d'alta o unir-te a la comunitat.",
       "pendingCommunity": "La teva sol·licitud de la comunitat {{community}} està pendent de confirmació",
-      "register":"Dona't d'alta",
-      "join":"Uneix-te"
+      "register":"Crear una comunitat nova",
+      "join":"Uneix-te a una comunitat"
     }
   },
   "MY-COMMUNITY": {
@@ -201,8 +201,8 @@
         "monthly": "Mensual",
         "yearly": "Anual"
       },
-      "prosumersSelectorTitle":"Excloure prosumidors",
-      "prosumersSelectorText":"Selecciona prosumidors",
+      "prosumersSelectorTitle":"Excloure productors comunitaris",
+      "prosumersSelectorText":"Selecciona",
       "noDisplay": "Res a mostrar",
       "chartDataInputText": "Tria un mes/any per veure el consum",
       "chartBottomText": "· Coneix la despesa d'energia al detall fent clic en cada tipus de consum. La gràfica mostrarà la informació de consum individualitzada.",
