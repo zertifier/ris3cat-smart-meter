@@ -197,9 +197,9 @@ export class MyCupsPageComponent implements OnInit, OnDestroy {
           const surplusDistribution = this.userStore.snapshotOnly(state => state.surplusDistribution) / 100;
           const { production, buy, inHouse, sell } = value;
           this.powerFlow.set({
-            buy: buy * surplusDistribution / 1000,
+            buy: buy * surplusDistribution ,
             inHouse: 0,
-            production: production * surplusDistribution / 1000,
+            production: production * surplusDistribution ,
             sell: 0,
           })
         })
