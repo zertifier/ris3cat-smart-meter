@@ -36,6 +36,7 @@ export class MonitoringService {
     if (this.interval) {
       return;
     }
+    // this.resetFlow()
 
     this.updatePowerFlow(type, cupsReference).then(() => console.log('first powerflow updated'));
 
@@ -59,6 +60,7 @@ export class MonitoringService {
 
   stop() {
     clearInterval(this.interval);
+    this.interval = undefined
   }
 
   private async updatePowerFlow(type: string = 'datadis', cupsReference: string = '') {
@@ -102,5 +104,14 @@ export class MonitoringService {
 
     this.monitoringStoreService.patchState({lastPowerFlowUpdate: new Date()})
     return response;
+  }
+
+  resetFlow() {
+    this.powerFlow.next({
+      buy: 0,
+      inHouse: 0,
+      production: 0,
+      sell: 0,
+    })
   }
 }

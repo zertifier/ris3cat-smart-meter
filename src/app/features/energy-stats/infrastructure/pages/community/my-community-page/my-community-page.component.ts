@@ -1,41 +1,24 @@
-import {Component, computed, isDevMode, OnDestroy, OnInit, signal, ViewChild} from '@angular/core';
+import {Component, computed, isDevMode, OnDestroy, OnInit, signal} from '@angular/core';
 import {ChartModule} from "primeng/chart";
 import {MonitoringService, PowerStats} from "../../../services/monitoring.service";
 import {map, Subscription} from "rxjs";
-import {AsyncPipe, JsonPipe, NgClass, NgIf, NgStyle} from "@angular/common";
+import {AsyncPipe, NgIf} from "@angular/common";
 import {StatsColors} from "../../../../domain/StatsColors";
-import {
-  NgbModal,
-  NgbNav,
-  NgbNavContent,
-  NgbNavItem,
-  NgbNavLinkButton,
-  NgbNavOutlet,
-  NgbTooltip
-} from "@ng-bootstrap/ng-bootstrap";
+import {NgbModal, NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
 
 import {CalendarModule} from "primeng/calendar";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import dayjs from "@shared/utils/dayjs";
 import {AuthStoreService} from "../../../../../auth/infrastructure/services/auth-store.service";
 import {StatDisplayComponent} from "../../../components/realtime/stat-display/stat-display.component";
-import {ChartLegendComponent} from "../../../components/historic/chart-legend/chart-legend.component";
-import {DataChartComponent} from "../../../components/historic/data-chart/data-chart.component";
-import {
-  ConsumptionItem,
-  ConsumptionItemsComponent
-} from "../../../components/realtime/consumption-items/consumption-items.component";
+import {ConsumptionItem} from "../../../components/realtime/consumption-items/consumption-items.component";
 import {HistoricChartComponent} from "../../../components/historic/historic-chart/historic-chart.component";
 import {UserStoreService} from "../../../../../user/infrastructure/services/user-store.service";
 import {NavbarComponent} from "@shared/infrastructure/components/navbar/navbar.component";
 import {FooterComponent} from "@shared/infrastructure/components/footer/footer.component";
 import {MonitoringStoreService} from "../../../services/monitoring-store.service";
-import {getMonth, getMonthTranslated} from "@shared/utils/DatesUtils";
+import {getMonthTranslated} from "@shared/utils/DatesUtils";
 import {KnobModule} from "primeng/knob";
-import {PowerflowGausComponent} from "../../../components/powerflow-gaus/powerflow-gaus.component";
-import {
-  EnergyPredictionChartComponent
-} from "../../../components/metereologic-prediction/metereologic-chart/energy-prediction-chart.component";
 import {
   MetereologicPredictionComponent
 } from "../../../components/metereologic-prediction/metereologic-prediction.component";
@@ -46,7 +29,7 @@ import {
   CommunityResponse,
   TradeTypes
 } from '../../../../../../shared/infrastructure/services/zertipower/communities/ZertipowerCommunitiesService';
-import { ZertipowerService } from '../../../../../../shared/infrastructure/services/zertipower/zertipower.service';
+import {ZertipowerService} from '../../../../../../shared/infrastructure/services/zertipower/zertipower.service';
 import {
   CommunityModalComponent
 } from "@features/energy-stats/infrastructure/pages/community/my-community-page/community-modal/community-modal.component";
@@ -58,27 +41,14 @@ import {ChartResource} from "@features/energy-stats/domain/ChartResource";
   imports: [
     NavbarComponent,
     ChartModule,
-    JsonPipe,
-    NgStyle,
     StatDisplayComponent,
-    NgbNavOutlet,
-    NgbNav,
-    NgbNavItem,
-    NgbNavLinkButton,
-    NgbNavContent,
-    ChartLegendComponent,
-    DataChartComponent,
-    ConsumptionItemsComponent,
     FooterComponent,
-    NgClass,
     CalendarModule,
     ReactiveFormsModule,
     HistoricChartComponent,
     AsyncPipe,
     KnobModule,
     FormsModule,
-    PowerflowGausComponent,
-    EnergyPredictionChartComponent,
     MetereologicPredictionComponent,
     EnergyPredictionComponent,
     TranslocoDirective,
@@ -139,16 +109,16 @@ export class MyCommunityPageComponent implements OnInit, OnDestroy {
       if (!value) {
         return '';
       }
-      const month = getMonthTranslated(this.translocoService,value.getMonth());
+      const month = getMonthTranslated(this.translocoService, value.getMonth());
       return dayjs(value).format(`HH:mm:ss - DD [${month}] YYYY`);
     }));
   protected readonly StatsColors = StatsColors;
 
-  communityData!:CommunityResponse | any;
-  communityId$ = this.userStore.selectOnly(this.userStore.$.communityId).subscribe(async (communityId:any)=>{
+  communityData!: CommunityResponse | any;
+  communityId$ = this.userStore.selectOnly(this.userStore.$.communityId).subscribe(async (communityId: any) => {
     this.communityData = await this.zertipowerService.communities.getCommunityById(communityId);
     //console.log("ep", this.communityData)
-   // await this.historicChart.setCommunityData(this.communityData).then((res)=>console.log(res))
+    // await this.historicChart.setCommunityData(this.communityData).then((res)=>console.log(res))
 
   });
 
@@ -158,7 +128,7 @@ export class MyCommunityPageComponent implements OnInit, OnDestroy {
     private readonly userStore: UserStoreService,
     private readonly monitoringStore: MonitoringStoreService,
     private readonly translocoService: TranslocoService,
-    private readonly zertipowerService:ZertipowerService,
+    private readonly zertipowerService: ZertipowerService,
     private readonly ngbModal: NgbModal,
   ) {
   }
@@ -187,12 +157,8 @@ export class MyCommunityPageComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnDestroy(): void {
-    this.subscriptions.forEach(s => s.unsubscribe())
-  }
-
-  openEditModal(){
-    const modalRef = this.ngbModal.open(CommunityModalComponent, { size: 'lg' })
+  openEditModal() {
+    const modalRef = this.ngbModal.open(CommunityModalComponent, {size: 'lg'})
     modalRef.componentInstance.community = this.communityData
 
     this.subscriptions.push(
@@ -202,10 +168,12 @@ export class MyCommunityPageComponent implements OnInit, OnDestroy {
     )
   }
 
-  getTradeTypeTranslation(type: TradeTypes){
-    switch (type){
-      case 'PREFERRED': return this.translocoService.translate('MY-COMMUNITY.texts.tradeTypePref')
-      case 'EQUITABLE': return this.translocoService.translate('MY-COMMUNITY.texts.tradeTypeEqui')
+  getTradeTypeTranslation(type: TradeTypes) {
+    switch (type) {
+      case 'PREFERRED':
+        return this.translocoService.translate('MY-COMMUNITY.texts.tradeTypePref')
+      case 'EQUITABLE':
+        return this.translocoService.translate('MY-COMMUNITY.texts.tradeTypeEqui')
     }
   }
 
@@ -213,7 +181,13 @@ export class MyCommunityPageComponent implements OnInit, OnDestroy {
     return typeof value === 'number' && !isNaN(value);
   }
 
+  ngOnDestroy(): void {
+    this.monitoringService.stop()
+    this.monitoringService.resetFlow()
+    this.subscriptions.forEach(s => s.unsubscribe())
+  }
+
   isDevMode = isDevMode;
   protected readonly environment = environment;
-    protected readonly ChartResource = ChartResource;
+  protected readonly ChartResource = ChartResource;
 }

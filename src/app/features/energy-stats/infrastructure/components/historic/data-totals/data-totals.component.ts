@@ -93,18 +93,11 @@ export class DataTotalsComponent implements OnDestroy, AfterViewInit {
 
   loadChart() {
     if (this.chartElement ) {
-      console.log({
-        totals: this.totalSurplusVirtual,
-        surplus: this.totalSurplus,
-      })
-
       const sharedPercentage = 100 - (this.totalSurplus ? (this.totalSurplusVirtual * 100) / this.totalSurplus : 100)
-      console.log({sharedPercentage})
       // if (!this.totalSurplus && !sharedPercentage) {
       //   this.displayChart = false
       //   return
       // }
-      console.log({datasets: this.datasets})
 
       this.setChartData(sharedPercentage)
       this.destroyChart()

@@ -1,45 +1,40 @@
-import { Component, computed, OnDestroy, OnInit, signal } from '@angular/core';
-import { ChartModule } from "primeng/chart";
-import { AsyncPipe, CommonModule, JsonPipe, NgStyle } from "@angular/common";
-import { MonitoringService, PowerStats } from "../../../services/monitoring.service";
-import { StatsColors } from "../../../../domain/StatsColors";
-import { CalendarModule } from "primeng/calendar";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { ChartLegendComponent } from "../../../components/historic/chart-legend/chart-legend.component";
-import { DataChartComponent } from "../../../components/historic/data-chart/data-chart.component";
-import { StatDisplayComponent } from "../../../components/realtime/stat-display/stat-display.component";
+import {Component, computed, OnDestroy, OnInit, signal} from '@angular/core';
+import {ChartModule} from "primeng/chart";
+import {AsyncPipe, CommonModule} from "@angular/common";
+import {MonitoringService, PowerStats} from "../../../services/monitoring.service";
+import {StatsColors} from "../../../../domain/StatsColors";
+import {CalendarModule} from "primeng/calendar";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {StatDisplayComponent} from "../../../components/realtime/stat-display/stat-display.component";
 import {
   ConsumptionItem,
   ConsumptionItemsComponent
 } from "../../../components/realtime/consumption-items/consumption-items.component";
-import { HistoricChartComponent } from "../../../components/historic/historic-chart/historic-chart.component";
-import { map, Subscription } from "rxjs";
-import { NavbarComponent } from "@shared/infrastructure/components/navbar/navbar.component";
-import { FooterComponent } from "@shared/infrastructure/components/footer/footer.component";
-import { QuestionBadgeComponent } from "@shared/infrastructure/components/question-badge/question-badge.component";
-import { MonitoringStoreService } from "../../../services/monitoring-store.service";
-import { getMonth, getMonthTranslated } from "@shared/utils/DatesUtils";
+import {HistoricChartComponent} from "../../../components/historic/historic-chart/historic-chart.component";
+import {map, Subscription} from "rxjs";
+import {NavbarComponent} from "@shared/infrastructure/components/navbar/navbar.component";
+import {FooterComponent} from "@shared/infrastructure/components/footer/footer.component";
+import {QuestionBadgeComponent} from "@shared/infrastructure/components/question-badge/question-badge.component";
+import {MonitoringStoreService} from "../../../services/monitoring-store.service";
+import {getMonthTranslated} from "@shared/utils/DatesUtils";
 import dayjs from "@shared/utils/dayjs";
-import { KnobModule } from "primeng/knob";
-import { PowerflowGausComponent } from "../../../components/powerflow-gaus/powerflow-gaus.component";
+import {KnobModule} from "primeng/knob";
 import {NgbModal, NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
-import { SelectCupsService } from "../../../../actions/select-cups.service";
-import { CupsModalComponent } from "./cups-modal/cups-modal.component";
-import { environment } from "@environments/environment";
-import { EnergyPredictionComponent } from "../../../components/energy-prediction/energy-prediction.component";
+import {SelectCupsService} from "../../../../actions/select-cups.service";
+import {CupsModalComponent} from "./cups-modal/cups-modal.component";
+import {environment} from "@environments/environment";
 import {
   MetereologicPredictionComponent
 } from "../../../components/metereologic-prediction/metereologic-prediction.component";
-import { TranslocoDirective, TranslocoPipe, TranslocoService } from "@jsverse/transloco";
-import { LanguageComponent } from "@core/layouts/language/language.component";
-import { state } from "@angular/animations";
+import {TranslocoDirective, TranslocoService} from "@jsverse/transloco";
+import {LanguageComponent} from "@core/layouts/language/language.component";
 import _default from "chart.js/dist/core/core.interaction";
-import index = _default.modes.index;
-import { CommunityResponse, ZertipowerCommunitiesService } from '../../../../../../shared/infrastructure/services/zertipower/communities/ZertipowerCommunitiesService';
-import { ZertipowerService } from '../../../../../../shared/infrastructure/services/zertipower/zertipower.service';
-import { switchChartEntityGuard } from '../../../guards/switch-chart-entity.guard';
-import { ChartEntity } from '../../../../domain/ChartEntity';
-import { ChartStoreService } from '../../../services/chart-store.service';
+import {
+  CommunityResponse
+} from '../../../../../../shared/infrastructure/services/zertipower/communities/ZertipowerCommunitiesService';
+import {ZertipowerService} from '../../../../../../shared/infrastructure/services/zertipower/zertipower.service';
+import {ChartEntity} from '../../../../domain/ChartEntity';
+import {ChartStoreService} from '../../../services/chart-store.service';
 import {UpdateUserCupsAction} from "../../../../../user/actions/update-user-cups-action.service";
 import {UserCups, UserStoreService} from "../../../../../user/infrastructure/services/user-store.service";
 
@@ -50,9 +45,6 @@ import {UserCups, UserStoreService} from "../../../../../user/infrastructure/ser
   imports: [
     NavbarComponent,
     ChartModule,
-    JsonPipe,
-    ChartLegendComponent,
-    DataChartComponent,
     StatDisplayComponent,
     ConsumptionItemsComponent,
     FooterComponent,
@@ -62,12 +54,8 @@ import {UserCups, UserStoreService} from "../../../../../user/infrastructure/ser
     AsyncPipe,
     QuestionBadgeComponent,
     KnobModule,
-    NgStyle,
     FormsModule,
-    PowerflowGausComponent,
-    EnergyPredictionComponent,
     MetereologicPredictionComponent,
-    TranslocoPipe,
     TranslocoDirective,
     LanguageComponent,
     CommonModule,
@@ -118,7 +106,7 @@ export class MyCupsPageComponent implements OnInit, OnDestroy {
       icon: 'fa-solid fa-car',
     },
   ];
-  readonly powerFlow = signal<PowerStats>({ production: 0, buy: 0, inHouse: 0, sell: 0 })
+  readonly powerFlow = signal<PowerStats>({production: 0, buy: 0, inHouse: 0, sell: 0})
   readonly knobValue = computed(() => {
     const consumptionRatio = (this.powerFlow().sell * 100) / this.powerFlow().production;
     if (isNaN(consumptionRatio)) {
@@ -131,7 +119,7 @@ export class MyCupsPageComponent implements OnInit, OnDestroy {
   cupsReference$ = this.userStore.selectOnly(this.userStore.$.cupsReference);
   communityData!: CommunityResponse | any;
   communityId$ = this.userStore.selectOnly(this.userStore.$.communityId).subscribe(async (communityId: any) => {
-    if(communityId){
+    if (communityId) {
       this.communityData = await this.zertipowerService.communities.getCommunityById(communityId)
     }
   });
@@ -154,21 +142,22 @@ export class MyCupsPageComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit(): Promise<void> {
-
     const selectedCups = this.getSelectedCups()
+
 
     this.subscriptions.push(
       this.selectedCupsIndex$.subscribe(index => {
         this.selectCupsAction.run(index);
       }),
       selectedCups.subscribe((selectedCup: UserCups | undefined) => {
+
         if (selectedCup && selectedCup.origin == 'datadis') this.startDatadisPowerflow()
         if (selectedCup && selectedCup.origin == 'shelly') this.startShellyPowerflow(selectedCup.cupsCode)
       })
     )
   }
 
-  async startDatadisPowerflow(){
+  async startDatadisPowerflow() {
     await this.monitoringService.start();
 
     this.subscriptions.push(
@@ -176,7 +165,7 @@ export class MyCupsPageComponent implements OnInit, OnDestroy {
         .getPowerFlow()
         .subscribe(value => {
           const surplusDistribution = this.userStore.snapshotOnly(state => state.surplusDistribution) / 100;
-          const { production, buy, inHouse, sell } = value;
+          const {production, buy, inHouse, sell} = value;
           this.powerFlow.set({
             buy: buy * surplusDistribution / 1000,
             inHouse: inHouse * surplusDistribution / 1000,
@@ -187,7 +176,7 @@ export class MyCupsPageComponent implements OnInit, OnDestroy {
     )
   }
 
-  async startShellyPowerflow(cupsReference: string = ''){
+  async startShellyPowerflow(cupsReference: string = '') {
     await this.monitoringService.start('shelly', cupsReference);
 
     this.subscriptions.push(
@@ -195,11 +184,11 @@ export class MyCupsPageComponent implements OnInit, OnDestroy {
         .getPowerFlow()
         .subscribe(value => {
           const surplusDistribution = this.userStore.snapshotOnly(state => state.surplusDistribution) / 100;
-          const { production, buy, inHouse, sell } = value;
+          const {production, buy, inHouse, sell} = value;
           this.powerFlow.set({
-            buy: buy * surplusDistribution ,
+            buy: buy * surplusDistribution,
             inHouse: 0,
-            production: production * surplusDistribution ,
+            production: production * surplusDistribution,
             sell: 0,
           })
         })
@@ -207,19 +196,20 @@ export class MyCupsPageComponent implements OnInit, OnDestroy {
 
 
   }
+
   selectCups(event: any) {
     const value: number = event.target.value;
-    if(value==-1){
+    if (value == -1) {
       // switchChartEntityGuard(ChartEntity.CUSTOMER);
       this.chartStoreService.patchState({selectedChartEntity: ChartEntity.CUSTOMERS});
       return;
     }
     this.chartStoreService.patchState({selectedChartEntity: ChartEntity.CUPS});
-    this.userStore.patchState({ selectedCupsIndex: value });
+    this.userStore.patchState({selectedCupsIndex: value});
   }
 
   openEditModal() {
-    const modalRef = this.ngbModal.open(CupsModalComponent, { size: 'lg' })
+    const modalRef = this.ngbModal.open(CupsModalComponent, {size: 'lg'})
 
     const selectedCupsIndex = this.userStore.snapshotOnly((state) => state.selectedCupsIndex)
     this.cups$.subscribe((cups) => {
@@ -242,7 +232,7 @@ export class MyCupsPageComponent implements OnInit, OnDestroy {
     );
   }
 
-  getSelectedCups(){
+  getSelectedCups() {
     return this.cups$.pipe(
       map(cups => {
         const selectedCupsIndex = this.userStore.snapshotOnly(state => state.selectedCupsIndex);
@@ -257,7 +247,18 @@ export class MyCupsPageComponent implements OnInit, OnDestroy {
 
   protected readonly environment = environment;
 
+  resetFlows() {
+    this.powerFlow.set({
+      buy: 0,
+      inHouse: 0,
+      production: 0,
+      sell: 0,
+    })
+  }
+
   ngOnDestroy(): void {
+    this.monitoringService.stop()
+    this.monitoringService.resetFlow()
     this.subscriptions.forEach(s => s.unsubscribe())
   }
 }
