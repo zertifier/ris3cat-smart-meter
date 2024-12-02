@@ -30,7 +30,8 @@ export class UpdateUserCupsAction {
             communityId: c.community_id,
             cupsCode: c.cups,
             surplusDistribution: parseFloat(c.surplus_distribution),
-            reference: c.reference || ''
+            reference: c.reference || '',
+            origin: c.origin
           }
         })
       })

@@ -23,7 +23,6 @@ import { getMonth, getMonthTranslated } from "@shared/utils/DatesUtils";
 import dayjs from "@shared/utils/dayjs";
 import { KnobModule } from "primeng/knob";
 import { PowerflowGausComponent } from "../../../components/powerflow-gaus/powerflow-gaus.component";
-import { UpdateUserCupsAction } from "@features/user/actions/update-user-cups-action.service";
 import {NgbModal, NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
 import { SelectCupsService } from "../../../../actions/select-cups.service";
 import { CupsModalComponent } from "./cups-modal/cups-modal.component";
@@ -42,6 +41,7 @@ import { ZertipowerService } from '../../../../../../shared/infrastructure/servi
 import { switchChartEntityGuard } from '../../../guards/switch-chart-entity.guard';
 import { ChartEntity } from '../../../../domain/ChartEntity';
 import { ChartStoreService } from '../../../services/chart-store.service';
+import {UpdateUserCupsAction} from "../../../../../user/actions/update-user-cups-action.service";
 
 
 @Component({
