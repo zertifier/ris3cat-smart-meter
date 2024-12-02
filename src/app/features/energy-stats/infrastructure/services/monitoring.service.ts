@@ -32,15 +32,18 @@ export class MonitoringService {
   ) {
   }
 
-  async start() {
+  async start(type: string = 'datadis', cupsReference: string = '') {
     if (this.interval) {
       return;
     }
-    this.updatePowerFlow().then(() => console.log('first powerflow updated'));
+
+    this.updatePowerFlow(type, cupsReference).then(() => console.log('first powerflow updated'));
 
     this.interval = setInterval(async () => {
-      await this.updatePowerFlow()
+      await this.updatePowerFlow(type, cupsReference)
     }, 60000);
+
+
   }
 
   getPowerFlow() {
@@ -58,9 +61,9 @@ export class MonitoringService {
     clearInterval(this.interval);
   }
 
-  private async updatePowerFlow() {
+  private async updatePowerFlow(type: string = 'datadis', cupsReference: string = '') {
     try {
-      const data = await this.fetchPowerFlow();
+      const data = type == 'datadis' ? await this.fetchDatadisPowerFlow() : await this.fetchShellyPowerFlow(cupsReference);
 
       const stats: PowerStats = {buy: 0, sell: 0, inHouse: 0, production: 0}
       stats.production = data.production
@@ -77,12 +80,24 @@ export class MonitoringService {
     }
   }
 
-  private async fetchPowerFlow(): Promise<{production: number, consumption: number, grid: number}> {
+  private async fetchDatadisPowerFlow(): Promise<{production: number, consumption: number, grid: number}> {
     const response = await firstValueFrom(this.httpClient.get<HttpResponse<{
       production: number,
       consumption: number,
       grid: number
     }>>(`${environment.api_url}/monitoring/powerflow/`)
+      .pipe(map(r => r.data)))
+
+    this.monitoringStoreService.patchState({lastPowerFlowUpdate: new Date()})
+    return response;
+  }
+
+  private async fetchShellyPowerFlow(cupsReference: string): Promise<{production: number, consumption: number, grid: number}> {
+    const response = await firstValueFrom(this.httpClient.get<HttpResponse<{
+      production: number,
+      consumption: number,
+      grid: number
+    }>>(`${environment.zertipower_url}/cups/${cupsReference}/monitoring`)
       .pipe(map(r => r.data)))
 
     this.monitoringStoreService.patchState({lastPowerFlowUpdate: new Date()})

@@ -31,6 +31,7 @@ export interface UserCups{
   communityId: number;
   surplusDistribution: number;
   reference?: string;
+  origin?: string;
 }
 
 const defaultValues: UserStore = {

@@ -5,7 +5,6 @@ import { MonitoringService, PowerStats } from "../../../services/monitoring.serv
 import { StatsColors } from "../../../../domain/StatsColors";
 import { CalendarModule } from "primeng/calendar";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { UserStoreService } from "@features/user/infrastructure/services/user-store.service";
 import { ChartLegendComponent } from "../../../components/historic/chart-legend/chart-legend.component";
 import { DataChartComponent } from "../../../components/historic/data-chart/data-chart.component";
 import { StatDisplayComponent } from "../../../components/realtime/stat-display/stat-display.component";
@@ -42,6 +41,7 @@ import { switchChartEntityGuard } from '../../../guards/switch-chart-entity.guar
 import { ChartEntity } from '../../../../domain/ChartEntity';
 import { ChartStoreService } from '../../../services/chart-store.service';
 import {UpdateUserCupsAction} from "../../../../../user/actions/update-user-cups-action.service";
+import {UserCups, UserStoreService} from "../../../../../user/infrastructure/services/user-store.service";
 
 
 @Component({
@@ -154,37 +154,59 @@ export class MyCupsPageComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit(): Promise<void> {
-    await this.monitoringService.start();
+
+    const selectedCups = this.getSelectedCups()
 
     this.subscriptions.push(
       this.selectedCupsIndex$.subscribe(index => {
         this.selectCupsAction.run(index);
       }),
+      selectedCups.subscribe((selectedCup: UserCups | undefined) => {
+        if (selectedCup && selectedCup.origin == 'datadis') this.startDatadisPowerflow()
+        if (selectedCup && selectedCup.origin == 'shelly') this.startShellyPowerflow(selectedCup.cupsCode)
+      })
+    )
+  }
+
+  async startDatadisPowerflow(){
+    await this.monitoringService.start();
+
+    this.subscriptions.push(
       this.monitoringService
         .getPowerFlow()
         .subscribe(value => {
           const surplusDistribution = this.userStore.snapshotOnly(state => state.surplusDistribution) / 100;
           const { production, buy, inHouse, sell } = value;
           this.powerFlow.set({
-            production: production * surplusDistribution / 1000,
-            inHouse: inHouse * surplusDistribution / 1000,
             buy: buy * surplusDistribution / 1000,
+            inHouse: inHouse * surplusDistribution / 1000,
+            production: production * surplusDistribution / 1000,
             sell: sell * surplusDistribution / 1000,
           })
+        })
+    )
+  }
 
-          // this.powerFlow.set({
-          //   production: 0,
-          //   sell: 0,
-          //   inHouse: 0,
-          //   buy: 0,
-          // })
+  async startShellyPowerflow(cupsReference: string = ''){
+    await this.monitoringService.start('shelly', cupsReference);
+
+    this.subscriptions.push(
+      this.monitoringService
+        .getPowerFlow()
+        .subscribe(value => {
+          const surplusDistribution = this.userStore.snapshotOnly(state => state.surplusDistribution) / 100;
+          const { production, buy, inHouse, sell } = value;
+          this.powerFlow.set({
+            buy: buy * surplusDistribution / 1000,
+            inHouse: 0,
+            production: production * surplusDistribution / 1000,
+            sell: 0,
+          })
         })
     )
 
-    //this.communitiesService.get
 
   }
-
   selectCups(event: any) {
     const value: number = event.target.value;
     if(value==-1){
@@ -216,6 +238,15 @@ export class MyCupsPageComponent implements OnInit, OnDestroy {
       map(cups => {
         const selectedCupsIndex = this.userStore.snapshotOnly(state => state.selectedCupsIndex);
         return cups[selectedCupsIndex]?.cupsCode || '-';
+      })
+    );
+  }
+
+  getSelectedCups(){
+    return this.cups$.pipe(
+      map(cups => {
+        const selectedCupsIndex = this.userStore.snapshotOnly(state => state.selectedCupsIndex);
+        return cups[selectedCupsIndex] || undefined;
       })
     );
   }
