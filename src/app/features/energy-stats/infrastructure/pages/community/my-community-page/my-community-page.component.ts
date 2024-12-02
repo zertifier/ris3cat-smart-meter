@@ -2,7 +2,7 @@ import {Component, computed, isDevMode, OnDestroy, OnInit, signal} from '@angula
 import {ChartModule} from "primeng/chart";
 import {MonitoringService, PowerStats} from "../../../services/monitoring.service";
 import {map, Subscription} from "rxjs";
-import {AsyncPipe, NgIf} from "@angular/common";
+import {AsyncPipe, JsonPipe, NgIf} from "@angular/common";
 import {StatsColors} from "../../../../domain/StatsColors";
 import {NgbModal, NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
 
@@ -53,7 +53,8 @@ import {ChartResource} from "@features/energy-stats/domain/ChartResource";
     EnergyPredictionComponent,
     TranslocoDirective,
     NgIf,
-    NgbTooltip
+    NgbTooltip,
+    JsonPipe
   ],
   templateUrl: './my-community-page.component.html',
   styleUrl: './my-community-page.component.scss'
