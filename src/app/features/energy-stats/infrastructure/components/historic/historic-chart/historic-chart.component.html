@@ -1,19 +1,19 @@
 <ng-container *transloco="let t; prefix: 'HISTORIC-CHART'">
   <h4 class="text-center mb-5">{{ t('title') }}</h4>
 
-  <div class="row justify-content-evenly mb-3">
-    <div class="col-12 col-lg-4">
+  <div class="row mb-3">
+    <!--<div class="col-12 col-lg-4">
       <p class="subtitle">{{ t('texts.dataType.title') }}</p>
       <select class="form-select w-100 bg-white" readonly (change)="setChartResource($event)"
         [disabled]="chartStoreService.isLoading$ | async">
         <option [value]="ChartResource.ENERGY" [selected]="(chartResource$ | async) === ChartResource.ENERGY">
           {{ t('texts.dataType.types.energy') }}
         </option>
-        <!-- @if(chartType=='cups'){ -->
+        &lt;!&ndash; @if(chartType=='cups'){ &ndash;&gt;
 
-        <!-- } -->
+        &lt;!&ndash; } &ndash;&gt;
       </select>
-    </div>
+    </div>-->
 
     <div class="col-12 col-lg-4">
       <p class="subtitle">{{ t('texts.communityModel.title') }}

@@ -52,6 +52,9 @@
       "registerCups": "Darte de alta"
     }
   },
+  "CALCULATOR": {
+    "navbar": "Calculadora"
+  },
   "MY-CUPS": {
     "navbar": "Contadores",
     "title": "Consumo y producción",
@@ -216,7 +219,7 @@
           "production": "Producción total"
         },
         "productionActive": "Producción activos",
-        "networkConsumption": "Consumo de la red",
+        "networkConsumption": "Consumo de la compañía",
         "networkActiveConsumption": "Consumo de la red activos",
         "surplus": "Excedente",
         "surplusActive": "Excedente activos",
@@ -233,7 +236,7 @@
         "totalActiveMembers": "Miembros activos: {{total}}",
         "totalShared": "Total compartido",
         "shared": "Compartido",
-        "notShared": "No compartido"
+        "notShared": "Disponible"
       },
       "displayLegend": "Mostrar la leyenda",
       "maximize": "Ampliar",

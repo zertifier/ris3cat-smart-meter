@@ -118,7 +118,6 @@ export class MyCommunityPageComponent implements OnInit, OnDestroy {
   communityData!: CommunityResponse | any;
   communityId$ = this.userStore.selectOnly(this.userStore.$.communityId).subscribe(async (communityId: any) => {
     this.communityData = await this.zertipowerService.communities.getCommunityById(communityId);
-    //console.log("ep", this.communityData)
     // await this.historicChart.setCommunityData(this.communityData).then((res)=>console.log(res))
 
   });

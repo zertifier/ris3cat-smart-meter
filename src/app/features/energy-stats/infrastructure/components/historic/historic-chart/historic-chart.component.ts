@@ -55,8 +55,8 @@ export class HistoricChartComponent implements AfterViewInit, OnDestroy{
   origin$ = this.chartStoreService.selectOnly(state => state.origin)
   maxDate = new Date();
   chartType$ = this.chartStoreService.selectOnly(state => state.chartType);
-  
-  
+
+
 
   calendarView$ = this.chartStoreService.selectOnly(state => {
     this.chartStoreService.setDate(state.date)
@@ -108,7 +108,7 @@ export class HistoricChartComponent implements AfterViewInit, OnDestroy{
     itemsShowLimit: 3,
     allowSearchFilter: true
   };
-  
+
   constructor(
     private readonly monitoringService: MonitoringService,
     public readonly chartStoreService: ChartStoreService,

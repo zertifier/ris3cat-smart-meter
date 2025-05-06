@@ -15,8 +15,8 @@ import {UserCupsChangedEvent} from "@features/user/domain/UserCupsChangedEvent";
 import {
   ValidationHintComponent
 } from "@shared/infrastructure/components/validation-hint/validation-hint.component";
-import {nifValidator} from "@shared/infrastructure/form-validators/nif-validator";
 import { TranslocoService, TranslocoDirective } from '@jsverse/transloco';
+import {nifValidator} from "../../../../../shared/infrastructure/form-validators/nif-validator";
 
 @Component({
   selector: 'app-datadis-register-form',

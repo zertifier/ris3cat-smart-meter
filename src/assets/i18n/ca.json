@@ -52,6 +52,9 @@
       "registerCups":"Dona't d'alta"
     }
   },
+  "CALCULATOR": {
+    "navbar": "Calculadora"
+  },
   "MY-CUPS": {
     "navbar": "Comptadors",
     "title": "Consum i producció",
@@ -212,27 +215,27 @@
         "CO2Savings": "Estalvi en CO2",
         "production": "Producció",
         "community": {
-          "production": "Producció total"
+          "production": "Producció"
         },
         "productionActive": "Producció membres donats d'alta",
-        "networkConsumption": "Consum de la xarxa",
-        "networkActiveConsumption": "Consum de la xarxa membres donats d'alta",
+        "networkConsumption": "Consum de la companyia",
+        "networkActiveConsumption": "Consum",
         "surplus": "Excedent",
-        "surplusActive": "Excedent membres donats d'alta",
-        "surplusActiveShared": "Excedent membres donats d'alta per compartir",
+        "surplusActive": "Excedent",
+        "surplusActiveShared": "Excedent per compartir",
         "totalProduction": "Total producció",
-        "totalActiveProduction": "Total producció membres donats d'alta",
+        "totalActiveProduction": "Total producció activa",
         "totalConsumption": "Total consum",
-        "totalActiveConsumption": "Total consum membres donats d'alta",
+        "totalActiveConsumption": "Total consum",
         "totalSurplus": "Total excedent",
-        "totalActiveSurplus": "Total excedent membres donats d'alta",
+        "totalActiveSurplus": "Total excedent",
         "totalCo2": "Reducció de la petjada de carboni",
         "totalCo2Badge": "El CO2 compensat es calcula a partir de la producció.",
         "totalMembers": "Total membres: {{total}}",
-        "totalActiveMembers": "Membres membres donats d'alta: {{total}}",
+        "totalActiveMembers": "Membres donats d'alta: {{total}}",
         "totalShared": "Total compartit",
         "shared": "Compartit",
-        "notShared": "No compartit"
+        "notShared": "Disponible"
       },
       "displayLegend": "Mostrar la llegenda",
       "maximize": "Ampliar",
@@ -243,11 +246,11 @@
         "community": {
           "CO2Savings": "Tones de co2 estalviades",
           "production": "Producció total de la comunitat.",
-          "activeProduction": "Producció dels participants donats d'alta",
+          "activeProduction": "Producció dels participants.",
           "networkConsumption": "Consum que facturarà la companyia elèctrica.",
-          "networkActiveConsumption": "Consum dels participants donats d'alta",
-          "surplusActive": "Quantitat d’energia que es produeix i no es consumeix dels participans donats d'alta.",
-          "sharedSurplusActive": "Quantitat d’energia per compartir que es produeix i no es consumeix dels participans donats d'alta."
+          "networkActiveConsumption": "Consum dels participants.",
+          "surplusActive": "Quantitat d’energia que es produeix i no es consumeix dels participans.",
+          "sharedSurplusActive": "Quantitat d’energia per compartir que es produeix i no es consumeix dels participans."
         },
         "cups": {
           "CO2Savings": "Tones de co2 estalviades.",

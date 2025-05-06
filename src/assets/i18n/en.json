@@ -52,6 +52,9 @@
       "registerCups": "Register"
     }
   },
+  "CALCULATOR": {
+    "navbar": "Calculator"
+  },
   "MY-CUPS": {
     "navbar": "Counters",
     "title": "Consumption and production",
@@ -233,7 +236,7 @@
         "totalActiveMembers": "Active members: {{total}}",
         "totalShared": "Total shared",
         "shared": "Shared",
-        "notShared": "Not shared"
+        "notShared": "Available"
       },
       "displayLegend": "Show legend",
       "maximize": "Maximize",
