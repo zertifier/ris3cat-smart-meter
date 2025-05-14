@@ -59,6 +59,9 @@ dependencies:
   angularx-qrcode:
     specifier: 18.0.1
     version: 18.0.1(@angular/core@17.2.4)
+  animate.css:
+    specifier: 4.1.1
+    version: 4.1.1
   axios:
     specifier: 1.6.8
     version: 1.6.8
@@ -3611,6 +3614,10 @@ packages:
       '@angular/core': 17.2.4(rxjs@7.8.1)(zone.js@0.14.4)
       qrcode: 1.5.3
       tslib: 2.6.2
+    dev: false
+
+  /animate.css@4.1.1:
+    resolution: {integrity: sha512-+mRmCTv6SbCmtYJCN4faJMNFVNN5EuCTTprDTAo7YzIGji2KADmakjVA3+8mVDkZ2Bf09vayB35lSQIex2+QaQ==}
     dev: false
 
   /ansi-colors@4.1.3:

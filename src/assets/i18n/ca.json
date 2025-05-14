@@ -31,7 +31,14 @@
       "password":"Contrasenya",
       "invalidPassword":"Contrassenya no vàlida",
       "invalidCups":"CUPS no vàlid",
-      "addData":"Afegir dades"
+      "addData":"Afegir dades",
+      "type": "Tipus",
+      "types": {
+        "consumer": "Consumidor",
+        "producer": "Productor",
+        "prosumer": "Prosumidor",
+        "community": "Productor comunitari"
+      }
     },
     "modals":{
       "errorText":"Hi ha hagut un error",
@@ -41,9 +48,12 @@
   "MISSING-CUPS": {
     "texts": {
       "anyCupsAccess": "No tens accés a cap CUPS.",
-      "cupsAccessDescription": "Per a accedir a les gràfiques del teu consum, necessites donar-te d'alta o unir-te a la comunitat.",
+      "cupsAccessDescription": "Per accedir a les gràfiques del teu consum i producció, necessites donar d'alta un comptador o smartmeter i esperar a ser acceptat per entrar a la comunitat.",
       "registerCups":"Dona't d'alta"
     }
+  },
+  "CALCULATOR": {
+    "navbar": "Calculadora"
   },
   "MY-CUPS": {
     "navbar": "Comptadors",
@@ -66,7 +76,10 @@
       "buyingPrice": "Preu de compra",
       "sellingPrice": "Preu de venda",
       "unavailable": "No disponible",
-      "allCups": "Tots els CUPS"
+      "allCups": "Tots els CUPS",
+      "availableSurplus": "Excedent disponible particular",
+      "communitySurplus": "Excedent disponible comunitari",
+      "unavailableSurplus": "Excedent no disponible"
     },
     "tooltips": {
       "assignedProd": "El percentatge de l'energia produïda que se li assigna a aquest CUPS"
@@ -76,7 +89,9 @@
         "title": "Canviar el nom del CUPS",
         "texts": {
           "nameLabel": "Nom del CUPS",
-          "namePlaceholder": "Per exemple: Garatge"
+          "namePlaceholder": "Per exemple: Garatge",
+          "success": "Les dades s'han guardat amb èxit",
+          "error": "Les dades no s'han pogut guardar."
         }
       },
       "addCups": {
@@ -87,14 +102,16 @@
   "MISSING-COMMUNITY": {
     "texts": {
       "anyAccess": "No tens accés a cap comunitat.",
-      "accessDescription": "Per a accedir a a la informació comunitària, necessites donar-te d'alta o unir-te a la comunitat.",
-      "register":"Dona't d'alta",
-      "join":"Uneix-te"
+      "accessDescription": "Per a accedir a la informació comunitària, necessites donar-te d'alta o unir-te a la comunitat.",
+      "pendingCommunity": "La teva sol·licitud de la comunitat {{community}} està pendent de confirmació",
+      "register":"Crear una comunitat nova",
+      "join":"Uneix-te a una comunitat"
     }
   },
   "MY-COMMUNITY": {
-    "navbar": "Comunitat",
+    "navbar": "Agregació",
     "title": "Consum i producció",
+    "subtitle": "Recurs energètic distribuït",
     "texts": {
       "info": "Informació",
       "communityPrices": "Preus comunitaris",
@@ -137,6 +154,26 @@
           "success": "Comunitat modificada correctament",
           "error": "Hi ha hagut un error guardant la comunitat. Torna-ho a intentar d'aqui una estona"
         }
+      },
+      "joinCommunity": {
+        "title": "Uneix-te a una comunitat",
+        "texts": {
+          "municipally": "Municipi",
+          "community": "Comunitat",
+          "noCommunity": "Ep! No hi ha cap comunitat disponible a aquest municipi",
+          "successJoining": "S'ha enviat una petició per unir-se a una comunitat correctament",
+          "errorJoining": "Hi ha hagut un error enviat la petició"
+        }
+      },
+      "addCommunity": {
+        "title": "Afageix una comunitat",
+        "texts": {
+          "location": "Localitat",
+          "undefined": "No definida",
+          "communityName": "Nom de la comunitat",
+          "successCreating": "Comunitat creada correctament",
+          "errorCreating": "Hi ha hagut un error creant la comunitat"
+        }
       }
     }
   },
@@ -168,8 +205,8 @@
         "monthly": "Mensual",
         "yearly": "Anual"
       },
-      "prosumersSelectorTitle":"Excloure prosumidors",
-      "prosumersSelectorText":"Selecciona prosumidors",
+      "prosumersSelectorTitle":"Excloure productors comunitaris",
+      "prosumersSelectorText":"Selecciona",
       "noDisplay": "Res a mostrar",
       "chartDataInputText": "Tria un mes/any per veure el consum",
       "chartBottomText": "· Coneix la despesa d'energia al detall fent clic en cada tipus de consum. La gràfica mostrarà la informació de consum individualitzada.",
@@ -179,27 +216,27 @@
         "CO2Savings": "Estalvi en CO2",
         "production": "Producció",
         "community": {
-          "production": "Producció total"
+          "production": "Producció"
         },
         "productionActive": "Producció membres donats d'alta",
-        "networkConsumption": "Consum de la xarxa",
-        "networkActiveConsumption": "Consum de la xarxa membres donats d'alta",
+        "networkConsumption": "Consum de la companyia",
+        "networkActiveConsumption": "Consum",
         "surplus": "Excedent",
-        "surplusActive": "Excedent membres donats d'alta",
-        "surplusActiveShared": "Excedent membres donats d'alta per compartir",
+        "surplusActive": "Excedent",
+        "surplusActiveShared": "Excedent per compartir",
         "totalProduction": "Total producció",
-        "totalActiveProduction": "Total producció membres donats d'alta",
+        "totalActiveProduction": "Total producció activa",
         "totalConsumption": "Total consum",
-        "totalActiveConsumption": "Total consum membres donats d'alta",
+        "totalActiveConsumption": "Total consum",
         "totalSurplus": "Total excedent",
-        "totalActiveSurplus": "Total excedent membres donats d'alta",
+        "totalActiveSurplus": "Total excedent",
         "totalCo2": "Reducció de la petjada de carboni",
         "totalCo2Badge": "El CO2 compensat es calcula a partir de la producció.",
         "totalMembers": "Total membres: {{total}}",
-        "totalActiveMembers": "Membres membres donats d'alta: {{total}}",
+        "totalActiveMembers": "Membres donats d'alta: {{total}}",
         "totalShared": "Total compartit",
         "shared": "Compartit",
-        "notShared": "No compartit"
+        "notShared": "Disponible"
       },
       "displayLegend": "Mostrar la llegenda",
       "maximize": "Ampliar",
@@ -210,11 +247,11 @@
         "community": {
           "CO2Savings": "Tones de co2 estalviades",
           "production": "Producció total de la comunitat.",
-          "activeProduction": "Producció dels participants donats d'alta",
+          "activeProduction": "Producció dels participants.",
           "networkConsumption": "Consum que facturarà la companyia elèctrica.",
-          "networkActiveConsumption": "Consum dels participants donats d'alta",
-          "surplusActive": "Quantitat d’energia que es produeix i no es consumeix dels participans donats d'alta.",
-          "sharedSurplusActive": "Quantitat d’energia per compartir que es produeix i no es consumeix dels participans donats d'alta."
+          "networkActiveConsumption": "Consum dels participants.",
+          "surplusActive": "Quantitat d’energia que es produeix i no es consumeix dels participans.",
+          "sharedSurplusActive": "Quantitat d’energia per compartir que es produeix i no es consumeix dels participans."
         },
         "cups": {
           "CO2Savings": "Tones de co2 estalviades.",
@@ -258,7 +295,11 @@
       "updated":"Perfil actualitzat correctament",
       "agree":"D'acord",
       "error":"Error al actualitzar el perfil",
-      "errorMessage":"Torna-ho a intentar en uns minuts"
+      "errorMessage":"Torna-ho a intentar en uns minuts",
+      "deleteUser": "Donar de baixa",
+      "deleteUserTitle": "Estàs segur?",
+      "deleteUserText": "Si et dones de baixa ja no podràs compartir energia, però podràs seguir accedint a la plataforma i guardarem el teu històric d'informació durant un any. Després d'aquest període es borrarà la teva informació. És necessari no tenir BETA per poder esborrar un usuari.",
+      "deleteSuccess": "S'ha creat la petició de baixa"
     }
   },
   "MY-WALLET": {
@@ -458,6 +499,31 @@
       "denied": "Denegades"
     }
   },
+  "PROPOSAL": {
+    "title": "Proposta",
+    "texts": {
+      "back": "Tornar a propostes",
+      "createdBy": "Feta per: {{name}}",
+      "pending": "Fes clic a Activar si acceptes la proposta o Descartar si vols eliminar-la",
+      "expired": "Fes clic a Executar si la proposta s'està duent a terme o Denegar si no es pot realitzar",
+      "activate": "Activar",
+      "execute": "Executar",
+      "discard": "Descartar",
+      "deny": "Denegar",
+      "info": "Informació",
+      "votes": "Vots: ",
+      "votesMade": "Han votat {{totalVotes}} membres de {{totalMembers}}",
+      "endDate": "Data de finalització: ",
+      "voteHere": "Vota aquí",
+      "voteWeight": "Nota: El pes de la teva votació és de {{voteWeight}}",
+      "vote": "Vota",
+      "endedVote": "La votació ja ha finalitzat",
+      "voteResult": "Resultat votacions fins ara",
+      "deleteWarning": "Segur que vols descartar la proposta?",
+      "success": "La proposta s'ha borrat correctament",
+      "error": "Hi ha hagut votant. Espera uns minuts i torna-ho a intentar"
+    }
+  },
   "NEW-PROPOSAL": {
     "title": "Nova proposta",
     "texts": {
@@ -518,7 +584,9 @@
         "emailLabel": "Correu electrònic",
         "emailPlaceholder": "correu@gmail.com",
         "sharesLabel": "Beta",
-        "sharePlaceholder": "p.e.:5000"
+        "sharePlaceholder": "p.e.:5000",
+        "success": "Participant modificat correctament",
+        "error": "Hi ha hagut un error amb la proposta. Espera uns minuts i torna-ho a intentar."
       },
       "remove": {
       },
@@ -549,7 +617,8 @@
       "noDataSaved": "No guardem cap dada relacionada amb les teves credencials",
       "help": "Centre d'ajuda",
       "logingIn": "Iniciant sessió.",
-      "wait": "Si us plau, esperi."
+      "wait": "Si us plau, esperi.",
+      "loginError": "No s'ha pogut iniciar sessió"
     }
   },
   "LOGOUT": {

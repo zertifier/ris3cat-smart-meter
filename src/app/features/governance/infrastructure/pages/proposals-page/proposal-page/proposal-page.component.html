@@ -1,121 +1,138 @@
-<div class="container-page" *ngIf="proposal">
-  <div class="row">
-    <div class="col-12 col-md-8 mb-3 border-end">
-      <div>
-        <a [routerLink]="'../'" [routerLinkActive]="'active'" class="text-decoration-none">
-          <i class="fa-solid fa-arrow-left me-1"></i> Tornar a propostes
-        </a>
-        <h3 class="fw-bold mt-3 text-tertiary">Proposta</h3>
-      </div>
-
-      <div>
-        <h5 class="fw-bold">{{ proposal.proposal }}</h5>
-        <div *ngIf="sanitizedHtml"  [innerHTML]="sanitizedHtml" class="my-4"></div>
-
-        <small class="text-body-secondary">Feta per: {{ proposal.firstname }}</small>
-
-        <br>
-        <div class="mt-5">
-          <button class="badge me-4 fw-normal border-0" [ngClass]="getStatusButtonClass(proposal.status)" style="cursor: default">
-            {{ statusTranslation(proposal.status) }}
-          </button>
-          <button class="badge fw-normal border-0 tertiary-badge" style="cursor: default">
-            {{ typeTranslation(proposal.type) }}
-          </button>
+<ng-container *transloco="let t; prefix: 'PROPOSAL'">
+  <div class="container-page" *ngIf="proposal">
+    <div class="row">
+      <div class="col-12 col-md-8 mb-3 border-end">
+        <div>
+          <a [routerLink]="'../'" [routerLinkActive]="'active'" class="text-decoration-none">
+            <i class="fa-solid fa-arrow-left me-1"></i> {{ t('texts.back') }}
+          </a>
+          <h3 class="fw-bold mt-3 text-tertiary">{{ t('title') }}</h3>
         </div>
 
-        <div *ngIf="proposal.status.toLowerCase() == ('pending' || 'expired') && userRole != 'USER'">
-          <hr class="my-5" style="max-width: 750px">
-          <p *ngIf="proposal.status.toLowerCase() == 'pending'">
-            Fes clic a Activar si acceptes la proposta o Descartar si vols eliminar-la
-          </p>
-          <p *ngIf="proposal.status.toLowerCase() == 'expired'">
-            Fes clic a Executar si la proposta s'està duent a terme o Denegar si no es pot realitzar
-          </p>
+        <div>
+          <h5 class="fw-bold">{{ proposal.proposal }}</h5>
+          <div *ngIf="sanitizedHtml" [innerHTML]="sanitizedHtml" class="my-4"></div>
 
-          <div *ngIf="proposal.status.toLowerCase() == ('pending' || 'expired') " class="row">
-            <div class="col-12 col-md-3 my-3">
-              <button *ngIf="proposal.status.toLowerCase() == 'pending'" class="btn btn-secondary rounded-5 w-100" (click)="updateProposalStatus('active')">Activar</button>
-              <button *ngIf="proposal.status.toLowerCase() == 'expired'" class="btn btn-secondary rounded-5 w-100" (click)="updateProposalStatus('executed')">Executar</button>
-            </div>
-            <div class="col-12 col-md-3 my-3">
-              <button *ngIf="proposal.status.toLowerCase() == 'pending'" class="btn btn-secondary rounded-5 w-100" (click)="deleteProposal()">Descartar</button>
-              <button *ngIf="proposal.status.toLowerCase() == 'expired'" class="btn btn-secondary rounded-5 w-100" (click)="updateProposalStatus('denied')">Denegar</button>
+          <small class="text-body-secondary">{{ t('texts.createdBy', {name: proposal.firstname}) }}</small>
 
+          <br>
+          <div class="mt-5">
+            <button class="badge me-4 fw-normal border-0" [ngClass]="getStatusButtonClass(proposal.status)"
+                    style="cursor: default">
+              {{ statusTranslation(proposal.status) }}
+            </button>
+            <button class="badge fw-normal border-0 tertiary-badge" style="cursor: default">
+              {{ typeTranslation(proposal.type) }}
+            </button>
+          </div>
+
+          <div *ngIf="proposal.status.toLowerCase() == ('pending' || 'expired') && userRole != 'USER'">
+            <hr class="my-5" style="max-width: 750px">
+            <p *ngIf="proposal.status.toLowerCase() == 'pending'">
+              {{ t('texts.pending') }}
+            </p>
+            <p *ngIf="proposal.status.toLowerCase() == 'expired'">
+              {{ t('texts.expired') }}
+            </p>
+
+            <div *ngIf="proposal.status.toLowerCase() == ('pending' || 'expired') " class="row">
+              <div class="col-12 col-md-3 my-3">
+                <button *ngIf="proposal.status.toLowerCase() == 'pending'" class="btn btn-secondary rounded-5 w-100"
+                        (click)="updateProposalStatus('active')">
+                  {{ t('texts.activate') }}
+                </button>
+                <button *ngIf="proposal.status.toLowerCase() == 'expired'" class="btn btn-secondary rounded-5 w-100"
+                        (click)="updateProposalStatus('executed')">
+                  {{ t('texts.execute') }}
+                </button>
+              </div>
+              <div class="col-12 col-md-3 my-3">
+                <button *ngIf="proposal.status.toLowerCase() == 'pending'" class="btn btn-secondary rounded-5 w-100"
+                        (click)="deleteProposal()">
+                  {{ t('texts.discard') }}
+                </button>
+                <button *ngIf="proposal.status.toLowerCase() == 'expired'" class="btn btn-secondary rounded-5 w-100"
+                        (click)="updateProposalStatus('denied')">
+                  {{ t('texts.deny') }}
+                </button>
+
+              </div>
             </div>
           </div>
-        </div>
 
-      </div>
-    </div>
-
-    <div class="col-12 col-md-4 px-md-5 mt-5 mt-md-0">
-      <div>
-        <h5 class="fw-bold">Informació</h5>
-
-        <p *ngIf="proposal.transparent != 0 || proposal.status.toLowerCase() != ('active' || 'pending')">
-          <strong>Vots:</strong> Han votat {{ totalVotes }} membres de {{ totalMembers }}
-        </p>
-        <p><strong>Data de finalització:</strong> {{ proposal.expirationDt | date: 'yy-MM-dd hh:mm' }}</p>
-      </div>
-
-
-      <div *ngIf="proposal.status.toLowerCase() != 'pending'" class="mt-5">
-        <h5 class="fw-bold">Vota aquí</h5>
-
-        <div *ngFor="let option of proposal.options!; let i = index" class="d-flex my-2">
-          <button class="btn btn-outline-secondary px-3 py-1 rounded-5 w-100 text-start"
-                  [ngClass]="activeOptionIndex == i ? 'active-tertiary' : ''"
-                  (click)="selectOption(option.id!, i)" [disabled]="alreadyVoted || proposal.status.toLowerCase() != 'active'">
-            {{ option.option }}
-          </button>
-        </div>
-
-        <div *ngIf="proposal.type == 'weighted'" class="my-3">
-          <p>Nota: El pes de la teva votació és de {{voteWeight}}</p>
-        </div>
-
-        <div class="mt-3">
-          <button *ngIf="proposal.status.toLowerCase() == 'active'" class="btn btn-tertiary rounded-5 py-1 w-100"
-                  style="max-width: 150px" [disabled]="!selectedOptionId || alreadyVoted"
-                  (click)="vote()">
-            Votar
-          </button>
-
-          <small *ngIf="proposal.status.toLowerCase() == 'expired'" class="text-danger fw-bold">
-            La votació ja ha finalitzat
-          </small>
         </div>
       </div>
-      <div class="mt-5" *ngIf="proposal.transparent != 0 || proposal.status.toLowerCase() != ('active' || 'pending')">
-        <h5 class="fw-bold">Resultat votacions fins ara</h5>
 
-        <div *ngFor="let option of proposal.options!" class="my-3">
-          <label class="form-label">
-            {{ option.option }}
-          </label>
-          <i class="fa-regular-calendar">
-            <div class="progress" role="progressbar" aria-valuenow="25"
-                 aria-valuemin="0"
-                 aria-valuemax="100"
-                 [ngbTooltip]="'Vots: ' + (getVoteByOptionId(option.id!)?.qty || 0)"><!--
+      <div class="col-12 col-md-4 px-md-5 mt-5 mt-md-0">
+        <div>
+          <h5 class="fw-bold">{{ t('texts.info') }}</h5>
+
+          <p *ngIf="proposal.transparent != 0 || proposal.status.toLowerCase() != ('active' || 'pending')">
+            <strong>{{ t('texts.votes') }}</strong> {{ t('texts.votesMade', {totalVotes, totalMembers}) }}
+          </p>
+          <p><strong>{{ t('texts.endDate') }}</strong> {{ proposal.expirationDt | date: 'yy-MM-dd hh:mm' }}</p>
+        </div>
+
+
+        <div *ngIf="proposal.status.toLowerCase() != 'pending'" class="mt-5">
+          <h5 class="fw-bold">{{ t('texts.voteHere') }}<</h5>
+
+          <div *ngFor="let option of proposal.options!; let i = index" class="d-flex my-2">
+            <button class="btn btn-outline-secondary px-3 py-1 rounded-5 w-100 text-start"
+                    [ngClass]="activeOptionIndex == i ? 'active-tertiary' : ''"
+                    (click)="selectOption(option.id!, i)"
+                    [disabled]="alreadyVoted || proposal.status.toLowerCase() != 'active'">
+              {{ option.option }}
+            </button>
+          </div>
+
+          <div *ngIf="proposal.type == 'weighted'" class="my-3">
+            <p>{{ t('texts.voteWeight', {voteWeight}) }}</p>
+          </div>
+
+          <div class="mt-3">
+            <button *ngIf="proposal.status.toLowerCase() == 'active'" class="btn btn-tertiary rounded-5 py-1 w-100"
+                    style="max-width: 150px" [disabled]="!selectedOptionId || alreadyVoted"
+                    (click)="vote()">
+              {{ t('texts.vote') }}
+            </button>
+
+            <small *ngIf="proposal.status.toLowerCase() == 'expired'" class="text-danger fw-bold">
+              {{ t('texts.endedVote') }}
+            </small>
+          </div>
+        </div>
+        <div class="mt-5" *ngIf="proposal.transparent != 0 || proposal.status.toLowerCase() != ('active' || 'pending')">
+          <h5 class="fw-bold">{{ t('texts.voteResult') }}</h5>
+
+          <div *ngFor="let option of proposal.options!" class="my-3">
+            <label class="form-label">
+              {{ option.option }}
+            </label>
+            <i class="fa-regular-calendar">
+              <div class="progress" role="progressbar" aria-valuenow="25"
+                   aria-valuemin="0"
+                   aria-valuemax="100"
+                   [ngbTooltip]="'Vots: ' + (getVoteByOptionId(option.id!)?.qty || 0)"><!--
             <div class="progress" role="progressbar" aria-valuenow="25"
                  aria-valuemin="0"
                  aria-valuemax="100"
                  [ngbTooltip]="'Vots: ' + (option.percentage ? (totalVotes * option.percentage/ 100) : '0')">-->
-              <div *ngIf="option.percentage" class="progress-bar bg-tertiary text-start ps-2"
-                   [style.width.%]="option.percentage || 0">
-                {{ option.percentage| number:'1.2-2' }}%
+                <div *ngIf="option.percentage" class="progress-bar bg-tertiary text-start ps-2"
+                     [style.width.%]="option.percentage || 0">
+                  {{ option.percentage| number:'1.2-2' }}%
+                </div>
+                <div class="ms-2" *ngIf="!option.percentage">
+                  {{ option.percentage || 0 }}%
+                </div>
               </div>
-              <div class="ms-2" *ngIf="!option.percentage">
-                {{ option.percentage || 0 }}%
-              </div>
-            </div>
-          </i>
-        </div>
+            </i>
+          </div>
 
+        </div>
       </div>
     </div>
   </div>
-</div>
+</ng-container>
+
 

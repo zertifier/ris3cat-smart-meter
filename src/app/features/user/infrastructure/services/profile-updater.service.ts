@@ -36,7 +36,7 @@ export class ProfileUpdaterService {
       if (!authData) {
         return;
       }
-
+      console.log(authData,"authData")
       const userId = authData.id;
       await this.updateUserData(userId);
       await this.updateCups.run(userId);

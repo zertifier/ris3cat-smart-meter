@@ -1,7 +1,13 @@
 <ng-container *transloco="let t;">
   <div class="container-page animate__animated animate__fadeIn">
-    <h4>{{ t('PROFILE.title') }}</h4>
-
+    <div class="d-flex justify-content-between">
+      <h4>
+        {{ t('PROFILE.title') }}
+      </h4>
+      <button class="btn btn-danger ms-auto" (click)="deleteUser()">
+        {{ t('PROFILE.texts.deleteUser') }}
+      </button>
+    </div>
     <form class="row mt-5" [formGroup]="formGroup">
       <ng-container *transloco="let t; prefix: 'PROFILE'">
         <div class="col-12 col-md-6">

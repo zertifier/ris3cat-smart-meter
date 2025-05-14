@@ -39,7 +39,7 @@ export class RegisterPageComponent implements OnInit {
   });
   email: string = "";
   deviceType: string = "";
-
+  loading = false
   constructor(
     private formBuilder: FormBuilder,
     private readonly router: Router,
@@ -63,13 +63,12 @@ export class RegisterPageComponent implements OnInit {
 
   async register() {
     if (this.formData.invalid) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Formulari no valid'
-      });
+      this.formData.markAllAsTouched()
+      this.loading = false
       return;
     }
 
+    this.loading = true
     const {privateKey, email} = this.authStore.snapshotOnly(store => store.loginData!);
     const {dni, name, lastname} = this.formData.value;
     const wallet = new Wallet(privateKey);
@@ -87,6 +86,7 @@ export class RegisterPageComponent implements OnInit {
         timer: 2000,
         showConfirmButton: false,
         willClose: () => {
+          this.loading = false
           this.changeAuthState(refreshToken, accessToken)
         }
       })

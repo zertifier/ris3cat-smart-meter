@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {LoginActionService} from "../../../actions/login-action.service";
 import Swal from "sweetalert2";
-import {TranslocoDirective} from "@jsverse/transloco";
+import {TranslocoDirective, TranslocoService} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-login-callback',
@@ -18,6 +18,7 @@ export class LoginCallbackComponent implements OnInit {
     private readonly route: ActivatedRoute,
     private readonly router: Router,
     private readonly loginAction: LoginActionService,
+    private readonly transloco: TranslocoService
   ) {
   }
 
@@ -35,7 +36,7 @@ export class LoginCallbackComponent implements OnInit {
       console.error(err);
       await Swal.fire({
         icon: 'error',
-        title: "No s'ha pogut iniciar sessió"
+        title: this.transloco.translate('LOGIN.texts.loginError')
       });
       await this.router.navigate(['/auth/login'])
       return;

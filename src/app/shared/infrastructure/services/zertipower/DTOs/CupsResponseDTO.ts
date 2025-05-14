@@ -7,6 +7,7 @@ export interface CupsResponseDTO {
   location_id: number;
   customer_id: number;
   type: string;
+  origin: string;
   datadis_active: number;
   smart_meter_active: number;
   smart_meter_model: "";

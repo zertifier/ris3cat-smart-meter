@@ -31,7 +31,14 @@
       "password": "Password",
       "invalidPassword": "Invalid password",
       "invalidCups": "Invalid CUPS",
-      "addData": "Add data"
+      "addData": "Add data",
+      "type": "Type",
+      "types": {
+        "consumer": "Consumer",
+        "producer": "Producer",
+        "prosumer": "Prosumer",
+        "community": "Community"
+      }
     },
     "modals": {
       "errorText": "An error has occurred",
@@ -44,6 +51,9 @@
       "cupsAccessDescription": "To access your consumption charts, you need to register or join the community.",
       "registerCups": "Register"
     }
+  },
+  "CALCULATOR": {
+    "navbar": "Calculator"
   },
   "MY-CUPS": {
     "navbar": "Counters",
@@ -66,7 +76,10 @@
       "buyingPrice": "Buying price",
       "sellingPrice": "selling price",
       "unavailable": "Unavailable",
-      "allCups": "All CUPS"
+      "allCups": "All CUPS",
+      "availableSurplus": "Excedente particular disponible",
+      "communitySurplus": "Excedente comunitario disponible",
+      "unavailableSurplus": "Excedente no disponible"
     },
     "tooltips": {
       "assignedProd": "The percentage of energy produced that is assigned to this CUPS"
@@ -76,7 +89,10 @@
         "title": "Change the CUPS name",
         "texts": {
           "nameLabel": "CUPS name",
-          "namePlaceholder": "For example: Garage"
+          "namePlaceholder": "For example: Garage",
+          "success": "The data has been saved successfully",
+          "error": "The data could not be saved"
+
         }
       },
       "addCups": {
@@ -86,15 +102,17 @@
   },
   "MISSING-COMMUNITY": {
     "texts": {
-      "anyAccess": "You don't have access to any community.",
+      "anyAccess": "You do not have access to any community.",
       "accessDescription": "To access community information, you need to register or join the community.",
+      "pendingCommunity": "Your request to join the community {{community}} is pending confirmation",
       "register": "Register",
       "join": "Join"
     }
   },
   "MY-COMMUNITY": {
-    "navbar": "Community",
+    "navbar": "Aggregation",
     "title": "Consumption and production",
+    "subtitle": "Shared energic distribution",
     "texts": {
       "info": "Information",
       "communityPrices": "Precios comunitarios",
@@ -136,6 +154,26 @@
         "swal": {
           "success": "Community successfully modified",
           "error": "There was an error saving the community. Please try again later"
+        }
+      },
+      "joinCommunity": {
+        "title": "Join a Community",
+        "texts": {
+          "municipally": "Municipality",
+          "community": "Community",
+          "noCommunity": "Oops! No community available in this municipality",
+          "successJoining": "A request to join a community has been sent successfully",
+          "errorJoining": "There was an error sending the request"
+        }
+      },
+      "addCommunity": {
+        "title": "Add a Community",
+        "texts": {
+          "location": "Location",
+          "undefined": "Not defined",
+          "communityName": "Community Name",
+          "successCreating": "Community created successfully",
+          "errorCreating": "There was an error creating the community"
         }
       }
     }
@@ -199,7 +237,7 @@
         "totalActiveMembers": "Active members: {{total}}",
         "totalShared": "Total shared",
         "shared": "Shared",
-        "notShared": "Not shared"
+        "notShared": "Available"
       },
       "displayLegend": "Show legend",
       "maximize": "Maximize",
@@ -258,7 +296,11 @@
       "updated": "Profile updated successfully",
       "agree": "Agree",
       "error": "Error updating profile",
-      "errorMessage": "Please try again in a few minutes"
+      "errorMessage": "Please try again in a few minutes",
+      "deleteUser": "Delete user",
+      "deleteUserTitle": "Are you sure?",
+      "deleteUserText": "If you unsubscribe, you will no longer be able to share energy, but you will still have access to the platform, and we will keep your information history for one year. After this period, your information will be deleted. It is necessary to have no BETA to delete a user.",
+      "deleteSuccess": "The unsubscribe request has been created"
     }
   },
   "MY-WALLET": {
@@ -456,6 +498,32 @@
       "denied": "Denied"
     }
   },
+  "PROPOSAL": {
+    "title": "Proposal",
+    "texts": {
+      "back": "Back to proposals",
+      "createdBy": "Created by: {{name}}",
+      "pending": "Click Activate if you accept the proposal or Discard if you want to remove it.",
+      "expired": "Click Execute if the proposal is being carried out or Deny if it cannot be executed.",
+      "activate": "Activate",
+      "execute": "Execute",
+      "discard": "Discard",
+      "deny": "Deny",
+      "info": "Information",
+      "votes": "Votes: ",
+      "votesMade": "{{totalVotes}} members out of {{totalMembers}} have voted",
+      "endDate": "End date: ",
+      "voteHere": "Vote here",
+      "voteWeight": "Note: Your voting weight is {{voteWeight}}",
+      "vote": "Vote",
+      "endedVote": "The voting has ended",
+      "voteResult": "Voting results so far",
+      "deleteWarning": "Are you sure you want to discard the proposal?",
+      "success": "The proposal has been deleted successfully",
+      "error": "There was an error with the vote. Please wait a few minutes and try again."
+    }
+
+  },
   "NEW-PROPOSAL": {
     "title": "New proposal",
     "texts": {
@@ -516,7 +584,10 @@
         "emailLabel": "Email address",
         "emailPlaceholder": "email@gmail.com",
         "sharesLabel": "Participation",
-        "sharePlaceholder": "e.g.:5000"
+        "sharePlaceholder": "e.g.:5000",
+        "success": "Participant updated successfully",
+        "error": "There was an error with the request. Please wait a few minutes and try again."
+
       },
       "remove": {},
       "swal": {
@@ -546,7 +617,9 @@
       "noDataSaved": "We do not save any data related to your credentials",
       "help": "Help Center",
       "logingIn": "Logging in.",
-      "wait": "Please wait."
+      "wait": "Please wait.",
+      "loginError": "Login failed"
+
     }
   },
   "LOGOUT": {

@@ -27,7 +27,7 @@ const defaultValues: ChartStore = {
   origin: ChartOrigins.DATADIS,
   selectedChartEntity: ChartEntity.CUPS,
   selectedChartResource: ChartResource.ENERGY,
-  chartType: ChartType.ACC,
+  chartType: ChartType.CCE,
   lastFetchedStats: [],
   cupsIdsToExclude:[]
 }

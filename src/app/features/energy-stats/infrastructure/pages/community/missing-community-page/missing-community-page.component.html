@@ -6,17 +6,23 @@
 
     </div>
     <div class="mb-5 text-center">
-      <h5>{{ t('texts.anyAccess') }}
-        <!-- <app-question-badge>
-          Necessites formar part d'una comunitat per poder accedir
-        </app-question-badge> -->
-      </h5>
-      <h5>
-        {{ t('texts.accessDescription') }}
+      <div  *ngIf="!pendingInvitation">
+        <h5>{{ t('texts.anyAccess') }}
+          <!-- <app-question-badge>
+            Necessites formar part d'una comunitat per poder accedir
+          </app-question-badge> -->
+        </h5>
+        <h5>
+          {{ t('texts.accessDescription') }}
+        </h5>
+      </div>
+
+      <h5 *ngIf="pendingInvitation && pendingCommunity">
+        {{ t('texts.pendingCommunity', {community: pendingCommunity.name})}}
       </h5>
     </div>
-    <div class="col-12 d-flex justify-content-center">
-      <button type="button" class="btn btn-primary bg-primary fw-medium">{{ t('texts.register') }}</button>
+    <div *ngIf="!pendingInvitation" class="col-12 d-flex justify-content-center">
+      <button (click)="openAddModal()" type="button" class="btn btn-primary bg-primary fw-medium">{{ t('texts.register') }}</button>
       <button (click)="openJoinModal()" type="button" class="btn btn-secondary bg-secondary fw-medium ms-4">{{ t('texts.join') }}</button>
     </div>
   </div>

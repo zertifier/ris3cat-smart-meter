@@ -12,8 +12,8 @@ export class ZertipowerCupsService {
     return body.data;
   }
 
-  public async registerDatadis(customerId: number, cups: string, dni: string, datadisUser: string, datadisPassword: string) {
-    await this.axios.post('/cups/datadis', {customerId, cups, datadisPassword, datadisUser, dni});
+  public async registerDatadis(customerId: number, cups: string, dni: string, datadisUser: string, datadisPassword: string, type: string) {
+    await this.axios.post('/cups/datadis', {customerId, cups, datadisPassword, datadisUser, dni, type});
   }
 
   public async updateCupsReference(cupsId: number, reference: string){

@@ -31,7 +31,14 @@
       "password": "Contraseña",
       "invalidPassword": "Contraseña no válida",
       "invalidCups": "CUPS no válido",
-      "addData": "Añadir datos"
+      "addData": "Añadir datos",
+      "type": "Tipo",
+      "types": {
+        "consumer": "Consumidor",
+        "producer": "Productor",
+        "prosumer": "Prosumidor",
+        "community": "Productor comunitario"
+      }
     },
     "modals": {
       "errorText": "Ha ocurrido un error",
@@ -44,6 +51,9 @@
       "cupsAccessDescription": "Para acceder a las gráficas de tu consumo, necesitas darte de alta o unirte a la comunidad.",
       "registerCups": "Darte de alta"
     }
+  },
+  "CALCULATOR": {
+    "navbar": "Calculadora"
   },
   "MY-CUPS": {
     "navbar": "Contadores",
@@ -66,7 +76,10 @@
       "buyingPrice": "Precio de compra",
       "sellingPrice": "Precio de venta",
       "unavailable": "No disponible",
-      "allCups": "Todos los CUPS"
+      "allCups": "Todos los CUPS",
+      "availableSurplus": "Available private surplus",
+      "communitySurplus": "Available community surplus",
+      "unavailableSurplus": "Surplus not available"
     },
     "tooltips": {
       "assignedProd": "El porcentaje de la energía producida que se le asigna a este CUPS"
@@ -76,7 +89,10 @@
         "title": "Cambiar el nombre del CUPS",
         "texts": {
           "nameLabel": "Nombre del CUPS",
-          "namePlaceholder": "Por ejemplo: Garaje"
+          "namePlaceholder": "Por ejemplo: Garaje",
+          "success": "Los datos se han guardado con éxito",
+          "error": "No se pudieron guardar los datos"
+
         }
       },
       "addCups": {
@@ -88,13 +104,15 @@
     "texts": {
       "anyAccess": "No tienes acceso a ninguna comunidad.",
       "accessDescription": "Para acceder a la información comunitaria, necesitas darte de alta o unirte a la comunidad.",
+      "pendingCommunity": "Tu solicitud para unirte a la comunidad {{community}} está pendiente de confirmación",
       "register": "Darte de alta",
-      "join": "Únete"
+      "join": "Unirte"
     }
   },
   "MY-COMMUNITY": {
-    "navbar": "Comunidad",
+    "navbar": "Agregación",
     "title": "Consumo y producción",
+    "subtitle": "Recurso energergético distribuido",
     "texts": {
       "info": "Información",
       "communityPrices": "Community prices",
@@ -137,6 +155,26 @@
           "success": "Comunidad modificada correctamente",
           "error": "Hubo un error al guardar la comunidad. Inténtalo de nuevo más tarde"
         }
+      },
+      "joinCommunity": {
+        "title": "Únete a una comunidad",
+        "texts": {
+          "municipally": "Municipio",
+          "community": "Comunidad",
+          "noCommunity": "¡Ups! No hay ninguna comunidad disponible en este municipio",
+          "successJoining": "Se ha enviado una solicitud para unirse a una comunidad correctamente",
+          "errorJoining": "Hubo un error al enviar la solicitud"
+        }
+      },
+      "addCommunity": {
+        "title": "Añadir una comunidad",
+        "texts": {
+          "location": "Localidad",
+          "undefined": "No definida",
+          "communityName": "Nombre de la comunidad",
+          "successCreating": "Comunidad creada correctamente",
+          "errorCreating": "Hubo un error al crear la comunidad"
+        }
       }
     }
   },
@@ -168,8 +206,8 @@
         "monthly": "Mensual",
         "yearly": "Anual"
       },
-      "prosumersSelectorTitle": "Excluir prosumidores",
-      "prosumersSelectorText": "Selecciona prosumidores",
+      "prosumersSelectorTitle": "Excluir productores comunitarios",
+      "prosumersSelectorText": "Selecciona",
       "noDisplay": "Nada que mostrar",
       "chartDataInputText": "Elige un mes/año para ver el consumo.",
       "chartBottomText": "· Conoce el gasto de energía en detalle haciendo clic en cada tipo de consumo. La gráfica mostrará la información de consumo individualizada.",
@@ -182,7 +220,7 @@
           "production": "Producción total"
         },
         "productionActive": "Producción activos",
-        "networkConsumption": "Consumo de la red",
+        "networkConsumption": "Consumo de la compañía",
         "networkActiveConsumption": "Consumo de la red activos",
         "surplus": "Excedente",
         "surplusActive": "Excedente activos",
@@ -199,7 +237,7 @@
         "totalActiveMembers": "Miembros activos: {{total}}",
         "totalShared": "Total compartido",
         "shared": "Compartido",
-        "notShared": "No compartido"
+        "notShared": "Disponible"
       },
       "displayLegend": "Mostrar la leyenda",
       "maximize": "Ampliar",
@@ -258,7 +296,11 @@
       "updated": "Perfil actualizado correctamente",
       "agree": "Aceptar",
       "error": "Error al actualizar el perfil",
-      "errorMessage": "Inténtalo de nuevo en unos minutos"
+      "errorMessage": "Inténtalo de nuevo en unos minutos",
+      "deleteUser": "Dar de baja",
+      "deleteUserTitle": "¿Estás seguro?",
+      "deleteUserText": "Si te das de baja, ya no podrás compartir energía, pero podrás seguir accediendo a la plataforma y guardaremos tu historial de información durante un año. Después de este período, se borrará tu información. Es necesario no tener BETA para poder borrar un usuario.",
+      "deleteSuccess": "Se ha creado la solicitud de baja"
     }
   },
   "MY-WALLET": {
@@ -456,6 +498,32 @@
       "denied": "Denegadas"
     }
   },
+  "PROPOSAL": {
+    "title": "Propuesta",
+    "texts": {
+      "back": "Volver a propuestas",
+      "createdBy": "Hecha por: {{name}}",
+      "pending": "Haz clic en Activar si aceptas la propuesta o en Descartar si quieres eliminarla.",
+      "expired": "Haz clic en Ejecutar si la propuesta se está llevando a cabo o en Denegar si no se puede realizar.",
+      "activate": "Activar",
+      "execute": "Ejecutar",
+      "discard": "Descartar",
+      "deny": "Denegar",
+      "info": "Información",
+      "votes": "Votos: ",
+      "votesMade": "Han votado {{totalVotes}} miembros de {{totalMembers}}",
+      "endDate": "Fecha de finalización: ",
+      "voteHere": "Vota aquí",
+      "voteWeight": "Nota: El peso de tu votación es de {{voteWeight}}",
+      "vote": "Votar",
+      "endedVote": "La votación ya ha finalizado",
+      "voteResult": "Resultados de la votación hasta ahora",
+      "deleteWarning": "¿Estás seguro de que quieres descartar la propuesta?",
+      "success": "La propuesta se ha eliminado correctamente",
+      "error": "Hubo un error al votar. Por favor, espera unos minutos y vuelve a intentarlo."
+    }
+
+  },
   "NEW-PROPOSAL": {
     "title": "Nueva propuesta",
     "texts": {
@@ -516,7 +584,10 @@
         "emailLabel": "Correo electrónico",
         "emailPlaceholder": "correo@gmail.com",
         "sharesLabel": "Participación",
-        "sharePlaceholder": "ej:5000"
+        "sharePlaceholder": "ej:5000",
+        "success": "Participante modificado correctamente",
+        "error": "Hubo un error con la propuesta. Por favor, espera unos minutos y vuelve a intentarlo."
+
       },
       "remove": {},
       "swal": {
@@ -546,7 +617,8 @@
       "noDataSaved": "No guardamos ningún dato relacionado con tus credenciales",
       "help": "Centro de ayuda",
       "logingIn": "Iniciando sesión.",
-      "wait": "Por favor, espera."
+      "wait": "Por favor, espera.",
+      "loginError": "No se pudo iniciar sesión"
     }
   },
   "LOGOUT": {

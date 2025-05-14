@@ -13,6 +13,7 @@ import {NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
 import {UserStoreService} from "@features/user/infrastructure/services/user-store.service";
 import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 import {Subscription} from "rxjs";
+import {TranslocoDirective, TranslocoService} from "@jsverse/transloco";
 
 
 @Component({
@@ -29,7 +30,8 @@ import {Subscription} from "rxjs";
     NgClass,
     DatePipe,
     NgbTooltip,
-    DecimalPipe
+    DecimalPipe,
+    TranslocoDirective
   ],
   templateUrl: './proposal-page.component.html',
   styleUrl: './proposal-page.component.scss'
@@ -61,7 +63,8 @@ export class ProposalPageComponent implements OnDestroy {
     private votesService: VotesService,
     private userStore: UserStoreService,
     public sanitized: DomSanitizer,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private transloco: TranslocoService
   ) {
     this.id = this.route.snapshot.paramMap.get('id');
     const user = this.userStore.snapshotOnly(state => state.user);
@@ -238,9 +241,9 @@ export class ProposalPageComponent implements OnDestroy {
   deleteProposal() {
     Swal.fire({
       icon: 'info',
-      title: "Segur que vols descartar la proposta?",
-      confirmButtonText: 'Sí',
-      cancelButtonText: 'No',
+      title: this.transloco.translate('PROPOSAL.texts.deleteWarning'),
+      confirmButtonText: this.transloco.translate('GENERIC.texts.yes'),
+      cancelButtonText: this.transloco.translate('GENERIC.texts.no'),
       showCancelButton: true,
       customClass: {
         confirmButton: 'btn btn-secondary-force',
@@ -250,12 +253,12 @@ export class ProposalPageComponent implements OnDestroy {
       if (result.isConfirmed)
         this.proposalsService.deleteProposal(this.proposal.id).subscribe({
           next: value => {
-            this.swalSuccessDisplay("La proposta s'ha borrat correctament").then(() => {
+            this.swalSuccessDisplay(this.transloco.translate('PROPOSAL.texts.success')).then(() => {
               this.router.navigate(['/governance/proposals']);
             })
           },
           error: err => {
-            this.swalErrorDisplay('Hi ha hagut votant. Espera uns minuts i torna-ho a intentar.').then(() => {
+            this.swalErrorDisplay(this.transloco.translate('PROPOSAL.texts.error')).then(() => {
               console.log("ERRROR", err)
             })
           }

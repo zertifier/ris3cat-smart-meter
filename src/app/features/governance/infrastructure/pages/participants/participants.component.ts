@@ -57,9 +57,11 @@ export class ParticipantsComponent implements OnDestroy{
           // this.user = data.user
           this.subscriptions.push(
             this.userStore.selectOnly(this.userStore.$.communityId).subscribe((community) => {
-              this.communityId = community
-              this.getParticipantsByStatus(this.participantStatus)
-              this.getPendingQty(this.communityId!)
+              if (community) {
+                this.communityId = community
+                this.getParticipantsByStatus(this.participantStatus)
+                this.getPendingQty(this.communityId!)
+              }
 
             })
           )
@@ -70,13 +72,13 @@ export class ParticipantsComponent implements OnDestroy{
 
 
   getParticipantsByStatus(status: ParticipantStatus) {
+    this.participantStatus = status
     if (this.filterText) {
       this.subscriptions.push(
         this.participantsService.getParticipantsFilter(this.communityId!, status, this.filterText || '').subscribe({
           next: response => {
             this.participants = response.data
             this.loading = false
-            this.participantStatus = status
           },
           error: err => {
             this.participants = []
@@ -90,8 +92,6 @@ export class ParticipantsComponent implements OnDestroy{
           next: response => {
             this.participants = response.data
             this.loading = false
-            this.participantStatus = status
-
           },
           error: err => {
             this.participants = []
@@ -211,7 +211,7 @@ export class ParticipantsComponent implements OnDestroy{
       icon: 'error',
       title: 'ERROR',
       text: message,
-      confirmButtonText: 'Entès',
+      confirmButtonText: this.translocoService.translate('GENERIC.texts.okay'),
       customClass: {
         confirmButton: 'btn btn-secondary-force'
       }

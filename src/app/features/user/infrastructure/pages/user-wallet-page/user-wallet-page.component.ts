@@ -53,7 +53,7 @@ export class UserWalletPageComponent implements AfterViewInit, OnDestroy {
   customerId!: number
   customer: CustomerDTO | undefined;
   walletAddress!: string;
-  
+
   pk:string = '';
   textOrPwd:'text'|'password'='password';
   isPasswordVisible:boolean=false;
@@ -100,7 +100,6 @@ export class UserWalletPageComponent implements AfterViewInit, OnDestroy {
             this.translocoService.events$.pipe(
               filter(e => e.type === 'translationLoadSuccess'), first()
             ).subscribe(() => {
-              console.log("bbbb")
 
               this.stripeCheckoutManagement(params)
             })
@@ -113,16 +112,13 @@ export class UserWalletPageComponent implements AfterViewInit, OnDestroy {
   async getAllBalances(wallet: string) {
     this.ethersService.getEKWBalance(wallet).then((balance) => {
       this.ekwBalance = balance
-      console.log("ekw", balance)
     })
     this.ethersService.getChainBalance(wallet).then((balance) => {
       this.chainBalance = balance
-      console.log("chain", balance)
     })
     if (this.communityId) {
       this.daoService.getDaoBalance(wallet, this.communityId).then((balance) => {
         this.voteWeight = balance
-        console.log("vote", balance)
       })
     }
     this.customer = await this.zertipowerService.customers.getCustomerById(this.customerId)

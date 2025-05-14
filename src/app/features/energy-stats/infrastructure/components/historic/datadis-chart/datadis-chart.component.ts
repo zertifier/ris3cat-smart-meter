@@ -191,7 +191,8 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                       data: mappedData.map(d => d.production ? parseFloat(d.production + '').toFixed(2) : '0'),
                       stack: 'Production',
                       yAxisID: 'y'
-                    },{
+                    },
+                    /*{
                       id: "productionActive",
                       order: 0,
                       // label: 'Producció actius',
@@ -201,7 +202,7 @@ export class DatadisChartComponent implements OnInit, OnDestroy {
                       data: mappedData.map(d => d.productionActives ? parseFloat(d.productionActives + '').toFixed(2) : '0'),
                       stack: 'Production',
                       yAxisID: 'y'
-                    },
+                    },*/
                     {
                       id: "networkActiveConsumption",
                       // label: 'Consum del a xarxa actius',

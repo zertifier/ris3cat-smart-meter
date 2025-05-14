@@ -5,7 +5,7 @@ import {UserCups} from "../../../../../../user/infrastructure/services/user-stor
 import {FormsModule} from "@angular/forms";
 import {ZertipowerService} from "../../../../../../../shared/infrastructure/services/zertipower/zertipower.service";
 import Swal from "sweetalert2";
-import {TranslocoDirective, TranslocoPipe} from "@jsverse/transloco";
+import {TranslocoDirective, TranslocoPipe, TranslocoService} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-cups-modal',
@@ -34,6 +34,7 @@ export class CupsModalComponent implements AfterViewInit{
   constructor(
     public readonly activeModal: NgbActiveModal,
     private zertipower: ZertipowerService,
+    private transloco: TranslocoService
   ) {
   }
 
@@ -64,17 +65,16 @@ export class CupsModalComponent implements AfterViewInit{
   displaySuccessAlert(){
     return Swal.fire({
       icon: 'success',
-      title: "Les dades s'han guardat amb èxit",
-      confirmButtonText: "D'acord"
+      title: this.transloco.translate('MY-CUPS.modals.modifyCups.texts.success'),
+      confirmButtonText: this.transloco.translate('GENERIC.texts.okay')
     })
   }
 
   displayErrorAlert(){
     return Swal.fire({
       icon: 'error',
-      title: "Les dades no s'han pogut guardar.",
-      text: "Torna-ho a intentar d'aqui uns minuts",
-      confirmButtonText: "D'acord"
+      title: this.transloco.translate('MY-CUPS.modals.modifyCups.texts.error'),
+      confirmButtonText: this.transloco.translate('GENERIC.texts.okay')
     })
   }
 }

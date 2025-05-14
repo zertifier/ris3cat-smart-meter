@@ -8,18 +8,17 @@
           </div>
           <div class="card-body">
             <form class="w-100 mb-4" [formGroup]="formData" id="register-form" (ngSubmit)="register()">
-              <div class="row">
-                <div class="col-md-7">
+
                   <h4 class="mt-3">Dades del usuari</h4>
                   <div class="row mb-3 g-3">
-                    <div class="col-12">
+                    <!--<div class="col-12">
                       <label for="community">{{ t('texts.community') }} <span class="text-danger">*</span></label>
                       <select name="type" class="form-select" id="community">
                         <option>No definida</option>
                         <option value="2">Com. Montolivet Olot</option>
                       </select>
-                    </div>
-                    <div class="col-12 col-md-6">
+                    </div>-->
+                    <div class="col col-md-6">
                       <label for="nom">{{ t('texts.name') }} <span class="text-danger">*</span></label>
                       <input formControlName="name" class="form-control" type="text" id="nom">
                     </div>
@@ -36,14 +35,14 @@
                       <input [value]="email" class="form-control" type="text" id="email" disabled>
                     </div>
                   </div>
-                </div>
-                <div class="col-md-5">
+                <!--<div class="col-md-5">
                   <div class="card">
                     <div class="card-body">
                       <h4>Dades del dispositiu</h4>
                       <div class="mb-3">
                         <label for="device-type">{{ t('texts.deviceType') }} <span class="text-danger">*</span></label>
-                        <select [(ngModel)]="deviceType" [ngModelOptions]="{standalone: true}" name="type" class="form-select" id="device-type">
+                        <select [(ngModel)]="deviceType" [ngModelOptions]="{standalone: true}" name="type"
+                                class="form-select" id="device-type">
                           <option value="">Datadis</option>
                           <option value="1">Smart Meter</option>
                         </select>
@@ -69,19 +68,24 @@
                         <div class="col-md">
                           <div class="mb-3">
                             <label for="password">{{ t('texts.password') }} <span class="text-danger">*</span></label>
-                            <input class="form-control" type="text" id="password">
+                            <input class="form-control" type="password" id="password">
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
+                </div>-->
             </form>
           </div>
           <div class="card-footer d-flex gap-2">
-            <button form="register-form" type="submit" class="btn btn-primary">{{ t('texts.toRegister') }}</button>
-            <button class="btn btn-secondary" (click)="goBack()" type="button">{{ t('texts.back') }}</button>
+            <button form="register-form" type="submit" class="btn btn-primary" [disabled]="loading"
+                    style="min-width: 103px">
+              <span *ngIf="!loading">{{ t('texts.toRegister') }}</span>
+              <i *ngIf="loading" class="fa-solid fa-spinner fa-spin"></i>
+            </button>
+            <button class="btn btn-secondary" (click)="goBack()" type="button"
+                    [disabled]="loading">{{ t('texts.back') }}
+            </button>
           </div>
         </div>
       </div>

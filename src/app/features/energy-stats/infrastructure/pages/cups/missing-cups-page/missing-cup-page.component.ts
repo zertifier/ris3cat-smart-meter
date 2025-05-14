@@ -21,6 +21,6 @@ export class MissingCupPageComponent {
 
   }
   public registerCups() {
-    this.ngbModal.open(DatadisRegisterFormComponent);
+    this.ngbModal.open(DatadisRegisterFormComponent, {size: 'lg'});
   }
 }
