@@ -69,18 +69,19 @@
 
   <div class="row">
 
-    <div class="col-md-4 mb-4" *ngIf="chartType=='community'">
+    <!--<div class="col-md-4 mb-4" *ngIf="chartType=='community'">
       <p class="subtitle">
         {{ t('texts.prosumersSelectorTitle') }}
       </p>
       <ng-multiselect-dropdown [placeholder]="t('texts.prosumersSelectorText')" [settings]="dropdownSettings" [data]="dropdownList"
         [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)" (onDeSelect)="onDeselect($event)">
       </ng-multiselect-dropdown>
-    </div>
+    </div>-->
 
-    <div class="col-md-4" *ngIf="chartType!='community'"></div>
+<!--    <div class="col-md-4" *ngIf="chartType!='community'"></div>-->
 
-    <div class="col-md-4 mb-4">
+<!--    <div class="col-md-4 mb-4">-->
+    <div class="col-md-4 mb-4 mx-auto">
       <p class="subtitle">
         {{ t('texts.chartDataInputText') }}
       </p>

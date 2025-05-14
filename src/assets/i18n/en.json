@@ -110,8 +110,9 @@
     }
   },
   "MY-COMMUNITY": {
-    "navbar": "Community",
+    "navbar": "Aggregation",
     "title": "Consumption and production",
+    "subtitle": "Shared energic distribution",
     "texts": {
       "info": "Information",
       "communityPrices": "Precios comunitarios",

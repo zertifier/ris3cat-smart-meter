@@ -1,6 +1,8 @@
 <ng-container *transloco="let t; prefix: 'MY-COMMUNITY'" class="w-100">
   <div class="container-page animate__animated animate__fadeIn">
     <div class="row g-2 mb-5 justify-content-center justify-content-md-center">
+      <h2 class="text-center mb-3" style="font-weight: 600;">{{ t('subtitle') }}</h2>
+
       <div *ngIf="communityData" class="col-auto">
         <h4 style="font-weight: 600;">{{ t('navbar') }} {{ communityData.name }}</h4>
       </div>
@@ -73,7 +75,7 @@
         }
       </div>
 
-      <div class="col-6 col-lg my-3">
+      <!--<div class="col-6 col-lg my-3">
         @if (isValidNumber(powerFlow().inHouse) && powerFlow().inHouse > 0 && communityData.id == 7) {
           <app-stat-display [disabled]="powerFlow().inHouse === 0" width="20%"
                             [color]="StatsColors.IN_HOUSE_CONSUMPTION"
@@ -82,7 +84,7 @@
           <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
                             label="{{ t('texts.selfConsumption') }}" [text]="t('texts.unavailable')"/>
         }
-      </div>
+      </div>-->
 
       <div class="col-6 col-lg my-3">
         @if (isValidNumber(powerFlow().production) && (lastUpdate$ | async) && communityData.id == 7) {

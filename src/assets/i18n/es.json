@@ -110,8 +110,9 @@
     }
   },
   "MY-COMMUNITY": {
-    "navbar": "Comunidad",
+    "navbar": "Agregación",
     "title": "Consumo y producción",
+    "subtitle": "Recurso energergético distribuido",
     "texts": {
       "info": "Información",
       "communityPrices": "Community prices",

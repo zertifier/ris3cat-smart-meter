@@ -109,8 +109,9 @@
     }
   },
   "MY-COMMUNITY": {
-    "navbar": "Comunitat",
+    "navbar": "Agregació",
     "title": "Consum i producció",
+    "subtitle": "Recurs energètic distribuït",
     "texts": {
       "info": "Informació",
       "communityPrices": "Preus comunitaris",
