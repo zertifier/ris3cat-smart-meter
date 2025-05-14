@@ -8,6 +8,7 @@
       <h5>{{ t('texts.chartLabels.totalActiveProduction') }}</h5>
       <span>{{ totalActiveProduction | number:'1.0-2': 'es' }} {{ chartDataTypeSymbol }}</span>
     </div>-->
+
     <div class="col-md my-3 text-center">
       <h5>{{ t(showCommunity ? 'texts.chartLabels.totalActiveConsumption' : 'texts.chartLabels.totalConsumption') }}</h5>
       <span>{{ (cce ? totalConsumptionVirtual : totalConsumption) | number:'1.0-2': 'es' }} {{ chartDataTypeSymbol }}</span>
