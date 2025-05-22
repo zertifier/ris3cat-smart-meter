@@ -66,13 +66,15 @@
     <div class="row justify-content-evenly w-100">
 
       <div class="col-6 col-lg my-3">
-        @if (isValidNumber(powerFlow().buy) && powerFlow().buy > 0 && communityData.id == 7) {
+        <app-stat-display  width="20%" [color]="StatsColors.CONSUMPTION"
+                          label="{{ t('texts.consumption') }}" [text]="'3.35'"/>
+       <!-- @if (isValidNumber(powerFlow().buy) && powerFlow().buy > 0 && communityData.id == 7) {
           <app-stat-display [disabled]="powerFlow().buy === 0" width="20%" [color]="StatsColors.CONSUMPTION"
                             label="{{ t('texts.consumption') }}" [text]="powerFlow().buy.toFixed(2) "/>
         } @else {
           <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
                             label="{{ t('texts.consumption') }}" [text]="t('texts.unavailable')"/>
-        }
+        }-->
       </div>
 
       <!--<div class="col-6 col-lg my-3">
@@ -87,24 +89,29 @@
       </div>-->
 
       <div class="col-6 col-lg my-3">
-        @if (isValidNumber(powerFlow().production) && (lastUpdate$ | async) && communityData.id == 7) {
+        <app-stat-display width="20%"
+                          [color]="StatsColors.COMMUNITY_PRODUCTION" label="{{ t('texts.generatedEnergy') }}"
+                          [text]="'6.5'"/>
+       <!-- @if (isValidNumber(powerFlow().production) && (lastUpdate$ | async) && communityData.id == 7) {
           <app-stat-display width="20%"
                             [color]="StatsColors.COMMUNITY_PRODUCTION" label="{{ t('texts.generatedEnergy') }}"
                             [text]="powerFlow().production.toFixed(2)"/>
         } @else {
           <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
                             label="{{ t('texts.generatedEnergy') }}" [text]="t('texts.unavailable')"/>
-        }
+        }-->
       </div>
 
       <div class="col-6 col-lg my-3">
-        @if (isValidNumber(powerFlow().sell) && powerFlow().sell > 0 && communityData.id == 7) {
+        <app-stat-display width="20%" [color]="StatsColors.SURPLUS"
+                          label="{{ t('texts.surplus') }}" [text]="'3.15'"/>
+        <!--@if (isValidNumber(powerFlow().sell) && powerFlow().sell > 0 && communityData.id == 7) {
           <app-stat-display [disabled]="powerFlow().sell === 0" width="20%" [color]="StatsColors.SURPLUS"
                             label="{{ t('texts.surplus') }}" [text]="powerFlow().sell.toFixed(2)"/>
         } @else {
           <app-stat-display [disabled]="true" width="20%" [color]="StatsColors.IN_HOUSE_CONSUMPTION"
                             label="{{ t('texts.surplus') }}" [text]="t('texts.unavailable')"/>
-        }
+        }-->
       </div>
     </div>
   </div>
