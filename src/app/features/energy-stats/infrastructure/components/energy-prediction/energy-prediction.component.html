@@ -6,10 +6,11 @@
     <!-- PREDICCIÓ PRODUCCIÓ ENERGIA -->
     <div *ngIf="productionPrediction.length" class="container-page">
       @if (community) {
-        <h4 class="mb-5 text-center">{{ t('energy.titleCommunityProduction') }}</h4>
+        <h4 class="mb-5 text-center">Predicció de producció de la comunitat</h4>
       } @else {
         <h4 class="mb-5 text-center">{{ t('energy.titleProduction') }}</h4>
       }
+      <p *ngIf="communityProductionMessage" class="text-center text-secondary" role="status">{{ communityProductionMessage }}</p>
       <div class="row">
         @for (prediction of productionPrediction; track $index) {
           <div class="col-6 col-sm-4 col-md-2 d-flex flex-column mb-3">
@@ -26,9 +27,6 @@
             <div class="text-center text-capitalize mt-3 text-primary">{{ prediction.date }}</div>
           </div>
         }
-        <div class="text-center text-secondary mt-3">
-          {{ t('energy.productionDescription') }}
-        </div>
 
       </div>
     </div>
@@ -67,7 +65,7 @@
     <!-- PREDICCIÓ CONSUM ENERGIA -->
     <div *ngIf="consumptionPrediction.length" class="container-page">
       @if (community) {
-        <h4 class="mb-5 text-center">{{ t('energy.titleActivesConsumption') }}</h4>
+        <h4 class="mb-5 text-center">Predicció de consum de la comunitat</h4>
       } @else {
         <h4 class="mb-5 text-center">{{ t('energy.titleConsumption') }}</h4>
       }
