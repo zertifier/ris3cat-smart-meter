@@ -171,7 +171,10 @@ export class EnergyPredictionComponent implements OnInit, OnDestroy {
 
     // Match both rows by full calendar date, including gaps and unordered responses.
     const consumptionByDate = new Map<string, number>(
-      (consumptionPredictionResponse || []).map(day => [day.date, day.consumption])
+      (consumptionPredictionResponse || []).map(day => [
+        moment.utc(day.date, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss', moment.ISO_8601], true).format('YYYY-MM-DD'),
+        day.consumption
+      ])
     );
     this.consumptionPrediction = Array.from({ length: 6 }, (_, offset) => {
       const date = moment.utc(weekInit, 'YYYY-MM-DD', true).add(offset, 'days');
